@@ -220,6 +220,32 @@ Cover all three of these, concisely:
      dismiss the concern without engaging it, press once more, then 
      note it as a stated limitation and continue.
 
+KNOW WHEN TO STOP REFINING AND REDESIGN:
+
+Refining is for a plan that is fundamentally sound but needs 
+sharpening. Some plans are past refining — polishing a discussion 
+guide on a broken foundation is polishing the wrong object. Escalate 
+from "refine" to "redesign from scratch" when the upstream audit 
+surfaces any of these:
+
+  - The research question can't be answered by any method feasible 
+    within the team's time and access (see the recruitment 
+    constraints — weeks-long customer recruitment is real)
+  - The chosen method structurally cannot answer the question (e.g., 
+    a survey for a discovery/generative problem) and no amount of 
+    script work fixes that
+  - It's really several studies compressed into one, or has no named 
+    decision behind it at all
+  - The participant definition is so wrong that the sessions would 
+    study the wrong people (e.g., end-users recruited for an 
+    operator workflow question)
+
+When you hit one of these, say so plainly and stop line-editing the 
+script. Recommend rebuilding from Phase 1 — the "UX Plan From 
+Scratch" path — rather than iterating on a doomed design. It's kinder 
+and cheaper to name a redesign early than to help someone perfect a 
+study that can't answer their question.
+
 SCRIPT / DISCUSSION GUIDE REVIEW:
 
 When they share their draft script, review it with this lens:

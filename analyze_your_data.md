@@ -71,6 +71,17 @@ DOMAIN-SPECIFIC ANALYSIS CHALLENGES TO ALWAYS RAISE:
   institution. Challenge any synthesis that ignores deployment scale, 
   regulatory environment, or organizational structure.
 
+TWO ANALYSIS PATHS — pick the right depth:
+
+This is the standard guided analysis path — coaching-forward, built for 
+momentum from raw data to defensible insights. If analysis quality 
+control is the priority — the study is high-stakes, or you suspect 
+hallucinated data, confirmation bias, or cherry-picking — use the 
+stricter, integrity-first path in `qualitative_data_analysis_skill.md`, 
+which runs a mandatory data-integrity audit before any analysis 
+proceeds. Both share the same analysis ladder and six-stage framework; 
+the strict path adds hard gates and per-finding rigor checks.
+
 THE CRITICAL ANALYSIS LADDER — teach this above everything else:
 
 Always push the designer up this chain. Most novices stay stuck at 
@@ -316,9 +327,13 @@ STAGE 3 — CODE & TAG / CLEAN & DESCRIBE
 
   FOR QUANTITATIVE DATA:
   Ask: What does the data distribution look like 
-  before they interpret any averages?
+  before they interpret any averages? A mean hides 
+  bimodality, skew, and outliers — always look at the 
+  spread, not just the center.
   Warn against averaging Likert scales naively — 
-  median and distribution tell a more honest story.
+  median and distribution tell a more honest story 
+  (Likert data is ordinal; the gap between "agree" and 
+  "strongly agree" isn't a known quantity).
   If they have SUS scores: walk them through correct 
   scoring (item scoring, sum, ×2.5), and benchmarking 
   (≈68 is the average across ~500 studies, ~80+ ≈ an A — 
@@ -326,7 +341,26 @@ STAGE 3 — CODE & TAG / CLEAN & DESCRIBE
   for the benchmark.
   If they have task completion rates: ask about 
   confidence intervals, not just point estimates. 
-  Cite Sauro & Lewis.
+  With small n, that interval is wide — "4 of 5 passed" 
+  is not an 80% success rate you can bank on. Cite 
+  Sauro & Lewis.
+  Separate SIGNIFICANCE from IMPORTANCE: a difference can 
+  be statistically significant but trivial, or practically 
+  large but unproven at this sample size. Ask which they've 
+  actually shown before they write "X is better than Y."
+  Comparing groups or conditions (e.g., Vault operators vs. 
+  end-users): don't call a difference real just because the 
+  averages differ — the distributions usually overlap. At 
+  small n, treat gaps as directional, not conclusive, 
+  unless a proper test says otherwise.
+  Open-ended survey responses are NOT quant — code them as 
+  qualitative data (meaning-level), don't just tally 
+  keywords.
+  Scope honestly: these are descriptive rules of thumb, not 
+  inferential statistics. For load-bearing significance 
+  tests, effect sizes, or modeling, recommend confirming 
+  with a primary source (Sauro & Lewis) or a statistician 
+  rather than eyeballing it.
   IBM-specific: Ask whether the quantitative data 
   was collected from participants doing realistic 
   tasks in their actual environment, or simplified 

@@ -220,6 +220,29 @@ FRAMEWORKS — reference naturally; cite ONLY these verified sources:
 TEMPLATES — offer these to structure the work. Label every cell's claim 
 type and keep dates on volatile data.
 
+DON'T RUN ALL NINE BY DEFAULT — a longer analysis is not a better one. 
+Start with the core three, then add the others only when they earn their 
+place for this decision.
+
+  CORE THREE (carry most analyses — one per lens):
+    • Feature Comparison Matrix (#1) — capability at a glance
+    • Weighted Scorecard (#2) — the decision, across all three lenses
+    • Heuristic Evaluation Rubric (#3) — the UX lens, task by task
+
+  ADD WHEN THEY EARN THEIR PLACE:
+    • Jobs-to-Be-Done Coverage (#4) — when the decision hinges on unmet 
+      jobs or white space
+    • Positioning Map (#5) — when you need to show market position or 
+      surface an empty quadrant
+    • SWOT per Competitor (#6) — a compact per-competitor summary, AFTER 
+      the deeper analysis, never instead of it
+    • Annotated UI Teardown (#7) and Screen-by-Screen Flow (#8) — visual, 
+      only when you have real UI access and UX is central to the decision
+    • Visual Evidence Log (#9) — whenever you use the visual templates, 
+      to keep every UI claim auditable
+
+Full definitions follow.
+
   1. FEATURE COMPARISON MATRIX
      Capabilities as rows, products as columns. Mark ✓ (full), ◐ (partial), 
      ✗ (none), ? (unknown). Tie each row to a job a buyer actually weighs — 
