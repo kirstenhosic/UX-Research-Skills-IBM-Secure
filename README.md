@@ -1,10 +1,8 @@
 # Dr. Morgan — UX Research Mentor Prompts
 
 A suite of AI prompt "agents" that act as a senior UX researcher mentor. They are
-designed to be pasted into **Copilot Chat** (or any chat interface that accepts a
-system prompt / custom instructions) and used to guide, challenge, and co-pilot UX
-research work for **IBM Secure products** (HashiCorp Vault, Boundary, Consul,
-Terraform, and Vault Radar).
+designed to be used in IBM Bob (or similar tools that can run skills and agents) and used to guide, challenge, and co-pilot UX research work for **IBM Secure products** (HashiCorp Vault, Boundary, Consul,
+and Radar, with the addition of Terraform). For any output created with data analysis skills, the competitive analysis, or the slide deck generator, be sure to **run the Research-integrity auditor as a release gate.**
 
 The mentor — **Dr. Morgan**, a senior researcher with a PhD in HCI — teaches
 through Socratic questioning, challenges weak reasoning, insists on traceable
@@ -130,8 +128,7 @@ improvised. Full citations live in the individual prompt files.
 
 ## How to use
 
-1. **Invoke the agent** — in VS Code Copilot Chat, select the **Dr. Morgan** agent
-   (`agents/dr-morgan.agent.md`) directly. Or, for a single scenario, open one of the
+1. **Invoke the agent** — in IBM Bob or VS Code Copilot Chat, connect this repo so you can access it directly (you can prompt Bob to help you do this). Or, for a single scenario, open one of the
    standalone scenario files and copy its contents into **Copilot Chat or IBM Bob** as a
    system prompt / custom instructions, or as the first message in a new chat.
 2. Describe what you're working on. Dr. Morgan will route you to the right scenario
