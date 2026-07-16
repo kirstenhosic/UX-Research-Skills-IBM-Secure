@@ -2,7 +2,7 @@
 
 A suite of AI prompt "agents" that act as a senior UX researcher mentor. They are
 designed to be used in IBM Bob (or similar tools that can run skills and agents) and used to guide, challenge, and co-pilot UX research work for **IBM Secure products** (HashiCorp Vault, Boundary, Consul,
-and Radar, with the addition of Terraform). For any output created with data analysis skills, the competitive analysis, or the slide deck generator, be sure to **run the Research-integrity auditor as a release gate.**
+and Radar, with the addition of Terraform). **For any output created with data analysis skills, the competitive analysis, or the slide deck generator, be sure to run the Research-integrity auditor as a release gate.**
 
 The mentor — **Dr. Morgan**, a senior researcher with a PhD in HCI — teaches
 through Socratic questioning, challenges weak reasoning, insists on traceable
