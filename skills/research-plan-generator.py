@@ -172,34 +172,21 @@ class ResearchPlanGenerator:
         scope_text = self.config.get('scope_intro', 'Scope has been deliberately narrowed to ensure high-confidence findings within the available timeline.')
         self.add_paragraph(scope_text, space_after=50800)
 
-        # Add scope table if provided
+        # Add scope bullets if provided
         if self.config.get('include_scope_table', True):
             in_scope = self.config.get('in_scope', [])
             out_of_scope = self.config.get('out_of_scope', [])
 
             if in_scope or out_of_scope:
-                table = self.doc.add_table(rows=2, cols=2)
-                table.style = 'Light Grid Accent 1'
+                # In Scope section
+                if in_scope:
+                    self.add_heading_2('In Scope')
+                    self.add_bullet_list(in_scope, space_before=0)
 
-                header_cells = table.rows[0].cells
-                for cell in header_cells:
-                    self.shade_cell(cell, LIGHT_GRAY)
-
-                header_cells[0].text = 'In Scope'
-                header_cells[1].text = 'Out of Scope'
-
-                content_cells = table.rows[1].cells
-                in_para = content_cells[0].paragraphs[0]
-                in_para.clear()
-                for item in in_scope:
-                    content_cells[0].add_paragraph(item, style='List Paragraph')
-
-                out_para = content_cells[1].paragraphs[0]
-                out_para.clear()
-                for item in out_of_scope:
-                    content_cells[1].add_paragraph(item, style='List Paragraph')
-
-                self.doc.add_paragraph().paragraph_format.space_after = Emu(50800)
+                # Out of Scope section
+                if out_of_scope:
+                    self.add_heading_2('Out of Scope')
+                    self.add_bullet_list(out_of_scope, space_before=0)
 
         # Research questions
         if self.config.get('include_research_questions', True):
