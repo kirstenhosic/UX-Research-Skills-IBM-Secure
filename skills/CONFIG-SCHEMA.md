@@ -331,13 +331,15 @@ What the research will produce, organized by type.
 
 ### Section Inclusion Flags
 
-Boolean flags to include/exclude entire sections.
+Boolean flags to include/exclude entire sections. **A section renders only when its flag allows it AND it has content** — a config with no `discussion_guide` data never produces an empty "Discussion Guide" heading, even if the flag is left at its default.
+
+**Section numbering is dynamic:** H1 numbers ("1.", "2.", …) are assigned at generation time, so omitting a section never leaves a gap. Sub-numbers inside your data (group names like "3.1", deliverable titles like "7.1", question numbers like "(1.1)") are yours to keep consistent with the sections you include.
 
 #### `include_central_question` (boolean, default: `true`)
 Include the central research question in a callout box.
 
 #### `include_scope_table` (boolean, default: `true`)
-Include the in-scope vs. out-of-scope comparison table.
+Include the in-scope / out-of-scope bullet sections.
 
 #### `include_research_questions` (boolean, default: `true`)
 Include the "Core Research Questions" section.
@@ -353,6 +355,48 @@ Include the "Timeline and Milestones" section.
 
 #### `include_deliverables` (boolean, default: `true`)
 Include the "Deliverables" section.
+
+---
+
+### Custom Document Layout (`sections`)
+
+For documents that don't fit the research-plan structure — rationales, briefs, one-pagers — provide a top-level `sections` array. When present, it **replaces** the plan layout entirely (title and metadata still render first).
+
+Each section has a `heading` (auto-numbered unless `"numbered": false`) and an ordered list of `blocks`:
+
+| Block `type` | Fields | Renders as |
+|---|---|---|
+| `paragraph` | `text`, optional `bold`, `italic` | Body paragraph |
+| `bullets` | `items`, optional `lead` (bold intro line) | Bulleted list |
+| `callout` | `title`, `text` | Shaded callout box with accent bar |
+| `table` | `headers`, `rows` (array of arrays) | Design-system table |
+| `subheading` | `text` | Heading 2 |
+
+**Example — a research rationale:**
+```json
+{
+  "product_name": "Consul Adoption",
+  "plan_title": "Research Rationale",
+  "metadata": ["IBM HashiCorp Secure  |  UX Research"],
+  "sections": [
+    {
+      "heading": "Why This Research Matters",
+      "blocks": [
+        { "type": "paragraph", "text": "Adoption stalls between evaluation and production..." },
+        { "type": "callout", "title": "Central Question", "text": "\"What needs to be true for customers to feel confident beginning?\"" }
+      ]
+    },
+    {
+      "heading": "Assumptions and Risks",
+      "blocks": [
+        { "type": "subheading", "text": "Assumptions" },
+        { "type": "bullets", "items": ["Customers will delay migration by default", "Trust is the binding constraint"] },
+        { "type": "table", "headers": ["Risk", "Mitigation"], "rows": [["Low recruitment", "CSM channel + internal fallback"]] }
+      ]
+    }
+  ]
+}
+```
 
 ---
 

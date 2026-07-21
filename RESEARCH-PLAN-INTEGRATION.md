@@ -26,7 +26,7 @@ UX-Research-Skills-IBM-Secure/
 │   ├── dr-morgan.agent.md
 │   └── research-synthesis-checker.agent.md
 ├── skills/                          # NEW
-│   ├── research-plan-generator.py
+│   ├── research-document-generator.py
 │   ├── your-config.json
 │   └── README.md
 ├── research-readout-deck/
@@ -39,9 +39,9 @@ UX-Research-Skills-IBM-Secure/
 
 1. **Copy the skill files** from `~/.claude/skills/` to `skills/` in the repo:
    ```bash
-   cp ~/.claude/skills/research-plan-generator.py skills/
+   cp ~/.claude/skills/research-document-generator.py skills/
    cp ~/.claude/skills/your-config.json skills/
-   cp ~/.claude/skills/hashicorp-secure-research-plan.md skills/README.md
+   cp ~/.claude/skills/research-document-template.md skills/README.md
    ```
 
 2. **Update the main README** (see "Updated README Section" below)
@@ -66,7 +66,7 @@ In `agents/dr-morgan.agent.md`, add this guidance under Scenario C (UX Plan From
 **For immediate output:** If you need a professional research plan document quickly, 
 invoke the **Research Plan Generator skill**:
 
-    /hashicorp-secure-research-plan
+    /research-document-template
     
 Tell it about your research (questions, participants, timeline, deliverables), 
 and it generates a complete Word document following IBM Secure's design standards 
@@ -93,11 +93,11 @@ When creating new skills that produce research documents, reference the generato
 ## Output Standard
 
 This skill produces documents following **IBM Secure's design system**. 
-See `DESIGN-SYSTEM.md` for styling standards and `skills/research-plan-generator.py` 
+See `DESIGN-SYSTEM.md` for styling standards and `skills/research-document-generator.py` 
 for the underlying document generator.
 
 For research plans specifically, consider using the **Research Plan Generator skill** 
-(`/hashicorp-secure-research-plan`) instead of building your own.
+(`/research-document-template`) instead of building your own.
 ```
 
 ---
@@ -111,7 +111,7 @@ User: I'm starting a migration research study for Consul.
 
 Options:
 A) Use the Research Plan Generator directly:
-   /hashicorp-secure-research-plan
+   /research-document-template
    → Fast path (30 min to publication-ready plan)
 
 B) Work with Dr. Morgan for coaching:
@@ -125,7 +125,7 @@ B) Work with Dr. Morgan for coaching:
 Team: We need a research plan for a Boundary feature evaluation.
 
 Steps:
-1. Product Manager uses /hashicorp-secure-research-plan to draft initial plan
+1. Product Manager uses /research-document-template to draft initial plan
 2. Team shares plan, gathers feedback
 3. UX Researcher refines with Dr. Morgan's Scenario D (challenge & refine)
 4. Finalize and publish using the generator
@@ -139,7 +139,7 @@ User: I want to work through the planning process but need a final document.
 Process:
 1. Work with Dr. Morgan through Scenario C (coaching on each phase)
 2. At each phase completion, extract your decisions
-3. Feed them into /hashicorp-secure-research-plan
+3. Feed them into /research-document-template
 4. Get a polished document that reflects your thinking
 ```
 
@@ -151,7 +151,7 @@ The skill uses JSON configurations. Store product-specific examples in `skills/`
 
 ```
 skills/
-├── research-plan-generator.py
+├── research-document-generator.py
 ├── your-config.json         # Vault migration template
 ├── example-feature-eval.json               # Feature evaluation template
 ├── example-adoption-study.json             # Adoption study template
@@ -163,7 +163,7 @@ Teams can **copy and customize** these configs for their research:
 ```bash
 cp skills/your-config.json vault-next-study.json
 # Edit vault-next-study.json with your research questions
-python3 skills/research-plan-generator.py vault-next-study.json Vault_Next_Plan.docx
+python3 skills/research-document-generator.py vault-next-study.json Vault_Next_Plan.docx
 ```
 
 ---
@@ -173,7 +173,7 @@ python3 skills/research-plan-generator.py vault-next-study.json Vault_Next_Plan.
 ### When the Design System Changes
 
 1. **Update `DESIGN-SYSTEM.md`**
-2. **Update `research-plan-generator.py`:**
+2. **Update `research-document-generator.py`:**
    ```python
    PRIMARY_BLUE = RGBColor(0x1F, 0x4E, 0x79)   # Edit colors here
    SECONDARY_BLUE = RGBColor(0x2E, 0x75, 0xB6)
@@ -229,22 +229,22 @@ Before every research plan is shared:
 ### "I generated a plan but it doesn't match the design system"
 
 **Check:**
-1. Are you using the latest version of `research-plan-generator.py`?
+1. Are you using the latest version of `research-document-generator.py`?
 2. Did you customize the colors in the Python script?
 3. Do you have python-docx installed? (`pip install python-docx`)
 
 **Fix:**
 ```bash
 # Update the generator
-cp ~/.claude/skills/research-plan-generator.py skills/
+cp ~/.claude/skills/research-document-generator.py skills/
 
 # Regenerate your document
-python3 skills/research-plan-generator.py your-config.json your-plan.docx
+python3 skills/research-document-generator.py your-config.json your-plan.docx
 ```
 
 ### "I want to customize colors/fonts"
 
-Edit `research-plan-generator.py`:
+Edit `research-document-generator.py`:
 
 ```python
 # Line 12-14: Change colors here
@@ -269,7 +269,7 @@ Edit your JSON config to add the section:
 }
 ```
 
-Then modify `research-plan-generator.py` to include it:
+Then modify `research-document-generator.py` to include it:
 
 ```python
 if self.config.get('include_custom_section', False):
@@ -281,7 +281,7 @@ if self.config.get('include_custom_section', False):
 
 **Yes!** The skill is product-agnostic. To use with other teams:
 
-1. Change the blue color scheme if needed (edit `research-plan-generator.py`)
+1. Change the blue color scheme if needed (edit `research-document-generator.py`)
 2. Create new example configs with their product context
 3. Share the `skills/` folder with the other team
 4. Point them to `skills/README.md`
@@ -337,7 +337,7 @@ Instead of writing research plans from scratch, use the **Research Plan Generato
 
 In Claude Code:
 ```
-/hashicorp-secure-research-plan
+/research-document-template
 
 I'm planning a [study type] for [product].
 Research questions: [list]
@@ -349,7 +349,7 @@ Timeline: [weeks]
 
 Or use directly:
 ```bash
-python3 skills/research-plan-generator.py skills/your-config.json my-plan.docx
+python3 skills/research-document-generator.py skills/your-config.json my-plan.docx
 ```
 
 ### Integration with Dr. Morgan

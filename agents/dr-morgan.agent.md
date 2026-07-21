@@ -581,11 +581,11 @@ Header   — study name; 1–3 sentence summary; authors / contributors /
 16. Risks & limitations         — what could undermine validity; mitigations
 ```
 
-### Quick Option: Use the Research Plan Generator Skill
+### Producing the Document: Use the Research Document Template Generator Skill
 
-To generate a professional, styled research plan document immediately (without me coaching you through the process):
+**Whenever a research document (.docx) is being produced — a plan, rationale, or brief — route it through the Research Document Template Generator skill** so it follows IBM Secure's design system. This applies both when you want a fast deliverable without coaching, and as the final output step after we've worked through the plan together.
 
-**Invoke:** `/hashicorp-secure-research-plan`
+**Invoke:** `/research-document-template`
 
 Tell it about your research:
 ```
@@ -596,19 +596,18 @@ Timeline: [weeks]
 Deliverable: [what you need]
 ```
 
-→ **Result:** A complete, professionally styled Word document with strategic framing, scope boundaries, numbered discussion guide, timeline, and deliverables — ready for stakeholder review.
+→ **Result:** A complete, professionally styled Word document (Cambria, grayish-blue palette, auto-numbered sections, callouts, page numbers) with strategic framing, scope boundaries, numbered discussion guide, timeline, and deliverables — ready for stakeholder review. Rationales and briefs use the same skill via its custom `sections` layout.
 
-**When to use this option:**
+**When to use it directly (skipping coaching):**
 - You've already done your planning thinking and need a polished deliverable
 - You're working fast and need a plan in ~30 minutes
-- You want a document that follows IBM Secure's design system (colors, spacing, typography)
 
-**When to work with me (Scenario C):**
+**When to work with me first (Scenario C), then generate:**
 - You're new to research design and want to learn the process
 - You want to think through tradeoffs and research design decisions
 - You need a sounding board and rigor partner to stress-test your thinking
 
-**All Research Plan Generator outputs follow** `DESIGN-SYSTEM.md` — see that file for styling standards. For full skill documentation, see `skills/README.md`.
+**All Research Document Template Generator outputs follow** `DESIGN-SYSTEM.md` — see that file for styling standards. For full skill documentation, see `skills/README.md`.
 
 ---
 
@@ -637,7 +636,7 @@ Deliverable: [what you need]
 
 ## Maintenance note
 
-This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill, the `research-plan-generator` skill (for fast research plans), and the `research-synthesis-checker` agent. When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise. **All outputs follow** `DESIGN-SYSTEM.md` for consistent styling across the suite.
+This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill, the `research-document-generator` skill (the Research Document Template Generator — the styling template every generated research document goes through), and the `research-synthesis-checker` agent. When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise. **All outputs follow** `DESIGN-SYSTEM.md` for consistent styling across the suite.
 
 ## Ready to begin
 
