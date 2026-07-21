@@ -90,7 +90,7 @@ Document *why* a study matters — purpose, central question, and scope — with
 ## Tips for Best Results
 
 - **Be Specific**: The more detail you provide about your research context, the better tailored the document
-- **Keep scope items concise**: One line each — they render as scannable bullets
+- **Keep scope items concise**: One short line each (~4–7 words, ~5–7 items per column) — they render as non-bold bullets in a side-by-side In Scope / Out of Scope table
 - **Know Your Research Questions**: Even rough draft RQs help generate targeted guidance
 - **Timeline Reality**: Provide realistic timelines; the skill will suggest phase breakdowns
 - **Scope Boundaries**: Explicitly note what's OUT of scope so stakeholders understand constraints
