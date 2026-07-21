@@ -1,0 +1,144 @@
+{
+  "plan_type": "migration",
+  "product_name": "Vault Next Migration",
+  "plan_title": "Research Plan",
+  "metadata": [
+    "IBM HashiCorp Secure  |  UX Research",
+    "Status: Draft for Review  |  Author: TBD  |  Created: TBD",
+    "Research Window: Weeks 5–8  |  Findings Due: September 12, 2025"
+  ],
+  "purpose": "This research effort addresses critical retention and trust challenges. We need to understand what conditions would make customers feel safe enough to begin migration — and what product investments, commitments, and communication would need to be in place before that trust is possible.",
+  "central_question": "\"What migration experience and capabilities need to be available — for both customers migrating existing workloads and customers adopting fresh — for them to feel confident beginning?\"",
+  "scope_intro": "Scope has been deliberately narrowed to maximize confidence within the available timeline. Competitive analysis and pricing are parallel workstreams owned by other teams.",
+  "in_scope": [
+    "Migration decision-making: when and why customers begin",
+    "Trust and risk thresholds for initiating migration",
+    "Minimum feature requirements before engagement",
+    "Hybrid deployment tolerance and coexistence model",
+    "Adoption vs. migration decision logic and triggers",
+    "Role-specific migration labor: operators and developers",
+    "Whether customers expect professional services support",
+    "What IBM must provide for migration to feel manageable",
+    "Feedback on proposed migration model/concept",
+    "Customer workload categorization and sequencing"
+  ],
+  "out_of_scope": [
+    "Competitive analysis of migration processes",
+    "Pricing, packaging, and sales process",
+    "Vault Next UI/UX usability evaluation",
+    "Feature parity prioritization at scale",
+    "Feasibility of automation and self-service tooling",
+    "Full adoption track research for net-new customers"
+  ],
+  "research_questions_intro": "All questions are anchored in behavior, decision-making, and trust under real constraints.",
+  "research_questions": [
+    {
+      "group_name": "3.1 Migration Barriers and Feature Requirements",
+      "questions": [
+        "RQ1: What are the primary barriers that prevent customers from migrating — and which are hard blockers?",
+        "RQ2: Which features are so critical that their absence would prevent workload migration?"
+      ]
+    },
+    {
+      "group_name": "3.2 Risk Tolerance and Migration Decision Logic",
+      "questions": [
+        "RQ3: How do customers think about risk during migration?",
+        "RQ4: What information do customers need to feel confident proceeding?",
+        "RQ5: What triggers the decision to start, and what nearly stops them?"
+      ]
+    },
+    {
+      "group_name": "3.3 Adoption vs. Migration Decision Logic",
+      "questions": [
+        "RQ6: How do customers distinguish between migrating existing workloads and starting fresh?"
+      ]
+    },
+    {
+      "group_name": "3.4 Role-Based Migration Labor",
+      "questions": [
+        "RQ7: Which jobs belong to operator/platform teams vs. application teams?",
+        "RQ8: Which work items require the most effort by role?"
+      ]
+    }
+  ],
+  "participant_profile": "Platform engineers, security engineers, or DevOps leads who are the primary operators in a production environment, at companies with 200+ employees, with direct input into infrastructure decisions.",
+  "disqualifiers": [
+    "Primary contact is through a managed service (no migration authority)",
+    "Not operating in production environment",
+    "Fewer than 200 employees"
+  ],
+  "recruitment_channels": [
+    "CSM-mediated via GTM PM — primary channel",
+    "Internal IBM staff using in production — valid fallback",
+    "External panel (e.g., Respondent) — last resort"
+  ],
+  "include_discussion_guide": true,
+  "discussion_guide": [
+    {
+      "section_name": "Section 1 — Warm-Up",
+      "time_info": "5 minutes",
+      "questions": [
+        "(1.1) Tell me about your role and how you came to be responsible for this platform in your organization.",
+        "(1.2) Walk me through your current deployment at a high level — how many clusters, roughly how large a team manages it."
+      ]
+    },
+    {
+      "section_name": "Section 2 — Current Practice and Operational Context",
+      "time_info": "10 minutes  →  RQ2 setup",
+      "questions": [
+        "(2.1) What are the two or three workflows your team depends on most heavily day-to-day?",
+        "(2.2) Tell me about the last time something in your environment caused real operational stress.",
+        "(2.3) When you think about features or workflows you absolutely cannot afford to lose — what comes to mind first?"
+      ]
+    },
+    {
+      "section_name": "Section 3 — Past Migration Behavior and Mental Models",
+      "time_info": "15 minutes  →  RQ3, RQ5",
+      "questions": [
+        "(3.1) Has your team ever had to migrate workloads between versions, or move critical infrastructure from one system to another?",
+        "(3.2) When you imagine committing your team to a major infrastructure migration, what's the first thing you need to know?",
+        "(3.3) What would have to go wrong during a migration for you to consider it a failure?"
+      ]
+    }
+  ],
+  "include_timeline": true,
+  "timeline": [
+    {
+      "timeframe": "Wk 1–2",
+      "milestone": "Stakeholder alignment confirmed. PM and Eng input gathered. Engineering resolves internal questions."
+    },
+    {
+      "timeframe": "Wk 3–4",
+      "milestone": "Recruitment live. Discussion guide finalized. Pilot session completed and guide revised."
+    },
+    {
+      "timeframe": "Wk 5–6",
+      "milestone": "Study sessions begin (target 3–4 per week). Contingency decision point: end of Week 5."
+    },
+    {
+      "timeframe": "Wk 7–8",
+      "milestone": "Remaining sessions complete. Analysis begins: de-identification, organization, coding."
+    }
+  ],
+  "include_deliverables": true,
+  "deliverables": [
+    {
+      "title": "7.1 Research Findings",
+      "items": [
+        "One findings document mapped to three product decisions",
+        "Each finding: evidence (quote + participant ID) → interpretation → insight → recommendation",
+        "Scope statement and confidence note included"
+      ]
+    },
+    {
+      "title": "7.2 Migration Narrative Input",
+      "items": [
+        "Draft language PM can use to build the HashiConf narrative",
+        "Grounded in actual participant language — not paraphrased"
+      ]
+    }
+  ],
+  "include_research_questions": true,
+  "include_participants": true,
+  "include_scope_table": true
+}
