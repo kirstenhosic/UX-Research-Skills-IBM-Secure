@@ -13,9 +13,12 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
 # Brand Colors
-PRIMARY_BLUE = RGBColor(0x1F, 0x4E, 0x79)   # Dark blue for titles
-SECONDARY_BLUE = RGBColor(0x2E, 0x75, 0xB6)  # Light blue for subtitles
+PRIMARY_BLUE = RGBColor(0x51, 0x6B, 0x7F)   # Dark grayish blue for titles
+SECONDARY_BLUE = RGBColor(0x6B, 0x84, 0x99)  # Medium grayish blue for subtitles
 LIGHT_GRAY = "D9E1F2"                        # Light background for callouts
+
+# Default Font
+DEFAULT_FONT = "Cambria"
 
 class ResearchPlanGenerator:
     """Generate professional research plan documents"""
@@ -37,6 +40,7 @@ class ResearchPlanGenerator:
         title_run = title_para.add_run(title)
         title_run.font.size = Pt(28)
         title_run.font.bold = True
+        title_run.font.name = DEFAULT_FONT
         title_run.font.color.rgb = PRIMARY_BLUE
         title_para.paragraph_format.space_before = Emu(152400)
         title_para.paragraph_format.space_after = Emu(50800)
@@ -46,6 +50,7 @@ class ResearchPlanGenerator:
             subtitle_run = subtitle_para.add_run(subtitle)
             subtitle_run.font.size = Pt(18)
             subtitle_run.font.bold = True
+            subtitle_run.font.name = DEFAULT_FONT
             subtitle_run.font.color.rgb = SECONDARY_BLUE
             subtitle_para.paragraph_format.space_after = Emu(50800)
 
@@ -64,6 +69,7 @@ class ResearchPlanGenerator:
         h.paragraph_format.space_before = Emu(76200)
         h.paragraph_format.space_after = Emu(63500)
         for run in h.runs:
+            run.font.name = DEFAULT_FONT
             run.font.color.rgb = PRIMARY_BLUE
         return h
 
@@ -73,6 +79,7 @@ class ResearchPlanGenerator:
         h.paragraph_format.space_before = Emu(50800)
         h.paragraph_format.space_after = Emu(38100)
         for run in h.runs:
+            run.font.name = DEFAULT_FONT
             run.font.color.rgb = SECONDARY_BLUE
         return h
 
@@ -82,12 +89,12 @@ class ResearchPlanGenerator:
         p.paragraph_format.space_before = Emu(space_before)
         p.paragraph_format.space_after = Emu(space_after)
 
-        if bold or italic:
-            for run in p.runs:
-                if bold:
-                    run.bold = True
-                if italic:
-                    run.italic = True
+        for run in p.runs:
+            run.font.name = DEFAULT_FONT
+            if bold:
+                run.bold = True
+            if italic:
+                run.italic = True
         return p
 
     def add_bullet_list(self, items, space_before=38100):
@@ -96,6 +103,8 @@ class ResearchPlanGenerator:
             p = self.doc.add_paragraph(item, style='List Paragraph')
             p.paragraph_format.space_before = Emu(space_before if i == 0 else 0)
             p.paragraph_format.space_after = Emu(38100)
+            for run in p.runs:
+                run.font.name = DEFAULT_FONT
 
     def add_callout(self, title, content):
         """Add a callout box (single-cell table with background)"""
@@ -112,10 +121,12 @@ class ResearchPlanGenerator:
         title_run = title_p.add_run(title + '\n')
         title_run.font.bold = True
         title_run.font.size = Pt(12)
+        title_run.font.name = DEFAULT_FONT
         title_run.font.color.rgb = PRIMARY_BLUE
 
         content_run = title_p.add_run(content)
         content_run.font.size = Pt(11)
+        content_run.font.name = DEFAULT_FONT
 
         title_p.paragraph_format.space_before = Emu(50800)
         title_p.paragraph_format.space_after = Emu(50800)
