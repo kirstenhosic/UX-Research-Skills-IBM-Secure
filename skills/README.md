@@ -56,9 +56,10 @@ You provide:
 A Word document (.docx) ready to share with stakeholders, print, or refine:
 
 - Professional cover: title, subtitle, thin accent rule, gray metadata block
+- Running page header (document title + org/date) and a confidentiality footer note, when configured
 - Auto-numbered sections with no gaps
-- Callout boxes for key questions and decisions
-- Design-system tables (timeline, comparisons) with repeating headers
+- Callout boxes for key questions, decisions, and success/failure criteria
+- Design-system tables with repeating headers — timelines adapt from simple Timeframe/Milestone up to 4-column Phase/Timeframe/Outputs/Activities execution plans
 - Numbered discussion guide questions (1.1, 2.1…) for field reference
 - Page numbers on every page
 

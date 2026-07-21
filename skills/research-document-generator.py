@@ -10,7 +10,7 @@ import json
 import sys
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Emu
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -42,7 +42,7 @@ class ResearchDocumentGenerator:
     # ------------------------------------------------------------------
 
     def _setup_document(self):
-        """Set margins, base style, and footer so every element inherits the design system."""
+        """Set margins, base style, header, and footer so every element inherits the design system."""
         for section in self.doc.sections:
             section.top_margin = Inches(1)
             section.bottom_margin = Inches(1)
@@ -63,13 +63,73 @@ class ResearchDocumentGenerator:
         rfonts.set(qn('w:ascii'), DEFAULT_FONT)
         rfonts.set(qn('w:hAnsi'), DEFAULT_FONT)
 
-        self._add_page_number_footer()
+        # Explicit heading hierarchy: 16pt H1, 13pt H2
+        for style_name, size in (('Heading 1', 16), ('Heading 2', 13)):
+            h_style = self.doc.styles[style_name]
+            h_style.font.size = Pt(size)
 
-    def _add_page_number_footer(self):
-        """Centered page number in the footer."""
+        self._add_page_header()
+        self._add_footer()
+
+    def _add_page_header(self):
+        """Running header on every page: title line + context line, with a thin rule.
+
+        Configured via `page_header` (list of 1–2 strings). No header if absent.
+        """
+        lines = self.config.get('page_header') or []
+        if not lines:
+            return
+        header = self.doc.sections[0].header
+        header.is_linked_to_previous = False
+        p = header.paragraphs[0]
+        run = p.add_run(lines[0])
+        run.font.name = DEFAULT_FONT
+        run.font.size = Pt(9)
+        run.font.bold = True
+        run.font.color.rgb = PRIMARY_BLUE
+        p.paragraph_format.space_after = Emu(0)
+        last_p = p
+        if len(lines) > 1:
+            p2 = header.add_paragraph()
+            run2 = p2.add_run(lines[1])
+            run2.font.name = DEFAULT_FONT
+            run2.font.size = Pt(9)
+            run2.font.color.rgb = META_GRAY
+            p2.paragraph_format.space_after = Emu(0)
+            last_p = p2
+        # Thin rule separating the header from the page body
+        p_pr = last_p._p.get_or_add_pPr()
+        borders = OxmlElement('w:pBdr')
+        bottom = OxmlElement('w:bottom')
+        bottom.set(qn('w:val'), 'single')
+        bottom.set(qn('w:sz'), '4')
+        bottom.set(qn('w:space'), '4')
+        bottom.set(qn('w:color'), ACCENT_HEX)
+        borders.append(bottom)
+        p_pr.append(borders)
+
+    def _add_footer(self):
+        """Footer: optional note (e.g. 'Confidential — Internal Use Only') left,
+        page number right. Without a `footer_note`, the page number is centered."""
         footer_p = self.doc.sections[0].footer.paragraphs[0]
-        footer_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        run = footer_p.add_run()
+        note = self.config.get('footer_note', '')
+
+        def _styled(run, size=9):
+            run.font.name = DEFAULT_FONT
+            run.font.size = Pt(size)
+            run.font.color.rgb = META_GRAY
+            return run
+
+        if note:
+            footer_p.paragraph_format.tab_stops.add_tab_stop(
+                Inches(6.5), WD_TAB_ALIGNMENT.RIGHT)
+            _styled(footer_p.add_run(note)).font.italic = True
+            footer_p.add_run('\t')
+            _styled(footer_p.add_run('Page '))
+        else:
+            footer_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+        run = _styled(footer_p.add_run())
         fld_begin = OxmlElement('w:fldChar')
         fld_begin.set(qn('w:fldCharType'), 'begin')
         instr = OxmlElement('w:instrText')
@@ -80,9 +140,6 @@ class ResearchDocumentGenerator:
         run._r.append(fld_begin)
         run._r.append(instr)
         run._r.append(fld_end)
-        run.font.name = DEFAULT_FONT
-        run.font.size = Pt(9)
-        run.font.color.rgb = META_GRAY
 
     # ------------------------------------------------------------------
     # Low-level helpers
@@ -405,13 +462,21 @@ class ResearchDocumentGenerator:
                     self.add_paragraph(time_info, italic=True, space_before=0, space_after=25400)
                 self.add_bullet_list(section.get('questions', []), space_before=0)
 
-        # Timeline
+        # Timeline — columns adapt to the keys present in the data, so a simple
+        # Timeframe/Milestone table and a richer Phase/Weeks/Outputs/Activities
+        # execution plan both render correctly.
         if self._has_content('timeline', 'include_timeline'):
             self.add_heading_1('Timeline and Milestones')
-            rows = [[item.get('timeframe', ''), item.get('milestone', '')]
-                    for item in self.config.get('timeline', [])]
-            self.add_table_with_header(['Timeframe', 'Milestone'], rows,
-                                       first_col_width=Inches(1.1))
+            items = self.config.get('timeline', [])
+            candidates = [('phase', 'Phase'), ('timeframe', 'Timeframe'),
+                          ('milestone', 'Milestone'), ('outputs', 'Outputs'),
+                          ('activities', 'Activities')]
+            columns = [(k, label) for k, label in candidates
+                       if any(item.get(k) for item in items)]
+            rows = [[item.get(k, '') for k, _ in columns] for item in items]
+            first_width = Inches(1.1) if columns and columns[0][0] in ('phase', 'timeframe') else None
+            self.add_table_with_header([label for _, label in columns], rows,
+                                       first_col_width=first_width)
 
         # Deliverables
         if self._has_content('deliverables', 'include_deliverables'):
@@ -419,6 +484,15 @@ class ResearchDocumentGenerator:
             for deliverable in self.config.get('deliverables', []):
                 self.add_heading_2(deliverable.get('title', ''))
                 self.add_bullet_list(deliverable.get('items', []))
+
+        # Success criteria — paired callouts, matching the team's established format
+        criteria = self.config.get('success_criteria', {})
+        if self.config.get('include_success_criteria', True) and criteria:
+            self.add_heading_1('Success Criteria')
+            if criteria.get('success'):
+                self.add_callout('Research is successful if:', criteria['success'])
+            if criteria.get('failure'):
+                self.add_callout('Failure looks like:', criteria['failure'])
 
     def save(self, filename):
         """Save the document"""
