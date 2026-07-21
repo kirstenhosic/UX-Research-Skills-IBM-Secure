@@ -99,6 +99,29 @@ Additional context shown on the title page (organization, status, dates, etc.).
 
 ---
 
+#### `page_header` (array of 1–2 strings, optional)
+Running header shown on every page: a bold title line and an optional gray context line, separated from the body by a thin accent rule. Omit for no header.
+
+**Example:**
+```json
+"page_header": [
+  "Vault Next Migration — Study 1 Plan",
+  "IBM HashiCorp Secure  |  UX Research  |  July 2026"
+]
+```
+
+---
+
+#### `footer_note` (string, optional)
+Note shown at the left of every page footer (page number moves to the right). Without it, the page number is centered.
+
+**Example:**
+```json
+"footer_note": "Confidential — Internal Use Only"
+```
+
+---
+
 ### Strategic Framing
 
 #### `purpose` (string, required)
@@ -279,24 +302,45 @@ Ordered sections of the discussion guide, each with questions that will be auto-
 ### Timeline
 
 #### `timeline` (array of objects, optional)
-Milestones and activities week-by-week.
+Milestones and activities week-by-week. **Columns adapt to the keys you provide** — recognized keys, in column order: `phase`, `timeframe`, `milestone`, `outputs`, `activities`. A column appears only if at least one item uses its key.
 
-**Structure:**
+**Simple structure:**
 ```json
 "timeline": [
   {
     "timeframe": "Wk 1–2",
-    "milestone": "Stakeholder alignment confirmed. PM and Eng input gathered. Engineering resolves internal questions."
+    "milestone": "Stakeholder alignment confirmed. PM and Eng input gathered."
   },
   {
     "timeframe": "Wk 3–4",
-    "milestone": "Recruitment live. Discussion guide finalized. Pilot session completed and guide revised."
-  },
-  {
-    "timeframe": "Wk 5–6",
-    "milestone": "Study sessions begin (target 3–4 per week). Contingency decision point: end of Week 5."
+    "milestone": "Recruitment live. Discussion guide finalized. Pilot completed."
   }
 ]
+```
+
+**Rich execution-plan structure** (renders a 4-column Phase / Timeframe / Outputs / Activities table):
+```json
+"timeline": [
+  {
+    "phase": "Phase 1 — Alignment",
+    "timeframe": "Wk 1–2",
+    "outputs": "Finalized screener and outreach email",
+    "activities": "Stakeholder alignment, CSM meeting, consent process confirmed"
+  }
+]
+```
+
+---
+
+#### `success_criteria` (object, optional)
+Renders a "Success Criteria" section as paired callout boxes — "Research is successful if:" and "Failure looks like:". Toggle with `include_success_criteria`.
+
+**Example:**
+```json
+"success_criteria": {
+  "success": "The PM can defend the migration narrative at HashiConf with evidence-backed confidence, and feature prioritization decisions cite specific findings.",
+  "failure": "\"It depends\" findings with no decision guidance, or recommendations no one owns."
+}
 ```
 
 ---

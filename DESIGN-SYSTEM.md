@@ -46,7 +46,13 @@ All documents use IBM HashiCorp Secure's professional color scheme:
 
 ## Typography & Spacing
 
-**Document font: Cambria** — set on the Normal style so every element (body, lists, tables, footers) inherits it. Line spacing: 1.15. Margins: 1" all around. Every page carries a centered 9pt page number in the footer.
+**Document font: Cambria** — set on the Normal style so every element (body, lists, tables, footers) inherits it. Line spacing: 1.15. Margins: 1" all around.
+
+**Page furniture (every page):**
+- **Header** (via `page_header` config): bold 9pt title line in Primary Blue + gray 9pt context line, separated from the body by a thin accent rule
+- **Footer**: confidentiality note (via `footer_note` config, e.g. "Confidential — Internal Use Only") italic at left, 9pt page number at right — or a centered page number when no note is set
+
+**Heading hierarchy:** Title ~28pt → H1 16pt → H2 13pt → body 11pt.
 
 ### Document Structure
 
