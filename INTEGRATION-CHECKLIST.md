@@ -25,13 +25,13 @@ mkdir -p skills
 
 ```bash
 # Copy the generator script
-cp ~/.claude/skills/research-plan-generator.py skills/
+cp ~/.claude/skills/research-document-generator.py skills/
 
 # Copy the example configuration
 cp ~/.claude/skills/example-migration-research.json skills/
 
 # Copy the documentation (rename to repo-specific README)
-cp ~/.claude/skills/hashicorp-secure-research-plan.md skills/README.md
+cp ~/.claude/skills/research-document-template.md skills/README.md
 
 # Optional: Copy all supporting docs
 cp ~/.claude/skills/CONFIG-SCHEMA.md skills/
@@ -44,7 +44,7 @@ cp ~/.claude/skills/RESEARCH-PLAN-SKILL-README.md skills/
 ```bash
 ls -la skills/
 # Should show:
-# - research-plan-generator.py
+# - research-document-generator.py
 # - example-migration-research.json
 # - README.md
 # - (optional: CONFIG-SCHEMA.md, QUICK-START-BY-ROLE.md, etc.)
@@ -52,7 +52,7 @@ ls -la skills/
 
 - [ ] All skill files copied successfully
 - [ ] File permissions are correct (readable by team)
-- [ ] Generator script is executable: `chmod +x skills/research-plan-generator.py`
+- [ ] Generator script is executable: `chmod +x skills/research-document-generator.py`
 
 ---
 
@@ -92,7 +92,7 @@ to create professional research plans in ~30 minutes instead of 4+ hours.
 
 | File | Role | Use it when |
 |---|---|---|
-| `skills/research-plan-generator.py` + `example-*.json` | **Research Plan Generator** | You need a professional, styled research plan document. Invoke via `/hashicorp-secure-research-plan` or run the script directly. Adapts to migration, feature evaluation, adoption, and comparative studies. |
+| `skills/research-document-generator.py` + `example-*.json` | **Research Plan Generator** | You need a professional, styled research plan document. Invoke via `/research-document-template` or run the script directly. Adapts to migration, feature evaluation, adoption, and comparative studies. |
 
 **Why use it:**
 - ✅ Professional design (IBM Secure colors, spacing, typography)
@@ -117,7 +117,7 @@ After the existing "How to use" instructions, add:
 
 **In Claude Code:**
 ```bash
-/hashicorp-secure-research-plan
+/research-document-template
 
 I'm planning a [study type] for [product].
 Research questions: [list]
@@ -129,7 +129,7 @@ Timeline: [weeks]
 
 **Or run directly:**
 ```bash
-python3 skills/research-plan-generator.py skills/example-migration-research.json my-plan.docx
+python3 skills/research-document-generator.py skills/example-migration-research.json my-plan.docx
 ```
 
 **Design Standards:** All generated documents follow IBM Secure's design system (see `DESIGN-SYSTEM.md`).
@@ -155,7 +155,7 @@ To generate a professional research plan document immediately without coaching:
 
 **Invoke the Research Plan Generator:**
 ```
-/hashicorp-secure-research-plan
+/research-document-template
 
 [Describe your research study]
 ```
@@ -244,7 +244,7 @@ cp skills/example-migration-research.json skills/example-terraform-policies.json
 
 ```bash
 # Generate a test document
-python3 skills/research-plan-generator.py \
+python3 skills/research-document-generator.py \
   skills/example-migration-research.json \
   test-output.docx
 
@@ -260,7 +260,7 @@ rm test-output.docx
 
 ```bash
 # In Claude Code, invoke:
-/hashicorp-secure-research-plan
+/research-document-template
 
 I'm planning a test research study.
 Research questions: test question
@@ -272,7 +272,7 @@ Timeline: 6 weeks
 - [ ] Output document is valid (opens in Word/Google Docs)
 - [ ] Document styling matches DESIGN-SYSTEM.md
 - [ ] Dr. Morgan agent still works after updates
-- [ ] `/hashicorp-secure-research-plan` invocation works
+- [ ] `/research-document-template` invocation works
 
 ---
 
@@ -293,7 +293,7 @@ git add agents/dr-morgan.agent.md  # (if updated)
 ```bash
 git commit -m "Add Research Plan Generator skill with design system integration
 
-- Adds research-plan-generator.py for creating styled research plans
+- Adds research-document-generator.py for creating styled research plans
 - Adds example configurations for migration, feature eval, adoption studies
 - Establishes DESIGN-SYSTEM.md as standard for all research documents
 - Updates Dr. Morgan agent to reference the skill
@@ -318,7 +318,7 @@ Create a PR on GitHub with:
   that follow IBM Secure's design system standards.
   
   ## What's included
-  - research-plan-generator.py — Core Python generator
+  - research-document-generator.py — Core Python generator
   - example-*.json configurations — Templates for different research types
   - DESIGN-SYSTEM.md — Styling standards for all research documents
   - RESEARCH-PLAN-INTEGRATION.md — Architecture and integration guide
@@ -355,7 +355,7 @@ We've added a new skill to speed up research plan creation.
 
 **Use it:**
 ```
-/hashicorp-secure-research-plan
+/research-document-template
 ```
 
 **Features:**
@@ -463,13 +463,13 @@ cp skills/example-migration-research.json skills/example-[product].json
 
 **To use the skill:**
 ```
-/hashicorp-secure-research-plan
+/research-document-template
 [Describe your research]
 ```
 
 **To run the script directly:**
 ```bash
-python3 skills/research-plan-generator.py \
+python3 skills/research-document-generator.py \
   skills/example-migration-research.json \
   my-plan.docx
 ```
@@ -478,7 +478,7 @@ python3 skills/research-plan-generator.py \
 ```bash
 cp skills/example-migration-research.json my-study.json
 # Edit my-study.json
-python3 skills/research-plan-generator.py my-study.json my-plan.docx
+python3 skills/research-document-generator.py my-study.json my-plan.docx
 ```
 
 **To understand styling:**

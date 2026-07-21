@@ -13,7 +13,7 @@ Ensure that all artifacts produced by research skills maintain:
 ## When to Apply
 
 **Apply these standards to:**
-- Research plans (via `research-plan-generator` skill)
+- Research plans, rationales, and briefs (via the **Research Document Template Generator** skill, `skills/research-document-generator.py`)
 - Readout decks (via `research-readout-deck/` generator)
 - Data analysis outputs
 - Competitive analysis matrices
@@ -33,46 +33,52 @@ All documents use IBM HashiCorp Secure's professional color scheme:
 
 | Element | Color | RGB | Usage |
 |---------|-------|-----|-------|
-| Primary Title | Dark Blue | #1F4E79 | Research plan name, main headings |
-| Section Heading | Light Blue | #2E75B6 | Section titles, subsection headings |
-| Callout/Highlight | Light Gray | #D9E1F2 | Key findings, decision points, callout boxes |
-| Body Text | Black | #000000 | All body text and paragraphs |
-| Table Header | Light Gray | #D9E1F2 | Table headers and row separators |
+| Primary Title | Dark Grayish Blue | #516B7F | Document title, main headings (H1), callout accents |
+| Section Heading | Medium Grayish Blue | #6B8499 | Subtitle, subsection headings (H2) |
+| Callout/Highlight | Soft Blue-Gray | #EDF1F5 | Key findings, decision points, callout boxes (with #516B7F left accent bar) |
+| Body Text | Dark Gray | #333333 | All body text and paragraphs |
+| Metadata/Footer | Medium Gray | #595959 | Cover metadata, page numbers |
+| Table Header | Blue-Gray | #E4EAEF | Table header background (bold #516B7F text) |
 
-**Rationale:** The blue color scheme echoes IBM and HashiCorp branding while remaining professional and accessible.
+**Rationale:** The muted grayish-blue scheme echoes IBM and HashiCorp branding while remaining professional, sophisticated, and accessible.
 
 ---
 
 ## Typography & Spacing
 
+**Document font: Cambria** — set on the Normal style so every element (body, lists, tables, footers) inherits it. Line spacing: 1.15. Margins: 1" all around. Every page carries a centered 9pt page number in the footer.
+
 ### Document Structure
 
 **Title Page:**
-- Main Title: 28pt, Bold, Primary Blue (#1F4E79)
-- Subtitle: 18pt, Bold, Secondary Blue (#2E75B6)
-- Metadata: 11pt, Regular Black
+- Main Title: 28pt, Bold, Primary Blue (#516B7F)
+- Subtitle: 16pt, Bold, Secondary Blue (#6B8499)
+- A thin #516B7F horizontal rule under the title block
+- Metadata: 10pt, Regular, Medium Gray (#595959)
 - Space Before Title: 152400 EMU (1 inch)
 - Space After Title: 50800 EMU (0.35 inch)
 
 **Headings:**
-- Heading 1: 14pt, Bold, Primary Blue (#1F4E79)
-- Space Before: 76200 EMU (0.5 inch)
-- Space After: 63500 EMU (0.45 inch)
+- Heading 1: Bold, Primary Blue (#516B7F), auto-numbered ("1.", "2." — numbering is dynamic, so omitted sections never leave gaps)
+- Space Before: 101600 EMU
+- Space After: 63500 EMU
+- Keep-with-next enabled (no orphaned headings at page bottoms)
 
-- Heading 2: 12pt, Bold, Secondary Blue (#2E75B6)
-- Space Before: 50800 EMU (0.35 inch)
-- Space After: 38100 EMU (0.25 inch)
+- Heading 2: Bold, Secondary Blue (#6B8499)
+- Space Before: 63500 EMU
+- Space After: 38100 EMU
+- Keep-with-next enabled
 
 **Body Text:**
-- Regular: 11pt, Regular, Black
+- Regular: 11pt Cambria, Dark Gray (#333333)
 - Space Before Paragraph: 38100 EMU
 - Space After Paragraph: 63500 EMU
 
 **Lists:**
 - Use "List Paragraph" style (not bullet points)
-- 11pt, Regular
+- 11pt Cambria, Regular
 - Indent: 0.25"
-- Space: 38100 EMU after each item
+- Space: 31750 EMU after each item
 
 ### Professional Spacing
 
@@ -88,9 +94,10 @@ All documents use IBM HashiCorp Secure's professional color scheme:
 ### Callout Boxes
 
 Used for key information, decisions, and questions:
-- Single-cell table with light gray background (#D9E1F2)
-- Title in bold, Secondary Blue (#2E75B6)
-- Content in regular black, 11pt
+- Single-cell table with soft blue-gray background (#EDF1F5)
+- Thick left accent bar in Primary Blue (#516B7F)
+- Title in bold, Primary Blue (#516B7F), 12pt
+- Content in italic dark gray (#333333), 11pt
 - Padding: 50800 EMU top and bottom
 - Followed by 50800 EMU spacing
 
@@ -103,14 +110,13 @@ Used for key information, decisions, and questions:
 ### Tables
 
 **Header Row:**
-- Background: Light Gray (#D9E1F2)
-- Text: Bold, Black, 11pt
-- Every cell has a border (1pt, light gray)
+- Background: Blue-Gray (#E4EAEF)
+- Text: Bold, Primary Blue (#516B7F), 10.5pt Cambria
+- Repeats automatically across page breaks
 
 **Data Rows:**
-- Alternating row shading optional (improves readability on large tables)
-- Text: Regular Black, 11pt
-- Consistent column widths
+- Text: Regular Dark Gray, 10.5pt Cambria
+- Consistent column widths (narrow first column for timeline tables)
 - Clear cell borders
 
 **Style:** "Light Grid Accent 1" (or equivalent)
@@ -220,22 +226,22 @@ Examples:
 
 ## Tool Integration
 
-### Research Plan Generator
+### Research Document Template Generator
 
-**Location:** `~/.claude/skills/research-plan-generator.py`
+**Location:** `skills/research-document-generator.py` (repo is source of truth; keep any local copy in `~/.claude/skills/` synced from here)
 
-**When to use:** Any time you're creating a research plan (migration, feature eval, adoption, comparative)
+**When to use:** Any time you're creating a research document — research plans (migration, feature eval, adoption, comparative), rationales, briefs, or custom stakeholder documents
 
 **Invocation in Claude Code:**
 ```
-/hashicorp-secure-research-plan
+/research-document-template
 
 [Describe your research]
 ```
 
 **Output:** Professional Word document following this design system
 
-**Configuration:** Edit `example-migration-research.json` to customize sections, questions, timeline
+**Configuration:** Edit `example-migration-research.json` to customize sections, questions, timeline. For non-plan documents (rationales, briefs), use the generic `sections` config layout — see `skills/CONFIG-SCHEMA.md`.
 
 ---
 
@@ -254,11 +260,14 @@ Examples:
 Before sharing any document, verify:
 
 **Visual Design:**
-- ✅ Title is Primary Blue (#1F4E79)
-- ✅ Section headings are Secondary Blue (#2E75B6)
-- ✅ Callout boxes have Light Gray (#D9E1F2) background
+- ✅ Document font is Cambria throughout (including tables and footers)
+- ✅ Title is Primary Blue (#516B7F)
+- ✅ Section headings are Secondary Blue (#6B8499)
+- ✅ Callout boxes have Soft Blue-Gray (#EDF1F5) background with a #516B7F accent bar
+- ✅ Section numbering has no gaps (dynamic numbering handles omitted sections)
 - ✅ Spacing is consistent (no cramped text)
 - ✅ Tables have colored headers
+- ✅ Page numbers appear in the footer
 
 **Structural Integrity:**
 - ✅ Research plan has scope boundaries (in/out of scope)
@@ -290,7 +299,7 @@ When creating a new skill that produces documents:
 
 2. **Use the research plan generator** for any plan output:
    ```python
-   from research-plan-generator import ResearchPlanGenerator
+   from research_document_generator import ResearchDocumentGenerator
    ```
 
 3. **Test styling** against the checklist above before finalizing
@@ -299,9 +308,9 @@ When creating a new skill that produces documents:
 
 ### For Dr. Morgan Agent
 
-Dr. Morgan should refer users to the research plan generator:
+Dr. Morgan should refer users to the Research Document Template Generator **whenever a research document is being produced** — plans, rationales, briefs alike:
 
-> "To create a professional research plan with built-in styling and structure, I recommend using the **Research Plan Generator skill**. Invoke it with `/hashicorp-secure-research-plan` and provide your research context. It will generate a Word document following IBM Secure's design standards."
+> "To create a professional research document with built-in styling and structure, I recommend using the **Research Document Template Generator skill**. Invoke it with `/research-document-template` and provide your research context. It will generate a Word document following IBM Secure's design standards."
 
 ### For Quality Assurance
 

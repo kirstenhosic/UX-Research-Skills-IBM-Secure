@@ -12,7 +12,7 @@ Fast-track guide for different team members at IBM HashiCorp Secure.
 
 1. **Open Claude Code** and invoke the skill:
    ```
-   /hashicorp-secure-research-plan
+   /research-document-template
    ```
 
 2. **Tell Claude about your research:**
@@ -199,7 +199,7 @@ The research plan should include or link to:
 
 3. **Generate the document:**
    ```
-   python3 ~/.claude/skills/research-plan-generator.py vault-feature-adoption-study.json Vault_Feature_Adoption_Study.docx
+   python3 ~/.claude/skills/research-document-generator.py vault-feature-adoption-study.json Vault_Feature_Adoption_Study.docx
    ```
 
 4. **Share the config** with your team so others can run similar studies
@@ -313,7 +313,7 @@ Document the decision so you can explain it later to skeptics.
 
 1. **Choose your role above** and follow the setup guide
 2. **Gather the information** needed for your research context
-3. **Invoke the skill** `/hashicorp-secure-research-plan`
+3. **Invoke the skill** `/research-document-template`
 4. **Generate your first document** and share with your team
 5. **Iterate** before finalizing with stakeholders
 
