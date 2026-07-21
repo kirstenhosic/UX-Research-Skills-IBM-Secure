@@ -333,6 +333,48 @@ class ResearchDocumentGenerator:
 
         return table
 
+    def add_scope_table(self, in_scope, out_of_scope):
+        """Two-column In Scope / Out of Scope table with bulleted, non-bold items."""
+        table = self.doc.add_table(rows=2, cols=2)
+        table.style = 'Light Grid Accent 1'
+
+        # The table style bolds the first column by default — turn that off so
+        # scope items render in regular weight.
+        tbl_look = table._tbl.tblPr.find(qn('w:tblLook'))
+        if tbl_look is not None:
+            tbl_look.set(qn('w:firstColumn'), '0')
+            tbl_look.set(qn('w:lastColumn'), '0')
+
+        headers = ['In Scope', 'Out of Scope']
+        for i, header in enumerate(headers):
+            cell = table.rows[0].cells[i]
+            self.shade_cell(cell, TABLE_HEADER_BG)
+            cell.text = header
+            self._style_cell_text(cell, bold=True, size=10.5, color=PRIMARY_BLUE)
+
+        tr_pr = table.rows[0]._tr.get_or_add_trPr()
+        tr_pr.append(OxmlElement('w:tblHeader'))
+
+        for i, items in enumerate([in_scope, out_of_scope]):
+            cell = table.rows[1].cells[i]
+            cell.paragraphs[0].clear()
+            for j, item in enumerate(items):
+                p = cell.paragraphs[0] if j == 0 else cell.add_paragraph()
+                p.style = self.doc.styles['List Bullet']
+                p.paragraph_format.space_before = Emu(19050)
+                p.paragraph_format.space_after = Emu(19050)
+                run = p.add_run(item)
+                run.font.name = DEFAULT_FONT
+                run.font.size = Pt(10.5)
+                run.font.bold = False
+                run.font.color.rgb = BODY_GRAY
+
+        for row in table.rows:
+            for cell in row.cells:
+                cell.width = Inches(3.25)
+
+        self.doc.add_paragraph().paragraph_format.space_after = Emu(38100)
+
     # ------------------------------------------------------------------
     # Generic custom-section rendering (for rationales, briefs, etc.)
     # ------------------------------------------------------------------
@@ -405,20 +447,15 @@ class ResearchDocumentGenerator:
                 self.add_heading_2('Central Research Question')
                 self.add_callout('Key Question', central_q)
 
-        # Scope
+        # Scope — two-column table with bulleted items. Keep items concise:
+        # one short line each, so the columns stay scannable side by side.
         in_scope = self.config.get('in_scope', [])
         out_of_scope = self.config.get('out_of_scope', [])
         if self.config.get('include_scope_table', True) and (in_scope or out_of_scope):
             self.add_heading_1('Scope Boundaries')
             scope_text = self.config.get('scope_intro', 'Scope has been deliberately narrowed to ensure high-confidence findings within the available timeline.')
             self.add_paragraph(scope_text, space_after=50800)
-
-            if in_scope:
-                self.add_heading_2('In Scope')
-                self.add_bullet_list(in_scope, space_before=0)
-            if out_of_scope:
-                self.add_heading_2('Out of Scope')
-                self.add_bullet_list(out_of_scope, space_before=0)
+            self.add_scope_table(in_scope, out_of_scope)
 
         # Research questions
         if self._has_content('research_questions', 'include_research_questions'):

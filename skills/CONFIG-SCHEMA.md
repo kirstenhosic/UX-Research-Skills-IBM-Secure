@@ -157,30 +157,30 @@ Introductory statement about why scope is bounded.
 ---
 
 #### `in_scope` (array of strings, optional)
-List of topics/questions that ARE included in the research.
+List of topics/questions that ARE included in the research. Renders as the left column of a two-column In Scope / Out of Scope table, with each item as a bullet in regular (non-bold) weight. **Keep items concise — one short line each (roughly 4–7 words)** so the columns stay scannable side by side; aim for ~5–7 items.
 
 **Example:**
 ```json
 "in_scope": [
-  "Migration decision-making: when and why customers begin",
-  "Trust and risk thresholds for initiating migration",
-  "Minimum feature requirements before engagement",
-  "Role-specific migration labor: operators and developers"
+  "When and why customers decide to migrate",
+  "Trust signals and risk tolerance",
+  "Critical feature requirements for engagement",
+  "Role-based migration labor and bottlenecks"
 ]
 ```
 
 ---
 
 #### `out_of_scope` (array of strings, optional)
-List of topics that are explicitly NOT included.
+List of topics that are explicitly NOT included. Renders as the right column of the scope table — same rules: concise bullets, regular weight.
 
 **Example:**
 ```json
 "out_of_scope": [
-  "Competitive analysis of migration processes",
-  "Pricing, packaging, and sales process",
-  "Consul UI/UX usability evaluation",
-  "Feature parity prioritization at scale"
+  "Competitive migration analysis",
+  "Pricing and packaging",
+  "Consul UI/UX evaluation",
+  "Feature parity prioritization"
 ]
 ```
 
@@ -383,7 +383,7 @@ Boolean flags to include/exclude entire sections. **A section renders only when 
 Include the central research question in a callout box.
 
 #### `include_scope_table` (boolean, default: `true`)
-Include the in-scope / out-of-scope bullet sections.
+Include the two-column In Scope / Out of Scope table (bulleted, non-bold items).
 
 #### `include_research_questions` (boolean, default: `true`)
 Include the "Core Research Questions" section.

@@ -143,8 +143,9 @@ Every research plan generated follows this structure:
    - Central research question in callout box
 
 3. **Scope Boundaries**
-   - In-scope vs. out-of-scope comparison table
-   - Clear constraints and rationale
+   - Two-column In Scope / Out of Scope table
+   - Items are bulleted, regular weight (never bold), and concise — one short line each (~5–7 items per column)
+   - Clear constraints and rationale in the intro paragraph
 
 4. **Core Research Questions**
    - Grouped by theme or priority
