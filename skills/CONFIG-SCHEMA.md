@@ -37,11 +37,14 @@ Complete reference for all available configuration options in the JSON schema.
   "disqualifiers": ["array"],
   "recruitment_channels": ["array"],
   
+  "discussion_guide_intro": "string (moderator note rendered as a callout above the guide)",
   "discussion_guide": [{ 
     "section_name": "string",
     "time_info": "string", 
     "questions": ["array"] 
   }],
+  
+  "analysis_plan": { "intro": "string", "items": ["array"] },
   
   "timeline": [{ 
     "timeframe": "string", 
@@ -359,6 +362,11 @@ How you'll find and recruit participants, in priority order.
 
 ### Discussion Guide
 
+#### `discussion_guide_intro` (string, optional)
+Moderator note rendered as a callout box above the guide sections — use for
+session-wide guidance such as language framing (e.g. "favor 'adoption' over
+'migration' in participant-facing wording") or consent reminders.
+
 #### `discussion_guide` (array of objects, optional)
 Ordered sections of the discussion guide, each with questions that will be auto-numbered.
 
@@ -389,6 +397,33 @@ Ordered sections of the discussion guide, each with questions that will be auto-
 - Include time allocations for each section
 - Optionally reference which research questions each section addresses with `→ RQ#` notation
 - Questions are rendered as bullet points in the document
+- Section time allocations should sum to the session length stated in `metadata` — check this whenever you add or remove questions
+
+---
+
+### Analysis Plan
+
+#### `analysis_plan` (object or string, optional)
+How sessions become findings. Renders after the discussion guide, before the
+timeline. As an object: `intro` paragraph plus bulleted `items`; a plain string
+renders as a single paragraph. Cover: unit of analysis, coding approach
+(deductive frame / inductive pass), coder count and disagreement handling,
+the disconfirming-evidence check against stated hypotheses, and what will NOT
+be analyzed. Don't leave analysis activities living only as timeline
+milestones — that's how this section gets silently lost.
+
+**Structure:**
+```json
+"analysis_plan": {
+  "intro": "Analysis converts session data into findings mapped to the product decisions. The unit of analysis is the coded excerpt within each session.",
+  "items": [
+    "Coding: deductive frame seeded by the research question groups, with an inductive pass for emergent themes",
+    "Process: independent coding, then a norming session to resolve disagreements before affinity mapping",
+    "Bias check: disconfirming-evidence pass against each retained hypothesis",
+    "Out of analysis scope: feature-level prioritization ranking (deferred to quantitative follow-up)"
+  ]
+}
+```
 
 ---
 
@@ -489,6 +524,9 @@ Include the "Risks and Limitations" section.
 
 #### `include_open_items` (boolean, default: `true`)
 Include the "Open Items Before Plan Finalization" section.
+
+#### `include_analysis_plan` (boolean, default: `true`)
+Include the "Analysis Plan" section.
 
 #### `include_participants` (boolean, default: `true`)
 Include the "Participants and Recruitment" section.
