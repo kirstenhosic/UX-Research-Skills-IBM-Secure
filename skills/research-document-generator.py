@@ -333,7 +333,7 @@ class ResearchDocumentGenerator:
 
         return table
 
-    def add_scope_table(self, in_scope, out_of_scope):
+    def add_scope_table(self, in_scope, out_of_scope, headers=None):
         """Two-column In Scope / Out of Scope table with bulleted, non-bold items."""
         table = self.doc.add_table(rows=2, cols=2)
         table.style = 'Light Grid Accent 1'
@@ -345,7 +345,7 @@ class ResearchDocumentGenerator:
             tbl_look.set(qn('w:firstColumn'), '0')
             tbl_look.set(qn('w:lastColumn'), '0')
 
-        headers = ['In Scope', 'Out of Scope']
+        headers = headers or ['In Scope', 'Out of Scope']
         for i, header in enumerate(headers):
             cell = table.rows[0].cells[i]
             self.shade_cell(cell, TABLE_HEADER_BG)
@@ -442,10 +442,19 @@ class ResearchDocumentGenerator:
             self.add_heading_1('Purpose and Strategic Framing')
             self.add_paragraph(self.config.get('purpose'))
 
+            purpose_extra = self.config.get('purpose_extra', '')
+            if purpose_extra:
+                self.add_paragraph(purpose_extra)
+
             central_q = self.config.get('central_question', '')
             if self.config.get('include_central_question', True) and central_q:
                 self.add_heading_2('Central Research Question')
                 self.add_callout('Key Question', central_q)
+
+            primary_outputs = self.config.get('primary_outputs', [])
+            if primary_outputs:
+                self.add_paragraph('Primary Outputs:', bold=True, space_before=0, space_after=25400)
+                self.add_bullet_list(primary_outputs, space_before=0)
 
         # Scope — two-column table with bulleted items. Keep items concise:
         # one short line each, so the columns stay scannable side by side.
@@ -455,7 +464,10 @@ class ResearchDocumentGenerator:
             self.add_heading_1('Scope Boundaries')
             scope_text = self.config.get('scope_intro', 'Scope has been deliberately narrowed to ensure high-confidence findings within the available timeline.')
             self.add_paragraph(scope_text, space_after=50800)
-            self.add_scope_table(in_scope, out_of_scope)
+            self.add_scope_table(in_scope, out_of_scope, headers=self.config.get('scope_headers'))
+            scope_note = self.config.get('scope_note', '')
+            if scope_note:
+                self.add_paragraph(scope_note, italic=True)
 
         # Research questions
         if self._has_content('research_questions', 'include_research_questions'):
@@ -466,6 +478,46 @@ class ResearchDocumentGenerator:
             for rq_group in self.config.get('research_questions', []):
                 self.add_heading_2(rq_group.get('group_name', ''))
                 self.add_bullet_list(rq_group.get('questions', []))
+
+        # Assumptions and hypotheses — stated explicitly so they can be
+        # checked against disconfirming evidence at synthesis. Each item is
+        # {"id": "H1", "statement": "...", "note": "..." (optional)}.
+        if self._has_content('hypotheses', 'include_hypotheses'):
+            self.add_heading_1('Assumptions and Hypotheses')
+            hyp_intro = self.config.get('hypotheses_intro', '')
+            if hyp_intro:
+                self.add_paragraph(hyp_intro)
+            items = []
+            for h in self.config.get('hypotheses', []):
+                label = h.get('id', '')
+                statement = h.get('statement', '')
+                note = h.get('note', '')
+                line = f"{label}: {statement}" if label else statement
+                if note:
+                    line = f"{line} {note}"
+                items.append(line)
+            self.add_bullet_list(items)
+
+        # Risks and limitations
+        if self._has_content('risks', 'include_risks'):
+            self.add_heading_1('Risks and Limitations')
+            risks_intro = self.config.get('risks_intro', '')
+            if risks_intro:
+                self.add_paragraph(risks_intro)
+            items = []
+            for r in self.config.get('risks', []):
+                if isinstance(r, dict):
+                    label = r.get('label', '')
+                    detail = r.get('detail', '')
+                    items.append(f"{label}: {detail}" if label else detail)
+                else:
+                    items.append(r)
+            self.add_bullet_list(items)
+
+        # Open items pending before the plan is finalized
+        if self._has_content('open_items', 'include_open_items'):
+            self.add_heading_1('Open Items Before Plan Finalization')
+            self.add_bullet_list(self.config.get('open_items', []))
 
         # Participants
         if self.config.get('include_participants', True) and (
