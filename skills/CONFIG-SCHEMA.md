@@ -152,9 +152,10 @@ Note shown at the left of every page footer (page number moves to the right). Wi
 ---
 
 #### `purpose_points` (array of strings, optional)
-Bullets rendered directly after the purpose lead paragraph. Prefer a short
-`purpose` lead plus `purpose_points` over one long prose paragraph — dense
-paragraph-only sections are the main readability complaint in review.
+Bullets rendered directly after the purpose lead paragraph. Note: the team's
+established preference is prose (no bullets) for the Purpose and Strategic
+Framing narrative — use this field sparingly; genuine lists like
+`primary_outputs` stay bulleted.
 
 ---
 
@@ -431,7 +432,9 @@ Ordered sections of the discussion guide, each with questions that will be auto-
 ```
 
 **Notes:**
-- Questions should include numbering like `(1.1)`, `(2.1)` for easy reference in sessions
+- Do NOT include numbering in question text — the generator numbers questions sequentially across the whole guide (1, 2, 3 …) so any question is unambiguous mid-session. A question given as an array of strings renders as letter sub-parts under one number (5a, 5b, 5c). Never use decimal pairs like (1.1).
+- Questions render as indented numbered items with a bold number — no bullet glyphs (the number is the marker)
+- A question string starting with `[` (e.g. `"[Framing — read to participant]: …"`) renders as an italic, unnumbered moderator line
 - Include time allocations for each section
 - Optionally reference which research questions each section addresses with `→ RQ#` notation
 - Questions are rendered as bullet points in the document

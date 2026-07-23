@@ -232,8 +232,8 @@ class ResearchDocumentGenerator:
             self.section_num += 1
             text = f"{self.section_num}. {text}"
         h = self.doc.add_heading(text, level=1)
-        h.paragraph_format.space_before = Emu(101600)
-        h.paragraph_format.space_after = Emu(63500)
+        h.paragraph_format.space_before = Emu(177800)
+        h.paragraph_format.space_after = Emu(76200)
         self._keep_with_next(h)
         for run in h.runs:
             run.font.name = DEFAULT_FONT
@@ -243,8 +243,8 @@ class ResearchDocumentGenerator:
     def add_heading_2(self, text):
         """Add Heading 2 with proper styling"""
         h = self.doc.add_heading(text, level=2)
-        h.paragraph_format.space_before = Emu(63500)
-        h.paragraph_format.space_after = Emu(38100)
+        h.paragraph_format.space_before = Emu(101600)
+        h.paragraph_format.space_after = Emu(44450)
         self._keep_with_next(h)
         for run in h.runs:
             run.font.name = DEFAULT_FONT
@@ -265,19 +265,72 @@ class ResearchDocumentGenerator:
                 run.italic = True
         return p
 
+    def _bullet_indent(self, p, level=1):
+        """Indent a bullet so the glyph sits off the left margin (0.25\" per
+        level), not flush against it — flush-left bullets read as body text."""
+        p.paragraph_format.left_indent = Inches(0.25 + 0.25 * level)
+
     def add_bullet_list(self, items, space_before=38100, level=1):
         """Add a bulleted list with real bullet glyphs.
 
         Uses 'List Bullet' (not 'List Paragraph', which is indentation-only —
-        no glyph). level=2 renders an indented sub-list ('List Bullet 2').
+        no glyph). level=2 renders a further-indented sub-list.
         """
         style = 'List Bullet' if level == 1 else 'List Bullet 2'
         for i, item in enumerate(items):
             p = self.doc.add_paragraph(item, style=style)
+            self._bullet_indent(p, level)
             p.paragraph_format.space_before = Emu(space_before if i == 0 else 0)
             p.paragraph_format.space_after = Emu(31750)
             for run in p.runs:
                 run.font.name = DEFAULT_FONT
+
+    def add_labeled_bullets(self, items, space_before=38100, level=1):
+        """Bulleted list of (label, text) pairs — the label renders bold, so
+        IDs like 'H1:' or lead-ins like 'Coding:' anchor the eye."""
+        style = 'List Bullet' if level == 1 else 'List Bullet 2'
+        for i, (label, text) in enumerate(items):
+            p = self.doc.add_paragraph(style=style)
+            self._bullet_indent(p, level)
+            p.paragraph_format.space_before = Emu(space_before if i == 0 else 0)
+            p.paragraph_format.space_after = Emu(31750)
+            if label:
+                run = p.add_run(label)
+                run.font.name = DEFAULT_FONT
+                run.font.bold = True
+            if text:
+                run2 = p.add_run((' ' if label else '') + text)
+                run2.font.name = DEFAULT_FONT
+
+    def add_numbered_items(self, items, space_before=38100, indent=0.5):
+        """Indented items with a bold identifying label and NO bullet glyph.
+
+        For lists whose items carry their own identifier (question numbers
+        '1.', 'RQ3:', 'H1a:') — a bullet glyph next to a number is redundant.
+        Use plain numbers (1, 2, 3) or letter sub-parts (1a, 1b) for labels,
+        never decimal pairs like (1.1).
+        """
+        for i, (label, text) in enumerate(items):
+            p = self.doc.add_paragraph()
+            p.paragraph_format.left_indent = Inches(indent)
+            p.paragraph_format.space_before = Emu(space_before if i == 0 else 0)
+            p.paragraph_format.space_after = Emu(31750)
+            if label:
+                run = p.add_run(label)
+                run.font.name = DEFAULT_FONT
+                run.font.bold = True
+            run2 = p.add_run((' ' if label else '') + text)
+            run2.font.name = DEFAULT_FONT
+
+    @staticmethod
+    def _split_label(text, max_len=40):
+        """Split 'Label: rest' into (label, rest) when a short lead-in label
+        is present; otherwise ('', text)."""
+        if ': ' in text:
+            label, rest = text.split(': ', 1)
+            if len(label) <= max_len and '.' not in label:
+                return label + ':', rest
+        return '', text
 
     def add_callout(self, title, content):
         """Add a callout box: shaded single-cell table with a left accent bar."""
@@ -336,6 +389,9 @@ class ResearchDocumentGenerator:
                     for j, item in enumerate(cell_data):
                         p = cell.paragraphs[0] if j == 0 else cell.add_paragraph()
                         p.style = self.doc.styles['List Bullet']
+                        # Modest indent inside cells — enough to read as a
+                        # bullet, without wasting column width.
+                        p.paragraph_format.left_indent = Inches(0.18)
                         p.paragraph_format.space_before = Emu(9525)
                         p.paragraph_format.space_after = Emu(9525)
                         run = p.add_run(item)
@@ -508,7 +564,8 @@ class ResearchDocumentGenerator:
 
             for rq_group in self.config.get('research_questions', []):
                 self.add_heading_2(rq_group.get('group_name', ''))
-                self.add_bullet_list(rq_group.get('questions', []))
+                self.add_numbered_items(
+                    [self._split_label(q) for q in rq_group.get('questions', [])])
 
         # Assumptions and hypotheses — stated explicitly so they can be
         # checked against disconfirming evidence at synthesis. Each item is
@@ -523,11 +580,9 @@ class ResearchDocumentGenerator:
                 label = h.get('id', '')
                 statement = h.get('statement', '')
                 note = h.get('note', '')
-                line = f"{label}: {statement}" if label else statement
-                if note:
-                    line = f"{line} {note}"
-                items.append(line)
-            self.add_bullet_list(items)
+                text = f"{statement} {note}".strip() if note else statement
+                items.append((label + ':' if label else '', text))
+            self.add_numbered_items(items)
 
         # Risks and limitations
         if self._has_content('risks', 'include_risks'):
@@ -539,11 +594,10 @@ class ResearchDocumentGenerator:
             for r in self.config.get('risks', []):
                 if isinstance(r, dict):
                     label = r.get('label', '')
-                    detail = r.get('detail', '')
-                    items.append(f"{label}: {detail}" if label else detail)
+                    items.append((label + ':' if label else '', r.get('detail', '')))
                 else:
-                    items.append(r)
-            self.add_bullet_list(items)
+                    items.append(self._split_label(r))
+            self.add_labeled_bullets(items)
 
         # Open items pending before the plan is finalized
         if self._has_content('open_items', 'include_open_items'):
@@ -576,14 +630,21 @@ class ResearchDocumentGenerator:
             if channels:
                 self.add_heading_2('Recruitment Strategy')
                 self.add_paragraph('Channel priority:', bold=True, space_before=0, space_after=25400)
+                import re as _re
                 for ch in channels:
                     if isinstance(ch, dict):
-                        name_p = self.doc.add_paragraph(ch.get('name', ''), style='List Bullet')
-                        name_p.paragraph_format.space_before = Emu(0)
-                        name_p.paragraph_format.space_after = Emu(19050)
-                        for run in name_p.runs:
-                            run.font.name = DEFAULT_FONT
-                            run.font.bold = True
+                        # Channel names carry their own "1." priority number —
+                        # numbered item, no bullet glyph; details as sub-bullets.
+                        name = ch.get('name', '')
+                        m = _re.match(r'^(\d+[a-z]?\.)\s*(.*)$', name)
+                        label, text = (m.group(1), m.group(2)) if m else ('', name)
+                        p = self.doc.add_paragraph()
+                        p.paragraph_format.left_indent = Inches(0.5)
+                        p.paragraph_format.space_before = Emu(0)
+                        p.paragraph_format.space_after = Emu(19050)
+                        run = p.add_run((label + ' ' if label else '') + text)
+                        run.font.name = DEFAULT_FONT
+                        run.font.bold = True
                         self.add_bullet_list(ch.get('points', []), space_before=0, level=2)
                     else:
                         self.add_bullet_list([ch], space_before=0)
@@ -596,12 +657,31 @@ class ResearchDocumentGenerator:
             if guide_intro:
                 self.add_callout('Moderator Note', guide_intro)
 
+            # Questions are numbered sequentially across the whole guide
+            # (1, 2, 3 …) so any question can be referenced unambiguously
+            # mid-session. A question given as a list of strings renders as
+            # letter sub-parts (5a, 5b, 5c) under one number. No bullet
+            # glyphs — the number IS the marker.
+            q_num = 0
             for section in self.config.get('discussion_guide', []):
                 self.add_heading_2(section.get('section_name', ''))
                 time_info = section.get('time_info', '')
                 if time_info:
                     self.add_paragraph(time_info, italic=True, space_before=0, space_after=25400)
-                self.add_bullet_list(section.get('questions', []), space_before=0)
+                for q in section.get('questions', []):
+                    # Moderator/framing lines ("[Framing — read to participant]: ...")
+                    # render as italic paragraphs, unnumbered.
+                    if isinstance(q, str) and q.startswith('['):
+                        p = self.add_paragraph(q, italic=True, space_before=0, space_after=31750)
+                        p.paragraph_format.left_indent = Inches(0.25)
+                        continue
+                    q_num += 1
+                    if isinstance(q, list):
+                        self.add_numbered_items(
+                            [(f"{q_num}{chr(97 + j)}.", part) for j, part in enumerate(q)],
+                            space_before=0)
+                    else:
+                        self.add_numbered_items([(f"{q_num}.", q)], space_before=0)
 
         # Analysis plan — how sessions become findings. A short paragraph plus
         # optional bullets; content-gated like every other section so it can't
@@ -614,7 +694,8 @@ class ResearchDocumentGenerator:
                 if plan.get('intro'):
                     self.add_paragraph(plan['intro'])
                 if plan.get('items'):
-                    self.add_bullet_list(plan['items'])
+                    self.add_labeled_bullets(
+                        [self._split_label(i) for i in plan['items']])
             else:
                 self.add_paragraph(plan)
 
