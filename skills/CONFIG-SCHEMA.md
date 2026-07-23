@@ -11,8 +11,9 @@ Complete reference for all available configuration options in the JSON schema.
   "plan_title": "string",
   "metadata": ["array of strings"],
   
-  "purpose": "string",
-  "purpose_extra": "string",
+  "purpose": "string (short lead paragraph)",
+  "purpose_points": ["array — bullets after the purpose lead"],
+  "purpose_extra": "string, or { \"text\": \"lead\", \"items\": [\"bullets\"] }",
   "central_question": "string",
   "primary_outputs": ["array"],
   
@@ -33,9 +34,10 @@ Complete reference for all available configuration options in the JSON schema.
   
   "open_items": ["array"],
   
-  "participant_profile": "string",
+  "participant_profile": "string (short lead)",
+  "participant_criteria": ["array — bulleted profile criteria"],
   "disqualifiers": ["array"],
-  "recruitment_channels": ["array"],
+  "recruitment_channels": ["strings, or { \"name\": \"channel\", \"points\": [\"detail bullets\"] }"],
   
   "discussion_guide_intro": "string (moderator note rendered as a callout above the guide)",
   "discussion_guide": [{ 
@@ -149,10 +151,18 @@ Note shown at the left of every page footer (page number moves to the right). Wi
 
 ---
 
-#### `purpose_extra` (string, optional)
-A second paragraph under Purpose, rendered after the Central Question callout
-is configured (not before it) — use for supporting framing that doesn't belong
-in the main purpose paragraph, e.g. distinguishing customer segments.
+#### `purpose_points` (array of strings, optional)
+Bullets rendered directly after the purpose lead paragraph. Prefer a short
+`purpose` lead plus `purpose_points` over one long prose paragraph — dense
+paragraph-only sections are the main readability complaint in review.
+
+---
+
+#### `purpose_extra` (string or object, optional)
+Supporting framing that doesn't belong in the main purpose paragraph, e.g.
+distinguishing customer segments. A plain string renders as a paragraph; an
+object `{ "text": "lead", "items": ["..."] }` renders a short lead followed
+by bullets.
 
 ---
 
@@ -323,11 +333,28 @@ sign-off, unconfirmed timelines, dependencies on other teams).
 ### Participants & Recruitment
 
 #### `participant_profile` (string, optional)
-Detailed description of who you're targeting.
+Short lead sentence describing who you're targeting. Put the specific
+criteria in `participant_criteria` bullets rather than packing them all into
+this paragraph.
 
 **Example:**
 ```json
-"participant_profile": "Platform engineers, security engineers, or DevOps leads who are the primary operators in a production environment, at companies with 200+ employees, with direct input into infrastructure decisions."
+"participant_profile": "Primary operators of Vault Current in a production environment, with direct input into infrastructure migration decisions."
+```
+
+---
+
+#### `participant_criteria` (array of strings, optional)
+Bulleted screening criteria rendered under the Target Profile lead.
+
+**Example:**
+```json
+"participant_criteria": [
+  "Role: platform engineer, security engineer, or DevOps lead",
+  "Primary operator of Vault Current in production",
+  "Company size: 200+ employees",
+  "Direct input into infrastructure migration decisions"
+]
 ```
 
 ---
@@ -346,15 +373,26 @@ Conditions that automatically exclude potential participants.
 
 ---
 
-#### `recruitment_channels` (array of strings, optional)
-How you'll find and recruit participants, in priority order.
+#### `recruitment_channels` (array, optional)
+How you'll find and recruit participants, in priority order. Plain strings
+render as flat bullets; `{ "name", "points" }` objects render a bold channel
+name with indented detail bullets — prefer objects when a channel needs more
+than one sentence of explanation.
 
 **Example:**
 ```json
 "recruitment_channels": [
-  "CSM-mediated via product manager — primary channel. Templated outreach; researcher owns logistics.",
-  "Internal IBM staff using product in production — valid fallback if CSM recruiting is slow.",
-  "External research panel — last resort. Treat as supplementary; weight customer sessions more."
+  {
+    "name": "1. CSM-mediated via product manager — primary channel",
+    "points": [
+      "Templated outreach email provided to CSMs; researcher owns logistics after introduction",
+      "Explicitly request 1–2 skeptical or at-risk accounts to counter sampling bias"
+    ]
+  },
+  {
+    "name": "2. External research panel — last resort",
+    "points": ["Treat as supplementary; weight customer sessions more heavily in synthesis"]
+  }
 ]
 ```
 
@@ -431,6 +469,18 @@ milestones — that's how this section gets silently lost.
 
 #### `timeline` (array of objects, optional)
 Milestones and activities week-by-week. **Columns adapt to the keys you provide** — recognized keys, in column order: `phase`, `timeframe`, `milestone`, `outputs`, `activities`. A column appears only if at least one item uses its key.
+
+Any cell value may be an **array of strings**, which renders as bullets inside
+the cell — strongly preferred over sentence-run prose for dense milestone
+cells:
+
+```json
+{ "timeframe": "Wk 1–2", "milestone": [
+  "Stakeholder alignment confirmed",
+  "Screener and outreach email finalized",
+  "Consent process confirmed with legal"
+] }
+```
 
 **Simple structure:**
 ```json
