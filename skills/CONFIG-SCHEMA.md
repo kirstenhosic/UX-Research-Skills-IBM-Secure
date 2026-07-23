@@ -12,14 +12,26 @@ Complete reference for all available configuration options in the JSON schema.
   "metadata": ["array of strings"],
   
   "purpose": "string",
+  "purpose_extra": "string",
   "central_question": "string",
+  "primary_outputs": ["array"],
   
   "scope_intro": "string",
+  "scope_headers": ["In Scope label", "Out of Scope label"],
   "in_scope": ["array"],
   "out_of_scope": ["array"],
+  "scope_note": "string",
   
   "research_questions_intro": "string",
   "research_questions": [{ "group_name": "string", "questions": ["array"] }],
+  
+  "hypotheses_intro": "string",
+  "hypotheses": [{ "id": "H1", "statement": "string", "note": "string (optional)" }],
+  
+  "risks_intro": "string",
+  "risks": [{ "label": "string", "detail": "string" }],
+  
+  "open_items": ["array"],
   
   "participant_profile": "string",
   "disqualifiers": ["array"],
@@ -134,6 +146,13 @@ Note shown at the left of every page footer (page number moves to the right). Wi
 
 ---
 
+#### `purpose_extra` (string, optional)
+A second paragraph under Purpose, rendered after the Central Question callout
+is configured (not before it) — use for supporting framing that doesn't belong
+in the main purpose paragraph, e.g. distinguishing customer segments.
+
+---
+
 #### `central_question` (string, optional)
 The single overarching research question in quotation marks.
 
@@ -141,6 +160,12 @@ The single overarching research question in quotation marks.
 ```json
 "central_question": "\"What migration experience and capabilities need to be available for customers to feel confident beginning?\""
 ```
+
+---
+
+#### `primary_outputs` (array of strings, optional)
+Bulleted list of what this research is expected to produce, rendered under a
+bold "Primary Outputs:" lead-in at the end of the Purpose section.
 
 ---
 
@@ -153,6 +178,21 @@ Introductory statement about why scope is bounded.
 ```json
 "scope_intro": "Scope has been deliberately narrowed to maximize confidence within the available timeline."
 ```
+
+---
+
+#### `scope_headers` (array of two strings, optional)
+Overrides the scope table's column headers (default `["In Scope", "Out of Scope"]`).
+Use when you need ownership context in the header itself, e.g.:
+```json
+"scope_headers": ["In Scope — UX Research Owned", "Out of Scope — Other Teams / Future Studies"]
+```
+
+---
+
+#### `scope_note` (string, optional)
+Italic clarifying note rendered directly under the scope table — e.g. to flag
+that an out-of-scope item is deferred rather than permanently excluded.
 
 ---
 
@@ -219,6 +259,59 @@ Array of research question groups, each with a title and list of questions.
       "RQ5: What risks are unacceptable vs. tolerable?"
     ]
   }
+]
+```
+
+---
+
+### Assumptions, Hypotheses, Risks, and Open Items
+
+These sections are common to research rationales (and useful in plans too). Each
+renders only when its array has content, so omitting a field leaves no empty
+heading — the same rule every other section in this schema follows. This is
+also the trio that a prior version of the generic `sections` layout silently
+dropped when converting a hand-written rationale into config form, so treat
+their presence as required whenever a rationale has stated hypotheses or risks.
+
+#### `hypotheses_intro` (string, optional)
+Introductory text before the hypotheses list — e.g. framing them as
+falsifiable claims to be checked against disconfirming evidence at synthesis.
+
+#### `hypotheses` (array of objects, optional)
+Each item renders as `{id}: {statement} {note}`.
+
+**Structure:**
+```json
+"hypotheses": [
+  { "id": "H1", "statement": "Primary barriers are fear of unrecoverable errors AND absence of feature parity.", "note": "These barriers are weighted differently across segments." },
+  { "id": "H2", "statement": "TBD — pending PM and Engineering input on critical feature hypotheses." }
+]
+```
+
+#### `risks_intro` (string, optional)
+Introductory text before the risks list.
+
+#### `risks` (array of objects, optional)
+Each item renders as `{label}: {detail}`. Plain strings are also accepted if
+you don't need a label/detail split.
+
+**Structure:**
+```json
+"risks": [
+  { "label": "Recruitment access", "detail": "No formalized process exists and CSM relationships are new." },
+  { "label": "Sample scope", "detail": "7 interviews cannot represent full diversity of the customer base. Findings are directional." }
+]
+```
+
+#### `open_items` (array of strings, optional)
+Unresolved items to confirm before the plan is finalized (e.g. pending legal
+sign-off, unconfirmed timelines, dependencies on other teams).
+
+**Structure:**
+```json
+"open_items": [
+  "Legal/consent — confirm participant and recording consent process",
+  "Findings handoff date — confirm with PM"
 ]
 ```
 
@@ -387,6 +480,15 @@ Include the two-column In Scope / Out of Scope table (bulleted, non-bold items).
 
 #### `include_research_questions` (boolean, default: `true`)
 Include the "Core Research Questions" section.
+
+#### `include_hypotheses` (boolean, default: `true`)
+Include the "Assumptions and Hypotheses" section.
+
+#### `include_risks` (boolean, default: `true`)
+Include the "Risks and Limitations" section.
+
+#### `include_open_items` (boolean, default: `true`)
+Include the "Open Items Before Plan Finalization" section.
 
 #### `include_participants` (boolean, default: `true`)
 Include the "Participants and Recruitment" section.
