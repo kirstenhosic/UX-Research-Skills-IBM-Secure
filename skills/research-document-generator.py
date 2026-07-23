@@ -544,12 +544,31 @@ class ResearchDocumentGenerator:
         if self._has_content('discussion_guide', 'include_discussion_guide'):
             self.add_heading_1('Discussion Guide')
 
+            guide_intro = self.config.get('discussion_guide_intro', '')
+            if guide_intro:
+                self.add_callout('Moderator Note', guide_intro)
+
             for section in self.config.get('discussion_guide', []):
                 self.add_heading_2(section.get('section_name', ''))
                 time_info = section.get('time_info', '')
                 if time_info:
                     self.add_paragraph(time_info, italic=True, space_before=0, space_after=25400)
                 self.add_bullet_list(section.get('questions', []), space_before=0)
+
+        # Analysis plan — how sessions become findings. A short paragraph plus
+        # optional bullets; content-gated like every other section so it can't
+        # render an empty heading, but first-class so a config migration can't
+        # silently drop it (as happened once with hypotheses/risks).
+        if self._has_content('analysis_plan', 'include_analysis_plan'):
+            self.add_heading_1('Analysis Plan')
+            plan = self.config.get('analysis_plan')
+            if isinstance(plan, dict):
+                if plan.get('intro'):
+                    self.add_paragraph(plan['intro'])
+                if plan.get('items'):
+                    self.add_bullet_list(plan['items'])
+            else:
+                self.add_paragraph(plan)
 
         # Timeline — columns adapt to the keys present in the data, so a simple
         # Timeframe/Milestone table and a richer Phase/Weeks/Outputs/Activities
