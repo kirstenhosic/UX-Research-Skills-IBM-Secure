@@ -265,10 +265,15 @@ class ResearchDocumentGenerator:
                 run.italic = True
         return p
 
-    def add_bullet_list(self, items, space_before=38100):
-        """Add a bulleted list"""
+    def add_bullet_list(self, items, space_before=38100, level=1):
+        """Add a bulleted list with real bullet glyphs.
+
+        Uses 'List Bullet' (not 'List Paragraph', which is indentation-only —
+        no glyph). level=2 renders an indented sub-list ('List Bullet 2').
+        """
+        style = 'List Bullet' if level == 1 else 'List Bullet 2'
         for i, item in enumerate(items):
-            p = self.doc.add_paragraph(item, style='List Paragraph')
+            p = self.doc.add_paragraph(item, style=style)
             p.paragraph_format.space_before = Emu(space_before if i == 0 else 0)
             p.paragraph_format.space_after = Emu(31750)
             for run in p.runs:
@@ -324,8 +329,22 @@ class ResearchDocumentGenerator:
         for row_idx, row_data in enumerate(rows):
             for col_idx, cell_data in enumerate(row_data):
                 cell = table.rows[row_idx + 1].cells[col_idx]
-                cell.text = cell_data
-                self._style_cell_text(cell, size=10.5)
+                if isinstance(cell_data, list):
+                    # A list renders as bullets inside the cell — much more
+                    # scannable than sentence-run prose for dense cells.
+                    cell.paragraphs[0].clear()
+                    for j, item in enumerate(cell_data):
+                        p = cell.paragraphs[0] if j == 0 else cell.add_paragraph()
+                        p.style = self.doc.styles['List Bullet']
+                        p.paragraph_format.space_before = Emu(9525)
+                        p.paragraph_format.space_after = Emu(9525)
+                        run = p.add_run(item)
+                        run.font.name = DEFAULT_FONT
+                        run.font.size = Pt(10.5)
+                        run.font.color.rgb = BODY_GRAY
+                else:
+                    cell.text = cell_data
+                    self._style_cell_text(cell, size=10.5)
 
         if first_col_width is not None:
             for row in table.rows:
@@ -442,9 +461,21 @@ class ResearchDocumentGenerator:
             self.add_heading_1('Purpose and Strategic Framing')
             self.add_paragraph(self.config.get('purpose'))
 
+            purpose_points = self.config.get('purpose_points', [])
+            if purpose_points:
+                self.add_bullet_list(purpose_points, space_before=0)
+
+            # purpose_extra: a string paragraph, or {text, items} for a short
+            # lead followed by bullets.
             purpose_extra = self.config.get('purpose_extra', '')
             if purpose_extra:
-                self.add_paragraph(purpose_extra)
+                if isinstance(purpose_extra, dict):
+                    if purpose_extra.get('text'):
+                        self.add_paragraph(purpose_extra['text'])
+                    if purpose_extra.get('items'):
+                        self.add_bullet_list(purpose_extra['items'], space_before=0)
+                else:
+                    self.add_paragraph(purpose_extra)
 
             central_q = self.config.get('central_question', '')
             if self.config.get('include_central_question', True) and central_q:
@@ -521,24 +552,41 @@ class ResearchDocumentGenerator:
 
         # Participants
         if self.config.get('include_participants', True) and (
-                self.config.get('participant_profile') or self.config.get('recruitment_channels')):
+                self.config.get('participant_profile') or self.config.get('participant_criteria')
+                or self.config.get('recruitment_channels')):
             self.add_heading_1('Participants and Recruitment')
 
             profile_text = self.config.get('participant_profile', '')
-            if profile_text:
+            criteria = self.config.get('participant_criteria', [])
+            if profile_text or criteria:
                 self.add_heading_2('Target Profile')
-                self.add_paragraph(profile_text, space_after=38100)
+                if profile_text:
+                    self.add_paragraph(profile_text, space_after=25400 if criteria else 38100)
+                if criteria:
+                    self.add_bullet_list(criteria, space_before=0)
 
             disqualifiers = self.config.get('disqualifiers', [])
             if disqualifiers:
                 self.add_paragraph('Disqualifiers:', bold=True, space_before=0, space_after=25400)
                 self.add_bullet_list(disqualifiers, space_before=0)
 
+            # Channels are strings (flat bullets) or {name, points} dicts —
+            # a bulleted channel name with indented detail bullets beneath.
             channels = self.config.get('recruitment_channels', [])
             if channels:
                 self.add_heading_2('Recruitment Strategy')
                 self.add_paragraph('Channel priority:', bold=True, space_before=0, space_after=25400)
-                self.add_bullet_list(channels, space_before=0)
+                for ch in channels:
+                    if isinstance(ch, dict):
+                        name_p = self.doc.add_paragraph(ch.get('name', ''), style='List Bullet')
+                        name_p.paragraph_format.space_before = Emu(0)
+                        name_p.paragraph_format.space_after = Emu(19050)
+                        for run in name_p.runs:
+                            run.font.name = DEFAULT_FONT
+                            run.font.bold = True
+                        self.add_bullet_list(ch.get('points', []), space_before=0, level=2)
+                    else:
+                        self.add_bullet_list([ch], space_before=0)
 
         # Discussion guide
         if self._has_content('discussion_guide', 'include_discussion_guide'):
