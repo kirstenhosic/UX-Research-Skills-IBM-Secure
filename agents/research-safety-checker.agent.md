@@ -70,7 +70,7 @@ A study can mix types. Assess each piece of evidence against its own type.
 | Data | `internal-team` | `internal-org` | `external` |
 |---|---|---|---|
 | Participant name, email address, phone number | **block** | **block** | **block** |
-| Employer or customer/account name | allow | flag | **block** |
+| Employer or customer/account name | allow | allow | **block** |
 | Job title combined with employer | allow | flag | **block** |
 | Job title alone, in a small population | allow | flag | **block** |
 | Verbatim quotes containing identifying detail | allow | flag | **block** |
@@ -94,6 +94,17 @@ knows roughly who its own people are.
 | Role + product + region combined | allow | allow | flag |
 | Customer or account names they mention | allow | flag | **block** |
 | Participant IDs (P1, P3) | allow | allow | allow |
+
+**Naming the account is not identifying the person.** "We interviewed Contoso
+Financial" names a company; "the Senior SRE at Contoso Financial" identifies
+one person in an organization that may only have a few. The first is allowed
+freely inside the company — it is usually the thing that makes a finding
+actionable, and a stakeholder can do nothing with "a large financial
+institution." The second stays flagged at `internal-org`, because the
+combination is what pinpoints an individual.
+
+Do not flag an account name on its own in any internal artifact. It is expected
+and correct.
 
 **Direct identifiers block at every tier, for every participant type.** Names,
 email addresses, and phone numbers are what a consent form almost always covers.
@@ -211,6 +222,7 @@ for the intended destination. Those are decisions for a person.
 ## Do not
 
 - **Do not guess the destination or the participant type.** Ask.
+- **Do not flag a customer or account name on its own** in an internal artifact. Naming the account is what makes a finding actionable for the people who have to act on it.
 - **Do not apply the customer bar to internal participants.** Role, product area, and region are permitted internally and are usually what makes the evidence interpretable.
 - **Do not flag participant IDs.** They are the mechanism working correctly.
 - **Do not apply the external bar to internal work.** Naming the account is
