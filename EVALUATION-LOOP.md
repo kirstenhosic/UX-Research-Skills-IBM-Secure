@@ -1,0 +1,367 @@
+# Evaluation Loop
+
+How outputs from this suite get checked, revised, and released.
+
+Before this file existed, the release gate was a suggestion: the README told a
+human to run the integrity auditor, the auditor wrote a report, and nothing
+caught the report. That is a one-shot audit, not a loop. This file makes it a
+loop — with an explicit bar, a revision step, a cap on iterations, and a
+defined moment where the machine stops and a person decides.
+
+**The human is always the final gate.** Everything below is a filter that
+removes work you shouldn't have to do by hand. It is not an approval.
+
+---
+
+## 1. The cycle
+
+```
+   ┌─────────────────────────────────────────────────┐
+   │                                                 │
+   ▼                                                 │
+DRAFT ──► GATE 1 ──► GATE 2 ──► GATE 3 ──► RELEASE   │
+(Dr.       │           │           │                 │
+ Morgan)   │           │           │                 │
+           └───────────┴───────────┴──► REVISE ──────┘
+                                    │   (Dr. Morgan,
+                                    │    blocking items only)
+                                    │
+                                    └──► ESCALATE ──► human
+```
+
+**Producers draft. Evaluators verify. Only the producer revises.**
+
+Evaluators never edit the artifact. This is deliberate: an evaluator that
+rewrites its own input then re-checks its own rewrite launders its errors past
+itself, and you lose the independence that makes the check worth running. The
+existing `research-synthesis-checker` already holds this line ("You do NOT
+improve, rewrite, or re-synthesize"). Every evaluator holds it.
+
+### Iteration cap
+
+| Iteration | What happens |
+|---|---|
+| 1 | Draft produced. Gates run. |
+| 2 | First revision. Blocking items only. Gates re-run. |
+| 3 | Second revision. Gates re-run. |
+| — | Still `FAIL` after iteration 3 → **ESCALATE**. Stop. |
+
+Two revision passes, then it goes to a person. If an artifact can't clear the
+bar in two tries, the problem is upstream of the wording — the data, the
+question, or the method — and another pass just polishes the wrong object.
+(This is the same judgment Scenario D applies to research plans: *know when to
+stop refining and redesign.*)
+
+Revision is **narrow**. Pass the producer the blocking items and the evidence
+the source actually supports — not the whole artifact with "make it better."
+Open-ended revision reintroduces problems the earlier gates already cleared,
+and the iteration count stops meaning anything.
+
+### Escalate immediately, regardless of iteration count
+
+Some failures aren't fixable by revision. Any evaluator that finds one stops
+the loop on the spot and says so:
+
+- The data corpus is incomplete, or only the "interesting" sessions were analyzed
+- The method structurally cannot answer the research question
+- No decision is attached to the study
+- The participant definition is wrong — the sessions studied the wrong people
+- Analysis was done from memory; there is no traceable corpus
+- Participant-identifying data is present in an artifact about to be shared
+
+---
+
+## 2. Verdict schema
+
+Every evaluator ends its report with this block, verbatim in this shape. It is
+the machine-readable part — the thing that lets a person, a script, or an
+orchestrating agent branch on the result instead of reading prose.
+
+```
+=== VERDICT ===
+gate:        <agent name>
+artifact:    <file or artifact name>
+iteration:   <1 | 2 | 3>
+result:      PASS | PASS_WITH_FLAGS | FAIL
+blocking:    <count>
+flags:       <count>
+blocking_ids: [<claim/section ids>]
+flag_ids:     [<claim/section ids>]
+next_action: RELEASE | REVISE | ESCALATE
+note:        <one line, plain language>
+=== END VERDICT ===
+```
+
+### Result semantics
+
+| Result | Meaning | `next_action` |
+|---|---|---|
+| `PASS` | Nothing blocking, nothing flagged. | `RELEASE` |
+| `PASS_WITH_FLAGS` | Nothing blocking. Some items need **human judgment**, not correction. | `RELEASE` |
+| `FAIL` | At least one blocking defect. The artifact is wrong, not merely debatable. | `REVISE` (or `ESCALATE` at cap) |
+
+**Blocking vs. flagged is the most important distinction in this file.**
+
+- **Blocking** = the artifact asserts something untrue, unsupported, or unsafe.
+  A hallucinated quote. A statistic the data doesn't support. PII in a
+  shareable document. These are defects. They get fixed.
+- **Flagged** = the artifact is accurate, but a human should look. An
+  unexpected finding outside the study's stated questions. A research question
+  no finding addressed. A recommendation with no named owner. These are
+  *judgment calls*, and an evaluator that treats them as defects will push the
+  researcher to delete interesting things to make a gate go green.
+
+`PASS_WITH_FLAGS` releases. Flags travel with the artifact as a short
+**Reviewer Notes** section so the human sees them at the moment of decision,
+not in a report they've already closed.
+
+---
+
+## 3. Gate matrix
+
+Gates attach to **artifact types**, not to skills. There are four artifacts and
+four evaluators, so most artifacts run two or three gates rather than all of
+them.
+
+| Artifact | Produced by | Gates, in order |
+|---|---|---|
+| **Research plan / discussion guide** | Scenario C, D; `research-document-generator` | `plan-reviewer` → `readability-checker` |
+| **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
+| **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
+| **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
+
+Run gates **in order**. Groundedness before significance before readability —
+there's no point assessing whether a finding matters, or polishing how it
+reads, if it turns out not to be supported. A `FAIL` at any gate stops the
+sequence; later gates don't run until the artifact clears the earlier one.
+
+### Why the deck is re-checked
+
+The deck gate exists because story-editing is where invented evidence
+historically appears — a quote gets tightened to fit a slide, a "4 of 8"
+becomes "most," a hedge gets dropped for punch. The deck gate re-verifies the
+deck against `FINDINGS-CONTRACT.md`, not against the transcripts: every claim
+on a slide must map to a finding record that already passed. Anything on a
+slide with no matching record is blocking.
+
+### The four evaluators
+
+| Agent | Verifies | Cannot see |
+|---|---|---|
+| `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
+| `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
+| `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
+| `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+
+Each column-3 entry is the reason there is more than one evaluator. A
+groundedness checker will pass a perfectly-sourced finding that answers nothing
+anyone asked. A significance checker will pass a decision-relevant finding
+built on a fabricated quote. Neither notices a participant's employer in
+paragraph four.
+
+---
+
+## 4. Definition of Done
+
+The bar each artifact is measured against. Evaluators are handed the relevant
+section as their rubric — so the standard lives in one place and the evaluator
+isn't inventing it fresh each run.
+
+### 4.1 Research plan / discussion guide
+
+1. A named decision, with an owner and a date. What changes because of this?
+2. Research questions that are specific, researchable, and prioritized
+3. Method stated with its rationale, and with what it **cannot** tell you
+4. Participants defined by persona and product — not "users" or "engineers" —
+   with sample size given as a rule of thumb plus its assumptions
+5. Recruitment path realistic against the team's actual constraints, with a
+   timeline that reflects them
+6. Every question in the guide maps to a research question; anything mapping to
+   none is cut or justified
+7. No leading, double-barreled, or future-hypothetical questions
+8. An analysis plan exists before fieldwork starts
+9. Consent, de-identification, storage, and retention are addressed
+10. Out-of-scope is stated explicitly
+11. Meets `VOICE-AND-STYLE.md`
+
+### 4.2 Synthesis findings
+
+1. Every claim traces to specific source text — verbatim quote, participant ID,
+   locatable position
+2. Every finding conforms to `FINDINGS-CONTRACT.md`
+3. Quantifiers are exact ("6 of 8"), never vague ("most," "many," "several")
+4. Every finding is scoped: which product, which persona, under what conditions
+5. Findings reach **insight** level, not observation level
+6. Every research question is either addressed or explicitly flagged as
+   unaddressed (see §5)
+7. Findings that map to no research question are **kept and flagged** (see §5)
+8. Disconfirming evidence was sought, and is reported where found
+9. The full corpus was analyzed — not just the memorable sessions
+10. Recommendations have named owners
+11. No participant-identifying data
+12. Meets `VOICE-AND-STYLE.md`
+
+### 4.3 Competitive analysis
+
+1. A named decision the analysis serves
+2. Every claim labeled `[verified]` / `[vendor claim]` / `[inference]` / `[unknown]`
+3. Volatile claims — pricing, features, integrations — carry a date
+4. IBM/HashiCorp materials labeled `[vendor claim]` on the same terms as a competitor's
+5. UX judgments come from the live product or a rubric-scored teardown, never
+   from marketing imagery alone
+6. Criteria and weights defined **before** rating
+7. Wins / loses / uniquely-differentiated stated per product; white space named
+8. Conclusions resting on `[inference]` or `[vendor claim]` are marked as such
+9. No invented capability, price, integration, statistic, or citation
+10. Meets `VOICE-AND-STYLE.md`
+
+### 4.4 Readout deck
+
+1. Every claim on every slide maps to a finding record that already passed
+   §4.2 — no new evidence introduced during deck building
+2. Quotes are verbatim and attributed to the right participant
+3. Observation, interpretation, and recommendation stay visually distinct
+4. Evidence strength is stated, not implied by confident formatting
+5. Sample and method appear somewhere a skeptical reader will find them
+6. Recommendations have owners
+7. No participant-identifying data — including in screenshots, and including
+   speaker notes
+8. Meets `VOICE-AND-STYLE.md`
+
+---
+
+## 5. Research-question coverage — flag both directions
+
+A coverage check that only runs one way misses half the problem. Run it both
+ways, and treat the two directions differently.
+
+The `research-significance-checker` builds a coverage matrix of research
+questions × findings, then reports the orphans on each axis.
+
+### Findings with no research question → **FLAG. Never delete.**
+
+A finding that answers nothing you asked is frequently the most valuable thing
+in a study. It is what you didn't know to look for. The gate's job is to
+surface it as unplanned, not to suppress it for being off-plan.
+
+Report as:
+
+> **[Unmapped — retain]** F4: "Operators keep a personal cheat sheet of
+> namespace paths outside Vault." Maps to no stated research question.
+> Retained. Consider: amend the study's questions, or log as a candidate for
+> follow-up research.
+
+This is `PASS_WITH_FLAGS`, never `FAIL`. An evaluator must never recommend
+cutting a finding for being unmapped, and must never let a mapped-but-trivial
+finding pass just because it has a question attached.
+
+The one exception: an unmapped finding is still subject to every other gate. It
+must be grounded, scoped, and evidenced like any other. Unplanned is not
+unverified.
+
+### Research questions with no findings → **FLAG. Human revises.**
+
+An unaddressed question is a gap someone needs to know about — before the
+readout, not during it. It usually means one of four things, and the evaluator
+should say which it looks like:
+
+1. The data doesn't answer it — the study needs a follow-up
+2. It was answered but the answer got dropped in synthesis — recoverable
+3. It was never really researchable as written — rewrite it
+4. The analysis drifted toward what was interesting — go back to the corpus
+
+Report as:
+
+> **[Unaddressed RQ]** RQ2: "How do operators decide when to rotate a secret
+> manually?" No finding addresses this. Sessions 3 and 7 touch the topic but
+> were not coded to it. Looks like (2) — recoverable from the corpus.
+
+Also `PASS_WITH_FLAGS`. It doesn't block the artifact, because findings that
+*are* supported are still worth shipping. But it must appear in Reviewer Notes,
+and it must appear in the readout — a study that quietly drops a question its
+stakeholders are still expecting an answer to will get asked about in the room.
+
+---
+
+## 6. Adversarial pass (selective)
+
+For the small number of claims that actually carry a recommendation, one
+verifier is thin. Run a refutation panel — but only on those claims.
+
+**Trigger it when any of:**
+
+- The claim is load-bearing: a recommendation depends on it
+- The claim came back `Partially Supported` but is being kept
+- The decision is high-stakes, expensive, or hard to reverse
+
+**How:**
+
+1. Spawn 3 independent verifiers
+2. Give each **only the source material and the claim** — not the synthesis,
+   not the reasoning that produced it, not the other verdicts. A blind
+   evaluator is much harder to talk into agreeing than one shown the argument.
+3. Prompt each to **refute**, not to assess. Default to refuted when uncertain.
+4. Kill the claim on 2-of-3 refutations.
+
+**Do not run this on every claim.** The cost is real, and past the load-bearing
+few the return drops sharply. A twenty-claim synthesis with three
+recommendation-critical claims runs three panels, not twenty.
+
+---
+
+## 7. Known limits
+
+Stated plainly, because a QA system that oversells itself is worse than none —
+which is the same standard this suite holds research to.
+
+- **LLM evaluators grade leniently on text that reads rigorous.** Formatting,
+  hedged phrasing, and confident structure all bias a judge toward passing.
+  Strict-verdict rules and blind context reduce this; they don't remove it.
+- **An evaluator sharing a model and context with the producer shares its blind
+  spots.** Blind evaluation (source + claim only) is the main defense.
+- **Chained gates compound false positives.** Four gates each with a small
+  false-alarm rate produce a system that flags something almost every run. If
+  flags become noise, people stop reading them. Watch for gates that flag
+  constantly, and tighten the ones that do.
+- **Gates check artifacts, not conversation.** Never run this loop on Dr.
+  Morgan's Coach mode. Socratic dialogue has no output to grade, and wrapping
+  it in evaluation would make the coaching slower and more hedged for no gain.
+- **A green verdict is not a correct study.** These gates catch fabrication,
+  irrelevance, incoherence, and opacity. They cannot catch a well-executed
+  study of the wrong question that everyone agreed on at the start.
+
+---
+
+## 8. Quick reference
+
+**Producing findings:**
+
+```
+1. Draft synthesis (Dr. Morgan, Scenario A or F)
+2. Emit findings per FINDINGS-CONTRACT.md
+3. research-synthesis-checker      → FAIL? revise blocking claims, re-run
+4. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
+5. research-readability-checker    → FAIL? revise, re-run
+6. Release with Reviewer Notes attached
+```
+
+**Producing a plan:**
+
+```
+1. Draft plan (Dr. Morgan, Scenario C or D)
+2. research-plan-reviewer          → FAIL? revise, re-run
+3. research-readability-checker    → FAIL? revise, re-run
+4. Release
+```
+
+**Producing a deck:**
+
+```
+1. Findings must have cleared the findings sequence first
+2. Draft deck (research-readout-deck)
+3. research-synthesis-checker (deck mode — verify against findings records)
+4. research-readability-checker
+5. Release
+```
+
+Cap: 2 revisions per gate. Then a person looks at it.
