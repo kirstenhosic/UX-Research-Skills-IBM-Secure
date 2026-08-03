@@ -337,17 +337,9 @@ Dr. Morgan should refer users to the Research Document Template Generator **when
 ### For Quality Assurance
 
 Before releasing any research, run the gates in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
-Which ones depends on the artifact:
-
-`research-safety-checker` runs first on every artifact — pre-flight, destination-aware
-(`internal-team` / `internal-org` / `external`). Then:
-
-| Artifact | Gates, in order |
-|---|---|
-| Research plan / discussion guide | `research-plan-reviewer` → `research-readability-checker` |
-| Synthesis findings | `research-synthesis-checker` → `research-significance-checker` → `research-readability-checker` |
-| Competitive analysis | `research-synthesis-checker` (source-integrity mode) → `research-significance-checker` → `research-readability-checker` |
-| Readout deck | `research-synthesis-checker` (deck mode) → `research-readability-checker` |
+Safety pre-flight first on every artifact, then the quality gates in order. The
+matrix of which gates apply to which artifact lives in §3 of that file and is
+deliberately not repeated here.
 
 Then:
 
