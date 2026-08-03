@@ -7,4 +7,8 @@ Decision: whether to reorder the auth method setup flow before Q4. Owner: Priya 
 - RQ3 — What do end-users need from the Vault UI during an incident?
 
 ## Participants
-4 sessions. P1, P2, P4 = platform operators. P3 = end-user (application developer).
+5 sessions. P1, P2, P4 = platform operators (customer-direct). P3 = end-user,
+application developer (customer-direct). P5 = IBM customer success manager
+speaking about customer experience (internal-proxy).
+
+Destination: internal-team.

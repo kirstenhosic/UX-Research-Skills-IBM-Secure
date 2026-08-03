@@ -99,13 +99,29 @@ Flag:
 - Sample size stated as a hard number rather than a rule of thumb with its
   assumptions
 
-### E. Analysis plan
+### E. Proxy participants and internal recruitment
+
+Flag when the study answers questions about **customer** behavior entirely
+through internal employees reporting on customers — customer success, solution
+architects, support, field engineering. That is a legitimate and often necessary
+design when direct customer access is slow, but it changes what the study can
+conclude, and the plan should say so before fieldwork rather than the readout
+discovering it afterwards. Check that the plan names it as a stated limitation.
+
+Where participants are internal colleagues, check the consent approach
+specifically. Recruiting inside the company carries a dimension external
+recruiting doesn't: people find it harder to decline a request from their own
+organization, and harder to be candid when they know the readout circulates
+where they work. Flag if the plan doesn't address voluntariness and how findings
+will be attributed.
+
+### F. Analysis plan
 
 A plan with no analysis plan is incomplete. **Blocking.** A great study with no
 plan for what happens to the data produces no insights, and the decision about
 how to code data should not be made after seeing it.
 
-### F. Ethics and data handling
+### G. Ethics and data handling
 
 Blocking if absent: informed consent, recording consent, de-identification
 approach, storage, retention.
@@ -181,6 +197,7 @@ Phase 1 of the plan-from-scratch flow.
 | Research questions | | |
 | Method fit | | |
 | Participants & recruitment | | |
+| Proxy / internal recruitment | | |
 | Analysis plan | | |
 | Ethics & data | | |
 

@@ -430,6 +430,33 @@ RELEASE GATE (apply to every artifact this file produces)
   point checking whether a finding matters, or how it reads,
   before knowing it is supported.
 
+  Record who each participant was: customer-direct,
+  internal-direct, internal-proxy, or sme-external. It drives
+  both the safety bar (internal participants may carry role,
+  product area, and region; names, emails, and phone numbers
+  block for everyone) and a provenance check.
+
+PROXY EVIDENCE — secondhand is not firsthand
+
+  An internal colleague in customer success, support, field
+  engineering, or solution architecture is reporting on
+  CUSTOMERS' experience. That evidence is real and often good —
+  they talk to more customers than the team ever will — but it
+  establishes what they believe about customers, not what
+  customers do.
+
+  Ordinary traceability cannot see this. "Customers find X
+  confusing — P3" is perfectly traceable if P3 said exactly
+  that; the quote is verbatim and the attribution correct, and
+  the claim still outruns its evidence.
+
+  So: a claim phrased as direct customer behavior on proxy
+  evidence gets FLAGGED, and the scope line must name the proxy.
+  Both are flags, not blocks — reattribute the claim ("P3
+  reports that...") or re-scope the finding to what
+  customer-facing staff observe. Say it every time, because the
+  phrasing is what a stakeholder quotes in the next meeting.
+
   Emit findings as records conforming to FINDINGS-CONTRACT.md.
   Full spec, verdict schema, and Definition-of-Done rubrics:
   EVALUATION-LOOP.md.

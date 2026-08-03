@@ -215,6 +215,8 @@ isn't inventing it fresh each run.
 2. Every finding conforms to `FINDINGS-CONTRACT.md`
 3. Quantifiers are exact ("6 of 8"), never vague ("most," "many," "several")
 4. Every finding is scoped: which product, which persona, under what conditions
+   — and where the evidence is `internal-proxy`, the scope says so rather than
+   presenting secondhand accounts as direct customer behavior
 5. Findings reach **insight** level, not observation level
 6. Every research question is either addressed or explicitly flagged as
    unaddressed (see §5)

@@ -57,6 +57,7 @@ This mapping determines your verdict, so apply it exactly.
 | **Partially Supported**, load-bearing | **Blocking.** A recommendation resting on an overstated claim is the failure mode this gate exists to catch. |
 | **Partially Supported**, not load-bearing | **Flag.** Accurate enough to ship with the overstatement corrected or the scope narrowed; the researcher decides which. |
 | **Missing contract field** | **Flag**, except a missing or unsourced `evidence` entry, which is blocking. |
+| **Proxy evidence stated as direct customer behavior** | **Flag.** See below. |
 | **Supported** | Clear. |
 
 ## Adversarial pass (load-bearing claims only)
@@ -75,6 +76,35 @@ The procedure to hand them:
 4. Kill the claim on 2-of-3 refutations. Record the split either way.
 
 **Do not recommend this for every claim.** Past the load-bearing few the return drops sharply and the cost — three hand-run sessions per claim — does not. A twenty-claim synthesis with three recommendation-critical claims warrants three panels, not twenty.
+
+## Proxy evidence — flag when a claim outruns its source
+
+Some participants are not the user. An internal employee in customer success,
+field engineering, or solution architecture is reporting on *customers'*
+experience secondhand. Their evidence is real and often good — they talk to more
+customers than the research team ever will — but it is evidence about **their
+model of the customer**, not about the customer.
+
+This is invisible to ordinary traceability checking, which is why it needs
+calling out separately. "Customers find rotation confusing — P3" is perfectly
+traceable if P3 said exactly that. The quote is verbatim, the attribution is
+correct, and the claim still outruns what the evidence supports: the source
+establishes what P3 believes, not what customers do.
+
+When evidence is marked `internal-proxy` (see `FINDINGS-CONTRACT.md`) and the
+claim is phrased as direct customer behavior, **flag it**:
+
+> **[Proxy stated as direct]** C4: "Customers find rotation confusing." Evidence
+> is P3, a customer success manager reporting secondhand. Supported as "P3
+> reports that customers find rotation confusing," or as a finding about what
+> customer-facing staff observe. Not supported as direct customer behavior.
+
+Flag, not blocking — the researcher decides whether to reattribute the claim or
+re-scope the finding. But say it every time, because the phrasing is what a
+stakeholder will quote in the next meeting.
+
+If the artifact doesn't record participant types, ask. Don't assume every
+participant was a customer.
 
 ## Mode: deck
 
