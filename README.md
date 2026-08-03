@@ -30,10 +30,10 @@ switches between them on demand.
 |---|---|---|
 | `agents/dr-morgan.agent.md` | **The orchestrator.** One invocable Dr. Morgan agent (VS Code `.agent.md` with frontmatter) with a scenario router that covers all six scenarios (A–F) and switches between them mid-conversation. | You want a single agent for a whole research effort and may move between tasks. |
 | `EVALUATION-LOOP.md` | **The orchestration spec.** Which gates run on which artifact, the verdict schema every evaluator emits, the revision cycle and its two-pass cap, escalation triggers, the blocking-vs-flagged rule, and the Definition of Done for each artifact type. | You want to know how an artifact actually gets released, or you're adding a new skill or evaluator. |
-| `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. | You're synthesizing findings, or building anything that reads them. |
+| `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. Also carries `participant_type` per evidence entry, which drives the safety bar and the proxy check. | You're synthesizing findings, or building anything that reads them. |
 | `VOICE-AND-STYLE.md` | **How outputs should read.** What makes writing land as human rather than generated, how to write one document for engineers, PMs, designers, researchers, and customer reps at once, and a 21-item rubric the readability gate scores against. | Any artifact a stakeholder will open. |
-| `agents/research-safety-checker.agent.md` | **Pre-flight — is it safe to share?** Runs first on every artifact, outside the ordered sequence, because a safety scan placed last never executes on an artifact that failed an earlier gate. Destination-aware (`internal-team` / `internal-org` / `external`) — naming the account is often what makes a finding actionable internally and unacceptable externally. Consent terms override the destination tier whenever they are stricter. Reports what it could not inspect (images, embedded metadata) rather than passing it silently. | Every artifact, first, every iteration. |
-| `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every synthesized finding, theme, quote, and statistic against the source-of-truth (transcripts, raw notes, survey CSVs) to catch hallucinated, unsupported, or overstated claims. Has a **deck mode** (re-verifies slides against already-passed finding records) and a **source-integrity mode** (labels competitive claims verified / vendor claim / inference / unknown). Runs a blind 3-verifier adversarial pass on load-bearing claims only. | Any draft synthesis, competitive analysis, or readout deck. |
+| `agents/research-safety-checker.agent.md` | **Pre-flight — is it safe to share?** Runs first on every artifact, outside the ordered sequence, because a safety scan placed last never executes on an artifact that failed an earlier gate. Calibrated to two things: where the artifact is going (`internal-team` / `internal-org` / `external`) and who the participants were (`customer-direct` / `internal-direct` / `internal-proxy` / `sme-external`). Role and account name are freely shareable internally for every participant type; names, email addresses, and phone numbers block everywhere. Consent terms override the destination tier whenever they are stricter. Reports what it could not inspect (images, embedded metadata) rather than passing it silently. | Every artifact, first, every iteration. |
+| `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every synthesized finding, theme, quote, and statistic against the source-of-truth (transcripts, raw notes, survey CSVs) to catch hallucinated, unsupported, or overstated claims. Has a **deck mode** (re-verifies slides against already-passed finding records) and a **source-integrity mode** (labels competitive claims verified / vendor claim / inference / unknown). For load-bearing claims it identifies which warrant a blind 3-verifier refutation panel and hands you the procedure — it cannot spawn agents itself, and three viewpoints simulated in one context would share the bias the panel exists to avoid. | Any draft synthesis, competitive analysis, or readout deck. |
 | `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Builds a bidirectional coverage matrix of research questions × findings; flags findings that map to no question (**retained, never deleted**) and questions no finding addressed. Also checks altitude (observation vs. insight), decision-fit, scope, and whether disconfirming evidence was sought. Catches findings that are true but useless — which gate 1 structurally cannot see. | After gate 1 passes on any findings set. |
 | `agents/research-plan-reviewer.agent.md` | **The plan gate.** Audits the upstream decisions (named decision, researchable questions, method fit, participants, analysis plan, ethics), then reviews the discussion guide question by question and maps coverage against the research questions. The only gate that runs *before* the money is spent. | Any research plan or discussion guide, before fieldwork. |
 | `agents/research-readability-checker.agent.md` | **The last gate — can a mixed room act on it?** Scores against `VOICE-AND-STYLE.md`: rhythm, exact quantifiers, concrete detail, stated confidence, committed conclusions, audience coverage, jargon, length. Confirms the safety pre-flight already ran; it does not adjudicate safety itself. | Every artifact, last, before it leaves the team. |
@@ -43,7 +43,8 @@ switches between them on demand.
 | `challenge_and_refine_plan.md` | **Scenario D** — critical review of an existing plan, method, or discussion guide via a rapid upstream audit + script review — and it knows when to stop refining and send you back to Scenario C for a redesign. | You have a draft and want it stress-tested. |
 | `competitive_analysis.md` | **Scenario E** — competitive-analysis co-pilot comparing 2–4 products across UX, capability, and market/strategy lenses, with tiered templates (a core three, plus six you add only when they earn their place), a source-integrity audit, and a **visual-evidence workflow** for sourcing and comparing competitor UI from web pages, screenshots, and demo video. | You're comparing competing products to inform a design, positioning, or roadmap decision. After you synthesize the comparison output, run the gate sequence — safety pre-flight, then the synthesis checker in source-integrity mode — before sharing. |
 | `qualitative_data_analysis_skill.md` | **Scenario F** — specialized deep-dive on qualitative analysis with a *mandatory data-integrity audit* (hallucination, confirmation bias, and cherry-picking detection) before any analysis proceeds. | Analysis quality control is the priority and you want the strictest integrity checks. |
-| `research-readout-deck/` | **Artifact generator** — converts raw research materials (interview notes, usability observations, survey data, verbatim quotes) into a findings-first `.pptx` readout built for a mixed product-team audience (PM + Eng + UXD). Enforces separation of observation, interpretation, and recommendation; calibrates evidence strength; defaults to IBM theming (Carbon Design System / IBM Plex). Bundles a slide-by-slide recipe + theme reference (`references/deck-structure.md`); requires the separate **pptx** skill to render slides. | You've completed a study and need to present findings to your product team. |
+| `research-readout-deck.skill` | **Artifact generator** (packaged skill bundle — unzip to inspect) — converts raw research materials (interview notes, usability observations, survey data, verbatim quotes) into a findings-first `.pptx` readout built for a mixed product-team audience (PM + Eng + UXD). Enforces separation of observation, interpretation, and recommendation; calibrates evidence strength; defaults to IBM theming (Carbon Design System / IBM Plex). Bundles a slide-by-slide recipe + theme reference (`references/deck-structure.md`); requires the separate **pptx** skill to render slides. | You've completed a study and need to present findings to your product team. |
+| `test-fixtures/` | **Regression test for the gates.** A 5-participant corpus and a synthesis with 12 deliberately planted defects — hallucinated quote, altered quote, vague quantifier, unmapped finding, unaddressed research question, proxy evidence stated as direct customer behavior — plus an answer key and **named controls that must not trigger**. It caught a real architectural flaw on its first run. | Any time you change a gate, a rubric, or `EVALUATION-LOOP.md`. |
 | `skills/research-document-generator.py` + configs | **Research Document Template Generator (Scenario G)** — the single template every generated research document goes through. Produces professionally formatted Word documents following IBM Secure's design system (Cambria, grayish-blue palette, callouts, auto-numbered sections, page numbers). Two layouts: the standard **research-plan** layout (purpose → scope → RQs → participants → guide → timeline → deliverables) and a generic **`sections`** layout for rationales, briefs, and one-pagers. Fully customizable via JSON configs. All generated documents follow `DESIGN-SYSTEM.md` standards. | **Any time a research document (.docx) is being produced** — plan, rationale, or brief. Use as an invokable skill in Bob or run the script directly. See `skills/README.md` for full documentation. |
 
 ---
@@ -91,6 +92,11 @@ honest "I don't know."** That shows up two ways:
 - **Data integrity** (Scenarios A, D, and the deep analysis skill): findings must
   be traceable to specific evidence with participant IDs; confirmation bias and
   cherry-picking get named explicitly; analysis from memory is not allowed.
+- **Provenance integrity** (everywhere): every piece of evidence records who the
+  participant was. An internal colleague reporting on *customers'* experience is
+  speaking secondhand — their evidence establishes what they believe about
+  customers, not what customers do. Ordinary traceability cannot see the
+  difference, so the gates check it separately.
 - **Source integrity** (Scenario E): every claim is labeled **[verified]**,
   **[vendor claim]**, **[inference]**, or **[unknown]**; a vendor saying it does X
   is treated as a claim, not a fact, until corroborated; volatile data is dated;
@@ -103,8 +109,8 @@ honest "I don't know."** That shows up two ways:
 
 ## The evaluation loop
 
-Dr. Morgan drafts. Four independent evaluators check. Dr. Morgan revises. A
-person decides.
+Dr. Morgan drafts. A safety pre-flight plus four independent quality gates
+check. Dr. Morgan revises. A person decides.
 
 ```
 PRE-FLIGHT (everything)  →  safety-checker
@@ -127,10 +133,11 @@ carry *more* permitted detail — role, product area, and region are how a
 colleague's perspective becomes interpretable — while names, email addresses,
 and phone numbers block for everyone at every tier.
 
-On destination:
-The bar for a team readout is not the bar for a conference talk, and applying
-the external bar to internal work blocks ordinary research over an account name
-the whole team already knows. Where the study's consent terms are stricter than
+On destination: the bar for a team readout is not the bar for a conference talk.
+Applying the external bar to internal work would block ordinary research over an
+account name the whole team already knows — so inside the company, role and
+account name are freely shareable ("an SRE at Contoso Financial" is a category
+of user at a category of customer, not a person). Where the study's consent terms are stricter than
 the destination allows, consent governs — that is what participants were
 promised, and an office norm has no standing to relax it.
 
@@ -264,10 +271,12 @@ improvised. Full citations live in the individual prompt files.
 2. Describe what you're working on. Dr. Morgan will route you to the right scenario
    (or follow the one scenario you loaded) and guide you from there.
 3. Paste in your own materials — research questions, transcripts, draft guides,
-   competitor notes — when prompted. **De-identify transcripts and notes where necessary first**
-   (remove names, emails, employer/client details); treat the chat as you would
-   any external tool handling research data. The more context you provide, the
-   sharper the guidance.
+   competitor notes — when prompted. **Pseudonymize participants first** — replace
+   names, email addresses, and phone numbers with participant IDs (P1, P2). Role,
+   account name, and region can stay: they are what make a finding actionable, and
+   `research-safety-checker` governs where they may travel. Treat the chat as you
+   would any external tool handling research data. The more context you provide,
+   the sharper the guidance.
 4. **Run `research-safety-checker` first**, on every artifact, and tell it where
    the artifact is going (`internal-team` / `internal-org` / `external`). It
    will ask if you don't. This runs before everything else and every iteration.
@@ -304,8 +313,8 @@ work.
 - **Five evaluators, five jobs — and each one is blind to the others'.** That's the
   reason there is more than one. A groundedness checker will pass a perfectly-sourced
   finding that answers nothing anyone asked. A significance checker will pass a
-  decision-relevant finding built on a fabricated quote. Neither notices a participant's
-  employer in paragraph four.
+  decision-relevant finding built on a fabricated quote. Neither notices a participant's real
+  name in the appendix.
 
   | Agent | Verifies | Cannot see |
   |---|---|---|
@@ -313,7 +322,7 @@ work.
   | `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
   | `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
   | `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
-  | `research-readability-checker` | Will a mixed audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+  | `research-readability-checker` | Will a mixed audience understand and act on it? | Whether any of it is correct, and whether it is safe to share |
 
 - **Three analysis-integrity files, three jobs.** It's easy to confuse these — here's
   the split:
@@ -327,7 +336,7 @@ work.
     Supported / Partially Supported / Unsupported per claim. It never analyzes,
     rewrites, or re-synthesizes — use it after synthesis to fact-check the output,
     then run it again after deck drafting as a final integrity pass.
-- **`research-readout-deck/` and Scenario A serve different phases.** Scenario A is for *analysis* — getting from raw data to defensible insights. The readout skill is for *output* — turning finished findings into a slide deck the team can act on. Run Scenario A first if your findings aren't fully synthesized yet.
+- **`research-readout-deck.skill` and Scenario A serve different phases.** Scenario A is for *analysis* — getting from raw data to defensible insights. The readout skill is for *output* — turning finished findings into a slide deck the team can act on. Run Scenario A first if your findings aren't fully synthesized yet.
 - **Keep the Dr. Morgan agent in sync:** `agents/dr-morgan.agent.md` embeds condensed
   copies of each scenario, so when you change a standalone file, mirror the change in
   the agent (or treat the agent as the source of truth and regenerate the standalones).
