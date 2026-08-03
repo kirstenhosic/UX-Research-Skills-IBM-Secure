@@ -62,7 +62,20 @@ Scope: Vault, platform operators.
 
 Users found the interface complex and had difficulty completing tasks.
 
+## F6 — Customers find secret rotation confusing
+
+Customers consistently struggle with secret rotation, and most have configured
+it incorrectly at least once.
+
+- P5: "What I hear constantly is that customers find rotation confusing."
+- P5: "I'd say most of my accounts have gotten it wrong at least once."
+
+Scope: Vault, customers using secret rotation.
+Recommendation: Prioritise rotation onboarding work.
+Owner: Priya (Design).
+
 ## Method note
 
-4 remote sessions, July 2026. P1, P2, P4 platform operators; P3 (Senior SRE at
-Meridian Financial) is an application developer consuming secrets.
+5 remote sessions, July 2026. P1, P2, P4 platform operators; P3 (Senior SRE at
+Meridian Financial) is an application developer consuming secrets. P5 is a
+customer success manager.

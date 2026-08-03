@@ -120,7 +120,14 @@ last would never run on an artifact that failed groundedness. Identifying data
 would sit undiscovered through two revision cycles, on the one check that is
 never negotiable.
 
-It is **destination-aware**: `internal-team`, `internal-org`, or `external`.
+It is aware of **two** things: where the artifact is going (`internal-team`,
+`internal-org`, `external`) and who the participants were (`customer-direct`,
+`internal-direct`, `internal-proxy`, `sme-external`). Internal participants
+carry *more* permitted detail — role, product area, and region are how a
+colleague's perspective becomes interpretable — while names, email addresses,
+and phone numbers block for everyone at every tier.
+
+On destination:
 The bar for a team readout is not the bar for a conference talk, and applying
 the external bar to internal work blocks ordinary research over an account name
 the whole team already knows. Where the study's consent terms are stricter than
@@ -152,6 +159,13 @@ findings are often the most valuable thing in a study. A research question no
 finding addressed is flagged so the human can decide between a follow-up,
 recovering it from the corpus, or rewriting the question. Both gaps travel to
 the readout.
+
+**Proxy evidence is flagged, not silently accepted.** When an internal colleague
+in customer success or field engineering reports on *customers'* experience, that
+is secondhand: it establishes what they believe about customers, not what
+customers do. Ordinary traceability can't see the difference — "customers find X
+confusing — P3" passes every groundedness check if P3 said exactly that. The
+gates flag the phrasing and require the scope line to name the proxy.
 
 **Known limits are stated,** not glossed: LLM evaluators grade leniently on text
 that reads rigorous, chained gates compound false positives, and a green verdict

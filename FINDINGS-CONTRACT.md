@@ -64,7 +64,8 @@ FINDING F1
 | `scope.product` | yes | Named product. Never "IBM Secure." |
 | `scope.persona` | yes | Named persona. Never "users" or "engineers." |
 | `scope.condition` | yes | What they were doing, under what constraints. |
-| `evidence[]` | yes, ≥1 | Verbatim `quote` or observed `behavior`, each with a locatable `source`. |
+| `evidence[]` | yes, ≥1 | Verbatim `quote` or observed `behavior`, each with a locatable `source` and a `participant_type`. |
+| `participant_type` | yes, per evidence entry | `customer-direct` / `internal-direct` / `internal-proxy` / `sme-external`. Determines whether the evidence is about the user or about someone's account of the user. |
 | `disconfirming` | yes | What contradicts this — or `none found` / `not sought`. Blank is not allowed. |
 | `confidence` | yes | `high` / `medium` / `low`, **and why**. |
 | `limits` | yes | What this does not apply to. |
@@ -131,7 +132,7 @@ semantics, same required fields.
       "prevalence": { "n": 5, "of": 8, "note": "all operators; no end-users" },
       "scope": { "product": "Vault", "persona": "platform operators", "condition": "…" },
       "evidence": [
-        { "type": "quote", "text": "…", "participant": "P3", "source": "transcript-p3.txt", "locator": "14:22" }
+        { "type": "quote", "text": "…", "participant": "P3", "participant_type": "internal-proxy", "source": "transcript-p3.txt", "locator": "14:22" }
       ],
       "disconfirming": "…",
       "confidence": { "level": "high", "why": "…" },
@@ -168,6 +169,30 @@ readout meeting.
 
 ---
 
+## Participant type
+
+Every evidence entry records who the participant was:
+
+| Value | Meaning |
+|---|---|
+| `customer-direct` | An external customer who is the user in question |
+| `internal-direct` | An internal employee who is themselves the user |
+| `internal-proxy` | An internal employee reporting on *customers'* experience — customer success, solution architects, support, field engineering |
+| `sme-external` | An external subject-matter expert matching the persona, not a customer |
+
+`internal-proxy` is the one that changes how a finding may be phrased. That
+evidence is secondhand: it establishes what a customer-facing colleague
+believes and repeats, which is worth knowing and often actionable, but it is not
+a record of customer behavior. A claim written as "customers do X" on proxy
+evidence gets flagged by `research-synthesis-checker`, and its scope line gets
+flagged by `research-significance-checker` if it doesn't name the proxy.
+
+The field also drives the safety bar: internal participants carry more permitted
+detail (role, product area, region are fine internally) while names, email
+addresses, and phone numbers block for everyone.
+
+---
+
 ## Destination
 
 Every findings set declares where it is going: `internal-team`, `internal-org`,
@@ -191,6 +216,7 @@ findings are agreed. What can never be dropped, at any study size:
 - `prevalence` (exact)
 - `scope` (product + persona)
 - `rq` (an ID or `UNMAPPED`)
+- `participant_type` on every evidence entry
 
 Those five are what make a finding checkable at all. Below that it isn't a
 finding, it's a recollection.

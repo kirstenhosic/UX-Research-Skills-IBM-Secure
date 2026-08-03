@@ -13,8 +13,8 @@ That is now pre-flight.
 | File | What it is |
 |---|---|
 | `research-plan.md` | Named decision, 3 research questions, 4 participants |
-| `transcripts/p1–p4.txt` | The corpus. P1, P2, P4 operators; P3 end-user |
-| `synthesis-draft.md` | The artifact under test. 10 planted defects |
+| `transcripts/p1–p5.txt` | The corpus. P1, P2, P4 operators; P3 end-user (all `customer-direct`); P5 customer success manager (`internal-proxy`) |
+| `synthesis-draft.md` | The artifact under test. 12 planted defects |
 
 Destination for the test: `internal-team`.
 
@@ -39,6 +39,8 @@ compare against the answer key below. Note that a real run stops at the first
 | 8 | Observation-level finding, no evidence at all | F5 | significance-checker | Flag (altitude) + blocking (no evidence) |
 | 9 | Recommendation with no owner | F2 | significance-checker + readability (item 15) | Blocking |
 | 10 | Summary restates instead of concluding; both-sidesing | Summary | readability (item 16) | Blocking |
+| 11 | Proxy evidence stated as direct customer behavior — P5 is a CSM reporting secondhand, but the claim is written as what customers do | F6 | synthesis-checker | `[Proxy stated as direct]` — flag |
+| 12 | Proxy scope unstated — F6 is scoped to "customers using secret rotation" when the evidence is one CSM's impression | F6 | significance-checker | `[Proxy scope unstated]` — flag |
 
 ## Controls — these must NOT be flagged
 
@@ -46,6 +48,21 @@ compare against the answer key below. Note that a real run stops at the first
 - **Participant IDs** (P1–P4) are correct. Never a safety finding.
 - **The telling detail** — P1's text file and P2's sticky note — should *pass* the "could only come from being in the room" check, not fail it.
 - **"Senior SRE at Meridian Financial"** (method note) is **allowed** at `internal-team`, flagged at `internal-org`, blocking at `external`. If the plan's consent terms promised full anonymization, it blocks at every tier — consent wins. This one line is the destination-tier test; change the declared destination and the verdict should change with it.
+
+## The proxy case specifically
+
+Defects 11 and 12 are the ones worth re-running whenever the gates change,
+because they are invisible to ordinary traceability checking. P5 genuinely said
+"customers find rotation confusing." The quote is verbatim and correctly
+attributed, so gate 1 will mark it **Supported** unless it is also checking
+provenance. The claim is about customers; the evidence is about what a CSM
+believes about customers.
+
+Note that P5 self-corrects in the transcript — "I couldn't tell you what they
+actually clicked," "that's my interpretation, I'm not in the product with them."
+A gate that reads the source properly has everything it needs to catch this.
+Both are flags, not blocks: the researcher decides whether to reattribute the
+claim or re-scope the finding.
 
 ## What this does and doesn't prove
 
