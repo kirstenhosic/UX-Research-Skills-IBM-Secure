@@ -16,18 +16,36 @@ removes work you shouldn't have to do by hand. It is not an approval.
 ## 1. The cycle
 
 ```
-   ┌─────────────────────────────────────────────────┐
-   │                                                 │
-   ▼                                                 │
-DRAFT ──► GATE 1 ──► GATE 2 ──► GATE 3 ──► RELEASE   │
-(Dr.       │           │           │                 │
- Morgan)   │           │           │                 │
-           └───────────┴───────────┴──► REVISE ──────┘
-                                    │   (Dr. Morgan,
-                                    │    blocking items only)
-                                    │
-                                    └──► ESCALATE ──► human
+   ┌──────────────────────────────────────────────────────────────┐
+   │                                                              │
+   ▼                                                              │
+DRAFT ──► PRE-FLIGHT ──► GATE 1 ──► GATE 2 ──► GATE 3 ──► RELEASE │
+(Dr.       (safety)        │          │          │               │
+ Morgan)       │           │          │          │               │
+               └───────────┴──────────┴──────────┴──► REVISE ─────┘
+                                               │   (Dr. Morgan,
+                                               │    blocking items only)
+                                               │
+                                               └──► ESCALATE ──► human
 ```
+
+### Pre-flight — safety runs before everything
+
+`research-safety-checker` runs **first, on every artifact, every iteration** —
+outside the ordered sequence below.
+
+This is deliberate, and it is the one thing about the ordering that is easy to
+get wrong. The quality gates run in order and stop at the first failure. A
+safety scan placed last therefore would not run *at all* on an artifact that
+failed groundedness — identifying data could sit undiscovered through two full
+revision cycles, on the one check that is never negotiable. Safety is not a
+quality check and does not queue behind one.
+
+The scan is destination-aware: the bar for a team-internal readout is not the
+bar for a conference talk, and applying the external bar to internal work blocks
+ordinary research over an account name the whole team already knows. Where the
+study's consent terms are stricter than the destination allows, consent governs.
+See `agents/research-safety-checker.agent.md` for the tier table.
 
 **Producers draft. Evaluators verify. Only the producer revises.**
 
@@ -67,7 +85,10 @@ the loop on the spot and says so:
 - No decision is attached to the study
 - The participant definition is wrong — the sessions studied the wrong people
 - Analysis was done from memory; there is no traceable corpus
-- Participant-identifying data is present in an artifact about to be shared
+- Identifying data is present that redaction cannot fix — the finding itself
+  depends on naming the account, or the corpus lacks consent for the intended
+  destination (`research-safety-checker` raises this; ordinary redactable
+  findings are a `REVISE`, not an escalation)
 
 ---
 
@@ -120,8 +141,10 @@ not in a report they've already closed.
 ## 3. Gate matrix
 
 Gates attach to **artifact types**, not to skills. There are four artifacts and
-four evaluators, so most artifacts run two or three gates rather than all of
-them.
+five evaluators — one pre-flight plus four in sequence — so most artifacts run
+the pre-flight and two or three gates rather than all of them.
+
+Every row below is preceded by `research-safety-checker` (pre-flight, always).
 
 | Artifact | Produced by | Gates, in order |
 |---|---|---|
@@ -144,10 +167,11 @@ deck against `FINDINGS-CONTRACT.md`, not against the transcripts: every claim
 on a slide must map to a finding record that already passed. Anything on a
 slide with no matching record is blocking.
 
-### The four evaluators
+### The five evaluators
 
 | Agent | Verifies | Cannot see |
 |---|---|---|
+| `research-safety-checker` | Is this safe to share with *this* audience? | Whether any of it is true, relevant, or readable |
 | `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
 | `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
 | `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
@@ -198,7 +222,7 @@ isn't inventing it fresh each run.
 8. Disconfirming evidence was sought, and is reported where found
 9. The full corpus was analyzed — not just the memorable sessions
 10. Recommendations have named owners
-11. No participant-identifying data
+11. Cleared by `research-safety-checker` for the artifact's declared destination
 12. Meets `VOICE-AND-STYLE.md`
 
 ### 4.3 Competitive analysis
@@ -224,8 +248,10 @@ isn't inventing it fresh each run.
 4. Evidence strength is stated, not implied by confident formatting
 5. Sample and method appear somewhere a skeptical reader will find them
 6. Recommendations have owners
-7. No participant-identifying data — including in screenshots, and including
-   speaker notes
+7. Cleared by `research-safety-checker` for the declared destination — including
+   speaker notes. Images and embedded metadata cannot be machine-checked; the
+   scan lists them for human review and the deck is not clear until someone has
+   actually looked
 8. Meets `VOICE-AND-STYLE.md`
 
 ---
@@ -294,18 +320,27 @@ verifier is thin. Run a refutation panel — but only on those claims.
 - The claim came back `Partially Supported` but is being kept
 - The decision is high-stakes, expensive, or hard to reverse
 
+**The researcher runs this by hand.** No agent in this suite can spawn another —
+they all have `read` and `search` only. Three "verifiers" simulated inside one
+conversation share a context and therefore share a bias, which is exactly what
+the panel exists to avoid. `research-synthesis-checker` identifies which claims
+warrant a panel; a person runs it.
+
 **How:**
 
-1. Spawn 3 independent verifiers
-2. Give each **only the source material and the claim** — not the synthesis,
-   not the reasoning that produced it, not the other verdicts. A blind
+1. Open **three fresh sessions** — a new chat each, no shared history.
+2. In each, paste **only the source material and the one claim** — not the
+   synthesis, not the reasoning that produced it, not the other sessions'
+   verdicts. Fresh context is what makes the evaluator blind, and a blind
    evaluator is much harder to talk into agreeing than one shown the argument.
-3. Prompt each to **refute**, not to assess. Default to refuted when uncertain.
+3. Ask each to **refute** the claim rather than assess it, defaulting to
+   refuted when uncertain.
 4. Kill the claim on 2-of-3 refutations.
 
-**Do not run this on every claim.** The cost is real, and past the load-bearing
-few the return drops sharply. A twenty-claim synthesis with three
-recommendation-critical claims runs three panels, not twenty.
+**Do not run this on every claim.** The cost is real — three hand-run sessions
+per claim — and past the load-bearing few the return drops sharply. A
+twenty-claim synthesis with three recommendation-critical claims warrants three
+panels, not twenty.
 
 ---
 
@@ -338,20 +373,22 @@ which is the same standard this suite holds research to.
 
 ```
 1. Draft synthesis (Dr. Morgan, Scenario A or F)
-2. Emit findings per FINDINGS-CONTRACT.md
-3. research-synthesis-checker      → FAIL? revise blocking claims, re-run
-4. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
-5. research-readability-checker    → FAIL? revise, re-run
-6. Release with Reviewer Notes attached
+2. Emit findings per FINDINGS-CONTRACT.md, with a declared destination
+3. research-safety-checker         → PRE-FLIGHT, always runs first
+4. research-synthesis-checker      → FAIL? revise blocking claims, re-run
+5. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
+6. research-readability-checker    → FAIL? revise, re-run
+7. Release with Reviewer Notes attached
 ```
 
 **Producing a plan:**
 
 ```
 1. Draft plan (Dr. Morgan, Scenario C or D)
-2. research-plan-reviewer          → FAIL? revise, re-run
-3. research-readability-checker    → FAIL? revise, re-run
-4. Release
+2. research-safety-checker         → PRE-FLIGHT, always runs first
+3. research-plan-reviewer          → FAIL? revise, re-run
+4. research-readability-checker    → FAIL? revise, re-run
+5. Release
 ```
 
 **Producing a deck:**
@@ -359,9 +396,10 @@ which is the same standard this suite holds research to.
 ```
 1. Findings must have cleared the findings sequence first
 2. Draft deck (research-readout-deck)
-3. research-synthesis-checker (deck mode — verify against findings records)
-4. research-readability-checker
-5. Release
+3. research-safety-checker (deck mode — speaker notes and screenshots included)
+4. research-synthesis-checker (deck mode — verify against findings records)
+5. research-readability-checker
+6. Release
 ```
 
 Cap: 2 revisions per gate. Then a person looks at it.

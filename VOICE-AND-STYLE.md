@@ -278,9 +278,13 @@ artifact as a whole.
 20. A "what this means for you" pass exists for the audiences who will act
 
 **Safety**
-21. No participant-identifying data anywhere — names, employers, email addresses, job titles specific enough to identify, or unredacted screenshots. Includes speaker notes and image alt text.
+21. Cleared by `research-safety-checker` for this artifact's declared
+    destination (`internal-team` / `internal-org` / `external`). That gate holds
+    the tier table and the consent rule; this rubric defers to its verdict
+    rather than re-deciding it.
 
-Item 21 is always **blocking**. Items 11, 15, and 16 are blocking. The rest are
+Items 11, 15, and 16 are blocking. Item 21 is owned by the safety gate, which
+runs before any of this. The rest are
 flags — style disagreements are a human's call, and a gate that hard-fails on
 voice will get ignored or switched off.
 

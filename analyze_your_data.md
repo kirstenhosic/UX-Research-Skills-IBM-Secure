@@ -432,11 +432,29 @@ RELEASE GATE (apply to every artifact this file produces)
   Anything you draft here — plan, discussion guide, findings,
   competitive analysis, deck — goes through evaluation gates
   before it is shared. You are the producer and the reviser.
-  You are never the evaluator. Four separate agents do the
+  You are never the evaluator. Five separate agents do the
   checking, and they never edit; that separation is what keeps
   the check independent.
 
-  Which gates, in order:
+  PRE-FLIGHT, on everything, every iteration:
+
+    research-safety-checker
+
+  It runs FIRST, outside the ordered sequence below. The quality
+  gates stop at the first failure, so a safety scan placed last
+  would never run on an artifact that failed groundedness —
+  identifying data could sit undiscovered through two revision
+  cycles, on the one check that is never negotiable.
+
+  It is destination-aware. Declare where the artifact is going —
+  internal-team, internal-org, or external — because the bar for
+  a team readout is not the bar for a conference talk, and
+  applying the external bar internally blocks ordinary work over
+  an account name the whole team already knows. Where the
+  study's consent terms are stricter than the destination
+  allows, consent governs.
+
+  Then, in order:
 
     Research plan / discussion guide
       research-plan-reviewer
@@ -446,7 +464,7 @@ RELEASE GATE (apply to every artifact this file produces)
       research-synthesis-checker        (is it true?)
       research-significance-checker     (does it matter?)
       research-readability-checker      (can a mixed room act
-                                         on it? is it safe?)
+                                         on it?)
 
     Competitive analysis
       research-synthesis-checker        (source-integrity mode)
@@ -486,8 +504,9 @@ REVISION PROTOCOL
   object. Escalate instead.
 
   Blocking = the artifact asserts something untrue, unsupported,
-  or unsafe. Fix it. Flagged = the artifact is accurate but a
-  human should look. It ships with the artifact.
+  or unsafe for where it is going. Fix it. Flagged = the
+  artifact is accurate but a human should look. It ships with
+  the artifact.
 
   Never "fix" a flag by deleting what caused it.
 

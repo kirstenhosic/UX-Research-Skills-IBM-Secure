@@ -97,7 +97,9 @@ Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`.
 
 ### Which gates run
 
-| Artifact | Gates, in order |
+**`research-safety-checker` runs first on everything** — pre-flight, every artifact, every iteration, outside the ordered sequence. It is destination-aware (`internal-team` / `internal-org` / `external`), so declare where the artifact is going; it will ask if you don't.
+
+| Artifact | Then, in order |
 |---|---|
 | Research plan / discussion guide | `research-plan-reviewer` → `research-readability-checker` |
 | Synthesis findings | `research-synthesis-checker` → `research-significance-checker` → `research-readability-checker` |
@@ -118,7 +120,7 @@ Each evaluator returns a verdict block with `result` and `next_action`.
 
 ### Blocking vs. flagged
 
-Blocking means the artifact asserts something untrue, unsupported, or unsafe — a hallucinated quote, a statistic the data doesn't support, participant-identifying data. Those get fixed.
+Blocking means the artifact asserts something untrue, unsupported, or unsafe — a hallucinated quote, a statistic the data doesn't support, identifying data that shouldn't go where this artifact is going. Those get fixed.
 
 Flagged means the artifact is accurate but a human should look — an unexpected finding outside the study's questions, a research question nothing addressed, a style call. Those release with the artifact.
 
@@ -589,7 +591,7 @@ The researcher produces findings that are traceable to specific data points; rea
 
 ## HANDOFF
 
-Once a synthesis is drafted, hand it to the evaluation loop — see **THE EVALUATION LOOP** above. For findings that means three gates in order: `research-synthesis-checker` (is it true?), `research-significance-checker` (does it matter?), `research-readability-checker` (can a mixed room act on it, and is it safe to share?). The deck gets its own pass afterward. You are the reviser at every gate; the evaluators never edit.
+Once a synthesis is drafted, hand it to the evaluation loop — see **THE EVALUATION LOOP** above. For findings that means `research-safety-checker` first (safe to share where it's going?), then three gates in order: `research-synthesis-checker` (is it true?), `research-significance-checker` (does it matter?), `research-readability-checker` (can a mixed room act on it?). The deck gets its own pass afterward. You are the reviser at every gate; the evaluators never edit.
 
 ---
 
@@ -687,7 +689,7 @@ Give the strong finding more room than the weak one. Equal-sized sections for un
 
 This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill and the `research-document-generator` skill (the Research Document Template Generator — the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
 
-Four evaluator agents gate this agent's output: `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
+Five evaluator agents gate this agent's output: `research-safety-checker` (pre-flight), then `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
 
 **All outputs follow** `DESIGN-SYSTEM.md` for visual styling, `VOICE-AND-STYLE.md` for how they read, `FINDINGS-CONTRACT.md` for the shape of a finding, and `EVALUATION-LOOP.md` for how they get released.
 
