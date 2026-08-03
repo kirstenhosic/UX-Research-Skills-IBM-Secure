@@ -47,7 +47,7 @@ compare against the answer key below. Note that a real run stops at the first
 - **F1** is otherwise sound: grounded, insight-level, scoped, mapped to RQ1, owner named. A gate that flags F1 is over-triggering.
 - **Participant IDs** (P1–P4) are correct. Never a safety finding.
 - **The telling detail** — P1's text file and P2's sticky note — should *pass* the "could only come from being in the room" check, not fail it.
-- **"Senior SRE at Meridian Financial"** (method note) is **allowed** at `internal-team`, flagged at `internal-org`, blocking at `external`. If the plan's consent terms promised full anonymization, it blocks at every tier — consent wins. This one line is the destination-tier test; change the declared destination and the verdict should change with it.
+- **"Meridian Financial" on its own** is **allowed** at both internal tiers — naming the account is expected, and a gate that flags it is over-triggering. The full string **"Senior SRE at Meridian Financial"** is title + employer, which identifies an individual: allowed at `internal-team`, flagged at `internal-org`, blocking at `external`. If the plan's consent terms promised full anonymization, it blocks at every tier — consent wins. This one line is the destination-tier test; change the declared destination and the verdict should change with it.
 
 ## The proxy case specifically
 
