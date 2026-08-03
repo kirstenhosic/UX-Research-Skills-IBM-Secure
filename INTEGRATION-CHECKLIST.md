@@ -1,5 +1,11 @@
 # Research Plan Generator — Integration Checklist
 
+> **Status: completed, July 2026.** This was a one-time runbook for moving the
+> Research Document Template Generator out of `~/.claude/skills/` and into this
+> repo. It's done — `skills/` is populated and working. Kept as a record of how
+> the integration was performed; you don't need to run it again. For the
+> resulting architecture, see [`RESEARCH-PLAN-INTEGRATION.md`](RESEARCH-PLAN-INTEGRATION.md).
+
 Use this checklist to integrate the Research Plan Generator skill into your UX Research Skills repo.
 
 ## Pre-Integration (Prep)
@@ -36,7 +42,6 @@ cp ~/.claude/skills/research-document-template.md skills/README.md
 # Optional: Copy all supporting docs
 cp ~/.claude/skills/CONFIG-SCHEMA.md skills/
 cp ~/.claude/skills/QUICK-START-BY-ROLE.md skills/
-cp ~/.claude/skills/RESEARCH-PLAN-SKILL-README.md skills/
 ```
 
 ### Verify files

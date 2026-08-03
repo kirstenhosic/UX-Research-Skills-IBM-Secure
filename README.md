@@ -2,7 +2,12 @@
 
 A suite of AI prompt "agents" that act as a senior UX researcher mentor. They are
 designed to be used in IBM Bob (or similar tools that can run skills and agents) and used to guide, challenge, and co-pilot UX research work for **IBM Secure products** (HashiCorp Vault, Boundary, Consul,
-and Radar, with the addition of Terraform). **For any output created with data analysis skills, the competitive analysis, or the slide deck generator, be sure to run the Research-integrity auditor as a release gate.**
+and Radar, with the addition of Terraform).
+
+**Nothing here ships unchecked.** Every artifact the suite produces runs an
+**evaluation loop** — a sequence of independent evaluator agents that verify it,
+hand back blocking items for revision, and cap the number of retries before a
+person has to look. See [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
 The mentor — **Dr. Morgan**, a senior researcher with a PhD in HCI — teaches
 through Socratic questioning, challenges weak reasoning, insists on traceable
@@ -24,7 +29,13 @@ switches between them on demand.
 | File | Role | Use it when |
 |---|---|---|
 | `agents/dr-morgan.agent.md` | **The orchestrator.** One invocable Dr. Morgan agent (VS Code `.agent.md` with frontmatter) with a scenario router that covers all six scenarios (A–F) and switches between them mid-conversation. | You want a single agent for a whole research effort and may move between tasks. |
-| `agents/research-synthesis-checker.agent.md` | **Research-integrity auditor.** Invocable agent that cross-checks every synthesized finding, theme, quote, and statistic against the source-of-truth (transcripts, raw notes, survey CSVs) to catch hallucinated, unsupported, or overstated claims before a synthesis is shared. | You have a draft synthesis and need to verify it is faithfully grounded in the source data; run it again after a draft readout deck is prepared to confirm no invented or falsified evidence made it into slides. |
+| `EVALUATION-LOOP.md` | **The orchestration spec.** Which gates run on which artifact, the verdict schema every evaluator emits, the revision cycle and its two-pass cap, escalation triggers, the blocking-vs-flagged rule, and the Definition of Done for each artifact type. | You want to know how an artifact actually gets released, or you're adding a new skill or evaluator. |
+| `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. | You're synthesizing findings, or building anything that reads them. |
+| `VOICE-AND-STYLE.md` | **How outputs should read.** What makes writing land as human rather than generated, how to write one document for engineers, PMs, designers, researchers, and customer reps at once, and a 21-item rubric the readability gate scores against. | Any artifact a stakeholder will open. |
+| `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every synthesized finding, theme, quote, and statistic against the source-of-truth (transcripts, raw notes, survey CSVs) to catch hallucinated, unsupported, or overstated claims. Has a **deck mode** (re-verifies slides against already-passed finding records) and a **source-integrity mode** (labels competitive claims verified / vendor claim / inference / unknown). Runs a blind 3-verifier adversarial pass on load-bearing claims only. | Any draft synthesis, competitive analysis, or readout deck. |
+| `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Builds a bidirectional coverage matrix of research questions × findings; flags findings that map to no question (**retained, never deleted**) and questions no finding addressed. Also checks altitude (observation vs. insight), decision-fit, scope, and whether disconfirming evidence was sought. Catches findings that are true but useless — which gate 1 structurally cannot see. | After gate 1 passes on any findings set. |
+| `agents/research-plan-reviewer.agent.md` | **The plan gate.** Audits the upstream decisions (named decision, researchable questions, method fit, participants, analysis plan, ethics), then reviews the discussion guide question by question and maps coverage against the research questions. The only gate that runs *before* the money is spent. | Any research plan or discussion guide, before fieldwork. |
+| `agents/research-readability-checker.agent.md` | **The last gate — can a mixed room act on it, and is it safe to share?** Scores against `VOICE-AND-STYLE.md`: rhythm, exact quantifiers, concrete detail, stated confidence, committed conclusions, audience coverage, jargon, length. Also runs the participant-data safety sweep — including speaker notes, alt text, and screenshots. | Every artifact, last, before it leaves the team. |
 | `ux_plan_from_scratch.md` | **Scenario C** — build a research plan from zero through seven phases (frame → questions → participants → method → guide → analysis → output), with depth calibrated to the study's size and stakes (lightweight / standard / high-stakes). | You're starting a brand-new study and have nothing yet. |
 | `select_best_method.md` | **Scenario B** — method-selection advisor built around the *Minimum Viable Research Method* and real recruitment constraints. | You need to pick the most rigorous method you can actually execute. |
 | `analyze_your_data.md` | **Scenario A** — guides analysis through six stages and pushes findings up the observation → insight ladder, with quantitative-data guardrails (distributions, small-n confidence, significance vs. importance). The quick path; cross-linked to the strict path below. | You have data and need help reaching defensible insights. |
@@ -86,6 +97,83 @@ honest "I don't know."** That shows up two ways:
   every screenshot or clip is labeled by source type (**[live product]**,
   **[marketing]**, **[demo video]**, **[third party]**) and dated, and UX is never
   scored from marketing imagery alone.
+
+---
+
+## The evaluation loop
+
+Dr. Morgan drafts. Four independent evaluators check. Dr. Morgan revises. A
+person decides.
+
+```
+Research plan / guide   →  plan-reviewer → readability
+Synthesis findings      →  synthesis-checker → significance-checker → readability
+Competitive analysis    →  synthesis-checker → significance-checker → readability
+Readout deck            →  synthesis-checker (deck mode) → readability
+```
+
+Gates run in order, and a `FAIL` stops the sequence — there's no point asking
+whether a finding matters, or polishing how it reads, before knowing it's
+supported. Each gate emits a machine-readable verdict so the result can be
+branched on rather than read as prose.
+
+**Evaluators never edit.** An evaluator that rewrites its own input and then
+re-checks its own rewrite launders its errors past itself. Revision always goes
+back to the producer, scoped to the blocking items only.
+
+**Two revision passes, then a person looks.** If an artifact can't clear the bar
+in two tries, the problem is upstream of the wording — the data, the question,
+or the method — and a third pass polishes the wrong object.
+
+**Blocking vs. flagged is the load-bearing distinction.** Blocking means the
+artifact asserts something untrue, unsupported, or unsafe; it gets fixed.
+Flagged means the artifact is accurate but a human should look; it ships
+attached to the artifact as Reviewer Notes. A gate that treats judgment calls as
+defects trains researchers to delete interesting things to make it go green.
+
+**Coverage is checked in both directions, and nothing gets deleted.** A finding
+that maps to no stated research question is retained and flagged — unplanned
+findings are often the most valuable thing in a study. A research question no
+finding addressed is flagged so the human can decide between a follow-up,
+recovering it from the corpus, or rewriting the question. Both gaps travel to
+the readout.
+
+**Known limits are stated,** not glossed: LLM evaluators grade leniently on text
+that reads rigorous, chained gates compound false positives, and a green verdict
+is not a correct study. See §7 of [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
+
+---
+
+## Writing that reads human
+
+Every artifact is also gated on how it reads, because a findings document that
+sounds generated gets treated as input rather than as a conclusion — it reads as
+un-owned, and nobody argues with it, which feels like agreement and isn't.
+
+[`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) is the standard. In short:
+
+- **Vary sentence length.** Uniform rhythm is the strongest single tell.
+- **Quantify exactly** — "6 of 8," never "most." Precision is a human trait;
+  vagueness is what reads generated.
+- **Keep one telling detail** that could only come from being in the room — the
+  paper cheat sheet, the fourteen open tabs. Unfakeable, and it survives the
+  meeting.
+- **Let the strong finding take more room.** Equal-sized sections for unequal
+  evidence is a lie told through layout.
+- **State your confidence and what would change your mind**, in your own voice.
+- **Commit to a conclusion** instead of balancing every criticism with a
+  compensating positive.
+- **Mark the altitude.** The specific failure mode of a mixed-stakeholder
+  document is jumping between "operators' mental model of the secret lifecycle"
+  and "the modal close target is small" without signalling the shift.
+- **One document, not five.** Write the finding once, then a short *"what this
+  means for you"* per audience — engineers, PMs, designers, researchers,
+  customer reps.
+
+And what *not* to do, since most "sound human" advice makes writing worse: don't
+fake casualness, don't add deliberate errors, don't panic about em-dashes
+(uniformity is the tell, not punctuation), don't manufacture opinions, and don't
+strip precision to sound conversational.
 
 ---
 
@@ -151,13 +239,22 @@ improvised. Full citations live in the individual prompt files.
    (remove names, emails, employer/client details); treat the chat as you would
    any external tool handling research data. The more context you provide, the
    sharper the guidance.
-4. **Run the Research-integrity auditor as a release gate** using
-   `agents/research-synthesis-checker.agent.md`:
-   - First pass: after you have a draft synthesis (themes/findings).
-   - Competitive pass: after you synthesize outputs from `competitive_analysis.md`
-     (verdict, scorecard, and supporting evidence).
-   - Second pass: after you build a draft slide deck, to verify no unsupported,
-     invented, or falsified data appeared during story editing.
+4. **Run the gates.** Which ones depends on what you made — see the table above,
+   or §3 of [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md). Run them in order and
+   stop at the first `FAIL`.
+   - **A plan or discussion guide** → `research-plan-reviewer`, then
+     `research-readability-checker`. This is the only gate that runs before
+     fieldwork, so it's the cheapest place to catch a problem.
+   - **Findings** → `research-synthesis-checker`, then
+     `research-significance-checker`, then `research-readability-checker`.
+   - **A competitive analysis** → same three, with the synthesis checker in
+     source-integrity mode.
+   - **A readout deck** → `research-synthesis-checker` in deck mode (verifying
+     slides against finding records that already passed, which is where invented
+     evidence historically appears), then `research-readability-checker`.
+5. **Act on the verdict.** `REVISE` means fix only the blocking items and re-run
+   that gate. `RELEASE` means ship it, with any flags attached as Reviewer Notes.
+   `ESCALATE` means stop — the problem isn't the wording.
 
 Each scenario file is self-contained; you don't need the others loaded for it to
 work.
@@ -172,6 +269,19 @@ work.
   cover analysis. The skill is the stricter, integrity-first deep dive (mandatory
   data-integrity audit before any analysis); Scenario A is the quicker guided path.
   Keep both if you want a fast path and a rigorous path.
+- **Four evaluators, four jobs — and each one is blind to the others'.** That's the
+  reason there is more than one. A groundedness checker will pass a perfectly-sourced
+  finding that answers nothing anyone asked. A significance checker will pass a
+  decision-relevant finding built on a fabricated quote. Neither notices a participant's
+  employer in paragraph four.
+
+  | Agent | Verifies | Cannot see |
+  |---|---|---|
+  | `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
+  | `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
+  | `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
+  | `research-readability-checker` | Will a mixed audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+
 - **Three analysis-integrity files, three jobs.** It's easy to confuse these — here's
   the split:
   - `analyze_your_data.md` (**Scenario A**) — *guides you to* insights through six
@@ -195,10 +305,30 @@ work.
   sources · protect participant data) is **repeated verbatim** across every skill file.
   That's the price of portability, not an accident. When you edit that block, mirror the
   change to **all** skill files (or pick one as canonical and regenerate the rest) so they
-  stay identical. Quick drift check — this should print exactly one hash:
+  stay identical. The same applies to the `RELEASE GATE` / `REVISION PROTOCOL` /
+  `COVERAGE` / `VOICE` block appended to every skill file.
+
+  Quick drift check — run from the repo root. Each block should report `OK`, and the
+  file names next to each hash make a mismatch diagnosable rather than just visible:
   ````
-  for f in *.md; do b=$(awk '/^OPERATING PRINCIPLES \(apply throughout/{p=1} /^MENTORING RULES/{p=0} p' "$f"); [ -n "$b" ] && printf '%s' "$b" | md5; done | sort -u
+  check() {
+    echo "--- $1"
+    for f in *.md; do
+      b=$(awk -v s="$1" -v e="$2" 'index($0,s)==1{p=1} e!="" && index($0,e)==1{p=0} p' "$f")
+      [ -n "$b" ] && printf '%s  %s\n' "$(printf '%s' "$b" | md5)" "$f"
+    done | sort > /tmp/_d
+    cat /tmp/_d
+    n=$(cut -d' ' -f1 /tmp/_d | sort -u | wc -l | tr -d ' ')
+    [ "$n" = 1 ] && echo "    OK — identical across $(wc -l < /tmp/_d | tr -d ' ') files" \
+                  || echo "    DRIFT — $n variants"
+  }
+  check 'OPERATING PRINCIPLES (apply throughout' 'MENTORING RULES'
+  check 'RELEASE GATE (apply to every artifact' ''
   ````
+  Literal prefix matching, not regex, and no GNU-only flags — it runs as-is on macOS.
+  Note this covers the six standalone scenario files only. `agents/dr-morgan.agent.md`
+  carries the same guidance in markdown rather than plain text, so it can't be hashed
+  against them — it's the file most likely to drift, and it has to be checked by reading.
 
 ---
 

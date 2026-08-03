@@ -290,6 +290,21 @@ Before sharing any document, verify:
 - ✅ Proofread and spell-checked
 - ✅ Ready for stakeholder presentation
 
+**Writing** — full standard and 21-item rubric in [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md):
+- ✅ Leads with the answer, not the method
+- ✅ Sentence length varies (uniform rhythm is the strongest generated-text tell)
+- ✅ Quantifiers are exact — "6 of 8," never "most" or "several"
+- ✅ At least one verbatim quote per major finding
+- ✅ At least one concrete detail that could only come from being in the room
+- ✅ Confidence and limits stated in the researcher's own voice
+- ✅ The summary concludes rather than restates
+- ✅ Acronyms expanded on first use; research-process jargon confined to the method note
+- ✅ No participant-identifying data — including speaker notes, alt text, and screenshots
+
+This design system governs how a document **looks**. `VOICE-AND-STYLE.md` governs how
+it **reads**. Both are checked before release; styling alone has never made a document
+credible.
+
 ---
 
 ## Maintaining Consistency
@@ -321,11 +336,25 @@ Dr. Morgan should refer users to the Research Document Template Generator **when
 
 ### For Quality Assurance
 
-Before releasing any research:
+Before releasing any research, run the gates in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
+Which ones depends on the artifact:
 
-1. Run the **Research-integrity auditor** agent (verify all claims have evidence)
-2. Check against the **Quality Checklist** above
-3. Have a peer review the styling and structure
+| Artifact | Gates, in order |
+|---|---|
+| Research plan / discussion guide | `research-plan-reviewer` → `research-readability-checker` |
+| Synthesis findings | `research-synthesis-checker` → `research-significance-checker` → `research-readability-checker` |
+| Competitive analysis | `research-synthesis-checker` (source-integrity mode) → `research-significance-checker` → `research-readability-checker` |
+| Readout deck | `research-synthesis-checker` (deck mode) → `research-readability-checker` |
+
+Then:
+
+1. Check against the **Quality Checklist** above
+2. Have a peer review the styling and structure
+3. Attach any gate flags to the document as **Reviewer Notes** so the human sees them
+   at the moment of decision, not in a report they've already closed
+
+The gates cap out at two revision passes. If an artifact still fails after that, the
+problem is upstream of the formatting — escalate rather than reformatting again.
 
 ---
 
