@@ -1,0 +1,7 @@
+[00:12] P2: Platform engineer, two years on Vault.
+[00:45] P2: I picked userpass because it was first in the list. I figured I'd
+       sort out the permissions afterwards, which turned out to be wrong.
+[01:20] P2: It took me three tries to get to the policy screen. I kept ending
+       up back at the method picker.
+[02:02] P2: Manual rotation, no. That's a scripted thing for us.
+[02:30] P2: I've got a sticky note on my monitor with the paths. Everyone does.

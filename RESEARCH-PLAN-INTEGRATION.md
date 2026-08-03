@@ -24,6 +24,7 @@ Add the skill to your repo under a new `skills/` directory:
 UX-Research-Skills-IBM-Secure/
 ├── agents/
 │   ├── dr-morgan.agent.md                        # Producer / reviser
+│   ├── research-safety-checker.agent.md          # Pre-flight — safe to share?
 │   ├── research-synthesis-checker.agent.md        # Gate — is it true?
 │   ├── research-significance-checker.agent.md     # Gate — does it matter?
 │   ├── research-plan-reviewer.agent.md            # Gate — plans & guides
@@ -243,7 +244,13 @@ When adding a new product or updating product details:
 Generated plans go through the same evaluation loop as everything else in the
 suite. Full spec: [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
-**For a research plan or discussion guide, two gates apply, in order:**
+**`agents/research-safety-checker.agent.md` runs first**, before anything else and
+on every iteration. Tell it where the plan is going (`internal-team`,
+`internal-org`, or `external`); it will ask if you don't. It runs outside the
+ordered sequence deliberately — the quality gates stop at the first failure, so a
+safety scan placed last would never execute on a plan that failed review.
+
+**Then two gates apply, in order:**
 
 1. **`agents/research-plan-reviewer.agent.md`** — the plan gate. Audits the
    upstream decisions (is a decision named and owned? are the research questions
@@ -258,7 +265,7 @@ suite. Full spec: [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
    data no amount of careful synthesis can rescue.
 
 2. **`agents/research-readability-checker.agent.md`** — voice, mixed-audience
-   fit, and the participant-data safety sweep. Scored against
+   fit. Scored against
    [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md). Note that a plan is partly a form:
    voice matters in the framing, questions, and rationale, not in the logistics
    table.
@@ -366,10 +373,11 @@ if self.config.get('include_custom_section', False):
 
 **Agents**
 - **Dr. Morgan:** `agents/dr-morgan.agent.md` — the producer and reviser; how coaching fits with the generator
+- **Safety Checker:** `agents/research-safety-checker.agent.md` — **pre-flight on every artifact**; destination-aware, consent-aware
 - **Plan Reviewer:** `agents/research-plan-reviewer.agent.md` — **the gate for plans and discussion guides**
 - **Synthesis Checker:** `agents/research-synthesis-checker.agent.md` — QA for findings, decks, and competitive claims (not plans)
 - **Significance Checker:** `agents/research-significance-checker.agent.md` — research-question coverage, insight altitude, decision-fit
-- **Readability Checker:** `agents/research-readability-checker.agent.md` — voice, audience fit, participant-data safety sweep
+- **Readability Checker:** `agents/research-readability-checker.agent.md` — voice and mixed-audience fit (safety moved to the pre-flight gate above)
 
 ---
 

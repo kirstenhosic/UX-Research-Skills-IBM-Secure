@@ -339,6 +339,9 @@ Dr. Morgan should refer users to the Research Document Template Generator **when
 Before releasing any research, run the gates in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 Which ones depends on the artifact:
 
+`research-safety-checker` runs first on every artifact — pre-flight, destination-aware
+(`internal-team` / `internal-org` / `external`). Then:
+
 | Artifact | Gates, in order |
 |---|---|
 | Research plan / discussion guide | `research-plan-reviewer` → `research-readability-checker` |

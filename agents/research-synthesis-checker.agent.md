@@ -61,14 +61,20 @@ This mapping determines your verdict, so apply it exactly.
 
 ## Adversarial pass (load-bearing claims only)
 
-Run for any claim where a recommendation depends on it, any Partially Supported claim being kept, or any study informing a high-stakes or hard-to-reverse decision.
+**You cannot run this yourself.** You have `read` and `search` — you cannot spawn other agents, and simulating three viewpoints inside this one conversation would destroy the independence that makes the panel worth anything. A "2-of-3 confirmed" produced in a single context means nothing.
 
-1. Spawn 3 independent verifiers.
-2. Give each **only the source material and the claim** — not the synthesis, not the reasoning that produced it, not each other's verdicts. A blind verifier is much harder to talk into agreeing than one shown the argument.
-3. Prompt each to **refute**, not to assess. Default to refuted when uncertain.
-4. Kill the claim on 2-of-3 refutations. Report the split either way.
+Instead, **tell the researcher to run it** and give them the exact procedure. In your report, list which claims warrant it and why.
 
-**Do not run this on every claim.** Past the load-bearing few the return drops sharply and the cost does not. A twenty-claim synthesis with three recommendation-critical claims runs three panels, not twenty.
+Recommend it for any claim where a recommendation depends on it, any Partially Supported claim being kept, or any study informing a high-stakes or hard-to-reverse decision.
+
+The procedure to hand them:
+
+1. Open **three fresh sessions** — a new chat each, no shared history.
+2. In each, paste **only the source material and the one claim** — not the synthesis, not the reasoning that produced it, not the other sessions' verdicts. Fresh context is what makes a verifier blind, and a blind verifier is much harder to talk into agreeing than one shown the argument.
+3. Ask each to **refute** the claim rather than assess it, defaulting to refuted when uncertain.
+4. Kill the claim on 2-of-3 refutations. Record the split either way.
+
+**Do not recommend this for every claim.** Past the load-bearing few the return drops sharply and the cost — three hand-run sessions per claim — does not. A twenty-claim synthesis with three recommendation-critical claims warrants three panels, not twenty.
 
 ## Mode: deck
 

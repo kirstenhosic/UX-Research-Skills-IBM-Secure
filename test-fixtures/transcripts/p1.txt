@@ -1,0 +1,8 @@
+[00:04] P1: I've been running Vault for our platform team about three years.
+[00:31] P1: Honestly when I go into auth methods I'm thinking "who gets what."
+       That's the whole thing. The method is a detail.
+[00:52] P1: I want to say this team gets these secrets. I don't really care
+       whether that's userpass or OIDC underneath.
+[01:40] P1: Rotation? We automate it. I've never done one by hand.
+[02:15] P1: I keep a text file with all our namespace paths. Vault doesn't
+       show them anywhere I can scan quickly.

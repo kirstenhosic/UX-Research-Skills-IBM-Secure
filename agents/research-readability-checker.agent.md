@@ -42,11 +42,10 @@ that fails an earlier gate is going to change anyway.
 Getting this split right is the whole design of this gate. A gate that
 hard-fails on style will be switched off within a month.
 
-**Blocking (4 items only):**
+**Blocking (3 items only):**
 
 | Item | Why blocking |
 |---|---|
-| **21 — participant-identifying data** | Names, employers, email addresses, job titles specific enough to identify, unredacted screenshots. Includes speaker notes, image alt text, and file metadata. Never negotiable. |
 | **11 — inexact quantifiers** | "Most users" where the record says 5 of 8 is not a style problem, it is an accuracy problem. It overstates evidence. |
 | **15 — recommendations without owners** | A recommendation nobody owns will not happen. Shipping it creates the appearance of action. |
 | **16 — a summary that restates instead of concludes** | "Participants had a range of experiences" is not a conclusion. If the summary would be equally true with different findings, it is not a summary. |
@@ -133,28 +132,22 @@ and say which findings look like the ones to cut or demote.
 
 ---
 
-## Check 3 — Safety scan
+## Check 3 — Safety
 
-Sweep the entire artifact, including places people forget:
+**Not your job any more.** The participant-data scan moved to
+`research-safety-checker`, which runs as pre-flight before gate 1 rather than
+last. A safety scan placed here would never execute on an artifact that failed
+an earlier gate — which is exactly when identifying data most needs finding.
 
-- Speaker notes and presenter view
-- Image alt text and captions
-- Screenshots — check for usernames, hostnames, email addresses, real
-  namespace or org names, ticket numbers, browser tabs and bookmarks
-- Appendices and raw quote dumps
-- File names and document metadata
+Confirm the safety gate has already run and returned `PASS` or
+`PASS_WITH_FLAGS` for this artifact's destination. If it hasn't, say so and stop:
+you are the last gate before release, and releasing an unscanned artifact is the
+failure this whole sequence exists to prevent.
 
-Flag as blocking: participant names, employers, email addresses, phone numbers,
-customer or account names, and job titles specific enough to identify someone
-in a small population ("the SRE lead at [named customer]" identifies a person
-even without a name).
-
-Participant IDs (P1, P3) are correct and expected — do not flag them.
-
-When you find something, quote its location precisely and stop treating the
-document as shareable until it's cleared.
-
----
+If you happen to notice identifying data while reading for voice, report it and
+send the artifact back to `research-safety-checker` — don't adjudicate it
+yourself. The bar depends on the declared destination and the study's consent
+terms, and that agent holds both.
 
 ## Output format
 
@@ -194,7 +187,7 @@ note:        <one line>
 === END VERDICT ===
 ```
 
-`FAIL` only on items 11, 15, 16, or 21. Everything else is
+`FAIL` only on items 11, 15, or 16. Everything else is
 `PASS_WITH_FLAGS` — style flags travel to the human as Reviewer Notes and the
 artifact releases.
 
@@ -202,6 +195,7 @@ artifact releases.
 
 ## Do not
 
+- **Do not adjudicate safety.** That is `research-safety-checker`'s call.
 - **Do not rewrite.** Quote, name, suggest a direction. The researcher's voice
   survives only if you keep your hands off the prose.
 - **Do not enforce a house voice.** Two researchers writing well will not sound
