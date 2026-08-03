@@ -23,25 +23,45 @@ Add the skill to your repo under a new `skills/` directory:
 ```
 UX-Research-Skills-IBM-Secure/
 ├── agents/
-│   ├── dr-morgan.agent.md
-│   └── research-synthesis-checker.agent.md
-├── skills/                          # NEW
+│   ├── dr-morgan.agent.md                        # Producer / reviser
+│   ├── research-synthesis-checker.agent.md        # Gate — is it true?
+│   ├── research-significance-checker.agent.md     # Gate — does it matter?
+│   ├── research-plan-reviewer.agent.md            # Gate — plans & guides
+│   └── research-readability-checker.agent.md      # Gate — voice, audience, PII
+├── skills/
 │   ├── research-document-generator.py
 │   ├── example-migration-research.json
+│   ├── CONFIG-SCHEMA.md
+│   ├── QUICK-START-BY-ROLE.md
 │   └── README.md
 ├── research-readout-deck/
-├── DESIGN-SYSTEM.md
+├── DESIGN-SYSTEM.md                  # How documents look
+├── VOICE-AND-STYLE.md                # How documents read
+├── FINDINGS-CONTRACT.md              # The shape of a finding
+├── EVALUATION-LOOP.md                # How documents get released
 ├── RESEARCH-PLAN-INTEGRATION.md      # This file
 └── README.md
 ```
 
 ### Steps to Integrate
 
+> **Already done, July 2026.** These steps are kept as a record of how the skill
+> got into the repo — `skills/` is populated and working, so you don't need to
+> run them. The step-by-step version with verification checkpoints lives in
+> [`INTEGRATION-CHECKLIST.md`](INTEGRATION-CHECKLIST.md).
+>
+> Note that the paths below are the source filenames as they stood in July.
+> They've since diverged: the generator was renamed from
+> `research-plan-generator.py` to `research-document-generator.py`, and the skill
+> definition that became `skills/README.md` is now
+> `~/.claude/skills/hashicorp-secure-research-plan.md`. Treat the commands as
+> history, not as instructions to re-run.
+
 1. **Copy the skill files** from `~/.claude/skills/` to `skills/` in the repo:
    ```bash
    cp ~/.claude/skills/research-document-generator.py skills/
    cp ~/.claude/skills/example-migration-research.json skills/
-   cp ~/.claude/skills/research-document-template.md skills/README.md
+   cp ~/.claude/skills/hashicorp-secure-research-plan.md skills/README.md
    ```
 
 2. **Update the main README** (see "Updated README Section" below)
@@ -152,11 +172,17 @@ The skill uses JSON configurations. Store product-specific examples in `skills/`
 ```
 skills/
 ├── research-document-generator.py
-├── example-migration-research.json         # Vault migration template
-├── example-feature-eval.json               # Feature evaluation template
-├── example-adoption-study.json             # Adoption study template
+├── example-migration-research.json         # Vault migration template — the only one that exists today
+├── CONFIG-SCHEMA.md
+├── QUICK-START-BY-ROLE.md
 └── README.md
 ```
+
+**Still to add.** A feature-evaluation and an adoption-study config
+(`example-feature-eval.json`, `example-adoption-study.json`) would cover the two
+most common study types after migration. Neither exists yet — build them from
+the migration config using the steps under *Adding New Research Types* below,
+and test each against the generator before committing.
 
 Teams can **copy and customize** these configs for their research:
 
@@ -199,28 +225,65 @@ Dr. Morgan's PRODUCT CONTEXT section (in `agents/dr-morgan.agent.md`) lists Vaul
 When adding a new product or updating product details:
 
 1. Update the PRODUCT CONTEXT in Dr. Morgan
-2. Create product-specific research plan examples (if needed)
-3. Mirror changes to `agents/research-synthesis-checker.agent.md` if it also references products
-4. Update this file with any new integration patterns
+2. Mirror the change into the six standalone scenario files — each carries its
+   own copy so it stays pasteable on its own. Run the drift check in the main
+   README afterward.
+3. Create product-specific research plan examples (if needed)
+4. Check the evaluators for product references. They are deliberately mostly
+   product-agnostic — the checks are about evidence, coverage, and voice, not
+   about your products — but `research-significance-checker` and
+   `research-plan-reviewer` carry example personas and product names in their
+   scope and conflation checks. Those examples should stay recognizable to your team.
+5. Update this file with any new integration patterns
 
 ---
 
 ## Quality Assurance
 
-Before every research plan is shared:
+Generated plans go through the same evaluation loop as everything else in the
+suite. Full spec: [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
-1. **Visual Design Check:**
-   - Use the checklist in `DESIGN-SYSTEM.md`
-   - Verify styling matches the standard
+**For a research plan or discussion guide, two gates apply, in order:**
 
-2. **Structural Integrity Check:**
-   - Run `agents/research-synthesis-checker.agent.md` (not applicable to plans, but useful for draft guides)
-   - Verify scope boundaries are clear
-   - Ensure research questions map to decisions
+1. **`agents/research-plan-reviewer.agent.md`** — the plan gate. Audits the
+   upstream decisions (is a decision named and owned? are the research questions
+   researchable? can the method actually answer them? are participants defined
+   and recruitable? is there an analysis plan? are consent and data handling
+   addressed?), then reviews the discussion guide question by question for
+   leading, double-barreled, yes/no, and future-hypothetical questions, and maps
+   coverage both ways between guide questions and research questions.
 
-3. **Peer Review:**
-   - Have a colleague review the plan
-   - Check for clarity, completeness, realistic timeline
+   This is the only gate that runs **before** fieldwork, which makes it the
+   cheapest place in the whole system to catch a problem. A flawed plan produces
+   data no amount of careful synthesis can rescue.
+
+2. **`agents/research-readability-checker.agent.md`** — voice, mixed-audience
+   fit, and the participant-data safety sweep. Scored against
+   [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md). Note that a plan is partly a form:
+   voice matters in the framing, questions, and rationale, not in the logistics
+   table.
+
+**Then:**
+
+3. **Visual design check** — use the checklist in
+   [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md); verify styling matches the standard.
+
+4. **Peer review** — have a colleague read it for clarity, completeness, and a
+   realistic timeline. Attach any gate flags as **Reviewer Notes** so they see
+   them alongside the plan.
+
+**On verdicts:** `REVISE` means fix only the blocking items and re-run that
+gate. Two revision passes is the cap — if a plan still fails at iteration 3, the
+problem is upstream of the wording and it escalates to you. `ESCALATE` fires
+immediately, regardless of iteration, when no decision is named or the method
+structurally can't answer the question; in those cases the plan needs rebuilding
+from Phase 1, not refining.
+
+> **Note:** `research-synthesis-checker` does **not** apply to plans — it
+> verifies claims against research data, and a plan has no findings yet. Earlier
+> versions of this guide pointed at it here; use `research-plan-reviewer`
+> instead. The synthesis checker comes in later, once the study has produced
+> findings.
 
 ---
 
@@ -290,19 +353,32 @@ if self.config.get('include_custom_section', False):
 
 ## References
 
-- **Design System:** `DESIGN-SYSTEM.md` — Styling, colors, typography standards
+**Standards**
+- **Design System:** `DESIGN-SYSTEM.md` — how documents look: styling, colors, typography
+- **Voice & Style:** `VOICE-AND-STYLE.md` — how documents read: human voice, mixed-audience digestibility, 21-item rubric
+- **Findings Contract:** `FINDINGS-CONTRACT.md` — the shape of a finding, shared by every producer and consumer
+- **Evaluation Loop:** `EVALUATION-LOOP.md` — gate matrix, verdict schema, revision cap, Definition of Done per artifact type
+
+**The generator**
 - **Skill README:** `skills/README.md` — Complete usage guide
 - **Configuration Reference:** `skills/CONFIG-SCHEMA.md` — All customization options
-- **Dr. Morgan Agent:** `agents/dr-morgan.agent.md` — How coaching fits with the generator
-- **Research Integrity Auditor:** `agents/research-synthesis-checker.agent.md` — QA for findings (not plans)
+- **Quick Start by Role:** `skills/QUICK-START-BY-ROLE.md` — role-specific entry points
+
+**Agents**
+- **Dr. Morgan:** `agents/dr-morgan.agent.md` — the producer and reviser; how coaching fits with the generator
+- **Plan Reviewer:** `agents/research-plan-reviewer.agent.md` — **the gate for plans and discussion guides**
+- **Synthesis Checker:** `agents/research-synthesis-checker.agent.md` — QA for findings, decks, and competitive claims (not plans)
+- **Significance Checker:** `agents/research-significance-checker.agent.md` — research-question coverage, insight altitude, decision-fit
+- **Readability Checker:** `agents/research-readability-checker.agent.md` — voice, audience fit, participant-data safety sweep
 
 ---
 
 ## Version Info
 
-**Skill Integration:** v1.0  
+**Skill Integration:** v1.1 — plans now gated by `research-plan-reviewer`  
 **Design System:** v1.0  
-**Last Updated:** July 2026  
+**Evaluation Loop:** v1.0  
+**Last Updated:** August 2026  
 **Maintainer:** Kirsten Hosic (@kirstenhosic)
 
 ---
