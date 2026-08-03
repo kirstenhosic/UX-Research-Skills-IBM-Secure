@@ -32,11 +32,11 @@ switches between them on demand.
 | `EVALUATION-LOOP.md` | **The orchestration spec.** Which gates run on which artifact, the verdict schema every evaluator emits, the revision cycle and its two-pass cap, escalation triggers, the blocking-vs-flagged rule, and the Definition of Done for each artifact type. | You want to know how an artifact actually gets released, or you're adding a new skill or evaluator. |
 | `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. Also carries `participant_type` per evidence entry, which drives the safety bar and the proxy check. | You're synthesizing findings, or building anything that reads them. |
 | `VOICE-AND-STYLE.md` | **How outputs should read.** What makes writing land as human rather than generated, how to write one document for engineers, PMs, designers, researchers, and customer reps at once, and a 21-item rubric the readability gate scores against. | Any artifact a stakeholder will open. |
-| `agents/research-safety-checker.agent.md` | **Pre-flight — is it safe to share?** Runs first on every artifact, outside the ordered sequence, because a safety scan placed last never executes on an artifact that failed an earlier gate. Calibrated to two things: where the artifact is going (`internal-team` / `internal-org` / `external`) and who the participants were (`customer-direct` / `internal-direct` / `internal-proxy` / `sme-external`). Role and account name are freely shareable internally for every participant type; names, email addresses, and phone numbers block everywhere. Consent terms override the destination tier whenever they are stricter. Reports what it could not inspect (images, embedded metadata) rather than passing it silently. | Every artifact, first, every iteration. |
-| `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every synthesized finding, theme, quote, and statistic against the source-of-truth (transcripts, raw notes, survey CSVs) to catch hallucinated, unsupported, or overstated claims. Has a **deck mode** (re-verifies slides against already-passed finding records) and a **source-integrity mode** (labels competitive claims verified / vendor claim / inference / unknown). For load-bearing claims it identifies which warrant a blind 3-verifier refutation panel and hands you the procedure — it cannot spawn agents itself, and three viewpoints simulated in one context would share the bias the panel exists to avoid. | Any draft synthesis, competitive analysis, or readout deck. |
-| `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Builds a bidirectional coverage matrix of research questions × findings; flags findings that map to no question (**retained, never deleted**) and questions no finding addressed. Also checks altitude (observation vs. insight), decision-fit, scope, and whether disconfirming evidence was sought. Catches findings that are true but useless — which gate 1 structurally cannot see. | After gate 1 passes on any findings set. |
-| `agents/research-plan-reviewer.agent.md` | **The plan gate.** Audits the upstream decisions (named decision, researchable questions, method fit, participants, analysis plan, ethics), then reviews the discussion guide question by question and maps coverage against the research questions. The only gate that runs *before* the money is spent. | Any research plan or discussion guide, before fieldwork. |
-| `agents/research-readability-checker.agent.md` | **The last gate — can a mixed room act on it?** Scores against `VOICE-AND-STYLE.md`: rhythm, exact quantifiers, concrete detail, stated confidence, committed conclusions, audience coverage, jargon, length. Confirms the safety pre-flight already ran; it does not adjudicate safety itself. | Every artifact, last, before it leaves the team. |
+| `agents/research-safety-checker.agent.md` | **Pre-flight — is it safe to share?** Calibrated to where the artifact is going and who the participants were. | Every artifact, first, every iteration. |
+| `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every claim, quote, and statistic against the source-of-truth. | Any draft synthesis, competitive analysis, or readout deck. |
+| `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Research-question coverage in both directions, insight altitude, decision-fit, scope. | After gate 1 passes on any findings set. |
+| `agents/research-plan-reviewer.agent.md` | **The plan gate — will this study work?** Audits the upstream decisions and the discussion guide. The only gate that runs *before* the money is spent. | Any research plan or discussion guide, before fieldwork. |
+| `agents/research-readability-checker.agent.md` | **The last gate — can a mixed room act on it?** Scored against `VOICE-AND-STYLE.md`. | Every artifact, last, before it leaves the team. |
 | `ux_plan_from_scratch.md` | **Scenario C** — build a research plan from zero through seven phases (frame → questions → participants → method → guide → analysis → output), with depth calibrated to the study's size and stakes (lightweight / standard / high-stakes). | You're starting a brand-new study and have nothing yet. |
 | `select_best_method.md` | **Scenario B** — method-selection advisor built around the *Minimum Viable Research Method* and real recruitment constraints. | You need to pick the most rigorous method you can actually execute. |
 | `analyze_your_data.md` | **Scenario A** — guides analysis through six stages and pushes findings up the observation → insight ladder, with quantitative-data guardrails (distributions, small-n confidence, significance vs. importance). The quick path; cross-linked to the strict path below. | You have data and need help reaching defensible insights. |
@@ -46,6 +46,10 @@ switches between them on demand.
 | `research-readout-deck.skill` | **Artifact generator** (packaged skill bundle — unzip to inspect) — converts raw research materials (interview notes, usability observations, survey data, verbatim quotes) into a findings-first `.pptx` readout built for a mixed product-team audience (PM + Eng + UXD). Enforces separation of observation, interpretation, and recommendation; calibrates evidence strength; defaults to IBM theming (Carbon Design System / IBM Plex). Bundles a slide-by-slide recipe + theme reference (`references/deck-structure.md`); requires the separate **pptx** skill to render slides. | You've completed a study and need to present findings to your product team. |
 | `test-fixtures/` | **Regression test for the gates.** A 5-participant corpus and a synthesis with 12 deliberately planted defects — hallucinated quote, altered quote, vague quantifier, unmapped finding, unaddressed research question, proxy evidence stated as direct customer behavior — plus an answer key and **named controls that must not trigger**. It caught a real architectural flaw on its first run. | Any time you change a gate, a rubric, or `EVALUATION-LOOP.md`. |
 | `skills/research-document-generator.py` + configs | **Research Document Template Generator (Scenario G)** — the single template every generated research document goes through. Produces professionally formatted Word documents following IBM Secure's design system (Cambria, grayish-blue palette, callouts, auto-numbered sections, page numbers). Two layouts: the standard **research-plan** layout (purpose → scope → RQs → participants → guide → timeline → deliverables) and a generic **`sections`** layout for rationales, briefs, and one-pagers. Fully customizable via JSON configs. All generated documents follow `DESIGN-SYSTEM.md` standards. | **Any time a research document (.docx) is being produced** — plan, rationale, or brief. Use as an invokable skill in Bob or run the script directly. See `skills/README.md` for full documentation. |
+
+Each evaluator's own file carries the detail — what it checks, what blocks versus
+flags, and the verdict it emits. The table says what each one is *for*; the agent
+says how it works, and is the only place that has to change when it does.
 
 ---
 
@@ -113,12 +117,13 @@ Dr. Morgan drafts. A safety pre-flight plus four independent quality gates
 check. Dr. Morgan revises. A person decides.
 
 ```
-PRE-FLIGHT (everything)  →  safety-checker
-Research plan / guide    →  plan-reviewer → readability
-Synthesis findings       →  synthesis-checker → significance-checker → readability
-Competitive analysis     →  synthesis-checker → significance-checker → readability
-Readout deck             →  synthesis-checker (deck mode) → readability
+every artifact  →  safety pre-flight  →  quality gates, in order  →  release
+                                          ↳ which gates depends on the artifact
 ```
+
+**Which gates run on what** is in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §3,
+and only there. Four artifact types, two or three gates each. It isn't repeated
+here because a matrix restated in two places becomes two different matrices.
 
 **Safety runs first, on everything.** Not last, and not inside the ordered
 sequence — the quality gates stop at the first failure, so a safety scan placed
@@ -280,19 +285,9 @@ improvised. Full citations live in the individual prompt files.
 4. **Run `research-safety-checker` first**, on every artifact, and tell it where
    the artifact is going (`internal-team` / `internal-org` / `external`). It
    will ask if you don't. This runs before everything else and every iteration.
-5. **Then run the quality gates.** Which ones depends on what you made — see the
-   table above, or §3 of [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md). Run them in
-   order and stop at the first `FAIL`.
-   - **A plan or discussion guide** → `research-plan-reviewer`, then
-     `research-readability-checker`. This is the only gate that runs before
-     fieldwork, so it's the cheapest place to catch a problem.
-   - **Findings** → `research-synthesis-checker`, then
-     `research-significance-checker`, then `research-readability-checker`.
-   - **A competitive analysis** → same three, with the synthesis checker in
-     source-integrity mode.
-   - **A readout deck** → `research-synthesis-checker` in deck mode (verifying
-     slides against finding records that already passed, which is where invented
-     evidence historically appears), then `research-readability-checker`.
+5. **Then run the quality gates**, in order, stopping at the first `FAIL`. Which
+   ones apply depends on what you made — look it up in §3 of
+   [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 6. **Act on the verdict.** `REVISE` means fix only the blocking items and re-run
    that gate. `RELEASE` means ship it, with any flags attached as Reviewer Notes.
    `ESCALATE` means stop — the problem isn't the wording.
