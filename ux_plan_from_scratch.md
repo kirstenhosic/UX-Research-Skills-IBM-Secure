@@ -394,3 +394,155 @@ Wrap-up:
 Close:
   Thank you for sharing your thoughts — this helps us understand 
   what matters and what to prioritize. Have a great day!
+
+RELEASE GATE (apply to every artifact this file produces)
+
+  Anything you draft here — plan, discussion guide, findings,
+  competitive analysis, deck — goes through evaluation gates
+  before it is shared. You are the producer and the reviser.
+  You are never the evaluator. Five separate agents do the
+  checking, and they never edit; that separation is what keeps
+  the check independent.
+
+  PRE-FLIGHT, on everything, every iteration:
+
+    research-safety-checker
+
+  It runs FIRST, outside the ordered sequence below. The quality
+  gates stop at the first failure, so a safety scan placed last
+  would never run on an artifact that failed groundedness —
+  identifying data could sit undiscovered through two revision
+  cycles, on the one check that is never negotiable.
+
+  It is destination-aware. Declare where the artifact is going —
+  internal-team, internal-org, or external — because the bar for
+  a team readout is not the bar for a conference talk, and
+  applying the external bar internally blocks ordinary work over
+  an account name the whole team already knows. Where the
+  study's consent terms are stricter than the destination
+  allows, consent governs.
+
+  Then, in order:
+
+    Research plan / discussion guide
+      research-plan-reviewer
+      research-readability-checker
+
+    Synthesis findings
+      research-synthesis-checker        (is it true?)
+      research-significance-checker     (does it matter?)
+      research-readability-checker      (can a mixed room act
+                                         on it?)
+
+    Competitive analysis
+      research-synthesis-checker        (source-integrity mode)
+      research-significance-checker
+      research-readability-checker
+
+    Readout deck
+      research-synthesis-checker        (deck mode)
+      research-readability-checker
+
+  Gates run in order and a FAIL stops the sequence. There is no
+  point checking whether a finding matters, or how it reads,
+  before knowing it is supported.
+
+  Record who each participant was: customer-direct,
+  internal-direct, internal-proxy, or sme-external. It drives
+  both the safety bar (internal participants may carry role,
+  product area, and region; names, emails, and phone numbers
+  block for everyone) and a provenance check.
+
+PROXY EVIDENCE — secondhand is not firsthand
+
+  An internal colleague in customer success, support, field
+  engineering, or solution architecture is reporting on
+  CUSTOMERS' experience. That evidence is real and often good —
+  they talk to more customers than the team ever will — but it
+  establishes what they believe about customers, not what
+  customers do.
+
+  Ordinary traceability cannot see this. "Customers find X
+  confusing — P3" is perfectly traceable if P3 said exactly
+  that; the quote is verbatim and the attribution correct, and
+  the claim still outruns its evidence.
+
+  So: a claim phrased as direct customer behavior on proxy
+  evidence gets FLAGGED, and the scope line must name the proxy.
+  Both are flags, not blocks — reattribute the claim ("P3
+  reports that...") or re-scope the finding to what
+  customer-facing staff observe. Say it every time, because the
+  phrasing is what a stakeholder quotes in the next meeting.
+
+  Emit findings as records conforming to FINDINGS-CONTRACT.md.
+  Full spec, verdict schema, and Definition-of-Done rubrics:
+  EVALUATION-LOOP.md.
+
+REVISION PROTOCOL
+
+  Each gate returns a verdict with a next_action:
+
+    RELEASE   — done. Attach any flags to the artifact as a
+                short Reviewer Notes section so the human sees
+                them at the moment of decision.
+    REVISE    — fix ONLY the blocking items, then re-run the
+                same gate with the iteration number bumped.
+                Do not re-open the whole artifact; open-ended
+                revision reintroduces problems earlier gates
+                already cleared.
+    ESCALATE  — stop. Tell the user why in one or two
+                sentences. Do not attempt another revision.
+
+  Cap: two revision passes. Still failing at iteration 3 means
+  the problem is upstream of the wording — the data, the
+  question, or the method — and a third pass polishes the wrong
+  object. Escalate instead.
+
+  Blocking = the artifact asserts something untrue, unsupported,
+  or unsafe for where it is going. Fix it. Flagged = the
+  artifact is accurate but a human should look. It ships with
+  the artifact.
+
+  Never "fix" a flag by deleting what caused it.
+
+COVERAGE — flag both directions, delete nothing
+
+  A finding that maps to no stated research question is
+  RETAINED and FLAGGED, never cut. Unplanned findings are
+  frequently the most valuable thing in a study — they are what
+  the team did not know to look for. Flag it as unmapped and
+  suggest amending the questions or logging a follow-up.
+
+  A research question that no finding addresses is FLAGGED so
+  the human can revise. Say which it looks like: the data does
+  not answer it (follow-up needed), it was answered but dropped
+  in synthesis (recoverable), it was never researchable as
+  written (rewrite it), or the analysis drifted (return to the
+  corpus).
+
+  Neither gap blocks release. Both must reach the readout — a
+  study that quietly drops a question its stakeholders still
+  expect an answer to will get asked about in the room.
+
+VOICE — write like a person, not a generator
+
+  These outputs are read by software engineers, product
+  managers, UX designers and researchers, and customer
+  representatives, usually the same document at the same time.
+
+  Lead with the answer, not the method. Vary sentence length —
+  uniform rhythm is the single strongest tell that nobody stood
+  behind the text. Quantify exactly ("6 of 8," never "most").
+  Name the actor and use the verb. Keep at least one concrete
+  detail that could only have come from being in the room.
+  State your confidence and what would change your mind, in
+  your own voice. Commit to a conclusion instead of balancing
+  every criticism with a compensating positive. Give the strong
+  finding more room than the weak one — equal-sized sections
+  for unequal evidence is a lie told through layout.
+
+  Do not fake casualness, manufacture opinions, or strip
+  precision to sound conversational. Plain is not casual, and
+  exactness is a human trait.
+
+  Full standard and 21-item rubric: VOICE-AND-STYLE.md.

@@ -1,0 +1,5 @@
+[00:08] P3: I'm an application developer, I just consume secrets.
+[00:39] P3: I never touch auth method config. That's the platform team.
+[01:05] P3: During an incident I want to know if my token is still valid and
+       when it expires. That's it. I don't need anything else on the screen.
+[01:44] P3: The expiry isn't anywhere obvious. I end up asking in Slack.

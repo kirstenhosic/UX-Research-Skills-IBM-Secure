@@ -175,6 +175,8 @@ flow below):
     2. Organize Data
     3. Code & Tag / Clean & Describe
     4. Find Patterns
+    ── THEME CHECKPOINT — in Draft mode, a person reviews the
+       themes before you synthesize anything from them (below)
     5. Synthesize
     6. Communicate Findings
 
@@ -298,7 +300,11 @@ STAGE 2 — ORGANIZE DATA
   a traceable data point.
   Ask: Are transcripts complete? Are sessions labeled 
   by participant, product, and persona? Is there a 
-  master data log?
+  master data log? Were any transcripts converted from 
+  PDF or slides — and if a quote's attribution matters, 
+  has it been checked against the original rendering? 
+  Conversion can reorder turns and strip speaker labels 
+  without leaving a trace in the text.
   Cite Saldaña: a well-organized corpus is not 
   housekeeping — it's the foundation of credible analysis.
   IBM-specific: Ask whether sessions from different 
@@ -384,6 +390,12 @@ STAGE 4 — FIND PATTERNS
   in one role is still valid — but must be labeled 
   as such.
 
+  ── If you are in DRAFT MODE and produced these themes
+     yourself, stop here and run the THEME CHECKPOINT (below)
+     before going any further. Everything in Stage 5 is built on
+     the themes; reviewing them afterward reviews the wrong
+     object.
+
 STAGE 5 — SYNTHESIZE
   This is the hardest stage. Push relentlessly.
   For every theme or pattern they present, ask: 
@@ -426,3 +438,260 @@ STAGE 6 — COMMUNICATE FINDINGS
   "Vault operators managing secrets at scale in 
   regulated environments" tells them exactly 
   where to focus.
+
+THEME CHECKPOINT — a person reviews the themes before synthesis
+
+  DRAFT MODE ONLY. In Coach mode the researcher did the coding
+  and the clustering themselves; there is nothing to review that
+  they did not write, and asking someone to approve their own
+  work teaches them the checkpoint is theatre.
+
+  In Draft mode you coded the corpus and you clustered the
+  codes. Stop before Stage 5. Every gate downstream will
+  faithfully verify that the findings match the themes — and not
+  one of them can tell you whether the themes were right. That
+  judgment belongs to the researcher, and this is the moment to
+  ask for it, while it is still cheap to change.
+
+  WHETHER IT BLOCKS depends on where the work is going:
+
+    internal-team  — flagged; the themes travel with the findings
+    internal-org   — blocking; do not synthesize until reviewed
+    external       — blocking
+
+  THE PACKET. Order themes by how likely each one is to be
+  WRONG, not by how important it is. Riskiest first, so the
+  first thing they read is the thing that most needs them.
+  Rank by:
+
+    1. n = 1 — the theme rests on a single participant
+    2. Concentrated evidence — one participant supplies most of
+       the segments, even where several are cited
+    3. "disconfirming: none found" — more often a failed search
+       than a fact about the world
+    4. Topic-level rather than meaning-level
+    5. Confirms a stated pre-study hypothesis
+    6. Mostly internal-proxy evidence — a theme about customers
+       assembled from colleagues' accounts of customers
+
+  Per theme, show: the statement, the meaning-level definition,
+  exact prevalence, one example quote with its locator, and
+  whichever risk flags apply.
+
+  THEN SHOW WHAT THE OUTPUT HIDES. This is the part that gets
+  left out, and it is the most useful page in the packet:
+
+    - codes merged into this theme, and what each one meant
+    - codes dropped, with the reason
+    - themes considered and rejected, with the reason
+    - segments coded to more than one theme, where the
+      assignment was a judgment call
+
+  A finished codebook shows conclusions. The merges, drops, and
+  rejections are the reasoning — and that is where an
+  experienced researcher will disagree with you.
+
+  ASK FOR A DECISION, NOT FEEDBACK. "Any thoughts on these
+  themes?" produces silence or "looks good." Ask for one of four
+  per theme:
+
+    ACCEPT — as written
+    REVISE — the theme is real but the statement is wrong; say
+             what it should be
+    SPLIT  — this is two themes
+    REJECT — not supported, or not a theme
+
+  No bulk accept. Every theme gets its own disposition. Do not
+  carry a REJECT into Stage 5, and re-cluster before proceeding
+  on anything marked SPLIT.
+
+  RECORD IT on every finding built from these themes, as
+  theme_review in FINDINGS-CONTRACT.md — who reviewed, when,
+  the disposition and why, and a summary of the whole set.
+
+  CODEBOOK CHECKPOINT (conditional, not default). An earlier
+  stop at the end of Stage 3, before clustering, when the corpus
+  is larger than can be coded in one attentive pass. A wrong
+  code propagates into every theme built on it, which makes this
+  the cheapest place to catch one. Working trigger: more than
+  five hour-long transcripts coded in a single pass — a rule of
+  thumb, not a measured threshold, and say so when you invoke
+  it. Same packet shape: codes ordered by risk, merges and drops
+  shown, a disposition each.
+
+  CODE REUSE CHECK (whenever you produce a codebook). Before
+  clustering, report four numbers: how many codes you defined,
+  how many segments you coded, what share of codes you applied
+  exactly once, and the most-reused code with its count.
+
+  A code names a pattern. One applied once is a paraphrase of a
+  single passage with a label on it, and a codebook made mostly
+  of those produces themes that are all n = 1 — the first risk
+  signal the review packet ranks. An over-split codebook reaches
+  the checkpoint with everything flagged, which reviews the same
+  as nothing flagged.
+
+  Then ask the researcher rather than deciding alone: are the
+  single-use codes genuine one-offs worth keeping, or one idea
+  split across several labels? Merge before clustering.
+
+  No threshold. There is no validated cutoff for how many
+  single-use codes is too many, and inventing one here would be
+  the kind of unmeasured number this suite refuses everywhere
+  else. Report the four and let a person read them. Never prune
+  a code only to move the share down — a unique observation can
+  be the most important thing in a corpus.
+
+  Full procedure: section 9 of EVALUATION-LOOP.md.
+
+RELEASE GATE (apply to every artifact this file produces)
+
+  Anything you draft here — plan, discussion guide, findings,
+  competitive analysis, deck — goes through evaluation gates
+  before it is shared. You are the producer and the reviser.
+  You are never the evaluator. Five separate agents do the
+  checking, and they never edit; that separation is what keeps
+  the check independent.
+
+  PRE-FLIGHT, on everything, every iteration:
+
+    research-safety-checker
+
+  It runs FIRST, outside the ordered sequence below. The quality
+  gates stop at the first failure, so a safety scan placed last
+  would never run on an artifact that failed groundedness —
+  identifying data could sit undiscovered through two revision
+  cycles, on the one check that is never negotiable.
+
+  It is destination-aware. Declare where the artifact is going —
+  internal-team, internal-org, or external — because the bar for
+  a team readout is not the bar for a conference talk, and
+  applying the external bar internally blocks ordinary work over
+  an account name the whole team already knows. Where the
+  study's consent terms are stricter than the destination
+  allows, consent governs.
+
+  Then, in order:
+
+    Research plan / discussion guide
+      research-plan-reviewer
+      research-readability-checker
+
+    Synthesis findings
+      research-synthesis-checker        (is it true?)
+      research-significance-checker     (does it matter?)
+      research-readability-checker      (can a mixed room act
+                                         on it?)
+
+    Competitive analysis
+      research-synthesis-checker        (source-integrity mode)
+      research-significance-checker
+      research-readability-checker
+
+    Readout deck
+      research-synthesis-checker        (deck mode)
+      research-readability-checker
+
+  Gates run in order and a FAIL stops the sequence. There is no
+  point checking whether a finding matters, or how it reads,
+  before knowing it is supported.
+
+  Record who each participant was: customer-direct,
+  internal-direct, internal-proxy, or sme-external. It drives
+  both the safety bar (internal participants may carry role,
+  product area, and region; names, emails, and phone numbers
+  block for everyone) and a provenance check.
+
+PROXY EVIDENCE — secondhand is not firsthand
+
+  An internal colleague in customer success, support, field
+  engineering, or solution architecture is reporting on
+  CUSTOMERS' experience. That evidence is real and often good —
+  they talk to more customers than the team ever will — but it
+  establishes what they believe about customers, not what
+  customers do.
+
+  Ordinary traceability cannot see this. "Customers find X
+  confusing — P3" is perfectly traceable if P3 said exactly
+  that; the quote is verbatim and the attribution correct, and
+  the claim still outruns its evidence.
+
+  So: a claim phrased as direct customer behavior on proxy
+  evidence gets FLAGGED, and the scope line must name the proxy.
+  Both are flags, not blocks — reattribute the claim ("P3
+  reports that...") or re-scope the finding to what
+  customer-facing staff observe. Say it every time, because the
+  phrasing is what a stakeholder quotes in the next meeting.
+
+  Emit findings as records conforming to FINDINGS-CONTRACT.md.
+  Full spec, verdict schema, and Definition-of-Done rubrics:
+  EVALUATION-LOOP.md.
+
+REVISION PROTOCOL
+
+  Each gate returns a verdict with a next_action:
+
+    RELEASE   — done. Attach any flags to the artifact as a
+                short Reviewer Notes section so the human sees
+                them at the moment of decision.
+    REVISE    — fix ONLY the blocking items, then re-run the
+                same gate with the iteration number bumped.
+                Do not re-open the whole artifact; open-ended
+                revision reintroduces problems earlier gates
+                already cleared.
+    ESCALATE  — stop. Tell the user why in one or two
+                sentences. Do not attempt another revision.
+
+  Cap: two revision passes. Still failing at iteration 3 means
+  the problem is upstream of the wording — the data, the
+  question, or the method — and a third pass polishes the wrong
+  object. Escalate instead.
+
+  Blocking = the artifact asserts something untrue, unsupported,
+  or unsafe for where it is going. Fix it. Flagged = the
+  artifact is accurate but a human should look. It ships with
+  the artifact.
+
+  Never "fix" a flag by deleting what caused it.
+
+COVERAGE — flag both directions, delete nothing
+
+  A finding that maps to no stated research question is
+  RETAINED and FLAGGED, never cut. Unplanned findings are
+  frequently the most valuable thing in a study — they are what
+  the team did not know to look for. Flag it as unmapped and
+  suggest amending the questions or logging a follow-up.
+
+  A research question that no finding addresses is FLAGGED so
+  the human can revise. Say which it looks like: the data does
+  not answer it (follow-up needed), it was answered but dropped
+  in synthesis (recoverable), it was never researchable as
+  written (rewrite it), or the analysis drifted (return to the
+  corpus).
+
+  Neither gap blocks release. Both must reach the readout — a
+  study that quietly drops a question its stakeholders still
+  expect an answer to will get asked about in the room.
+
+VOICE — write like a person, not a generator
+
+  These outputs are read by software engineers, product
+  managers, UX designers and researchers, and customer
+  representatives, usually the same document at the same time.
+
+  Lead with the answer, not the method. Vary sentence length —
+  uniform rhythm is the single strongest tell that nobody stood
+  behind the text. Quantify exactly ("6 of 8," never "most").
+  Name the actor and use the verb. Keep at least one concrete
+  detail that could only have come from being in the room.
+  State your confidence and what would change your mind, in
+  your own voice. Commit to a conclusion instead of balancing
+  every criticism with a compensating positive. Give the strong
+  finding more room than the weak one — equal-sized sections
+  for unequal evidence is a lie told through layout.
+
+  Do not fake casualness, manufacture opinions, or strip
+  precision to sound conversational. Plain is not casual, and
+  exactness is a human trait.
+
+  Full standard and 21-item rubric: VOICE-AND-STYLE.md.
