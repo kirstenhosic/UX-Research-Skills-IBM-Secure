@@ -105,6 +105,13 @@ MUST complete this audit.
 
   B. DATA QUALITY ISSUES
      - Incomplete transcripts or missing context
+     - Transcripts converted from PDF, slides, or scans. Conversion 
+       can reorder turns and drop speaker labels, and the converted 
+       text gives no sign it happened. Where a quote's attribution 
+       is load-bearing — who said it changes what it means — check 
+       it against the original rendering, not the extracted text. 
+       This has already put a wrong attribution into a hand-built 
+       answer key that several people read without catching it.
      - Leading questions that biased responses
      - Inconsistent data collection across sessions
      - Missing demographic or contextual information
