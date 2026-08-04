@@ -197,8 +197,9 @@ confusing — P3" passes every groundedness check if P3 said exactly that. The
 gates flag the phrasing and require the scope line to name the proxy.
 
 **Known limits are stated,** not glossed: LLM evaluators grade leniently on text
-that reads rigorous, chained gates compound false positives, and a green verdict
-is not a correct study. See §7 of [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
+that reads rigorous, chained gates compound false positives, a hand-built answer
+key is the most likely thing in the room to be wrong, and a green verdict is not
+a correct study. See §7 of [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
 ---
 
