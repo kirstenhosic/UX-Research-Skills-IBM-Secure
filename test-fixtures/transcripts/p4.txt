@@ -1,6 +1,0 @@
-[00:10] P4: Infrastructure lead, I've done Vault deployments at two companies.
-[00:50] P4: Auth methods map to how the org is structured, not how Vault is
-       structured. That mismatch is where people get lost.
-[01:33] P4: I did the cert auth setup last month and had to redo the policy
-       binding twice.
-[02:10] P4: We rotate on a schedule. Manual only if something's leaked.

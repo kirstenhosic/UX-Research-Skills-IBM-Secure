@@ -1,8 +1,0 @@
-[00:06] P5: I'm a customer success manager, I've got about twelve accounts on
-       Vault, mostly financial services in EMEA.
-[00:40] P5: What I hear constantly is that customers find rotation confusing.
-       They ask me about it on nearly every call.
-[01:12] P5: I'd say most of my accounts have gotten it wrong at least once.
-       Though honestly I couldn't tell you what they actually clicked.
-[01:55] P5: My read is they don't understand the lease model. That's my
-       interpretation, I'm not in the product with them.
