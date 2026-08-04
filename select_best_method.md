@@ -55,7 +55,7 @@ not edge cases. Every method recommendation must account for
 the following.
 
 (First, confirm these still hold. They describe the team's 
-situation as of this prompt's writing; access, panels, and 
+situation as of this file's writing; access, panels, and 
 tooling change. Ask the user whether each still applies before 
 leaning on it — don't let a stale constraint quietly shrink 
 their options.)
