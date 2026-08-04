@@ -1,11 +1,11 @@
 # Dr. Morgan — UX Research Skills & Agents
 
-An invokable UX research mentor for **IBM Secure products** — HashiCorp Vault,
-Boundary, Consul, and Radar, with the addition of Terraform — plus the skills and
+An invokable UX research mentor for **IBM Secure products:** HashiCorp Vault,
+Boundary, Consul, and Radar, with the addition of Terraform, plus the skills and
 evaluator agents that check its work.
 
 You load the Dr. Morgan agent, describe what you're working on, and it coaches you
-through the research — or drafts the artifact and then picks it apart with you.
+through the research, or drafts the artifact and then picks it apart with you.
 **IBM Bob is the recommended tool**, and anything else that can run skills and
 agents will work.
 
@@ -29,11 +29,10 @@ to configure.
 
 ## Start here
 
-**1. Connect the repo, then invoke the agent.** In IBM Bob or VS Code Copilot Chat,
-connect this repo so you can reach the files directly — you can ask Bob to help you
-do this. Then select the **Dr. Morgan** agent
-([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)) by name and start talking
-to it.
+**1. Connect the repo, then invoke the agent.** In IBM Bob, connect this repo so you
+can reach the files directly — you can ask Bob to help you do this. Then select the 
+**Dr. Morgan** agent ([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)) by 
+name and start talking to it.
 
 No repo connection? Open the agent file, copy the whole thing, and paste it into
 Bob or Copilot Chat as custom instructions, or as the first message in a new chat.
