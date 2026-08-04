@@ -86,38 +86,52 @@ that come from AI tooling, or that this repo uses in a particular way.
 
 ```mermaid
 flowchart TD
-    R(["You — the researcher"])
-    R --> DM["<b>Dr. Morgan</b> — the agent you talk to<br/>routes six scenarios, A through F"]
+    START(["<b>START HERE</b><br/>You, with a research question"])
+    START --> DM
 
-    DM -->|"Coach mode — the default"| C["Socratic guidance.<br/>You do the analysis."]
-    C -.->|"you keep working"| R
+    DM["<b>Dr. Morgan</b><br/>the agent you invoke in Bob<br/>routes six scenarios, A through F"]
+
+    DM -->|"Coach mode<br/>the default"| COACH["Dr. Morgan questions<br/>and challenges your thinking"]
+    COACH --> WORK["You analyze, draft,<br/>and rethink"]
+    WORK -.->|"iterate as many rounds<br/>as the work needs"| COACH
+    WORK --> ENDC(["Your own conclusion.<br/>No AI gates: you did<br/>the analysis yourself."])
 
     DM -->|"Draft mode"| CL["Dr. Morgan codes<br/>and clusters your corpus"]
-    CL --> TC{{"THEME CHECKPOINT<br/>a person decides, not an agent<br/>accept · revise · split · reject"}}
+    CL --> TC{{"THEME CHECKPOINT<br/>you decide, not an agent<br/>accept · revise · split · reject"}}
     TC --> SY["Synthesis"]
-    SY --> ART[["Artifact<br/>plan · guide · findings · comparison"]]
+    SY --> ART[["Draft artifact<br/>plan · guide · findings · comparison"]]
 
-    ART --> PF["<b>Pre-flight</b> — research-safety-checker<br/>safe to share with this audience?<br/>runs first, on everything, every iteration"]
+    ART --> PF["<b>Pre-flight</b><br/>research-safety-checker<br/>safe to share with this audience?"]
     PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · synthesis-checker<br/>significance-checker · readability-checker<br/>which ones run depends on the artifact"]
     G --> V{"Verdict"}
 
-    V -->|"PASS or PASS_WITH_FLAGS"| SK["Output skills<br/>research-readout-deck — .pptx<br/>research-document-template — .docx"]
-    SK --> OUT[["Released, with any flags<br/>attached as Reviewer Notes"]]
-    OUT --> R
+    V -->|"PASS or PASS_WITH_FLAGS<br/>→ RELEASE"| SK["Output skills<br/>research-readout-deck → .pptx<br/>research-document-template → .docx"]
+    SK --> ENDR(["<b>Released to your team</b><br/>flags attached as Reviewer Notes"])
 
-    V -->|"FAIL — REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
+    V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
     RV -.->|"two passes maximum"| PF
 
-    V -->|"ESCALATE"| ES(["A person looks.<br/>The problem is upstream<br/>of the wording."])
+    V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>The problem is upstream<br/>of the wording."])
+
+    classDef entry  fill:#15803D,stroke:#0B4A24,stroke-width:4px,color:#FFFFFF
+    classDef coach  fill:#0E7490,stroke:#083F4F,stroke-width:2px,color:#FFFFFF
+    classDef human  fill:#B45309,stroke:#6E3206,stroke-width:2px,color:#FFFFFF
+    classDef ending fill:#5B6B80,stroke:#37424F,stroke-width:2px,color:#FFFFFF
+    class START entry
+    class COACH,WORK coach
+    class TC human
+    class ENDC,ENDR,ENDE ending
 ```
 
-Rounded boxes are people. The hexagon is the one place a person decides instead of
-an agent. Dotted arrows are loops back.
+Read it top to bottom. **The green node is where you start.** Teal is the coaching
+loop, which you repeat as many rounds as the work needs. Amber marks the one point
+where you decide instead of an agent. Slate nodes are end states, and the two dotted
+arrows are the two loops.
 
-Two things the shape of this is meant to show. Coach mode never leaves the top of
-the diagram. No gates run there, because you did the work and there's no draft to
-verify. And every path out of `Verdict` ends with a person: release is your call,
-revision is capped at two passes, and escalation goes straight to you.
+Two things the shape is meant to show. Coach mode iterates but never reaches a gate,
+because you did the analysis yourself and there is no draft for an agent to verify.
+And all three end states belong to you: release is your call, revision is capped at
+two passes, and escalation stops the machine rather than trying again.
 
 ---
 
