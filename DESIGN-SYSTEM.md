@@ -248,7 +248,7 @@ Examples:
 
 **Output:** Professional Word document following this design system
 
-**Configuration:** Edit `your-config.json` to customize sections, questions, timeline. For non-plan documents (rationales, briefs), use the generic `sections` config layout — see `skills/CONFIG-SCHEMA.md`.
+**Configuration:** Write a JSON config to control sections, questions, and timeline; `skills/CONFIG-SCHEMA.md` documents every field. For non-plan documents (rationales, briefs), use the generic `sections` config layout — see `skills/CONFIG-SCHEMA.md`.
 
 ---
 

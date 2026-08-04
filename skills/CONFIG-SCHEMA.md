@@ -794,7 +794,7 @@ The generator accepts any valid JSON. If a field is missing, that section simply
 ## Examples by Research Type
 
 ### Migration Study
-See: `your-config.json`
+See: the full-plan example above, and `skills/README.md`
 
 ### Feature Evaluation
 ```json

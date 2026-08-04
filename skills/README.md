@@ -76,7 +76,7 @@ All documents use IBM HashiCorp Secure's brand-aligned styling (see `../DESIGN-S
 ## Common Scenarios
 
 ### Scenario 1: Migration Research (like Consul)
-Research how customers make migration decisions, what barriers exist, and what support they need. See `your-config.json`.
+Research how customers make migration decisions, what barriers exist, and what support they need. `CONFIG-SCHEMA.md` documents every field with examples.
 
 ### Scenario 2: Feature Evaluation
 Test a new feature or product concept with target users, mapped to feature-specific questions and success metrics.

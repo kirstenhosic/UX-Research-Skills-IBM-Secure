@@ -188,7 +188,7 @@ The research plan should include or link to:
 
 1. **Create a base configuration** for your product:
    ```
-   cp ~/.claude/skills/your-config.json vault-base-config.json
+   cp your-existing-config.json new-study-config.json
    ```
 
 2. **Customize for your specific study:**
