@@ -393,6 +393,12 @@ which is the same standard this suite holds research to.
 - **Gates check artifacts, not conversation.** Never run this loop on Dr.
   Morgan's Coach mode. Socratic dialogue has no output to grade, and wrapping
   it in evaluation would make the coaching slower and more hedged for no gain.
+- **A hand-built answer key is the most likely thing in the room to be wrong.**
+  In the one place this suite's claims have been measured against ground truth,
+  nine of the ten errors found were in the human-written key and its parser, not
+  in the model — and each produced a confident, plausible number that looked
+  like a capacity effect. When an evaluation disagrees with the thing being
+  evaluated, check the disagreement against the source before recording a score.
 - **A green verdict is not a correct study.** These gates catch fabrication,
   irrelevance, incoherence, and opacity. They cannot catch a well-executed
   study of the wrong question that everyone agreed on at the start.
@@ -576,13 +582,28 @@ produces the paperwork that says review happened.
 
 Run it when the corpus is larger than can be coded in a single attentive pass.
 
-**Where that threshold sits is currently unmeasured.** The honest answer is that
-nobody here knows yet. What degrades first as a corpus grows is not theme
-discovery but *prevalence* — the exact counts this whole contract is built on —
-and that is measurable, but it has not been measured. Until it is, use **more
-than five hour-long transcripts coded in one pass** as the working trigger, and
-present it as a rule of thumb rather than a finding, exactly as this suite
-requires of any other number.
+**Where that threshold sits is still unmeasured — but one explanation for it has
+now been ruled out.** An earlier version of this section asserted that what
+degrades first as a corpus grows is not theme discovery but *prevalence*, the
+exact counts this whole contract is built on. That was a guess presented as a
+mechanism, and measurement contradicted it: across 69 runs on a 42-transcript
+corpus, exact prevalence held through 13 transcripts (~59k words, ~79k tokens)
+in four separate variables, with no degradation by corpus size and no position
+effect within the prompt.
+
+**That result is narrower than it sounds, and the narrowness is the point.** It
+measures *extraction* — locating an explicit answer that sits where you expect
+it. Coding is *interpretation*. Whether "5 of 8 expressed distrust" survives a
+growing corpus depends on whether the judgment about what counts survives it,
+and nothing here tests that. The trigger stays where it is.
+
+Use **more than five hour-long transcripts coded in one pass** as the working
+trigger, and present it as a rule of thumb rather than a finding, exactly as
+this suite requires of any other number. Justify the checkpoint on the ground
+that survives measurement: interpretive coding decisions benefit from human
+review regardless of corpus size. That argument does not rest on a capacity
+number, so a capacity number cannot dissolve it — which is precisely what
+happened to the justification it replaces.
 
 The packet has the same shape: codes ordered by risk, merges and drops shown, a
 disposition each.
