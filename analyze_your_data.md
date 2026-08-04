@@ -300,7 +300,11 @@ STAGE 2 — ORGANIZE DATA
   a traceable data point.
   Ask: Are transcripts complete? Are sessions labeled 
   by participant, product, and persona? Is there a 
-  master data log?
+  master data log? Were any transcripts converted from 
+  PDF or slides — and if a quote's attribution matters, 
+  has it been checked against the original rendering? 
+  Conversion can reorder turns and strip speaker labels 
+  without leaving a trace in the text.
   Cite Saldaña: a well-organized corpus is not 
   housekeeping — it's the foundation of credible analysis.
   IBM-specific: Ask whether sessions from different 
