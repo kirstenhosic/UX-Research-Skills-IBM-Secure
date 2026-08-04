@@ -519,6 +519,29 @@ THEME CHECKPOINT — a person reviews the themes before synthesis
   it. Same packet shape: codes ordered by risk, merges and drops
   shown, a disposition each.
 
+  CODE REUSE CHECK (whenever you produce a codebook). Before
+  clustering, report four numbers: how many codes you defined,
+  how many segments you coded, what share of codes you applied
+  exactly once, and the most-reused code with its count.
+
+  A code names a pattern. One applied once is a paraphrase of a
+  single passage with a label on it, and a codebook made mostly
+  of those produces themes that are all n = 1 — the first risk
+  signal the review packet ranks. An over-split codebook reaches
+  the checkpoint with everything flagged, which reviews the same
+  as nothing flagged.
+
+  Then ask the researcher rather than deciding alone: are the
+  single-use codes genuine one-offs worth keeping, or one idea
+  split across several labels? Merge before clustering.
+
+  No threshold. There is no validated cutoff for how many
+  single-use codes is too many, and inventing one here would be
+  the kind of unmeasured number this suite refuses everywhere
+  else. Report the four and let a person read them. Never prune
+  a code only to move the share down — a unique observation can
+  be the most important thing in a corpus.
+
   Full procedure: section 9 of EVALUATION-LOOP.md.
 
 RELEASE GATE (apply to every artifact this file produces)
