@@ -355,7 +355,7 @@ each.
 
 | File | What it is | Open it when |
 |---|---|---|
-| [`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md) | The main agent — a VS Code `.agent.md` file. Routes between all six scenarios and switches mid-conversation. | You want one agent for a whole research effort. |
+| [`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md) | The main agent — an `.agent.md` file Bob can load by name. Routes between all six scenarios and switches mid-conversation. | You want one agent for a whole research effort. |
 | [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) | How an artifact gets released: which gates run on what, the verdict shape, the revision cycle and its two-pass cap, escalation triggers, and the Definition of Done per artifact type. | You want to know how release works, or you're adding a skill or evaluator. |
 | [`FINDINGS-CONTRACT.md`](FINDINGS-CONTRACT.md) | One shape for a finding, shared by everything that produces or reads one. Because the deck skill can only render fields a record actually contains, this is what structurally stops evidence from being invented during deck building. | You're synthesizing findings, or building anything that reads them. |
 | [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) | How outputs should read, and the 21-item rubric the readability gate scores against. | Any artifact a stakeholder will open. |
