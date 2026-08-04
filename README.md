@@ -1,11 +1,13 @@
-# Dr. Morgan — UX Research Mentor Prompts
+# Dr. Morgan — UX Research Skills & Agents
 
-A set of prompts that turn a chat assistant into a senior UX research mentor for
-**IBM Secure products** — HashiCorp Vault, Boundary, Consul, and Radar, with the
-addition of Terraform. You load one, describe what you're working on, and it
-coaches you through the work — or drafts the artifact and then picks it apart with
-you. Built for IBM Bob, and usable in anything else that can run skills and
-agents.
+An invokable UX research mentor for **IBM Secure products** — HashiCorp Vault,
+Boundary, Consul, and Radar, with the addition of Terraform — plus the skills and
+evaluator agents that check its work.
+
+You load the Dr. Morgan agent, describe what you're working on, and it coaches you
+through the research — or drafts the artifact and then picks it apart with you.
+**IBM Bob is the recommended tool**, and anything else that can run skills and
+agents will work.
 
 Dr. Morgan is the mentor: a senior researcher with a PhD in HCI who asks
 questions before handing over answers, argues with weak reasoning, insists that
@@ -15,10 +17,10 @@ plan, guide, coding frame, finding, or matrix, then critique it with you at the
 same standard.
 
 Nothing here ships unchecked. Anything the suite produces runs an **evaluation
-loop** — independent checkers that verify the work, hand back what's broken, and
-cap the retries before a person has to look. And when Dr. Morgan does the
-analysis itself, it stops mid-way and asks you to sign off on the themes before
-anything gets built on top of them.
+loop** — five independent evaluator agents that verify the work, hand back what's
+broken, and cap the retries before a person has to look. And when Dr. Morgan does
+the analysis itself, it stops mid-way and asks you to sign off on the themes
+before anything gets built on top of them.
 
 The IBM Secure product context is already filled in. Nothing to install, nothing
 to configure.
@@ -27,14 +29,15 @@ to configure.
 
 ## Start here
 
-**1. Connect the repo.** In IBM Bob or VS Code Copilot Chat, connect this repo so
-you can reach the files directly — you can ask Bob to help you do this. Then
-select the **Dr. Morgan** agent
-([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)).
+**1. Connect the repo, then invoke the agent.** In IBM Bob or VS Code Copilot Chat,
+connect this repo so you can reach the files directly — you can ask Bob to help you
+do this. Then select the **Dr. Morgan** agent
+([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)) by name and start talking
+to it.
 
 No repo connection? Open the agent file, copy the whole thing, and paste it into
 Bob or Copilot Chat as custom instructions, or as the first message in a new chat.
-Both work.
+The agent behaves the same either way; invoking it is just less friction.
 
 **2. Say what you're working on.** A plain sentence is fine — "I have eight
 interviews about Vault's setup flow and I don't know where to start." Dr. Morgan
@@ -52,10 +55,10 @@ That's all of it, for coaching. If you asked for Draft mode and now have an
 artifact you intend to show someone, keep going to
 [How work gets checked](#how-work-gets-checked).
 
-> **Want one file instead of the whole agent?** Every scenario also exists as a
-> standalone file you can paste on its own, and those versions go deeper than the
-> agent's condensed copies. Each one is self-contained — you never need the others
-> loaded. See [File reference](#file-reference).
+> **Need more depth on one scenario?** Each of the six also exists as a standalone
+> file that goes further than the agent's condensed copy of it. Load one directly
+> when you already know exactly what you need. Each file is self-contained, so you
+> never need the others loaded. See [File reference](#file-reference).
 
 ---
 
@@ -77,6 +80,45 @@ that come from AI tooling, or that this repo uses in a particular way.
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |
+
+---
+
+## How it fits together
+
+```mermaid
+flowchart TD
+    R(["You — the researcher"])
+    R --> DM["<b>Dr. Morgan</b> — the agent you talk to<br/>routes six scenarios, A through F"]
+
+    DM -->|"Coach mode — the default"| C["Socratic guidance.<br/>You do the analysis."]
+    C -.->|"you keep working"| R
+
+    DM -->|"Draft mode"| CL["Dr. Morgan codes<br/>and clusters your corpus"]
+    CL --> TC{{"THEME CHECKPOINT<br/>a person decides, not an agent<br/>accept · revise · split · reject"}}
+    TC --> SY["Synthesis"]
+    SY --> ART[["Artifact<br/>plan · guide · findings · comparison"]]
+
+    ART --> PF["<b>Pre-flight</b> — research-safety-checker<br/>safe to share with this audience?<br/>runs first, on everything, every iteration"]
+    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · synthesis-checker<br/>significance-checker · readability-checker<br/>which ones run depends on the artifact"]
+    G --> V{"Verdict"}
+
+    V -->|"PASS or PASS_WITH_FLAGS"| SK["Output skills<br/>research-readout-deck — .pptx<br/>research-document-template — .docx"]
+    SK --> OUT[["Released, with any flags<br/>attached as Reviewer Notes"]]
+    OUT --> R
+
+    V -->|"FAIL — REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
+    RV -.->|"two passes maximum"| PF
+
+    V -->|"ESCALATE"| ES(["A person looks.<br/>The problem is upstream<br/>of the wording."])
+```
+
+Rounded boxes are people. The hexagon is the one place a person decides instead of
+an agent. Dotted arrows are loops back.
+
+Two things the shape of this is meant to show. Coach mode never leaves the top of
+the diagram — no gates, because you did the work and there's no draft to verify.
+And every path out of `Verdict` ends with a person: release is your call, revision
+is capped at two passes, and escalation goes straight to you.
 
 ---
 
@@ -156,17 +198,9 @@ alone.
 ## How work gets checked
 
 Dr. Morgan drafts. A safety scan and up to three quality gates check. Dr. Morgan
-revises the blocking items. You decide.
-
-```
-themes  →  THEME CHECKPOINT  →  synthesis  →  safety pre-flight  →  gates  →  release
-           ↳ a person, not an agent                                 ↳ which gates
-             (Draft mode only)                                        depends on
-                                                                      the artifact
-```
-
-Read the arrows left to right as the order things happen in. The `↳` marks a note
-about the step above it.
+revises the blocking items. You decide. The diagram in
+[How it fits together](#how-it-fits-together) shows the whole path; this section is
+the reasoning behind it.
 
 ### A person reviews the themes first
 
@@ -348,7 +382,7 @@ flags, the verdict it emits. This table says what each one is for.
 
 ## Frameworks and canon referenced
 
-The prompts cite established literature so the guidance is grounded. Full
+The scenarios cite established literature so the guidance is grounded. Full
 citations live in the individual files.
 
 **Methods, interviewing, and analysis**
@@ -399,7 +433,14 @@ Releasing an artifact to other people takes three steps.
 
 ## For maintainers
 
-Everything below is repo upkeep. Skip it if you're here to use the prompts.
+Everything below is repo upkeep. Skip it if you're here to use the skills.
+
+**Test fixtures live in a separate repo.** Before you change a gate, a rubric, or
+`EVALUATION-LOOP.md`, run the fixtures in
+[kirstenhosic/UX-Research-Skills-testing](https://github.com/kirstenhosic/UX-Research-Skills-testing).
+`gate-fixture/` is the one that came from here — 13 planted defects, an answer key,
+and named controls that must not trigger. It's what caught the safety-scan ordering
+flaw.
 
 **Consistent persona and format.** Every file uses Dr. Morgan and the same plain
 instruction opener (`For this conversation, you are Dr. Morgan…`).
