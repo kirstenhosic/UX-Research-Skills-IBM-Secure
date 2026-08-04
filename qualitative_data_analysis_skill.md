@@ -253,6 +253,8 @@ they are):
     2. Organize Data — ensure a complete, labeled, traceable corpus
     3. Code & Tag — meaning-level codes, not just topics
     4. Find Patterns — clusters, contradictions, surprises
+    ── THEME CHECKPOINT — in Draft mode, a person reviews the
+       themes before you synthesize anything from them (below)
     5. Synthesize — push from observations to insights
     6. Communicate Findings — evidence → interpretation → insight 
        → recommendation
@@ -319,6 +321,88 @@ Your mission: ensure every insight is earned through rigorous
 analysis, not assumed through bias or fabricated through 
 hallucination. Be tough but supportive. The goal is credible, 
 actionable research that stands up to scrutiny.
+
+THEME CHECKPOINT — a person reviews the themes before synthesis
+
+  DRAFT MODE ONLY. In Coach mode the researcher did the coding
+  and the clustering themselves; there is nothing to review that
+  they did not write, and asking someone to approve their own
+  work teaches them the checkpoint is theatre.
+
+  In Draft mode you coded the corpus and you clustered the
+  codes. Stop before Stage 5. Every gate downstream will
+  faithfully verify that the findings match the themes — and not
+  one of them can tell you whether the themes were right. That
+  judgment belongs to the researcher, and this is the moment to
+  ask for it, while it is still cheap to change.
+
+  WHETHER IT BLOCKS depends on where the work is going:
+
+    internal-team  — flagged; the themes travel with the findings
+    internal-org   — blocking; do not synthesize until reviewed
+    external       — blocking
+
+  THE PACKET. Order themes by how likely each one is to be
+  WRONG, not by how important it is. Riskiest first, so the
+  first thing they read is the thing that most needs them.
+  Rank by:
+
+    1. n = 1 — the theme rests on a single participant
+    2. Concentrated evidence — one participant supplies most of
+       the segments, even where several are cited
+    3. "disconfirming: none found" — more often a failed search
+       than a fact about the world
+    4. Topic-level rather than meaning-level
+    5. Confirms a stated pre-study hypothesis
+    6. Mostly internal-proxy evidence — a theme about customers
+       assembled from colleagues' accounts of customers
+
+  Per theme, show: the statement, the meaning-level definition,
+  exact prevalence, one example quote with its locator, and
+  whichever risk flags apply.
+
+  THEN SHOW WHAT THE OUTPUT HIDES. This is the part that gets
+  left out, and it is the most useful page in the packet:
+
+    - codes merged into this theme, and what each one meant
+    - codes dropped, with the reason
+    - themes considered and rejected, with the reason
+    - segments coded to more than one theme, where the
+      assignment was a judgment call
+
+  A finished codebook shows conclusions. The merges, drops, and
+  rejections are the reasoning — and that is where an
+  experienced researcher will disagree with you.
+
+  ASK FOR A DECISION, NOT FEEDBACK. "Any thoughts on these
+  themes?" produces silence or "looks good." Ask for one of four
+  per theme:
+
+    ACCEPT — as written
+    REVISE — the theme is real but the statement is wrong; say
+             what it should be
+    SPLIT  — this is two themes
+    REJECT — not supported, or not a theme
+
+  No bulk accept. Every theme gets its own disposition. Do not
+  carry a REJECT into Stage 5, and re-cluster before proceeding
+  on anything marked SPLIT.
+
+  RECORD IT on every finding built from these themes, as
+  theme_review in FINDINGS-CONTRACT.md — who reviewed, when,
+  the disposition and why, and a summary of the whole set.
+
+  CODEBOOK CHECKPOINT (conditional, not default). An earlier
+  stop at the end of Stage 3, before clustering, when the corpus
+  is larger than can be coded in one attentive pass. A wrong
+  code propagates into every theme built on it, which makes this
+  the cheapest place to catch one. Working trigger: more than
+  five hour-long transcripts coded in a single pass — a rule of
+  thumb, not a measured threshold, and say so when you invoke
+  it. Same packet shape: codes ordered by risk, merges and drops
+  shown, a disposition each.
+
+  Full procedure: section 9 of EVALUATION-LOOP.md.
 
 RELEASE GATE (apply to every artifact this file produces)
 

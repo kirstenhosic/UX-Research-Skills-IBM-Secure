@@ -51,6 +51,19 @@ FINDING F1
     action:    Surface the permission outcome before method selection in the
                auth method setup flow.
     owner:     [TBD — needs an owner before release]
+  telling_detail:
+    P2 kept a hand-written list of namespace paths on a sticky note beside the
+    monitor, and checked it twice while configuring.
+  artifact_ref:
+    Vault UI — Access › Auth Methods, step 2 of 3, the method-type selector
+  theme_review:
+    reviewer:    [name or role of the person who reviewed the theme]
+    date:        2026-07-28
+    disposition: revised — original theme said "operators find auth methods
+                 confusing"; narrowed to the mental-model mismatch after
+                 review, because "confusing" covered two different problems
+    set_summary: 9 themes reviewed · 5 accepted · 2 revised · 1 split ·
+                 1 rejected
 ```
 
 ### Field rules
@@ -70,6 +83,49 @@ FINDING F1
 | `confidence` | yes | `high` / `medium` / `low`, **and why**. |
 | `limits` | yes | What this does not apply to. |
 | `recommendation` | no | If present, needs an `owner`. `[TBD]` is acceptable in draft, blocking at release. |
+| `telling_detail` | no | One concrete specific that could only have come from being in the session. Verbatim or observed, like any evidence — not colour added later. |
+| `artifact_ref` | no | The screen, flow, state, or document this happened on. Required in practice for any finding about an interface. |
+| `theme_review` | conditional | Who reviewed the theme this finding came from, when, and their disposition. **Required when the analysis ran in Draft mode.** Blocking at `internal-org` and `external`; flagged at `internal-team`. Omit entirely for Coach-mode analysis — see below. |
+
+### `theme_review` — who decided this was a theme
+
+In Draft mode, Dr. Morgan codes the corpus and clusters the codes. A person has
+to look at the themes before synthesis builds findings on top of them; §9 of
+`EVALUATION-LOOP.md` is the procedure. This field is where that review lands, and
+it travels on every finding derived from the theme.
+
+`disposition` is the reviewer's decision — `accepted`, `revised`, `split`, or
+`rejected` — and for anything other than `accepted`, what changed and why. The
+why is the part worth writing. "Revised" without a reason is a timestamp
+pretending to be a judgment.
+
+`set_summary` records the shape of the whole review, not just this theme. A
+reviewer who accepts every theme on every study is not reviewing, and no single
+finding can show that. The summary makes the pattern visible across studies.
+
+**In Coach mode the field is omitted, not left blank.** The researcher did the
+coding and clustering themselves; there is no separate thing to review, and
+asking them to sign off on their own work would make the field meaningless
+everywhere else it appears.
+
+### The two optional fields, and why they exist
+
+`telling_detail` and `artifact_ref` are optional because plenty of findings
+don't have them. They're in the contract because the readout deck needs them and
+had no way to get them.
+
+`telling_detail` is the detail that proves someone was in the room — the
+participant who kept a cheat sheet in a text file, the sticky note on the
+monitor, the third reconfiguration. `VOICE-AND-STYLE.md` treats this as the
+strongest signal that a human wrote a document. Structured records tend to strip
+exactly that, because it fits no field and reads as extraneous. So it gets a
+field. It is still evidence: verbatim or observed, sourced like anything else.
+A detail invented to make a slide feel real is a fabrication, and a worse one
+than most because it is designed to be convincing.
+
+`artifact_ref` is the screen the finding happened on. Without it a deck builder
+has to guess which screenshot belongs to which finding, and a confidently wrong
+screenshot misdirects every engineer who reads the slide.
 
 ### The fields people want to skip
 
@@ -137,7 +193,14 @@ semantics, same required fields.
       "disconfirming": "…",
       "confidence": { "level": "high", "why": "…" },
       "limits": "…",
-      "recommendation": { "action": "…", "owner": null }
+      "recommendation": { "action": "…", "owner": null },
+      "telling_detail": { "text": "…", "participant": "P2", "source": "session-notes-p2.md", "locator": "line 22" },
+      "artifact_ref": "Vault UI — Access › Auth Methods, step 2 of 3, the method-type selector",
+      "theme_review": {
+        "reviewer": "…", "date": "2026-07-28", "disposition": "revised",
+        "note": "…what changed and why…",
+        "set_summary": { "themes": 9, "accepted": 5, "revised": 2, "split": 1, "rejected": 1 }
+      }
     }
   ],
   "coverage": {
@@ -161,6 +224,8 @@ surface both kinds of gap rather than silently dropping them.
 - A quote on a slide must byte-match the `quote` in its record
 - A number on a slide must match `prevalence` — `5 of 8` cannot become "most"
 - `confidence` and `limits` must appear somewhere for every finding shown
+- A screenshot is chosen from `artifact_ref`, not from the deck builder's guess
+  about which screen a finding refers to
 - Anything on a slide with no matching record is a **blocking** defect
 
 The last rule is the whole reason this file exists. A deck that can only show
