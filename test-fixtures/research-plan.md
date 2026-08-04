@@ -12,3 +12,6 @@ application developer (customer-direct). P5 = IBM customer success manager
 speaking about customer experience (internal-proxy).
 
 Destination: internal-team.
+
+Analysis mode: Draft — Dr. Morgan coded the corpus and clustered the codes into
+themes. No theme checkpoint was run before synthesis.

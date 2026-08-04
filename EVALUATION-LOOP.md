@@ -16,6 +16,10 @@ removes work you shouldn't have to do by hand. It is not an approval.
 ## 1. The cycle
 
 ```
+CODE ──► CLUSTER ──► ◆ THEME CHECKPOINT ◆ ──► SYNTHESIZE ──┐
+(Dr. Morgan,          (a person decides — §9)              │
+ Draft mode only)                                          │
+                                                           ▼
    ┌──────────────────────────────────────────────────────────────┐
    │                                                              │
    ▼                                                              │
@@ -28,6 +32,10 @@ DRAFT ──► PRE-FLIGHT ──► GATE 1 ──► GATE 2 ──► GATE 3 �
                                                │
                                                └──► ESCALATE ──► human
 ```
+
+The top row is new, and it is a different kind of thing from the rest of the
+diagram. Everything after `DRAFT` is a machine filter. The **theme checkpoint**
+is a person, in the middle, before synthesis — see §9.
 
 ### Pre-flight — safety runs before everything
 
@@ -140,14 +148,16 @@ not in a report they've already closed.
 
 ## 3. Gate matrix
 
-Gates attach to **artifact types**, not to skills. There are four artifacts and
-five evaluators — one pre-flight plus four in sequence — so most artifacts run
-the pre-flight and two or three gates rather than all of them.
+Gates attach to **artifact types**, not to skills. Four artifact types are gated
+by agents — one pre-flight plus four evaluators in sequence — so most run the
+pre-flight and two or three gates rather than all of them. The fifth row, the
+theme set, has no agent gate at all: it gets a human checkpoint instead (§9).
 
 Every row below is preceded by `research-safety-checker` (pre-flight, always).
 
 | Artifact | Produced by | Gates, in order |
 |---|---|---|
+| **Theme set** | Scenario A, F — Draft mode only | **Human checkpoint, no agent gate.** See §9 |
 | **Research plan / discussion guide** | Scenario C, D; `research-document-generator` | `plan-reviewer` → `readability-checker` |
 | **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
@@ -226,6 +236,10 @@ isn't inventing it fresh each run.
 10. Recommendations have named owners
 11. Cleared by `research-safety-checker` for the artifact's declared destination
 12. Meets `VOICE-AND-STYLE.md`
+13. Where the analysis ran in Draft mode, a person reviewed the themes these
+    findings were built on, and `theme_review` records it. Blocking at
+    `internal-org` and `external`; flagged at `internal-team`. Omitted, not
+    blank, for Coach-mode analysis. See §9
 
 ### 4.3 Competitive analysis
 
@@ -255,6 +269,22 @@ isn't inventing it fresh each run.
    scan lists them for human review and the deck is not clear until someone has
    actually looked
 8. Meets `VOICE-AND-STYLE.md`
+
+### 4.5 Theme set — the human checkpoint
+
+Not an agent rubric. This is what the review packet a person receives has to
+contain for the review to be possible at all. Full procedure in §9.
+
+1. Every theme carries a meaning-level definition, not a topic label
+2. Every theme carries exact prevalence and one example quote with a locator
+3. Themes are ordered by **risk of being wrong**, not by importance
+4. The risk flags are shown per theme: single participant, concentrated
+   evidence, no disconfirming evidence found, topic-level, confirms a stated
+   hypothesis, mostly proxy evidence
+5. Codes merged, codes dropped, and themes considered-and-rejected are listed
+   with reasons — the reasoning, not just the conclusions
+6. Each theme has a disposition field: accept / revise / split / reject
+7. The outcome is recorded as `theme_review` on every finding derived from it
 
 ---
 
@@ -374,8 +404,11 @@ which is the same standard this suite holds research to.
 **Producing findings:**
 
 ```
+0. THEME CHECKPOINT (Draft mode only)  → a person accepts/revises/splits/rejects
+                                          each theme before synthesis. §9
 1. Draft synthesis (Dr. Morgan, Scenario A or F)
 2. Emit findings per FINDINGS-CONTRACT.md, with a declared destination
+   and theme_review carried through from step 0
 3. research-safety-checker         → PRE-FLIGHT, always runs first
 4. research-synthesis-checker      → FAIL? revise blocking claims, re-run
 5. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
@@ -397,11 +430,159 @@ which is the same standard this suite holds research to.
 
 ```
 1. Findings must have cleared the findings sequence first
-2. Draft deck (research-readout-deck)
-3. research-safety-checker (deck mode — speaker notes and screenshots included)
-4. research-synthesis-checker (deck mode — verify against findings records)
-5. research-readability-checker
-6. Release
+2. research-readout-deck validates its input — records exist, each carries the
+   minimum viable fields, destination is declared. Gaps are reported by finding
+   ID, never filled in
+3. Draft deck (research-readout-deck)
+4. research-safety-checker (deck mode — speaker notes and screenshots included)
+5. research-synthesis-checker (deck mode — verify against findings records)
+6. research-readability-checker
+7. Release
 ```
 
 Cap: 2 revisions per gate. Then a person looks at it.
+
+## 9. The theme checkpoint — a person in the middle, not only at the end
+
+Everything above this section is a machine filter. Five agents check artifacts
+and return verdicts; the human decides at the end. That works well for findings,
+because a finding is a checkable object — a quote either matches the transcript
+or it doesn't.
+
+It does nothing for the stage where the interpretive commitments are actually
+made.
+
+Look at the six-stage framework: Orient, Organize, **Code & Tag**, **Find
+Patterns**, Synthesize, Communicate. The gates in §3 attach to plans, findings,
+competitive analyses, and decks. None of them is a codebook or a theme set. So
+in Draft mode, Dr. Morgan can code a corpus, cluster those codes into themes,
+and synthesize findings from them without a person having looked at either. Then
+every gate downstream verifies — correctly, thoroughly — that the findings are
+faithful to themes nobody checked.
+
+That is the gap this section closes.
+
+### A checkpoint is not a gate
+
+| | Gate | Checkpoint |
+|---|---|---|
+| Who runs it | An evaluator agent | A person |
+| Produces | A verdict block | A disposition per theme |
+| On failure | `REVISE` / `ESCALATE` | Whatever the reviewer decides |
+| Blocks on | Defects | Nothing — it blocks on *not having happened* |
+
+A checkpoint is a **stop-and-wait**: Dr. Morgan emits a review packet and does
+not proceed to Stage 5 until a person returns decisions.
+
+A sixth *agent* would not do this job. An LLM judging an LLM's themes is a
+second opinion from the same kind of reasoner, drawn from the same context, with
+the same blind spots — §7 already says so about evaluators generally. What is
+missing at this stage isn't verification. It's judgment about what the data
+means, which is the part of research that belongs to the researcher.
+
+### Coach mode is exempt
+
+In Coach mode the researcher does the coding and the clustering themselves.
+There is nothing to review that they did not write. Running the checkpoint there
+would ask someone to approve their own work, which is the fastest way to teach
+them that the checkpoint is theatre. **Draft mode only.**
+
+### When it blocks
+
+Reuse the destination the artifact already declares. Don't add a second dial.
+
+| Destination | Theme checkpoint |
+|---|---|
+| `internal-team` | **Flagged.** Themes travel with the findings for review |
+| `internal-org` | **Blocking.** Synthesis does not proceed until reviewed |
+| `external` | **Blocking.** |
+
+A three-session study read by four people who all sat in the sessions does not
+need a formal stop. The same themes in front of a VP, a customer, or a
+conference room do.
+
+### The review packet
+
+Reviewing twelve themes is real work, and a checkpoint that is expensive to
+satisfy gets satisfied carelessly. Build the packet to make the wrong theme
+**fast to find**.
+
+**Order themes by how likely they are to be wrong — not by how important they
+are.** Riskiest first, so the first thing the reviewer reads is the thing that
+most needs them. Rank by:
+
+1. **n = 1** — the theme rests on a single participant
+2. **Concentrated evidence** — one participant supplies most of the segments,
+   even when several are cited
+3. **`disconfirming: none found`** — nothing was found to contradict it, which
+   is more often a failed search than a fact about the world
+4. **Topic-level, not meaning-level** — "auth methods" is a topic;
+   "participants treat auth methods as a permissions system, not a method
+   selection" is a code
+5. **Confirms a stated pre-study hypothesis** — the confirmation-bias candidates
+6. **Mostly `internal-proxy` evidence** — a theme about customers assembled from
+   colleagues' accounts of customers
+
+**Per theme, show:** the statement, the meaning-level definition, exact
+prevalence, one example quote with its locator, and whichever risk flags apply.
+
+**Then show what the output hides.** This is the part that gets left out, and
+it is the most useful page in the packet:
+
+- **Codes merged** into this theme, and what each one originally meant
+- **Codes dropped**, with the reason
+- **Themes considered and rejected**, with the reason
+- **Segments coded to more than one theme**, where the assignment was a judgment
+  call
+
+A finished codebook shows conclusions. The merges, drops, and rejections are the
+*reasoning* — and they are where an experienced researcher will disagree.
+
+### Ask for a decision, not for feedback
+
+"Any thoughts on these themes?" produces silence, or "looks good." Ask for one
+of four dispositions per theme:
+
+- **ACCEPT** — as written
+- **REVISE** — the theme is real but the statement is wrong; say what it should be
+- **SPLIT** — this is two themes
+- **REJECT** — not supported, or not a theme
+
+**No bulk accept.** Every theme gets its own disposition. A reviewer who
+genuinely accepts all of them can say so one at a time; that is the cost of the
+checkpoint, and it is not a high one.
+
+### Record the outcome
+
+The result goes onto every finding derived from those themes, as `theme_review`
+in `FINDINGS-CONTRACT.md`: who reviewed, when, and the disposition. Three weeks
+later that is the only way to tell whether a theme is Dr. Morgan's or the
+researcher's — and that question comes up precisely when a finding is being
+challenged.
+
+The record also carries **how many themes were modified**. A reviewer who
+accepts every theme on every study is not reviewing, and nothing makes that
+visible unless something counts it. It is not a defect on any single study.
+It is worth being able to see across several.
+
+### The codebook checkpoint — conditional, not default
+
+A second, earlier checkpoint at the end of Stage 3, before codes are clustered
+into themes. A wrong code propagates into every theme built on it, which makes
+this by far the cheapest place to catch one. It is not the default anyway,
+because two mandatory stops on a small study is friction people route around —
+and a checkpoint people route around is worse than no checkpoint, since it still
+produces the paperwork that says review happened.
+
+Run it when the corpus is larger than can be coded in a single attentive pass.
+
+**Where that threshold sits is currently unmeasured.** The honest answer is that
+nobody here knows yet. What degrades first as a corpus grows is not theme
+discovery but *prevalence* — the exact counts this whole contract is built on —
+and that is measurable, but it has not been measured. Until it is, use **more
+than five hour-long transcripts coded in one pass** as the working trigger, and
+present it as a rule of thumb rather than a finding, exactly as this suite
+requires of any other number.
+
+The packet has the same shape: codes ordered by risk, merges and drops shown, a
+disposition each.

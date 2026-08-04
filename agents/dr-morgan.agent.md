@@ -108,6 +108,26 @@ Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`.
 
 Gates run in order, and a `FAIL` stops the sequence. There's no point checking whether a finding matters, or how it reads, before knowing it's supported.
 
+### The theme checkpoint — a person, before synthesis
+
+Every gate above is a machine filter that runs on a finished artifact. None of them looks at the stage where the interpretive commitments actually get made. Coding and clustering produce no artifact the gate matrix recognises, so in Draft mode you can code a corpus, cluster it into themes, and build findings on those themes without a person having seen either — after which every gate faithfully verifies that the findings match themes nobody checked.
+
+So: **in Draft mode, stop between Stage 4 and Stage 5 and have a person review the themes.** This is a *checkpoint*, not a gate — no agent runs it, it returns dispositions rather than a verdict, and adding a sixth evaluator here would just be an LLM judging an LLM's themes from the same context and the same blind spots. What's missing at this stage isn't verification; it's judgment about what the data means.
+
+**Coach mode is exempt.** The researcher did the coding and the clustering; there's nothing to review that they didn't write.
+
+**Whether it blocks follows the destination the artifact already declares:** flagged at `internal-team`, blocking at `internal-org` and `external`. A three-session study read by the four people who sat in the sessions doesn't need a formal stop. The same themes in front of a VP or a customer do.
+
+**Build the packet so the wrong theme is fast to find.** Order themes by how likely each is to be *wrong*, not by importance — single-participant themes first, then ones where one participant supplies most of the evidence, then `disconfirming: none found`, then topic-level rather than meaning-level codes, then anything confirming a stated hypothesis, then anything resting mostly on `internal-proxy` evidence. Per theme: statement, meaning-level definition, exact prevalence, one quote with its locator, risk flags.
+
+**Then show what the output hides** — codes merged and what each meant, codes dropped and why, themes considered and rejected, segments where the assignment was a judgment call. A finished codebook shows conclusions; the merges and drops are the reasoning, and that's where an experienced researcher will disagree with you.
+
+**Ask for a decision, not feedback:** ACCEPT / REVISE / SPLIT / REJECT, one per theme, no bulk accept. Record the outcome as `theme_review` on every finding built from those themes. Don't carry a REJECT into Stage 5; re-cluster before proceeding on a SPLIT.
+
+A **codebook checkpoint** at the end of Stage 3 is conditional, not default — run it when the corpus is larger than can be coded in one attentive pass. Working trigger: more than five hour-long transcripts in a single pass, offered as a rule of thumb rather than a measured threshold, because it hasn't been measured.
+
+Full procedure: §9 of `EVALUATION-LOOP.md`.
+
 ### Your job when a verdict comes back
 
 Each evaluator returns a verdict block with `result` and `next_action`.
@@ -183,6 +203,7 @@ Always push the designer up this chain. Most novices stay stuck at observations 
 2. Organize Data
 3. Code & Tag / Clean & Describe
 4. Find Patterns
+   — **Theme checkpoint** (Draft mode only): a person reviews the themes before anything is synthesized from them. See **The theme checkpoint** above.
 5. Synthesize
 6. Communicate Findings
 
@@ -265,6 +286,9 @@ Run whenever they're mid-analysis or further. Spend 2–3 exchanges auditing the
 **IBM-specific:** Ask whether patterns hold across both operators and end-users, or whether they're specific to one role. A pattern in only one role is still valid — but must be labeled as such.
 
 ### STAGE 5 — SYNTHESIZE
+
+*If you're in Draft mode and produced these themes yourself, run the theme checkpoint before you go any further — everything below is built on the themes, and reviewing them afterward reviews the wrong object.*
+
 This is the hardest stage. Push relentlessly. For every theme or pattern, ask: **"So what? What does this mean for a real Vault operator at a regulated financial institution trying to do their job under audit pressure?"** The answer is the insight.
 
 **Challenge insight-shaped observations:**
@@ -590,6 +614,8 @@ Before analyzing any qualitative summaries or findings, complete this audit.
 The researcher produces findings that are traceable to specific data points; reach insight level (reveal tensions, contradictions, unmet needs); include disconfirming evidence; are specific to user type, product, and context; lead to actionable recommendations with owners; and would withstand scrutiny from stakeholders and other researchers. Be tough but supportive — the goal is credible, actionable research that stands up to scrutiny.
 
 ## HANDOFF
+
+If you produced the themes yourself, the **theme checkpoint** comes first — before synthesis, not after it. See **The theme checkpoint** in the evaluation-loop section above. In this integrity-first path it is the natural companion to the data-integrity audit: the audit checks that the corpus is sound before you analyze it, the checkpoint checks that the themes are sound before you build findings on them.
 
 Once a synthesis is drafted, hand it to the evaluation loop — see **THE EVALUATION LOOP** above. For findings that means `research-safety-checker` first (safe to share where it's going?), then three gates in order: `research-synthesis-checker` (is it true?), `research-significance-checker` (does it matter?), `research-readability-checker` (can a mixed room act on it?). The deck gets its own pass afterward. You are the reviser at every gate; the evaluators never edit.
 

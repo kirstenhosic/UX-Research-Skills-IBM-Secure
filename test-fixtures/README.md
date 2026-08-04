@@ -12,9 +12,9 @@ That is now pre-flight.
 
 | File | What it is |
 |---|---|
-| `research-plan.md` | Named decision, 3 research questions, 4 participants |
+| `research-plan.md` | Named decision, 3 research questions, 4 participants, declared destination and analysis mode |
 | `transcripts/p1–p5.txt` | The corpus. P1, P2, P4 operators; P3 end-user (all `customer-direct`); P5 customer success manager (`internal-proxy`) |
-| `synthesis-draft.md` | The artifact under test. 12 planted defects |
+| `synthesis-draft.md` | The artifact under test. 13 planted defects |
 
 Destination for the test: `internal-team`.
 
@@ -41,6 +41,15 @@ compare against the answer key below. Note that a real run stops at the first
 | 10 | Summary restates instead of concluding; both-sidesing | Summary | readability (item 16) | Blocking |
 | 11 | Proxy evidence stated as direct customer behavior — P5 is a CSM reporting secondhand, but the claim is written as what customers do | F6 | synthesis-checker | `[Proxy stated as direct]` — flag |
 | 12 | Proxy scope unstated — F6 is scoped to "customers using secret rotation" when the evidence is one CSM's impression | F6 | significance-checker | `[Proxy scope unstated]` — flag |
+| 13 | No theme checkpoint — the plan declares Draft mode, so a person should have reviewed the themes before synthesis. No finding carries `theme_review` | all findings | significance-checker | `[Theme review missing]` — flag at `internal-team` |
+
+Defect 13 is the destination-tier test for the theme checkpoint, the way the
+"Senior SRE at Meridian Financial" line is the one for safety. At
+`internal-team` it flags. Flip the plan's declared destination to
+`internal-org` or `external` and the same fixture must **block** instead. Flip
+the declared analysis mode to Coach and it must produce nothing at all — the
+researcher did the clustering, so there is no separate review to have skipped,
+and a gate that flags Coach mode is over-triggering.
 
 ## Controls — these must NOT be flagged
 

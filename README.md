@@ -7,7 +7,10 @@ and Radar, with the addition of Terraform).
 **Nothing here ships unchecked.** Every artifact the suite produces runs an
 **evaluation loop** — a sequence of independent evaluator agents that verify it,
 hand back blocking items for revision, and cap the number of retries before a
-person has to look. See [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
+person has to look. And when Dr. Morgan does the coding itself, a **theme
+checkpoint** stops the work mid-analysis and asks a researcher to sign off on the
+themes before anything is synthesized from them. See
+[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
 The mentor — **Dr. Morgan**, a senior researcher with a PhD in HCI — teaches
 through Socratic questioning, challenges weak reasoning, insists on traceable
@@ -30,21 +33,21 @@ switches between them on demand.
 |---|---|---|
 | `agents/dr-morgan.agent.md` | **The orchestrator.** One invocable Dr. Morgan agent (VS Code `.agent.md` with frontmatter) with a scenario router that covers all six scenarios (A–F) and switches between them mid-conversation. | You want a single agent for a whole research effort and may move between tasks. |
 | `EVALUATION-LOOP.md` | **The orchestration spec.** Which gates run on which artifact, the verdict schema every evaluator emits, the revision cycle and its two-pass cap, escalation triggers, the blocking-vs-flagged rule, and the Definition of Done for each artifact type. | You want to know how an artifact actually gets released, or you're adding a new skill or evaluator. |
-| `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. Also carries `participant_type` per evidence entry, which drives the safety bar and the proxy check. | You're synthesizing findings, or building anything that reads them. |
+| `FINDINGS-CONTRACT.md` | **One shape for a finding**, shared by everything that produces or consumes one. The deck skill can only render fields a record contains — which is what structurally prevents evidence from being invented during deck building. Also carries `participant_type` per evidence entry (drives the safety bar and the proxy check), `theme_review` (who signed off on the theme this finding came from), and `telling_detail` / `artifact_ref` so a record can survive the trip to a slide without going bloodless. | You're synthesizing findings, or building anything that reads them. |
 | `VOICE-AND-STYLE.md` | **How outputs should read.** What makes writing land as human rather than generated, how to write one document for engineers, PMs, designers, researchers, and customer reps at once, and a 21-item rubric the readability gate scores against. | Any artifact a stakeholder will open. |
 | `agents/research-safety-checker.agent.md` | **Pre-flight — is it safe to share?** Calibrated to where the artifact is going and who the participants were. | Every artifact, first, every iteration. |
 | `agents/research-synthesis-checker.agent.md` | **Gate 1 — is it true?** Cross-checks every claim, quote, and statistic against the source-of-truth. | Any draft synthesis, competitive analysis, or readout deck. |
-| `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Research-question coverage in both directions, insight altitude, decision-fit, scope. | After gate 1 passes on any findings set. |
+| `agents/research-significance-checker.agent.md` | **Gate 2 — does it matter?** Research-question coverage in both directions, insight altitude, decision-fit, scope, and whether a person reviewed the themes the findings rest on. | After gate 1 passes on any findings set. |
 | `agents/research-plan-reviewer.agent.md` | **The plan gate — will this study work?** Audits the upstream decisions and the discussion guide. The only gate that runs *before* the money is spent. | Any research plan or discussion guide, before fieldwork. |
 | `agents/research-readability-checker.agent.md` | **The last gate — can a mixed room act on it?** Scored against `VOICE-AND-STYLE.md`. | Every artifact, last, before it leaves the team. |
 | `ux_plan_from_scratch.md` | **Scenario C** — build a research plan from zero through seven phases (frame → questions → participants → method → guide → analysis → output), with depth calibrated to the study's size and stakes (lightweight / standard / high-stakes). | You're starting a brand-new study and have nothing yet. |
 | `select_best_method.md` | **Scenario B** — method-selection advisor built around the *Minimum Viable Research Method* and real recruitment constraints. | You need to pick the most rigorous method you can actually execute. |
-| `analyze_your_data.md` | **Scenario A** — guides analysis through six stages and pushes findings up the observation → insight ladder, with quantitative-data guardrails (distributions, small-n confidence, significance vs. importance). The quick path; cross-linked to the strict path below. | You have data and need help reaching defensible insights. |
+| `analyze_your_data.md` | **Scenario A** — guides analysis through six stages and pushes findings up the observation → insight ladder, with quantitative-data guardrails (distributions, small-n confidence, significance vs. importance). The quick path; cross-linked to the strict path below. In Draft mode it stops at the theme checkpoint before synthesizing. | You have data and need help reaching defensible insights. |
 | `challenge_and_refine_plan.md` | **Scenario D** — critical review of an existing plan, method, or discussion guide via a rapid upstream audit + script review — and it knows when to stop refining and send you back to Scenario C for a redesign. | You have a draft and want it stress-tested. |
 | `competitive_analysis.md` | **Scenario E** — competitive-analysis co-pilot comparing 2–4 products across UX, capability, and market/strategy lenses, with tiered templates (a core three, plus six you add only when they earn their place), a source-integrity audit, and a **visual-evidence workflow** for sourcing and comparing competitor UI from web pages, screenshots, and demo video. | You're comparing competing products to inform a design, positioning, or roadmap decision. After you synthesize the comparison output, run the gate sequence — safety pre-flight, then the synthesis checker in source-integrity mode — before sharing. |
-| `qualitative_data_analysis_skill.md` | **Scenario F** — specialized deep-dive on qualitative analysis with a *mandatory data-integrity audit* (hallucination, confirmation bias, and cherry-picking detection) before any analysis proceeds. | Analysis quality control is the priority and you want the strictest integrity checks. |
-| `research-readout-deck.skill` | **Artifact generator** (packaged skill bundle — unzip to inspect) — converts raw research materials (interview notes, usability observations, survey data, verbatim quotes) into a findings-first `.pptx` readout built for a mixed product-team audience (PM + Eng + UXD). Enforces separation of observation, interpretation, and recommendation; calibrates evidence strength; defaults to IBM theming (Carbon Design System / IBM Plex). Bundles a slide-by-slide recipe + theme reference (`references/deck-structure.md`); requires the separate **pptx** skill to render slides. | You've completed a study and need to present findings to your product team. |
-| `test-fixtures/` | **Regression test for the gates.** A 5-participant corpus and a synthesis with 12 deliberately planted defects — hallucinated quote, altered quote, vague quantifier, unmapped finding, unaddressed research question, proxy evidence stated as direct customer behavior — plus an answer key and **named controls that must not trigger**. It caught a real architectural flaw on its first run. | Any time you change a gate, a rubric, or `EVALUATION-LOOP.md`. |
+| `qualitative_data_analysis_skill.md` | **Scenario F** — specialized deep-dive on qualitative analysis with a *mandatory data-integrity audit* (hallucination, confirmation bias, and cherry-picking detection) before any analysis proceeds, and a *theme checkpoint* after clustering and before synthesis. | Analysis quality control is the priority and you want the strictest integrity checks. |
+| `research-readout-deck.skill` | **Artifact generator** (packaged skill bundle — unzip to inspect) — renders a findings-first `.pptx` readout for a mixed product-team audience (PM + Eng + UXD) **from findings records**, validating them before it builds a slide and reporting gaps by finding ID rather than filling them in. Handed raw notes instead, it says what that costs — `disconfirming`, `limits`, and `confidence` cannot be recovered at deck-build time — and reconstructs records as it goes. Enforces separation of observation, interpretation, and recommendation; calibrates evidence strength; defaults to IBM theming (Carbon Design System / IBM Plex). Bundles a slide-by-slide recipe + theme reference (`references/deck-structure.md`); requires the separate **pptx** skill to render slides. | You've completed a study and need to present findings to your product team. |
+| `test-fixtures/` | **Regression test for the gates.** A 5-participant corpus and a synthesis with 13 deliberately planted defects — hallucinated quote, altered quote, vague quantifier, unmapped finding, unaddressed research question, proxy evidence stated as direct customer behavior, themes never reviewed by a person — plus an answer key and **named controls that must not trigger**. It caught a real architectural flaw on its first run. | Any time you change a gate, a rubric, or `EVALUATION-LOOP.md`. |
 | `skills/research-document-generator.py` + configs | **Research Document Template Generator (Scenario G)** — the single template every generated research document goes through. Produces professionally formatted Word documents following IBM Secure's design system (Cambria, grayish-blue palette, callouts, auto-numbered sections, page numbers). Two layouts: the standard **research-plan** layout (purpose → scope → RQs → participants → guide → timeline → deliverables) and a generic **`sections`** layout for rationales, briefs, and one-pagers. Fully customizable via JSON configs. All generated documents follow `DESIGN-SYSTEM.md` standards. | **Any time a research document (.docx) is being produced** — plan, rationale, or brief. Use as an invokable skill in Bob or run the script directly. See `skills/README.md` for full documentation. |
 
 Each evaluator's own file carries the detail — what it checks, what blocks versus
@@ -117,12 +120,26 @@ Dr. Morgan drafts. A safety pre-flight plus four independent quality gates
 check. Dr. Morgan revises. A person decides.
 
 ```
-every artifact  →  safety pre-flight  →  quality gates, in order  →  release
-                                          ↳ which gates depends on the artifact
+themes  →  THEME CHECKPOINT  →  synthesis  →  safety pre-flight  →  gates  →  release
+           ↳ a person, not an agent                                 ↳ which gates
+             (Draft mode only)                                        depends on
+                                                                      the artifact
 ```
 
+**A person reviews the themes before anything is synthesized from them.** Every
+gate in this suite runs on a finished artifact, which means none of them looks at
+the stage where the interpretive commitments are actually made. In Draft mode Dr.
+Morgan codes the corpus and clusters the codes — so the checkpoint stops there
+and asks a researcher for a decision on each theme (accept / revise / split /
+reject) before synthesis builds anything on top. It's a *checkpoint*, not a gate:
+no agent runs it, because an LLM judging an LLM's themes is a second opinion from
+the same blind spots. Coach mode is exempt — the researcher did the clustering
+themselves. Flagged at `internal-team`, blocking at `internal-org` and
+`external`. Details in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §9.
+
 **Which gates run on what** is in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §3,
-and only there. Four artifact types, two or three gates each. It isn't repeated
+and only there. Four agent-gated artifact types, two or three gates each, plus a
+theme set that gets a human checkpoint instead. It isn't repeated
 here because a matrix restated in two places becomes two different matrices.
 
 **Safety runs first, on everything.** Not last, and not inside the ordered
