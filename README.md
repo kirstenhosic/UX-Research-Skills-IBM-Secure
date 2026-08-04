@@ -6,8 +6,8 @@ evaluator agents that check its work.
 
 You load the Dr. Morgan agent, describe what you're working on, and it coaches you
 through the research, or drafts the artifact and then picks it apart with you.
-**IBM Bob is the recommended tool**, and anything else that can run skills and
-agents will work.
+**Use IBM Bob**, with Copilot Chat as a fallback. GitHub Copilot in VS Code is not
+permitted for this work — that's IBM tooling policy, not a preference.
 
 Dr. Morgan is the mentor: a senior researcher with a PhD in HCI who asks
 questions before handing over answers, argues with weak reasoning, insists that
@@ -433,6 +433,11 @@ Releasing an artifact to other people takes three steps.
 ## For maintainers
 
 Everything below is repo upkeep. Skip it if you're here to use the skills.
+
+**Tooling is policy, not preference.** Bob is the tool for this work and Copilot
+Chat is an acceptable fallback, but GitHub Copilot in VS Code is not permitted.
+An earlier version of this README called the agent "a VS Code `.agent.md` file" —
+don't reintroduce that framing.
 
 **Test fixtures live in a separate repo.** Before you change a gate, a rubric, or
 `EVALUATION-LOOP.md`, run the fixtures in
