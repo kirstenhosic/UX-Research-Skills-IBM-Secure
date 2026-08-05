@@ -6,8 +6,7 @@ evaluator agents that check its work.
 
 Load the **Dr. Morgan** agent, say what you're working on, and it coaches you
 through the research, or drafts the artifact and then picks it apart with you.
-**Use IBM Bob**, with Copilot Chat as a fallback. GitHub Copilot in VS Code is not
-permitted for this work. That's IBM tooling policy, not a preference.
+**Use IBM Bob**, with Copilot Chat as a fallback. 
 
 Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before handing
 over answers, argues with weak reasoning, insists that every finding trace back to
@@ -32,11 +31,6 @@ you can reach the files directly — you can ask Bob to help you do this. Then s
 the **Dr. Morgan** agent
 ([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)) by name and start
 talking to it.
-
-Connect the repo if you possibly can. The agent's frontmatter grants it `read` and
-`search`, and a connected repo is how it reaches `EVALUATION-LOOP.md`,
-`VOICE-AND-STYLE.md`, `FINDINGS-CONTRACT.md`, `DESIGN-SYSTEM.md`, and the deeper
-scenario files it treats as source of truth.
 
 No repo connection? Open the agent file, copy the whole thing, and paste it into
 Bob or Copilot Chat. That works — but it is not equivalent, and the difference
