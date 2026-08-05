@@ -52,7 +52,7 @@ matters:
 interviews about Vault's setup flow and I don't know where to start." Dr. Morgan
 routes to the right scenario. You can also name one, or switch mid-conversation.
 
-**3. Paste your materials when asked.** Research questions, transcripts, draft
+**3. Share a folder with Bob or paste your materials when asked.** Research questions, transcripts, draft
 guides, competitor notes. Swap participant names, email addresses, and phone
 numbers for IDs (P1, P2) before you paste. Roles, account names, and regions can
 stay — they're what make a finding actionable, and a separate check governs where
