@@ -186,11 +186,13 @@ bold "Primary Outputs:" lead-in at the end of the Purpose section.
 ### Scope Boundaries
 
 #### `scope_intro` (string, optional)
-Introductory statement about why scope is bounded.
+Why scope is bounded the way it is. Omit it and no intro paragraph renders —
+there is no default, because a sentence explaining your reasoning has to come
+from you. Say what you actually cut and why.
 
-**Default:**
+**Example:**
 ```json
-"scope_intro": "Scope has been deliberately narrowed to maximize confidence within the available timeline."
+"scope_intro": "Narrowed to setup only, because the rotation flow ships in Q4."
 ```
 
 ---
@@ -243,11 +245,15 @@ List of topics that are explicitly NOT included. Renders as the right column of 
 ### Research Questions
 
 #### `research_questions_intro` (string, optional)
-Introductory text before research questions.
+Introductory text before research questions. Omit it and no intro paragraph
+renders — there is no default. Don't use it to assert that the questions are
+well-formed; that is `plan-reviewer`'s call, and a document that claims it of
+itself has only moved the claim somewhere nothing checks. Use it to say what
+the questions are for.
 
 **Example:**
 ```json
-"research_questions_intro": "All questions are anchored in behavior, decision-making, and trust under real constraints."
+"research_questions_intro": "Three questions, all tied to the September go/no-go."
 ```
 
 ---
@@ -678,7 +684,7 @@ A fully-featured configuration with all options:
   
   "central_question": "\"What migration experience and capabilities are needed for customers to feel confident beginning?\"",
   
-  "scope_intro": "Scope has been deliberately narrowed to maximize confidence within the available timeline.",
+  "scope_intro": "Narrowed to the decision to begin, not the migration itself \u2014 the execution work is a separate study in Q4.",
   
   "in_scope": [
     "Migration decision-making: when and why customers begin",
@@ -692,7 +698,7 @@ A fully-featured configuration with all options:
     "UI/UX usability evaluation"
   ],
   
-  "research_questions_intro": "All questions are anchored in behavior, decision-making, and trust under real constraints.",
+  "research_questions_intro": "Four questions, all tied to the Q3 go/no-go on migration tooling investment.",
   
   "research_questions": [
     {
