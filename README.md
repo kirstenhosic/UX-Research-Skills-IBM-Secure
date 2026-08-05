@@ -73,7 +73,7 @@ that come from AI tooling, or that this repo uses in a particular way.
 | skill | A prompt bundled with its supporting files (templates, reference docs, scripts). Bob can invoke one by name. |
 | custom instructions | The box in Bob or Copilot Chat where you set standing instructions for a whole conversation instead of retyping them. Sometimes called a system prompt. |
 | gate | A checker that reads a finished artifact and reports whether it passes. There are five, and each looks for something different. |
-| verdict | The block a gate ends with: `PASS`, `PASS_WITH_FLAGS`, or `FAIL`, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose. |
+| verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL`. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
 | checkpoint | A stop where a *person* decides, not an agent. There's exactly one: the theme checkpoint. |
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
@@ -96,22 +96,34 @@ flowchart TD
     WORK -.->|"iterate as many rounds<br/>as the work needs"| COACH
     WORK --> ENDC(["Your own conclusion.<br/>No AI gates: you did<br/>the analysis yourself."])
 
-    DM -->|"Draft mode"| CL["Dr. Morgan codes<br/>and clusters your corpus"]
-    CL --> TC{{"THEME CHECKPOINT<br/>you decide, not an agent<br/>accept · revise · split · reject"}}
-    TC --> SY["Synthesis"]
-    SY --> ART[["Draft artifact<br/>plan · guide · findings · comparison"]]
+    DM -->|"Draft mode"| IN["<b>First, Dr. Morgan asks for your inputs</b><br/>the product, the decision this informs,<br/>the deadline, stakeholder notes, prior research,<br/>and the raw data itself<br/><i>anything missing is marked TBD and asked about —<br/>never guessed, recalled, or filled in</i>"]
+    IN --> Q{"What did you bring?"}
 
-    ART --> PF["<b>Pre-flight</b><br/>research-safety-checker<br/>safe to share with this audience?"]
-    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · synthesis-checker<br/>significance-checker · readability-checker<br/>which ones run depends on the artifact"]
+    ART[["<b>Dr. Morgan drafts the artifact</b>"]]
+    CL["Dr. Morgan codes your corpus<br/>and clusters the codes into themes"]
+
+    Q -->|"Study context, or sources to compare<br/>research plan · discussion guide<br/>competitive analysis"| ART
+    Q -->|"A corpus to analyze<br/>findings"| CL
+
+    CL --> TC{{"THEME CHECKPOINT<br/>the interpretation is set here, so a person reviews it<br/>you decide each theme, not an agent<br/>accept · revise · split · reject"}}
+    TC --> SY["Synthesis<br/>findings built on the themes you approved"]
+    SY --> ART
+
+    ART --> PF["<b>Pre-flight · research-safety-checker</b><br/>could this expose a participant?<br/>names, emails and phone numbers block at every tier<br/>role and account name are fine inside the company<br/>the bar rises with the audience: team → org → public<br/>consent terms win when they are stricter"]
+    PF --> G["<b>Quality gates, in order</b><br/>Will this study answer its question? · plan-reviewer<br/>Is every claim traceable to the source? · synthesis-checker<br/>Does it matter to a named decision? · significance-checker<br/>Can a mixed audience act on it? · readability-checker<br/><i>only the ones that fit the artifact run</i>"]
     G --> V{"Verdict"}
 
-    V -->|"PASS or PASS_WITH_FLAGS<br/>→ RELEASE"| SK["Output skills<br/>research-readout-deck → .pptx<br/>research-document-template → .docx"]
-    SK --> ENDR(["<b>Released to your team</b><br/>flags attached as Reviewer Notes"])
+    V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flagged means accurate, but worth a human look<br/>flags ride along as Reviewer Notes"])
 
-    V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
+    V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit —<br/>a checker that rewrote its own input<br/>would just re-check its own work."]
     RV -.->|"two passes maximum"| PF
 
-    V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>The problem is upstream<br/>of the wording."])
+    V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>Two passes did not clear it, or the corpus,<br/>question, or method is the real problem.<br/>Another pass would polish the wrong object."])
+
+    ENDR -->|"building a readout deck?"| SK["<b>research-readout-deck</b><br/>renders the .pptx from findings that already passed<br/>it can only use fields a finding record contains"]
+    SK -.->|"a deck is a new artifact —<br/>it runs the checks again"| PF
+
+    ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 
     classDef entry  fill:#15803D,stroke:#0B4A24,stroke-width:4px,color:#FFFFFF
     classDef coach  fill:#0E7490,stroke:#083F4F,stroke-width:2px,color:#FFFFFF
@@ -125,13 +137,41 @@ flowchart TD
 
 Read it top to bottom. **The green node is where you start.** Teal is the coaching
 loop, which you repeat as many rounds as the work needs. Amber marks the one point
-where you decide instead of an agent. Slate nodes are end states, and the two dotted
-arrows are the two loops.
+where you decide instead of an agent. Slate nodes are end states, and all three
+dotted arrows mean the same thing: go around again.
 
-Two things the shape is meant to show. Coach mode iterates but never reaches a gate,
-because you did the analysis yourself and there is no draft for an agent to verify.
-And all three end states belong to you: release is your call, revision is capped at
-two passes, and escalation stops the machine rather than trying again.
+Three things the shape is meant to show. Draft mode forks, because a research plan
+and a findings doc are both drafted artifacts but only work resting on a corpus gets
+coded, clustered, and stopped at the theme checkpoint. Neither branch starts from
+nothing — Dr. Morgan asks for your inputs first and flags gaps rather than filling
+them. And a readout deck isn't a byproduct of release; it's a new artifact that runs
+the checks again, because story-editing is where invented evidence tends to show up.
+
+Coach mode iterates but never reaches a gate, because you did the analysis yourself
+and there is no draft for an agent to verify. All three end states belong to you:
+release is your call, revision is capped at two passes, and escalation stops the
+machine rather than trying again.
+
+One asymmetry is worth naming. The theme checkpoint only exists on the corpus
+branch, so a research plan goes from draft straight to pre-flight with no human stop
+in the middle. That isn't a lower bar — a plan runs `plan-reviewer`, which asks
+whether the study will answer its question at all, and there are simply no themes to
+review before it does. On that branch your decision comes at release instead.
+
+### What each checker can't see
+
+| Agent | Verifies | Cannot see |
+|---|---|---|
+| `research-safety-checker` | Could this expose a participant, given who will read it? | Whether any of it is true, relevant, or readable |
+| `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
+| `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
+| `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
+| `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+
+The third column is the reason there is more than one evaluator. A groundedness
+checker will pass a perfectly-sourced finding that answers nothing anyone asked. A
+significance checker will pass a decision-relevant finding built on a fabricated
+quote. Neither notices a participant's employer in paragraph four.
 
 ---
 
