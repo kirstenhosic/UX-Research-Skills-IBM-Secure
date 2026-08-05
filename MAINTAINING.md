@@ -60,10 +60,3 @@ carries the same guidance in markdown rather than plain text, so it can't be has
 against them. It's the file most likely to drift, and it has to be checked by
 reading — the scenario list in its opening paragraph and its closing sync note are
 the two places that go stale first.
-
-## Don't reintroduce the VS Code framing
-
-An earlier version of the README called the agent "a VS Code `.agent.md` file".
-Bob is the tool for this work, Copilot Chat is an acceptable fallback, and GitHub
-Copilot in VS Code is not permitted. The README states this for users; keep it
-accurate in both places.

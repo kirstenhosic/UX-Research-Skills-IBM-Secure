@@ -6,8 +6,7 @@ evaluator agents that check its work.
 
 Load the **Dr. Morgan** agent, say what you're working on, and it coaches you
 through the research, or drafts the artifact and then picks it apart with you.
-**Use IBM Bob**, with Copilot Chat as a fallback — GitHub Copilot in VS Code is
-not permitted for this work.
+**Use IBM Bob**, with Copilot Chat as a fallback.
 
 Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before handing
 over answers, argues with weak reasoning, insists that every finding trace back to
