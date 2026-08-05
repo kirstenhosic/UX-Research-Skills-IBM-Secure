@@ -232,26 +232,12 @@ And the loop that enforces it:
 
 ## Releasing an artifact
 
-Three steps, every time — and they aren't optional. Every artifact Dr. Morgan
-drafts in **Draft mode** runs this sequence before you show it to anyone. That's
-Dr. Morgan's own standing instruction, not a call each researcher makes per
-artifact: see `THE EVALUATION LOOP` in
-[`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md) and
-[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §1. Dr. Morgan hands you the draft
-pointed at the gates and asks for the destination if you haven't declared one.
+Anything you drafted in Draft mode gets checked before you share it. Dr. Morgan
+runs the loop and tells you which checker comes next — select it by name in Bob,
+then bring the verdict back. You don't need to track which gates apply.
 
-**Coach mode is exempt**, and that's the only exemption. You did the analysis
-and wrote the artifact yourself, so there's no machine filter to add — the
-gates exist to check Dr. Morgan's work, not yours.
-
-**You invoke the checkers, one at a time.** Dr. Morgan is the producer and the
-reviser and is never an evaluator — an evaluator that rewrote its own input
-would just re-check its own work. So the handoff is manual: select each
-evaluator agent by name in Bob, in the order below, and bring the verdict back
-to Dr. Morgan.
-
-**1. Run `research-safety-checker` first,** and tell it where the artifact is
-going. It will ask if you don't.
+**Say where it's going.** The safety scan runs first on everything, and its bar
+depends on who will read it. Dr. Morgan asks if you haven't said.
 
 | Destination | Who sees it |
 |---|---|
@@ -260,8 +246,7 @@ going. It will ask if you don't.
 | `external` | Anyone outside it: customers, conference talks, blog posts, public repos |
 
 It also asks who you talked to, because internal participants carry *more*
-permitted detail, not less — role, product area, and region are how a colleague's
-perspective becomes interpretable.
+permitted detail, not less.
 
 | Participant type | Meaning |
 |---|---|
@@ -270,43 +255,21 @@ perspective becomes interpretable.
 | `internal-proxy` | An employee describing customers' experience — support, customer success, solution architects, field engineering |
 | `sme-external` | An outside subject-matter expert who matches the persona but isn't a customer |
 
-Names, emails, and phone numbers block for everyone at every tier. Everything else
-scales with the destination: apply the external bar to internal work and you'll
-block ordinary research over an account name the whole team already knows. Inside
-IBM, "an SRE at Contoso Financial" is a category of user at a category of customer.
-Where the study's consent terms are stricter than the destination allows, consent
-wins.
+Names, emails, and phone numbers block at every tier. Role, account name, and
+region scale with the destination, and stricter consent terms win.
 
-**2. Run the quality gates in order,** stopping at the first `FAIL`. Which ones
-apply isn't a judgment call either — the gates attach to the artifact type, so
-what you made decides. [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §3 has the
-matrix, and it lives only there.
+**Then act on the verdict.** `RELEASE` ships it, with any flags attached as
+Reviewer Notes for you to weigh. `REVISE` means Dr. Morgan fixes the blocking
+items and re-runs that gate — twice at most. `ESCALATE` means stop and look at
+it yourself.
 
-**3. Act on the verdict.** `REVISE` means fix the blocking items only, then re-run
-that gate. `RELEASE` means ship it, with any flags attached as Reviewer Notes.
-`ESCALATE` means stop, because the problem isn't the wording. **Two revision
-passes, maximum** — a third `FAIL` escalates whatever the verdict says, because
-an artifact that can't clear the bar in two tries has a problem upstream of its
-wording.
+Two calls stay yours: the themes, which you accept, revise, split, or reject one
+at a time before synthesis is built on them, and whether the artifact actually
+ships. Passing the gates isn't approval. A readout deck is a new artifact and
+runs the checks again.
 
-A readout deck is a new artifact, not a byproduct of release — it runs the checks
-again, because story-editing is where invented evidence tends to show up.
-
-### What is your call
-
-Not whether to run the gates, and not which ones. What's yours:
-
-- **The destination and participant types you declare.** Nothing else can supply
-  these, and the whole safety tier depends on them.
-- **Every theme, at the theme checkpoint** — accept, revise, split, or reject,
-  one at a time. No agent runs this stop. It's flagged at `internal-team` and
-  blocking at `internal-org` and `external`.
-- **What to do about flags.** They release with the artifact as Reviewer Notes;
-  acting on them is a human judgment, and "fixing" one by deleting what caused
-  it is the wrong move.
-- **Whether it actually ships.** Passing every gate is not approval. The gates
-  remove work you shouldn't have to do by hand; they don't make a study correct,
-  and you are still the last reviewer before anyone else reads it.
+The gate matrix, verdict schema, and known limits are in
+[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
 
 ---
 
