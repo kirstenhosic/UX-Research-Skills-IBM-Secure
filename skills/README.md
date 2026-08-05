@@ -8,7 +8,7 @@ meta:
   design-system: ../DESIGN-SYSTEM.md
 ---
 
-# IBM HashiCorp Secure — Research Document Template Generator
+# IBM HashiCorp Secure — Research Document Template
 
 Create professional, reusable research documents following IBM HashiCorp Secure's design system and formatting standards. **This is the single template every generated research document goes through** — use it whenever a skill, agent, or teammate produces a research document, so all outputs share the same structure and styling.
 
@@ -33,7 +33,7 @@ I'm planning a [study type] for [product]. [Describe your research...]
 
 **As a script:**
 ```bash
-python3 skills/research-document-generator.py my-config.json My_Research_Plan.docx
+python3 skills/research-document-template.py my-config.json My_Research_Plan.docx
 ```
 
 You provide:
@@ -62,6 +62,22 @@ A Word document (.docx) ready to share with stakeholders, print, or refine:
 - Design-system tables with repeating headers — timelines adapt from simple Timeframe/Milestone up to 4-column Phase/Timeframe/Outputs/Activities execution plans
 - Numbered discussion guide questions (1.1, 2.1…) for field reference
 - Page numbers on every page
+
+Plus a list of anything that didn't make it in:
+
+```
+! 2 section(s) omitted from Vault_Adoption_Study.docx:
+    Discussion Guide — no content under "discussion_guide"
+    Timeline and Milestones — suppressed by "include_timeline": false
+  Check these against the plan this document was generated from.
+```
+
+Empty sections are skipped so you never get an orphaned heading — but skipping
+them quietly would mean the `.docx` can contain less than the plan that passed
+the gates, with nothing to say so. That's the same failure the deck gate exists
+to catch: the render step changing what a reader sees relative to what was
+checked. So every omission is named, with its reason. Read the list against the
+plan the config came from before you share the document.
 
 ## Design System
 
@@ -104,4 +120,4 @@ This skill is designed for:
 - **Engineering** — understanding customer decision-making and friction
 - **Security/Compliance** — documenting research methodology and consent
 
-Use consistently across teams so every research document meets the same professional standard. The repo copy (`skills/research-document-generator.py`) is the source of truth — sync any local `~/.claude/skills/` copy from here.
+Use consistently across teams so every research document meets the same professional standard. The repo copy (`skills/research-document-template.py`) is the source of truth — sync any local `~/.claude/skills/` copy from here.

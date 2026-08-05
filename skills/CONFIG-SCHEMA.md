@@ -767,8 +767,29 @@ A fully-featured configuration with all options:
 - `participant_profile` — Ensures targeted research
 - `discussion_guide` — Essential for conducting sessions
 
-### No Validation Applied
-The generator accepts any valid JSON. If a field is missing, that section simply won't appear in the document. This is intentional to allow maximum flexibility.
+### No Validation Applied — but omissions are reported
+The template accepts any valid JSON. If a field is missing, that section won't
+appear in the document. This is intentional, to allow maximum flexibility.
+
+What it will **not** do is drop a section silently. Every section that doesn't
+render is listed after the file is written, with the reason — either no content
+under its key, or an `include_*` flag set to `false`:
+
+```
+! 2 section(s) omitted from Vault_Adoption_Study.docx:
+    Discussion Guide — no content under "discussion_guide"
+    Timeline and Milestones — suppressed by "include_timeline": false
+  Check these against the plan this document was generated from.
+```
+
+The report goes to stderr, so it survives redirection and can't be lost in a
+pipeline. Read it against the plan the config came from: a document that quietly
+contains less than the plan that passed the gates is the same failure the deck
+gate exists to catch — the render step changing what a reader sees relative to
+what was checked.
+
+When calling the template as a library rather than a script, the same list is
+available from `generator.omission_report()`.
 
 ---
 
