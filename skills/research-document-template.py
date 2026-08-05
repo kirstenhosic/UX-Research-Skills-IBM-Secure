@@ -583,8 +583,10 @@ class ResearchDocumentGenerator:
         if self._renders('Scope Boundaries', bool(in_scope or out_of_scope),
                          'include_scope_table', '"in_scope" / "out_of_scope"'):
             self.add_heading_1('Scope Boundaries')
-            scope_text = self.config.get('scope_intro', 'Scope has been deliberately narrowed to ensure high-confidence findings within the available timeline.')
-            self.add_paragraph(scope_text, space_after=50800)
+            # No default intro. A sentence nobody wrote is a claim nobody checked.
+            scope_text = self.config.get('scope_intro', '')
+            if scope_text:
+                self.add_paragraph(scope_text, space_after=50800)
             self.add_scope_table(in_scope, out_of_scope, headers=self.config.get('scope_headers'))
             scope_note = self.config.get('scope_note', '')
             if scope_note:
@@ -593,8 +595,12 @@ class ResearchDocumentGenerator:
         # Research questions
         if self._has_content('research_questions', 'include_research_questions', 'Core Research Questions'):
             self.add_heading_1('Core Research Questions')
-            rq_intro = self.config.get('research_questions_intro', 'All questions are grounded in behavior, decision-making, and real constraints.')
-            self.add_paragraph(rq_intro)
+            # Defaulted to a claim that the questions are grounded in behavior —
+            # which is what plan-reviewer is there to decide, not what this
+            # renderer is there to assert.
+            rq_intro = self.config.get('research_questions_intro', '')
+            if rq_intro:
+                self.add_paragraph(rq_intro)
 
             for rq_group in self.config.get('research_questions', []):
                 self.add_heading_2(rq_group.get('group_name', ''))
