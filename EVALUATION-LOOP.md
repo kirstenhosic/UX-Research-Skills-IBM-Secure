@@ -635,3 +635,22 @@ happened to the justification it replaces.
 
 The packet has the same shape: codes ordered by risk, merges and drops shown, a
 disposition each.
+
+### The code reuse check — whenever a codebook is produced
+
+Not conditional, and not tied to either checkpoint: any time the producer builds
+a codebook, it reports four numbers before clustering. How many codes it defined,
+how many segments it coded, what share of codes it applied exactly once, and the
+most-reused code with its count.
+
+A code names a pattern. One applied exactly once is a paraphrase of a single
+passage with a label on it, and a codebook made mostly of those produces themes
+that are all n = 1 — the first risk signal the review packet ranks. The failure
+runs the other way too: an over-split codebook reaches the checkpoint with
+everything flagged, which reviews the same as nothing flagged. That is why this
+sits beside the checkpoints rather than inside one — it is what keeps a
+checkpoint from being handed an unreviewable packet.
+
+The producer asks rather than deciding alone: are the single-use codes genuine
+one-offs worth keeping, or one idea split across several labels? Merge before
+clustering.
