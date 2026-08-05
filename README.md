@@ -102,7 +102,7 @@ flowchart TD
     ART[["<b>Dr. Morgan drafts the artifact</b>"]]
     CL["Dr. Morgan codes your corpus<br/>and clusters the codes into themes"]
 
-    Q -->|"Study context, or sources to compare<br/>research plan · discussion guide<br/>competitive analysis"| ART
+    Q -->|"Study context or sources<br/>plan · guide · comparison"| ART
     Q -->|"A corpus to analyze<br/>findings"| CL
 
     CL --> TC{{"THEME CHECKPOINT<br/>the interpretation is set here, so a person reviews it<br/>you decide each theme, not an agent<br/>accept · revise · split · reject"}}
