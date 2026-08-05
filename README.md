@@ -280,25 +280,6 @@ again, because story-editing is where invented evidence tends to show up.
 
 ---
 
-## Writing that reads human
-
-Artifacts get gated on how they read, because a findings document that sounds
-generated gets treated as input instead of as a conclusion. Nobody argues with it,
-which feels like agreement and isn't.
-[`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) is the standard, scored as a 21-item
-rubric. The short version: vary sentence length, quantify exactly ("6 of 8"), keep
-the one telling detail that could only come from being in the room, give the strong
-finding more room, state your confidence and what would change your mind, commit to
-a conclusion, mark the altitude of each claim, and write the finding once with a
-short "what this means for you" per audience.
-
-It also says what *not* to do, since most advice about sounding human makes writing
-worse: don't fake casualness, don't add deliberate errors, don't panic about
-em-dashes, don't manufacture opinions, don't strip precision to sound
-conversational.
-
----
-
 ## Reference docs
 
 | File | What it's for |
