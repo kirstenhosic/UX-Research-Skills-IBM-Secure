@@ -6,7 +6,8 @@ evaluator agents that check its work.
 
 Load the **Dr. Morgan** agent, say what you're working on, and it coaches you
 through the research, or drafts the artifact and then picks it apart with you.
-**Use IBM Bob**, with Copilot Chat as a fallback. 
+**Use IBM Bob**, with Copilot Chat as a fallback — GitHub Copilot in VS Code is
+not permitted for this work.
 
 Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before handing
 over answers, argues with weak reasoning, insists that every finding trace back to
@@ -81,11 +82,19 @@ Each file is self-contained, so you never need the others loaded.
 | **E — Competitive analysis** | You're comparing two to four products across UX, capability, and market lenses, ending in a verdict tied to a real decision. Includes UI teardowns from sourced screenshots and demo video. | [`competitive_analysis.md`](competitive_analysis.md) |
 | **F — Deep qualitative analysis** | Same territory as A, strictest path. Runs a mandatory data-integrity audit for hallucination, confirmation bias, and cherry-picking before any analysis proceeds. | [`qualitative_data_analysis_skill.md`](qualitative_data_analysis_skill.md) |
 
+**A or F?** Both analyze data. A is the quicker guided path and keeps you moving;
+F front-loads a mandatory integrity audit for hallucination, confirmation bias, and
+cherry-picking before it will analyze anything. Start with A unless verification is
+the point. Either way, [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
+is a different thing again — it never analyzes, it only checks a finished synthesis
+against the source, claim by claim.
+
 **Need a deck?** [`research-readout-deck.skill`](research-readout-deck.skill)
 renders a findings-first `.pptx` from findings records, validating each one before
 it builds a slide and reporting gaps by finding ID. Defaults to IBM theming
 (Carbon Design System, IBM Plex). Unzip it to inspect; it needs the separate
-**pptx** skill to render.
+**pptx** skill to render. It turns finished findings into slides — if they aren't
+synthesized yet, run Scenario A first.
 
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
@@ -283,6 +292,7 @@ The gate matrix, verdict schema, and known limits are in
 | [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) | How outputs should read, and the rubric the readability gate scores against. |
 | [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md) | IBM Secure's output standards: palette, typography, spacing, document structure, and data integrity. Every generated research plan, deck, and analysis output follows it. |
 | [`skills/README.md`](skills/README.md) | Driving the Research Document Template: usage, layouts, output, and common scenarios. [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config. |
+| [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
 The six scenario files and the five evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
@@ -337,88 +347,6 @@ citations live in the individual files.
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |
-
-</details>
-
----
-
-<details>
-<summary><b>For maintainers</b> — repo upkeep. Skip it if you're here to use the skills.</summary>
-
-**Tooling is policy, not preference.** Bob is the tool for this work and Copilot
-Chat is an acceptable fallback, but GitHub Copilot in VS Code is not permitted. An
-earlier version of this README called the agent "a VS Code `.agent.md` file". Don't
-reintroduce that framing.
-
-**Test fixtures live in a separate repo.** Before you change a gate, a rubric, or
-`EVALUATION-LOOP.md`, run the fixtures in
-[kirstenhosic/UX-Research-Skills-testing](https://github.com/kirstenhosic/UX-Research-Skills-testing).
-`gate-fixture/` is the one that came from here: 13 planted defects, an answer key,
-and named controls that must not trigger. It's what caught the safety-scan ordering
-flaw.
-
-**Consistent persona and format.** Every file uses Dr. Morgan and the same plain
-instruction opener (`For this conversation, you are Dr. Morgan…`).
-
-**Three analysis-integrity files, three jobs.** Easy to confuse, so:
-
-- [`analyze_your_data.md`](analyze_your_data.md) (Scenario A) *guides you to*
-  insights through six stages. Coaching-forward; integrity matters, but the
-  emphasis is forward motion.
-- [`qualitative_data_analysis_skill.md`](qualitative_data_analysis_skill.md) (the
-  skill) *audits, then analyzes*. Mandatory data-integrity audit for hallucination,
-  confirmation bias, and cherry-picking before it continues into synthesis. The
-  overlap with Scenario A is intentional — keep both.
-- [`agents/research-synthesis-checker.agent.md`](agents/research-synthesis-checker.agent.md)
-  (the agent) is a *pure verifier*. Cross-checks a finished synthesis against the
-  source and reports Supported / Partially Supported / Unsupported per claim. It
-  never analyzes or rewrites. Use it after synthesis to fact-check, then again
-  after deck drafting as a final pass.
-
-**`research-readout-deck.skill` and Scenario A serve different phases.** Scenario
-A is analysis: raw data to defensible insights. The deck skill is output: finished
-findings to slides. Run Scenario A first if the findings aren't synthesized yet.
-
-**Keep the agent in sync.** `agents/dr-morgan.agent.md` embeds condensed copies of
-each scenario, so a change to a standalone file needs mirroring into the agent. Or
-treat the agent as canonical and regenerate the standalones. They will drift
-otherwise.
-
-**Shared blocks are duplicated on purpose.** Each scenario file has to be
-self-contained so it can be pasted into a chat alone, which means the
-`OPERATING PRINCIPLES` block (calibrate to experience · Coach/Draft modes · never
-fabricate data · never fabricate sources · protect participant data) is repeated
-verbatim in every skill file. That's the cost of portability. When you edit that
-block, mirror it to all skill files, or pick one as canonical and regenerate the
-rest. Same goes for the `RELEASE GATE` / `REVISION PROTOCOL` / `COVERAGE` /
-`VOICE` block appended to each one.
-
-Quick drift check, run from the repo root. Each block should report `OK`, and the
-file names beside each hash make a mismatch diagnosable:
-
-````
-check() {
-  echo "--- $1"
-  for f in *.md; do
-    b=$(awk -v s="$1" -v e="$2" 'index($0,s)==1{p=1} e!="" && index($0,e)==1{p=0} p' "$f")
-    [ -n "$b" ] && printf '%s  %s\n' "$(printf '%s' "$b" | md5)" "$f"
-  done | sort > /tmp/_d
-  cat /tmp/_d
-  n=$(cut -d' ' -f1 /tmp/_d | sort -u | wc -l | tr -d ' ')
-  [ "$n" = 1 ] && echo "    OK — identical across $(wc -l < /tmp/_d | tr -d ' ') files" \
-                || echo "    DRIFT — $n variants"
-}
-check 'OPERATING PRINCIPLES (apply throughout' 'MENTORING RULES'
-check 'RELEASE GATE (apply to every artifact' ''
-````
-
-Literal prefix matching, no regex, no GNU-only flags. It runs as-is on macOS.
-
-This covers the six standalone scenario files only. `agents/dr-morgan.agent.md`
-carries the same guidance in markdown rather than plain text, so it can't be hashed
-against them. It's the file most likely to drift, and it has to be checked by
-reading — the scenario list in its opening paragraph and its closing sync note are
-the two places that go stale first.
 
 </details>
 
