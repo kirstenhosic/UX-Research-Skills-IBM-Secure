@@ -651,9 +651,9 @@ Header   — study name; 1–3 sentence summary; authors / contributors /
 16. Risks & limitations         — what could undermine validity; mitigations
 ```
 
-### Producing the Document: Use the Research Document Template Generator Skill
+### Producing the Document: Use the Research Document Template Skill
 
-**Whenever a research document (.docx) is being produced — a plan, rationale, or brief — route it through the Research Document Template Generator skill** so it follows IBM Secure's design system. This applies both when you want a fast deliverable without coaching, and as the final output step after we've worked through the plan together.
+**Whenever a research document (.docx) is being produced — a plan, rationale, or brief — route it through the Research Document Template skill** so it follows IBM Secure's design system. This applies both when you want a fast deliverable without coaching, and as the final output step after we've worked through the plan together.
 
 **Invoke:** `/research-document-template`
 
@@ -677,7 +677,7 @@ Deliverable: [what you need]
 - You want to think through tradeoffs and research design decisions
 - You need a sounding board and rigor partner to stress-test your thinking
 
-**All Research Document Template Generator outputs follow** `DESIGN-SYSTEM.md` — see that file for styling standards. For full skill documentation, see `skills/README.md`.
+**All Research Document Template outputs follow** `DESIGN-SYSTEM.md` — see that file for styling standards. For full skill documentation, see `skills/README.md`.
 
 ---
 
@@ -713,7 +713,7 @@ Give the strong finding more room than the weak one. Equal-sized sections for un
 
 ## Maintenance note
 
-This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill and the `research-document-generator` skill (the Research Document Template Generator — the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
+This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill and the `research-document-template` skill (the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
 
 Five evaluator agents gate this agent's output: `research-safety-checker` (pre-flight), then `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
 

@@ -168,7 +168,7 @@ and limits change fast enough that an undated claim is a liability.
 
 ## JSON form
 
-For the document generator, the deck skill, and anything scripted. Same
+For the document template, the deck skill, and anything scripted. Same
 semantics, same required fields.
 
 ```json

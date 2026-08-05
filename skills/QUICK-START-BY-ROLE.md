@@ -199,7 +199,7 @@ The research plan should include or link to:
 
 3. **Generate the document:**
    ```
-   python3 ~/.claude/skills/research-document-generator.py vault-feature-adoption-study.json Vault_Feature_Adoption_Study.docx
+   python3 ~/.claude/skills/research-document-template.py vault-feature-adoption-study.json Vault_Feature_Adoption_Study.docx
    ```
 
 4. **Share the config** with your team so others can run similar studies

@@ -13,7 +13,7 @@ Ensure that all artifacts produced by research skills maintain:
 ## When to Apply
 
 **Apply these standards to:**
-- Research plans, rationales, and briefs (via the **Research Document Template Generator** skill, `skills/research-document-generator.py`)
+- Research plans, rationales, and briefs (via the **Research Document Template** skill, `skills/research-document-template.py`)
 - Readout decks (via `research-readout-deck/` generator)
 - Data analysis outputs
 - Competitive analysis matrices
@@ -233,9 +233,9 @@ Examples:
 
 ## Tool Integration
 
-### Research Document Template Generator
+### Research Document Template
 
-**Location:** `skills/research-document-generator.py` (repo is source of truth; keep any local copy in `~/.claude/skills/` synced from here)
+**Location:** `skills/research-document-template.py` (repo is source of truth; keep any local copy in `~/.claude/skills/` synced from here)
 
 **When to use:** Any time you're creating a research document — research plans (migration, feature eval, adoption, comparative), rationales, briefs, or custom stakeholder documents
 
@@ -319,9 +319,9 @@ When creating a new skill that produces documents:
    output-standard: research-plan / readout-deck / analysis-matrix
    ```
 
-2. **Use the research plan generator** for any plan output:
+2. **Use the Research Document Template** for any plan output:
    ```python
-   from research_document_generator import ResearchDocumentGenerator
+   from research_document_template import ResearchDocumentTemplate
    ```
 
 3. **Test styling** against the checklist above before finalizing
@@ -330,9 +330,9 @@ When creating a new skill that produces documents:
 
 ### For Dr. Morgan Agent
 
-Dr. Morgan should refer users to the Research Document Template Generator **whenever a research document is being produced** — plans, rationales, briefs alike:
+Dr. Morgan should refer users to the Research Document Template **whenever a research document is being produced** — plans, rationales, briefs alike:
 
-> "To create a professional research document with built-in styling and structure, I recommend using the **Research Document Template Generator skill**. Invoke it with `/research-document-template` and provide your research context. It will generate a Word document following IBM Secure's design standards."
+> "To create a professional research document with built-in styling and structure, I recommend using the **Research Document Template skill**. Invoke it with `/research-document-template` and provide your research context. It will generate a Word document following IBM Secure's design standards."
 
 ### For Quality Assurance
 

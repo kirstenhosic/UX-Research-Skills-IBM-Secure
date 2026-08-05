@@ -200,7 +200,7 @@ as the work moves.
   cherry-picking before any analysis proceeds.
 
 Need a formatted Word document out the other end? That's the **Research Document
-Template Generator**, a separate tool Dr. Morgan hands off to. It renders a
+Template**, a separate tool Dr. Morgan hands off to. It renders a
 `.docx` from your content and doesn't coach. [`skills/README.md`](skills/README.md)
 has the details.
 
@@ -217,7 +217,7 @@ decks, analysis outputs) follows IBM Secure's design system.
 - Document structure requirements
 - Data integrity standards
 
-[`skills/README.md`](skills/README.md) covers how to drive the document generator,
+[`skills/README.md`](skills/README.md) covers how to drive the document template,
 and [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config
 it takes.
 
@@ -425,7 +425,7 @@ each.
 | [`competitive_analysis.md`](competitive_analysis.md) | Scenario E, in full. Tiered templates (a core three, plus six you add when they earn it), a source-integrity audit, and a visual-evidence workflow for comparing competitor UI. | You're comparing products to inform a design, positioning, or roadmap call. Run the safety pre-flight and the synthesis checker in source-integrity mode before sharing the output. |
 | [`qualitative_data_analysis_skill.md`](qualitative_data_analysis_skill.md) | Scenario F, in full. Mandatory data-integrity audit before any analysis, and a theme checkpoint after clustering. | Analysis quality control is the priority. |
 | [`research-readout-deck.skill`](research-readout-deck.skill) | Artifact generator, packaged as a skill bundle — unzip to inspect. Renders a findings-first `.pptx` for a mixed product-team audience from findings records, validating them before it builds a slide and reporting gaps by finding ID. Handed raw notes, it says what that costs: `disconfirming`, `limits`, and `confidence` can't be recovered at deck-build time. Defaults to IBM theming (Carbon Design System, IBM Plex). Needs the separate **pptx** skill to render. | You've finished a study and need to present it. |
-| [`skills/research-document-generator.py`](skills/research-document-generator.py) + configs | The Research Document Template Generator, the single template every generated research document goes through. Produces formatted Word documents in IBM Secure's design system: Cambria, grayish-blue palette, callouts, auto-numbered sections, page numbers. Two layouts: the standard `research-plan` layout (purpose → scope → RQs → participants → guide → timeline → deliverables), and a generic `sections` layout for rationales, briefs, and one-pagers. Customizable through JSON configs. | Any time you're producing a research document as a `.docx` (plan, rationale, or brief). Invoke it as a skill in Bob, or run the script directly. [`skills/README.md`](skills/README.md) has the full documentation. |
+| [`skills/research-document-template.py`](skills/research-document-template.py) + configs | The Research Document Template, the single template every generated research document goes through. Produces formatted Word documents in IBM Secure's design system: Cambria, grayish-blue palette, callouts, auto-numbered sections, page numbers. Two layouts: the standard `research-plan` layout (purpose → scope → RQs → participants → guide → timeline → deliverables), and a generic `sections` layout for rationales, briefs, and one-pagers. Customizable through JSON configs. | Any time you're producing a research document as a `.docx` (plan, rationale, or brief). Invoke it as a skill in Bob, or run the script directly. [`skills/README.md`](skills/README.md) has the full documentation. |
 
 Each evaluator's own file carries its detail: what it checks, what blocks versus
 flags, the verdict it emits. This table says what each one is for.

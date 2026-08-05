@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-IBM HashiCorp Secure — Research Document Template Generator
+IBM HashiCorp Secure — Research Document Template
 Generates professionally formatted Word documents for UX research artifacts
 (research plans, rationales, briefs, and custom documents) following the
 repo design system (DESIGN-SYSTEM.md).
@@ -35,6 +35,7 @@ class ResearchDocumentGenerator:
         self.config = config
         self.doc = Document()
         self.section_num = 0  # dynamic H1 numbering — no gaps when sections are omitted
+        self.omissions = []   # every section that did not render, and why
         self._setup_document()
 
     # ------------------------------------------------------------------
@@ -487,10 +488,41 @@ class ResearchDocumentGenerator:
     # Research-plan layout (default)
     # ------------------------------------------------------------------
 
-    def _has_content(self, key, flag_key):
-        """A section renders only when its flag allows it AND it has content —
-        prevents orphaned empty headings."""
-        return self.config.get(flag_key, True) and bool(self.config.get(key))
+    def _record_omission(self, section, reason):
+        """Log a section that will not appear in the output."""
+        self.omissions.append({'section': section, 'reason': reason})
+
+    def _renders(self, section, present, flag_key=None, source=''):
+        """Decide whether a section renders, and record it when it does not.
+
+        A section renders only when its flag allows it AND it has content —
+        that is what keeps empty headings out of the document. But silently
+        dropping a section means the .docx can contain less than the plan it
+        was generated from, with nothing to say so. Every omission is recorded
+        and reported instead. Same standard the readout-deck skill holds:
+        gaps are reported, never filled in and never hidden.
+        """
+        allowed = self.config.get(flag_key, True) if flag_key else True
+        if not allowed:
+            self._record_omission(section, f'suppressed by "{flag_key}": false')
+        elif not present:
+            self._record_omission(section, f'no content under {source}')
+        return allowed and present
+
+    def _has_content(self, key, flag_key, section=None):
+        """A section renders only when its flag allows it AND it has content."""
+        return self._renders(section or key, bool(self.config.get(key)),
+                             flag_key, f'"{key}"')
+
+    def omission_report(self):
+        """Sections the config did not produce, in document order.
+
+        Callers must surface this. A rendered document that quietly contains
+        less than the reviewed plan is the same failure the deck gate exists
+        to catch: the render step changing what a reader sees relative to
+        what was checked.
+        """
+        return list(self.omissions)
 
     def generate(self):
         """Generate the document. Uses `sections` (custom layout) when present,
@@ -513,7 +545,8 @@ class ResearchDocumentGenerator:
         # --- Standard research-plan layout ---
 
         # Strategic framing
-        if self.config.get('purpose'):
+        if self._renders('Purpose and Strategic Framing',
+                         bool(self.config.get('purpose')), source='"purpose"'):
             self.add_heading_1('Purpose and Strategic Framing')
             self.add_paragraph(self.config.get('purpose'))
 
@@ -547,7 +580,8 @@ class ResearchDocumentGenerator:
         # one short line each, so the columns stay scannable side by side.
         in_scope = self.config.get('in_scope', [])
         out_of_scope = self.config.get('out_of_scope', [])
-        if self.config.get('include_scope_table', True) and (in_scope or out_of_scope):
+        if self._renders('Scope Boundaries', bool(in_scope or out_of_scope),
+                         'include_scope_table', '"in_scope" / "out_of_scope"'):
             self.add_heading_1('Scope Boundaries')
             scope_text = self.config.get('scope_intro', 'Scope has been deliberately narrowed to ensure high-confidence findings within the available timeline.')
             self.add_paragraph(scope_text, space_after=50800)
@@ -557,7 +591,7 @@ class ResearchDocumentGenerator:
                 self.add_paragraph(scope_note, italic=True)
 
         # Research questions
-        if self._has_content('research_questions', 'include_research_questions'):
+        if self._has_content('research_questions', 'include_research_questions', 'Core Research Questions'):
             self.add_heading_1('Core Research Questions')
             rq_intro = self.config.get('research_questions_intro', 'All questions are grounded in behavior, decision-making, and real constraints.')
             self.add_paragraph(rq_intro)
@@ -570,7 +604,7 @@ class ResearchDocumentGenerator:
         # Assumptions and hypotheses — stated explicitly so they can be
         # checked against disconfirming evidence at synthesis. Each item is
         # {"id": "H1", "statement": "...", "note": "..." (optional)}.
-        if self._has_content('hypotheses', 'include_hypotheses'):
+        if self._has_content('hypotheses', 'include_hypotheses', 'Assumptions and Hypotheses'):
             self.add_heading_1('Assumptions and Hypotheses')
             hyp_intro = self.config.get('hypotheses_intro', '')
             if hyp_intro:
@@ -585,7 +619,7 @@ class ResearchDocumentGenerator:
             self.add_numbered_items(items)
 
         # Risks and limitations
-        if self._has_content('risks', 'include_risks'):
+        if self._has_content('risks', 'include_risks', 'Risks and Limitations'):
             self.add_heading_1('Risks and Limitations')
             risks_intro = self.config.get('risks_intro', '')
             if risks_intro:
@@ -600,14 +634,17 @@ class ResearchDocumentGenerator:
             self.add_labeled_bullets(items)
 
         # Open items pending before the plan is finalized
-        if self._has_content('open_items', 'include_open_items'):
+        if self._has_content('open_items', 'include_open_items', 'Open Items Before Plan Finalization'):
             self.add_heading_1('Open Items Before Plan Finalization')
             self.add_bullet_list(self.config.get('open_items', []))
 
         # Participants
-        if self.config.get('include_participants', True) and (
-                self.config.get('participant_profile') or self.config.get('participant_criteria')
-                or self.config.get('recruitment_channels')):
+        if self._renders('Participants and Recruitment',
+                         bool(self.config.get('participant_profile')
+                              or self.config.get('participant_criteria')
+                              or self.config.get('recruitment_channels')),
+                         'include_participants',
+                         '"participant_profile" / "participant_criteria" / "recruitment_channels"'):
             self.add_heading_1('Participants and Recruitment')
 
             profile_text = self.config.get('participant_profile', '')
@@ -650,7 +687,7 @@ class ResearchDocumentGenerator:
                         self.add_bullet_list([ch], space_before=0)
 
         # Discussion guide
-        if self._has_content('discussion_guide', 'include_discussion_guide'):
+        if self._has_content('discussion_guide', 'include_discussion_guide', 'Discussion Guide'):
             self.add_heading_1('Discussion Guide')
 
             guide_intro = self.config.get('discussion_guide_intro', '')
@@ -687,7 +724,7 @@ class ResearchDocumentGenerator:
         # optional bullets; content-gated like every other section so it can't
         # render an empty heading, but first-class so a config migration can't
         # silently drop it (as happened once with hypotheses/risks).
-        if self._has_content('analysis_plan', 'include_analysis_plan'):
+        if self._has_content('analysis_plan', 'include_analysis_plan', 'Analysis Plan'):
             self.add_heading_1('Analysis Plan')
             plan = self.config.get('analysis_plan')
             if isinstance(plan, dict):
@@ -702,7 +739,7 @@ class ResearchDocumentGenerator:
         # Timeline — columns adapt to the keys present in the data, so a simple
         # Timeframe/Milestone table and a richer Phase/Weeks/Outputs/Activities
         # execution plan both render correctly.
-        if self._has_content('timeline', 'include_timeline'):
+        if self._has_content('timeline', 'include_timeline', 'Timeline and Milestones'):
             self.add_heading_1('Timeline and Milestones')
             items = self.config.get('timeline', [])
             candidates = [('phase', 'Phase'), ('timeframe', 'Timeframe'),
@@ -716,7 +753,7 @@ class ResearchDocumentGenerator:
                                        first_col_width=first_width)
 
         # Deliverables
-        if self._has_content('deliverables', 'include_deliverables'):
+        if self._has_content('deliverables', 'include_deliverables', 'Deliverables'):
             self.add_heading_1('Deliverables')
             for deliverable in self.config.get('deliverables', []):
                 self.add_heading_2(deliverable.get('title', ''))
@@ -724,7 +761,8 @@ class ResearchDocumentGenerator:
 
         # Success criteria — paired callouts, matching the team's established format
         criteria = self.config.get('success_criteria', {})
-        if self.config.get('include_success_criteria', True) and criteria:
+        if self._renders('Success Criteria', bool(criteria),
+                         'include_success_criteria', '"success_criteria"'):
             self.add_heading_1('Success Criteria')
             if criteria.get('success'):
                 self.add_callout('Research is successful if:', criteria['success'])
@@ -737,14 +775,34 @@ class ResearchDocumentGenerator:
         print(f'✓ Created: {filename}')
 
 
+# Preferred name, matching the skill: research-document-template
+ResearchDocumentTemplate = ResearchDocumentGenerator
+
 # Backwards-compatible alias (older docs/scripts import ResearchPlanGenerator)
 ResearchPlanGenerator = ResearchDocumentGenerator
+
+
+def print_omission_report(omissions, output_file, stream=sys.stderr):
+    """Say what the document does not contain.
+
+    Printed to stderr so it survives stdout redirection and cannot be lost in
+    a pipeline. A reader comparing this .docx against the plan that passed the
+    gates needs to know which sections did not make it across.
+    """
+    if not omissions:
+        return
+    sys.stdout.flush()  # keep the report below the "Created" line when piped
+    print(f'\n! {len(omissions)} section(s) omitted from {output_file}:', file=stream)
+    for o in omissions:
+        print(f'    {o["section"]} — {o["reason"]}', file=stream)
+    print('  Check these against the plan this document was generated from.\n',
+          file=stream)
 
 
 def main():
     """Main entry point"""
     if len(sys.argv) < 2:
-        print("Usage: python3 research-document-generator.py <config.json> <output.docx>")
+        print("Usage: python3 research-document-template.py <config.json> <output.docx>")
         sys.exit(1)
 
     config_file = sys.argv[1]
@@ -756,6 +814,7 @@ def main():
     generator = ResearchDocumentGenerator(config)
     generator.generate()
     generator.save(output_file)
+    print_omission_report(generator.omission_report(), output_file)
 
 
 if __name__ == '__main__':

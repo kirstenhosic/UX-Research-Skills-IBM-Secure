@@ -158,7 +158,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | Artifact | Produced by | Gates, in order |
 |---|---|---|
 | **Theme set** | Scenario A, F — Draft mode only | **Human checkpoint, no agent gate.** See §9 |
-| **Research plan / discussion guide** | Scenario C, D; `research-document-generator` | `plan-reviewer` → `readability-checker` |
+| **Research plan / discussion guide** | Scenario C, D; `research-document-template` | `plan-reviewer` → `readability-checker` |
 | **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
