@@ -177,6 +177,34 @@ deck against `FINDINGS-CONTRACT.md`, not against the transcripts: every claim
 on a slide must map to a finding record that already passed. Anything on a
 slide with no matching record is blocking.
 
+### Why the document template isn't
+
+`research-document-template` has two invocation paths, and only one of them
+produces anything. The row above means the first.
+
+**Invoked as a skill**, it composes the config from the conversation. That is
+content, and it is gated as a plan — `plan-reviewer` → `readability-checker`,
+like any other plan, regardless of what renders it afterward.
+
+**Run as a script** against a config that already exists, it applies typography
+and nothing else. No gate. Adding one would re-read a plan that already passed,
+using evaluators that cannot see the only thing that changed. The template
+holds no prose of its own: two fields used to default to boilerplate that
+asserted the scope was deliberately narrowed and the questions well-grounded,
+which put unchecked claims into a checked artifact. Both were removed. Keep it
+that way — a renderer that supplies sentences is a producer wearing a
+renderer's name.
+
+What it can still do is leave something out. Empty sections are skipped so the
+document never carries an orphaned heading, which means the `.docx` can contain
+less than the plan that cleared the gates. So the template reports every
+section it dropped and why, on the same principle the deck skill applies to
+finding records: gaps are named, never filled in and never hidden.
+
+That report is a warning, not a verdict. Nothing passes, fails, or gets revised
+on it. It exists so that whoever compares the document against the reviewed
+plan is told what is missing instead of being left to notice.
+
 ### The five evaluators
 
 | Agent | Verifies | Cannot see |
