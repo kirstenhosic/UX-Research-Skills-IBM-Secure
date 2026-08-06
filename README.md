@@ -15,10 +15,11 @@ senior researcher as a peer and teaches a novice from the fundamentals. Coaching
 is the default. Ask for **Draft mode** and it produces a real plan, guide, coding
 frame, finding, or matrix, then critiques it with you at the same standard.
 
-Nothing here ships unchecked. Every drafted artifact runs a safety scan and the
-quality gates that fit it, revision is capped at two passes before a person has to
-look, and when Dr. Morgan does the analysis itself it stops and asks you to sign
-off on the themes before anything gets built on top of them.
+Every drafted artifact gets checked before you share it: a safety scan first, then
+the quality gates that fit it, with revision capped at two passes before a person
+has to look. When Dr. Morgan does the analysis itself, it stops and asks you to
+sign off on the themes before anything gets built on top of them. The checks catch
+the obvious failures. Judging whether the work is any good is still yours.
 
 The IBM Secure product context is already filled in. Nothing to install, nothing
 to configure.
