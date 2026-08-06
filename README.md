@@ -38,13 +38,13 @@ No repo connection? Open the agent file, copy the whole thing, and paste it into
 Bob or Copilot Chat. That works — but it is not equivalent, and the difference
 matters:
 
-> - **A pasted copy has no file access.** Dr. Morgan defers to those files in nine
->   places for things it only summarizes: the verdict schema, the
->   Definition-of-Done rubrics, the 21-item readability rubric, the
->   theme-checkpoint procedure. Pasted, those pointers are dead ends — and the risk
->   isn't a refusal, it's a rubric reconstructed from memory and delivered with the
->   same confidence. Paste the file a gate needs alongside the agent, or run that
->   gate in a session with the repo connected.
+> - **A pasted copy has no file access.** Dr. Morgan defers to those files for the
+>   things it only summarizes: the verdict schema, the Definition-of-Done rubrics,
+>   the 21-item readability rubric, the theme-checkpoint procedure. Pasted, those
+>   pointers are dead ends — and the risk isn't a refusal, it's a rubric
+>   reconstructed from memory and delivered with the same confidence. Paste the
+>   file a gate needs alongside the agent, or run that gate in a session with the
+>   repo connected.
 > - **Custom instructions beat a first chat message.** Custom instructions are
 >   re-applied every turn. A first message is just an early turn, and it gets
 >   buried as you paste transcripts in — which is exactly when you're asking for
@@ -54,12 +54,12 @@ matters:
 interviews about Vault's setup flow and I don't know where to start." Dr. Morgan
 routes to the right scenario. You can also name one, or switch mid-conversation.
 
-**3. Share a folder with Bob or paste your materials when asked.** Research questions, transcripts, draft
-guides, competitor notes. Swap participant names, email addresses, and phone
-numbers for IDs (P1, P2) before you paste. Roles, account names, and regions can
-stay — they're what make a finding actionable, and a separate check governs where
-they're allowed to travel. Treat the chat the way you'd treat any outside tool
-holding research data.
+**3. Add your materials when asked** — share a folder with Bob, or paste them in.
+Research questions, transcripts, draft guides, competitor notes. Swap participant
+names, email addresses, and phone numbers for IDs (P1, P2) first. Roles, account
+names, and regions can stay — they're what make a finding actionable, and a
+separate check governs where they're allowed to travel. Treat the chat the way
+you'd treat any outside tool holding research data.
 
 That's the whole loop for coaching. If you used Draft mode and now have an
 artifact you intend to show someone, go to
@@ -221,7 +221,7 @@ worth having. None of them is a substitute for you reading the thing.
 
 **What they can't do**
 
-A green verdict means nothing blocking was found — not that the study is right.
+A `PASS` means nothing blocking was found — not that the study is right.
 These checks catch fabrication, irrelevance, incoherence, and opacity; a
 well-executed study of the wrong question passes every one of them. LLM evaluators
 also grade leniently on text that reads as rigorous, and chained checks compound
@@ -232,7 +232,7 @@ the limits are written down in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7.
 
 ## Releasing an artifact
 
-Anything you drafted in Draft mode gets checked before you share it. Dr. Morgan
+Draft-mode artifacts go through the loop before they reach anyone else. Dr. Morgan
 runs the loop and tells you which checker comes next — select it by name in Bob,
 then bring the verdict back. You don't need to track which gates apply.
 
@@ -331,7 +331,7 @@ citations live in the individual files.
 | agent | A prompt packaged so a tool can load it by name. The configuration at the top of an `.agent.md` file is called *frontmatter*; you don't need to touch it. |
 | skill | A prompt bundled with its supporting files (templates, reference docs, scripts). Bob can invoke one by name. |
 | custom instructions | The box in Bob or Copilot Chat where you set standing instructions for a whole conversation instead of retyping them. Sometimes called a system prompt. |
-| gate | A checker that reads a finished artifact and reports whether it passes. There are five, and each looks for something different. |
+| gate | A checker that reads a finished artifact and reports whether it passes. Four of the five run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL`. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
 | checkpoint | A stop where a *person* decides, not an agent. Two exist: the **theme checkpoint** after clustering (the default one), and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
