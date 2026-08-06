@@ -186,55 +186,27 @@ decide instead of an agent · slate nodes are end states · dotted arrows loop b
 ## Why you can trust the output
 
 One bar holds across every scenario: **a confident wrong answer is worse than an
-honest "I don't know."** In practice that means Dr. Morgan:
+honest "I don't know."** In practice:
 
-- **Never fabricates data.** Quotes only verbatim text you provided, with your
-  participant IDs, and asks for what's missing instead of reconstructing it.
-- **Never fabricates sources or overstates numbers.** Cites only verifiable
-  sources, and frames every sample-size rule or benchmark as a rule of thumb with
-  its assumptions attached.
-- **Separates firsthand from secondhand.** A colleague describing *customers'*
-  experience establishes what they believe about customers, which is a different
-  claim. Ordinary traceability can't tell the two apart, so proxy evidence is
-  always flagged and the scope line has to name it.
-- **Labels every competitive claim.** `[verified]`, `[vendor claim]`,
-  `[inference]`, or `[unknown]`; volatile data gets dated; screenshots are tagged
-  by source type, and UX is never scored from marketing imagery alone.
-- **Protects participant data.** Prompts you to de-identify before you paste, and
-  flags personal data it notices.
-- **Calibrates to you.** Challenges a senior researcher as a peer; teaches a
-  novice from fundamentals.
-
-And the loop that enforces it:
-
-- **Safety runs first, on everything, every iteration.** Not last. The quality
-  gates stop at the first failure, so a safety scan placed last would never run on
-  an artifact that failed groundedness — and identifying data could sit
-  undiscovered through two full revision cycles.
-- **Gates run in a fixed order:** groundedness, then significance, then
-  readability. A `FAIL` stops the sequence. No point asking whether a finding
-  matters before you know it's supported.
-- **Evaluators never edit.** An evaluator that rewrites its own input and then
-  re-checks its own rewrite launders its errors past itself. Revision goes back to
-  Dr. Morgan, scoped to the blocking items alone.
-- **Two revision passes, then a person looks.** An artifact that can't clear the
-  bar in two tries has a problem upstream of the wording.
-- **Blocking and flagged are different.** Blocking means untrue, unsupported, or
-  unsafe, and gets fixed. Flagged means accurate but worth a human look, and ships
-  with the flags attached as Reviewer Notes. A gate that treats judgment calls as
-  defects trains researchers to delete interesting things to make it go green.
-- **Nothing is deleted for being inconvenient.** A finding that maps to none of
+- **Nothing is fabricated.** Quotes are verbatim from what you provided, with your
+  participant IDs. Sources are real and checkable. Sample-size rules and benchmarks
+  come with their assumptions attached, as rules of thumb rather than laws.
+- **Secondhand evidence is labeled.** A colleague describing customers' experience
+  is a different claim from a customer describing their own, so proxy evidence is
+  flagged wherever it appears. Competitive claims carry `[verified]`,
+  `[vendor claim]`, `[inference]`, or `[unknown]`.
+- **Participant data is protected.** You're prompted to de-identify before you
+  paste, and anything personal that slips through gets flagged.
+- **Nothing is dropped for being inconvenient.** A finding that answers none of
   your research questions is kept and flagged — unplanned findings are often the
-  most valuable thing in a study. A question no finding addressed is flagged too.
-  Both gaps travel to the readout.
-- **A person reviews the themes.** In Draft mode, Dr. Morgan stops after
-  clustering and asks you to accept, revise, split, or reject each theme before
-  synthesis builds on it. No agent runs this: an LLM judging an LLM's themes is a
-  second opinion drawn from the same blind spots.
-- **The limits are written down.** LLM evaluators grade leniently on text that
-  reads rigorous, chained gates compound false positives, and passing every gate
-  doesn't make a study correct. See
-  [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7.
+  most valuable thing in a study. A question nothing answered is flagged too.
+- **It calibrates to you.** Challenges a senior researcher as a peer; teaches a
+  novice from the fundamentals.
+
+And where it stops: passing every gate doesn't make a study correct. LLM
+evaluators grade leniently on text that reads as rigorous, and chained checks
+compound false positives. Those limits are written down in
+[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7 rather than left for you to find.
 
 ---
 
