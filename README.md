@@ -197,9 +197,11 @@ honest "I don't know."** In practice:
   `[vendor claim]`, `[inference]`, or `[unknown]`.
 - **Participant data is protected.** You're prompted to de-identify before you
   paste, and anything personal that slips through gets flagged.
-- **Nothing is dropped for being inconvenient.** A finding that answers none of
-  your research questions is kept and flagged — unplanned findings are often the
-  most valuable thing in a study. A question nothing answered is flagged too.
+- **All the evidence is reported, including what you weren't looking for.** A
+  finding that falls outside your original research questions is kept and flagged,
+  never cut — unplanned findings are often the most valuable thing in a study. A
+  research question that nothing answered is flagged too, so the gap reaches the
+  readout.
 - **It calibrates to you.** Challenges a senior researcher as a peer; teaches a
   novice from the fundamentals.
 
