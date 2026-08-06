@@ -10,9 +10,10 @@ through the research, or drafts the artifact and then picks it apart with you.
 
 Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before handing
 over answers, argues with weak reasoning, insists that every finding trace back to
-evidence you can point to, and cites real, checkable literature. Coaching is the
-default. Ask for **Draft mode** and it produces a real plan, guide, coding frame,
-finding, or matrix, then critiques it with you at the same standard.
+evidence you can point to, and cites real, checkable literature. It challenges a
+senior researcher as a peer and teaches a novice from the fundamentals. Coaching
+is the default. Ask for **Draft mode** and it produces a real plan, guide, coding
+frame, finding, or matrix, then critiques it with you at the same standard.
 
 Nothing here ships unchecked. Every drafted artifact runs a safety scan and the
 quality gates that fit it, revision is capped at two passes before a person has to
@@ -183,32 +184,48 @@ decide instead of an agent · slate is an end state · dotted arrows loop back.*
 
 ---
 
-## Why you can trust the output
+## How much to trust the output
 
-One bar holds across every scenario: **a confident wrong answer is worse than an
-honest "I don't know."** In practice:
+Everything here is produced by a language model, including the checkers — and
+confident, well-formatted prose is what these systems produce when they are wrong
+as readily as when they are right. **Read every output the way you would read work
+from a contractor you are about to put your name on.** The guardrails below are
+worth having. None of them is a substitute for you reading the thing.
 
-- **Nothing is fabricated.** Quotes are verbatim from what you provided, with your
-  participant IDs. Sources are real and checkable. Sample-size rules and benchmarks
-  come with their assumptions attached, as rules of thumb rather than laws.
-- **Secondhand evidence is labeled.** A colleague describing customers' experience
-  is a different claim from a customer describing their own, so proxy evidence is
-  flagged wherever it appears. Competitive claims carry `[verified]`,
-  `[vendor claim]`, `[inference]`, or `[unknown]`.
-- **Participant data is protected.** You're prompted to de-identify before you
-  paste, and anything personal that slips through gets flagged.
-- **All the evidence is reported, including what you weren't looking for.** A
-  finding that falls outside your original research questions is kept and flagged,
-  never cut — unplanned findings are often the most valuable thing in a study. A
-  research question that nothing answered is flagged too, so the gap reaches the
-  readout.
-- **It calibrates to you.** Challenges a senior researcher as a peer; teaches a
-  novice from the fundamentals.
+**What they do**
 
-And where it stops: passing every gate doesn't make a study correct. LLM
-evaluators grade leniently on text that reads as rigorous, and chained checks
-compound false positives. Those limits are written down in
-[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7 rather than left for you to find.
+- **Make fabrication harder to introduce.** Dr. Morgan is instructed to quote only
+  text you provided, use your participant IDs, and cite only verifiable sources,
+  and [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
+  reads the finished synthesis back against the source, claim by claim. That
+  catches a great deal — and it is still one language model checking another's
+  work. Spot-check quotes against your transcripts: cheapest thing to verify,
+  most damaging thing to get wrong.
+- **Put weaker evidence on the record.** Proxy evidence — a colleague describing
+  customers rather than a customer describing themselves — gets flagged, and
+  competitive claims carry `[verified]`, `[vendor claim]`, `[inference]`, or
+  `[unknown]`. A missing label means the labeling missed something, not that the
+  claim underneath is solid.
+- **Add a second pass at participant data, not the first one.** De-identifying
+  before you paste is still your job.
+  [`research-safety-checker`](agents/research-safety-checker.agent.md) reads the
+  artifact against the destination you declared and catches things people miss,
+  but it can only flag what it recognizes.
+- **Keep the inconvenient findings in.** A finding that falls outside your original
+  research questions is kept and flagged rather than cut, and a research question
+  that nothing answered is flagged too.
+- **Stop where judgment is required.** In Draft mode you review every theme before
+  synthesis is built on it. That is where the interpretation gets set, and no
+  checker can verify what data means.
+
+**What they can't do**
+
+A green verdict means nothing blocking was found — not that the study is right.
+These checks catch fabrication, irrelevance, incoherence, and opacity; a
+well-executed study of the wrong question passes every one of them. LLM evaluators
+also grade leniently on text that reads as rigorous, and chained checks compound
+false positives, so neither a pass nor a flag proves much on its own. The rest of
+the limits are written down in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7.
 
 ---
 
