@@ -22,9 +22,8 @@ sign off on the themes before anything gets built on top of them. The checks cat
 the obvious failures. Judging whether the work is any good is still yours.
 
 Any team at IBM is welcome to use this. The IBM Secure product context is already
-filled in, so there's nothing to install and nothing to configure — if you work on
-a different product, swap the `PRODUCT CONTEXT` section in the agent file, or start
-from the product-agnostic sibling instead.
+filled in. If you work on a different product, message the maintainer on Slack
+about adapting the suite for yours.
 
 ---
 
@@ -349,6 +348,6 @@ citations live in the individual files.
 
 - **Repository:** [kirstenhosic/UX-Research-Skills-IBM-Secure](https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure) *(private)*
 - **Clone:** `https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure.git`
-- **Product-agnostic sibling:** [kirstenhosic/UX-Research-Skills](https://github.com/kirstenhosic/UX-Research-Skills) *(private)*. The same suite, with fill-in PRODUCT CONTEXT placeholders instead of the IBM Secure context, for use outside IBM
+- **Product-agnostic sibling:** [kirstenhosic/UX-Research-Skills](https://github.com/kirstenhosic/UX-Research-Skills) *(private, and not available to IBM teams)*. The same suite, with fill-in PRODUCT CONTEXT placeholders instead of the IBM Secure context, for use outside IBM
 - **License:** MIT
 - **Maintainer:** [@kirstenhosic](https://github.com/kirstenhosic)
