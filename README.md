@@ -132,14 +132,14 @@ flowchart TD
     START(["<b>START HERE</b><br/>You, with a research question"])
     START --> DM
 
-    DM["<b>Dr. Morgan</b><br/>the agent you invoke in Bob<br/>routes six scenarios, A through F"]
+    DM["<b>Dr. Morgan</b><br/>routes six scenarios, A through F"]
 
     DM -->|"Coach mode<br/>the default"| COACH["Dr. Morgan questions<br/>and challenges your thinking"]
     COACH --> WORK["You analyze, draft,<br/>and rethink"]
-    WORK -.->|"iterate as many rounds<br/>as the work needs"| COACH
-    WORK --> ENDC(["Your own conclusion.<br/>No AI gates: you did<br/>the analysis yourself."])
+    WORK -.->|"as many rounds<br/>as the work needs"| COACH
+    WORK --> ENDC(["Your own conclusion.<br/>No gates — you did<br/>the analysis yourself."])
 
-    DM -->|"Draft mode"| IN["<b>First, Dr. Morgan asks for your inputs</b><br/>the product, the decision this informs,<br/>the deadline, stakeholder notes, prior research,<br/>and the raw data itself<br/><i>anything missing is marked TBD and asked about —<br/>never guessed, recalled, or filled in</i>"]
+    DM -->|"Draft mode"| IN["<b>Dr. Morgan asks for your inputs</b><br/>anything missing is marked TBD and asked about,<br/>never guessed"]
     IN --> Q{"What did you bring?"}
 
     ART[["<b>Dr. Morgan drafts the artifact</b>"]]
@@ -148,22 +148,22 @@ flowchart TD
     Q -->|"Study context or sources<br/>plan · guide · comparison"| ART
     Q -->|"A corpus to analyze<br/>findings"| CL
 
-    CL --> TC{{"THEME CHECKPOINT<br/>the interpretation is set here, so a person reviews it<br/>you decide each theme, not an agent<br/>accept · revise · split · reject"}}
-    TC --> SY["Synthesis<br/>findings built on the themes you approved"]
+    CL --> TC{{"THEME CHECKPOINT<br/>you decide each theme, not an agent<br/>accept · revise · split · reject"}}
+    TC --> SY["Synthesis<br/>built on the themes you approved"]
     SY --> ART
 
-    ART --> PF["<b>Pre-flight · research-safety-checker</b><br/>could this expose a participant?<br/>names, emails and phone numbers block at every tier<br/>role and account name are fine inside the company<br/>the bar rises with the audience: team → org → public<br/>consent terms win when they are stricter"]
-    PF --> G["<b>Quality gates, in order</b><br/>Will this study answer its question? · plan-reviewer<br/>Is every claim traceable to the source? · synthesis-checker<br/>Does it matter to a named decision? · significance-checker<br/>Can a mixed audience act on it? · readability-checker<br/><i>only the ones that fit the artifact run</i>"]
+    ART --> PF["<b>Pre-flight · research-safety-checker</b><br/>could this expose a participant?<br/>the bar rises with the audience: team → org → public"]
+    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · synthesis-checker<br/>significance-checker · readability-checker<br/><i>only the ones that fit the artifact run</i>"]
     G --> V{"Verdict"}
 
-    V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flagged means accurate, but worth a human look<br/>flags ride along as Reviewer Notes"])
+    V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flags ride along as Reviewer Notes"])
 
-    V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit —<br/>a checker that rewrote its own input<br/>would just re-check its own work."]
+    V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
     RV -.->|"two passes maximum"| PF
 
-    V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>Two passes did not clear it, or the corpus,<br/>question, or method is the real problem.<br/>Another pass would polish the wrong object."])
+    V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>The corpus, question, or method<br/>is the real problem."])
 
-    ENDR -->|"building a readout deck?"| SK["<b>research-readout-deck</b><br/>renders the .pptx from findings that already passed<br/>it can only use fields a finding record contains"]
+    ENDR -->|"building a readout deck?"| SK["<b>research-readout-deck</b><br/>renders the .pptx from findings that already passed"]
     SK -.->|"a deck is a new artifact —<br/>it runs the checks again"| PF
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
@@ -179,7 +179,7 @@ flowchart TD
 ```
 
 *Green is where you start · teal is coaching · amber is the one stop where you
-decide instead of an agent · slate nodes are end states · dotted arrows loop back.*
+decide instead of an agent · slate is an end state · dotted arrows loop back.*
 
 ---
 
