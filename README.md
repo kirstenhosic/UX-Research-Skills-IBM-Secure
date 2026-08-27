@@ -101,6 +101,47 @@ To add your product: copy
 required fields, and open a pull request.
 [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) has the format and the rules.
 
+### Keeping a long session healthy
+
+Everything in a conversation shares one budget: the agent, your whole history,
+every file read in, every transcript pasted, every tool result. There's no
+setting to change — the ceiling is the model's context window, it varies by
+model, and nothing warns you as it fills. Check your tool's documentation for
+your model's limit; the number moves, the mechanics don't.
+
+**What going over looks like.** Not an error message. The symptoms, worst first:
+
+1. **A quote comes back close to your transcript rather than identical to it.**
+   This is the one to watch. Verbatim recall is the first thing to degrade under
+   context pressure, and it is exactly the guardrail everything else here rests
+   on. A paraphrase presented as a quote reads like ordinary work.
+2. Dr. Morgan asks for something you already gave it.
+3. A summary drifts — a count changes, a hedge vanishes, a theme picks up a
+   participant it never had.
+
+Spot-check a quote against your transcript when a session has run long. It is
+the cheapest thing to verify and the most damaging thing to get wrong.
+
+**Move before it happens.** Ask Dr. Morgan for a **carry-over packet** and paste
+it as the first message of a fresh conversation. It carries scenario and mode,
+product and method context, the decision and research questions, participant IDs
+and the declared destination, where you are in the flow, theme dispositions, gate
+verdicts with iteration numbers, and open flags. Good moments to do it: after the
+theme checkpoint, after a gate verdict, when you switch scenarios, and — best of
+all — right before pasting a large corpus, so the new conversation starts with
+it rather than adding it to a full one.
+
+**The packet carries state, not evidence.** Your corpus does not travel with it,
+by design. Re-paste it in the new conversation, and until you do, Dr. Morgan
+won't quote, count, or attribute anything. A summary that carries claims without
+the text underneath is how a fabrication survives a handoff and arrives looking
+clean.
+
+**Three habits that buy you a lot of room:** paste a corpus once and work from
+participant IDs afterwards; don't load a standalone scenario file alongside the
+agent, since the agent already contains it; and load one product-context and one
+method file rather than the directories.
+
 ### Method depth
 
 A second directory, [`methods/`](methods/), answers the other half of "be
@@ -371,7 +412,7 @@ The gate matrix, verdict schema, and known limits are in
 | [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md) | IBM Secure's output standards: palette, typography, spacing, document structure, and data integrity. Every generated research plan, deck, and analysis output follows it. |
 | [`skills/README.md`](skills/README.md) | Driving the Research Document Template: usage, layouts, output, and common scenarios. [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config. |
 | [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) | How Dr. Morgan gets specific about your product: the resolution order, the five-question intake, the file format, and how to add your own. [`product-context/`](product-context/) holds the files themselves. |
-| [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files. Read before adding a method. |
+| [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files, and the table of which methods have an instrument gate and which don't. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
 The six scenario files and the six evaluator agents are listed in

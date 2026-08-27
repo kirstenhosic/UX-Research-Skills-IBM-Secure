@@ -581,6 +581,15 @@ which is the same standard this suite holds research to.
   of leading in real sessions: the unwritten follow-up, and the silence a nervous
   moderator fills with a hypothesis. A clean guide can still produce contaminated
   data.
+- **Two methods have no instrument gate.** A survey and an A/B test both produce
+  findings the loop checks, and neither produces an *instrument* the loop can
+  read. `guide-checker` excludes surveys deliberately — self-administered
+  question wording answers to a different literature, and scoring one against
+  §4.6 would produce confident, wrong advice — and an experiment design has no
+  artifact of the shape any gate here expects. `methods/survey.md` and
+  `methods/ab-test.md` state this at the top and carry the craft standards
+  instead. A second human reader is the current control. `research-survey-checker`
+  is the obvious way to close the first gap.
 - **A rubric with blocking verdicts is a contested instrument for qualitative
   work.** Braun and Clarke — cited throughout this suite — reject reporting
   checklists such as COREQ and SRQR as incongruent with the values of reflexive
