@@ -97,7 +97,7 @@ quoted gets fixed.
 | **Double-barreled or compound** | "How do you configure and monitor policies?" | Two questions, one answer, and you will never know which half it addressed. NN/g frames the cost as working-memory overload: the participant answers the last part and the first is lost. | **Blocking** |
 | **Loaded or presupposing** | "What workarounds do you use for the sync delay?" | Presupposes the delay, the workaround, and that they noticed either. The "because" form — "did you pick that because it was faster?" — is the same defect wearing a clarifying question's clothes. | **Blocking** |
 | **Future-hypothetical standing alone** | "Would you use a feature that auto-rotated credentials?" | People are poor predictors of their own behavior, and generous ones. See Part 2. | **Blocking** if it is the only route to that topic; **flag** if a behavioral question anchors it first |
-| **Asking for the reason behind their own behavior** | "Why did you choose that approach?" | People have little introspective access to what actually drove a choice and supply a plausible-sounding theory instead (Nisbett & Wilson, 1977). You get an explanation, not a cause, and it arrives sounding exactly like data. Ask what they did and what was happening around it; the interpretation is the researcher's job, not the participant's. Flag repeated "why" chains especially — NN/g recommends a probe bank instead. | Flag |
+| **Asking for the reason behind their own behavior** | "Why did you choose that approach?" | People have little introspective access to what actually drove a choice and supply a plausible-sounding theory instead (Nisbett & Wilson, 1977). You get an explanation, not a cause, and it arrives sounding exactly like data. Ask what they did and what was happening around it; the interpretation is the researcher's job, not the participant's. **Scope this narrowly.** A *main question* asking someone to account for their own decision is the defect. "Why?" or "how so?" sitting in a probe bank, used to invite elaboration on a story already in play, is good interviewing and is not flagged. Flag repeated "why" chains as the moderator's only tool — NN/g recommends a probe bank instead. | Flag |
 | **Manufacturing an opinion** | "What do you think of the new risk dashboard layout?" asked of someone who has never noticed it | The query effect: asked for a view they don't hold, people construct one on the spot, and it is reported later as a pre-existing preference. Establish that the topic is live for them before asking what they think of it. | Flag |
 | **Sensitive question with no framing** | "How often do you skip the review step?" | Misreporting on sensitive topics is common and largely *situational* (Tourangeau & Yan, 2007), which means wording carries as much of the effect as placement does. A normalizing preamble ("some teams do this every time, some skip it when they're under pressure…") and forgiving phrasing recover more than a bare ask. Placement is Part 4; this is the wording half. | Flag |
 | **Yes/no with no probe** | "Did you find that difficult?" | Produces one word from a senior practitioner who has somewhere else to be. | Flag |
@@ -106,12 +106,83 @@ quoted gets fixed.
 | **Jargon mismatch** | "When you think about your secrets-management posture…" | Only when the participant would not use the phrase. For senior technical audiences, product and domain jargon is usually correct and stripping it sounds condescending. Flag genuine mismatches, not vocabulary. | Flag |
 | **Scale without an anchor** | "On a scale of 1 to 10, how usable was it?" | In a qualitative session an unanchored number is a number nobody can interpret and a story nobody told. | Flag |
 
+### The positive rule: TED+W
+
+Every main question should open with **Tell me about · Explain · Describe · Walk
+me through**. Check for it directly and report the share of main questions that
+do. The convention is TED, from investigative interviewing under the UK PEACE
+model, where open prompts are used to elicit a free narrative before any probing
+because open questions produce more reliable accounts; "walk me through" is the
+workflow-research extension.
+
+This is worth checking *first*, before the defect list, because it is the rule
+that fixes the others. A question that genuinely opens with TED+W is very hard to
+make leading, double-barreled, or yes/no — the defects in the table below are
+mostly what happens when a drafter reaches for a different opener. A guide where
+most main questions fail TED+W will fail several rows above, and saying so once
+is more useful than flagging each instance separately.
+
+Not a blocking rule on its own: "what happened next" and "what were you expecting
+there" are excellent questions with the wrong opener. Report the share, flag a
+guide where it is low, and treat it as diagnosis rather than defect.
+
+### Subjective language with no probe
+
+Evaluative words mean different things to different people, and a guide that
+lets them pass at face value produces a transcript full of "it was fine" and
+"that part was confusing" with nothing underneath. Check for these, in the
+questions and in the probes:
+
+> *easy · hard · simple · complex · confusing · obvious · intuitive · seamless ·
+> clunky · messy · fine · frustrating · annoying · overwhelming · straightforward*
+
+Two separate checks. **When one appears inside a question**, the question is
+supplying the evaluation the participant should be supplying — flag it, and note
+that it also usually reads as leading. **When the guide contains no instruction
+to probe these words at all**, flag that too: it is the single most common gap
+between a guide that reads well and a session that produces usable material. The
+fix is one line in the moderator reminders.
+
+### Moderator reminders
+
+Does the guide end with instructions to the person running the session? Flag if
+not.
+
+This matters more than its size suggests. You cannot see the moderator, and
+neither can any other gate — but the artifact travels into the room, and what it
+says there is the only lever anyone has on live moderation. A reminders block
+should carry the always-probe word list, the TED+W openers for going off-guide,
+mirroring, waiting a beat after the participant stops speaking, and an explicit
+statement that the guide is a starting point to be departed from.
+
 **For moderated usability scripts, the same rules apply to task wording.** A task
 that names the control gives away the answer: "Use the rotate-secret button to
 rotate the credential" tests nothing. Tasks should state a goal in the
 participant's language and leave the route to them. A task that presupposes the
 participant would ever want to do it is the task equivalent of a leading
 question — **blocking** on both counts.
+
+Check each task against four components. A task missing any of them is not ready:
+
+1. **A user goal** — what the person wants at the end, not the control you want
+   exercised
+2. **Context** — a realistic reason to care, in two sentences or fewer. Elaborate
+   backstory gets skimmed, and the part they skip is the part you needed
+3. **The information they need** — dates, names, values. Make them invent inputs
+   and you will measure their invention
+4. **A reachable end state** — a definable "done" that the prototype can actually
+   reach. **Blocking** if the flow dead-ends before it
+
+Also flag loaded task language ("find the best option", "take advantage of the
+discount") and emotionally charged framing — health, money trouble, bereavement,
+family occasions — which costs rapport and buys nothing.
+
+**In a quantitative session, probing during tasks is a defect**, not a
+preference: it changes the time on task being recorded and rescues a participant
+who was about to recover on their own. Flag any probe written into the task
+sequence of a measured session. In a qualitative session the opposite holds and
+the probes are the data — which is why you need to know which kind of session
+this is before scoring it.
 
 **Probes.** Are follow-ups written in, or does every question stand alone?
 Silence and "tell me more" are the strongest tools a moderator has (Portigal),
@@ -303,6 +374,21 @@ guide without it leaves it on the table.
 question with probes runs perhaps 4–6 minutes, not 2. Compare against the stated
 session length and report the gap.
 
+Cross-check the count against the planning ranges below, which come at the same
+answer from the other direction. Where the two disagree, report both rather than
+picking one; the disagreement is itself informative.
+
+| Session | Interview main questions | Usability tasks |
+|---|---|---|
+| 45 min | 6–8 | 5–7 |
+| 60 min | 8–12 | 5–7 |
+| 90 min | 12–17 | 8–12 |
+
+Both are rules of thumb with assumptions — substantive open questions with
+probes, a participant who talks most of the time, tasks of moderate complexity.
+A method file in `methods/` overrides them where it has better numbers for that
+method. Neither is a measurement.
+
 Treat the overrun as a **flag**, not a blocker, and say that the per-question
 figure is a working heuristic rather than a measured rate: an experienced
 moderator running a familiar guide is faster than that, and a contextual inquiry
@@ -361,12 +447,16 @@ what that meant for severity.
 
 ### Question inventory
 
-| # | Section | Question (quoted, truncated to 12 words) | Type | Recall window | Issues |
-|---|---|---|---|---|---|
+| # | Section | Question (quoted, truncated to 12 words) | Type | TED+W | Recall window | Issues |
+|---|---|---|---|---|---|---|
 
-Type is `behavioral` / `contextual` / `hypothetical`. Recall window applies to
-behavioral questions only: `bounded` / `landmark` / `none`. Issues are the
-problem names from Part 1, or `—`.
+Type is `behavioral` / `contextual` / `hypothetical`. TED+W is `yes` / `no` for
+main questions and `—` for probes. Recall window applies to behavioral questions
+only: `bounded` / `landmark` / `none`. Issues are the problem names from Part 1,
+or `—`.
+
+**Above the table**, report the share of main questions opening with TED+W, and
+whether the guide instructs the moderator to probe subjective language.
 
 ### Evidence hierarchy
 
@@ -392,11 +482,19 @@ anything out of place.
 Question count, per-section and total estimate, stated session length, and the
 gap. State that the estimate is heuristic.
 
+### Moderator reminders
+
+Whether the guide ends with instructions to the person running the session, and
+what they cover. Name what's missing from: the always-probe word list, TED+W
+openers for going off-guide, mirroring, the pause after the participant stops,
+and permission to depart from the guide.
+
 ### Piloting and coverage of this gate
 
 Whether the guide has been piloted. Then, in one or two sentences: that this gate
 does not replace a pilot, and that it cannot see the moderator, where most
-leading actually happens.
+leading actually happens — which is why the reminders block above is the only
+lever anyone has on live moderation.
 
 ### Blocking / Flagged
 
@@ -463,6 +561,11 @@ this list from memory.
   probe types.
 - **Fitzpatrick, R.**, *The Mom Test.* The practitioner test for a leading
   question.
+- **The PEACE model of investigative interviewing** (England and Wales, early
+  1990s). Source of the TED convention — Tell me, Explain, Describe — used to
+  elicit a free narrative before probing, on the evidence that open questions
+  produce more reliable and less contaminated accounts. "Walk me through" is the
+  workflow-research extension, not part of the original.
 - **Nielsen Norman Group** — "6 Mistakes When Crafting Interview Questions,"
   "Why User Interviews Fail," "Avoid Leading Questions," "The Critical Incident
   Technique in UX."

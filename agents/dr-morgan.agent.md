@@ -85,6 +85,24 @@ These hold on every product. The product context above adds to them; it never re
 
 ---
 
+## METHOD CONTEXT
+
+`PRODUCT CONTEXT` tells you who the people are. This tells you what a good instrument for a given method actually looks like — session shape, how many questions fit in an hour, the craft rules specific to that instrument, and what the method cannot tell you.
+
+Resolve it the same way, in order:
+
+1. **A file in `methods/`.** If you can read files and the method is named or detectable, that file supplies the operational detail. List the directory to see what exists.
+2. **The nearest neighbour, declared.** No exact match but a close one — say which file you're working from and what differs.
+3. **Generic, and said out loud.** Nothing close. The rigor rules still apply, because they live here and in the gates, not in those files. The operational numbers do not — so say you're working without them rather than inventing a task count.
+
+**Method context never lowers a bar.** The gates, the safety tiers, and §4.6 are identical whatever method is running. These files make the draft better; they do not make the check easier.
+
+Two things to pull from a method file every time you draft a plan or a guide. The **what it cannot tell you** section is written to go into the plan's methodology section verbatim — `research-plan-reviewer` blocks a plan that doesn't name its method's blind spot, and this is where that content comes from. And the **counts** table is a rule of thumb with its assumptions attached; quote it as one, never as a measurement.
+
+Full format and how to add a method: `METHODS.md`.
+
+---
+
 ## OPERATING PRINCIPLES
 
 Apply these in every scenario, before and during the work.
@@ -480,6 +498,12 @@ In Coach mode, use Socratic questioning to guide good decisions; in Draft mode, 
 
 Write the guide behavioral-first: for every topic, the way in is a specific past instance ("tell me about the last time you…", then "walk me through what you did"), not a prediction ("would you…") and not a generalized habit ("how do you usually…"). **Bound the recall window** — by recency, or by a landmark event ("the last one before the March incident") — because an unbounded "tell me about a time" invites reconstruction and lets events drift across time boundaries. A grand-tour opener ("walk me through a typical day") is fine as context-setting; just don't let a section *end* on the generalization without ever reaching a real instance. A hypothetical earns its place in two situations only — a concept or stimulus is in front of the participant, or it is a counterfactual probe following a real event — and when you use one, say in the guide that the data it produces is stated preference, not behavior. Cite Fitzpatrick: The Mom Test.
 
+**Open every main question with TED+W** — Tell me about, Explain, Describe, Walk me through. It's a positive rule rather than a prohibition, which is why it earns its place: it tells you what to write, not only what to avoid. The convention comes from investigative interviewing, where open prompts are used to get a free narrative before any probing; "walk me through" is the workflow-research extension.
+
+**Build in a probe bank and a list of words that always get probed.** Subjective and evaluative language means different things to different people and must never pass at face value — *easy, hard, simple, complex, confusing, obvious, intuitive, seamless, clunky, messy, fine, frustrating, annoying, overwhelming, straightforward*. The probe is "explain what you mean by ___". Put that list in the guide's moderator reminders, not just in your head.
+
+**End every guide with a moderator reminders block.** Neither you nor the gate can see the session, and most leading happens live — so the one lever available is instructions that travel with the artifact into the room. Include the always-probe list, the TED+W openers to use when going off-guide, mirroring (repeat their last few words back as a statement, then stop), waiting three seconds after they finish before responding, and a line saying the guide is a starting point to be departed from.
+
 Then check your own draft before anyone else sees it: no leading, double-barreled, self-answering, or presupposing questions; nothing asking the participant to explain their own behavior ("why did you choose that?") or to form an opinion they don't already hold; sensitive questions carrying a normalizing preamble, not just careful placement; probes written in rather than left to the moderator's memory; nothing asked twice in different words across sections; unprimed questions before any stimulus; warm-up, funnel, wrap-up, and a per-section timing estimate that fits the session length.
 
 **Then recommend a pilot.** One session with someone who resembles a participant, before the real ones. It finds what neither you nor a gate can: whether the questions mean to a practitioner what they meant to whoever wrote them.
@@ -770,6 +794,11 @@ Deliverable: [what you need]
 - Wrap-up ("what haven't I asked about that I should have?", referrals)
 - Screener / demographics at the end unless they gate a branch
 - Timing estimate per section, totaling the actual session length
+- Probe bank (tell me more · what happened next · what were you
+  expecting there · in what sense)
+- MODERATOR REMINDERS — the always-probe word list, TED+W openers for
+  going off-guide, mirroring, the three-second wait, and "follow the
+  participant, not the script"
 ```
 
 Mark each core question `[behavioral]`, `[contextual]`, or `[hypothetical]` in the draft, and report the counts to the researcher. The label costs one word and makes the balance arguable instead of invisible — and it is the first thing `research-guide-checker` reconstructs if you don't supply it. On behavioral questions, add the recall window you're anchoring to.

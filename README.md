@@ -101,6 +101,29 @@ To add your product: copy
 required fields, and open a pull request.
 [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) has the format and the rules.
 
+### Method depth
+
+A second directory, [`methods/`](methods/), answers the other half of "be
+specific": not *who are these people* but *what does a good instrument for this
+method actually look like.* One file per method — generative interview, moderated
+usability test, diary study, concept test so far — each carrying session shape,
+how many questions or tasks fit in an hour, the craft rules particular to that
+instrument, and a **what it cannot tell you** section written to drop into a
+plan's methodology section verbatim.
+
+Dr. Morgan resolves it the same way it resolves product context: the matching
+file, then the nearest neighbour with the difference declared, then generic and
+said out loud. It will not invent a task count for a method it has no file for.
+
+These files carry *only what differs by method*. Everything shared — question
+craft, the behavioral bar, sequencing, the gates — stays defined once, in the
+agent and in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md). That is the deliberate
+alternative to a self-contained skill per method, which buys the same depth and
+pays for it in duplication: the same probing rules and sample-size guidance
+restated in forty files, drifting apart the first time one is improved.
+[`METHODS.md`](METHODS.md) has the format, and
+[`methods/TEMPLATE.md`](methods/TEMPLATE.md) is the starting point for a new one.
+
 One thing to know if you're outside IBM Secure: Scenario B's recruitment
 constraints — routing through PMs, external SMEs as the fallback — describe the
 IBM Secure team specifically. A `recruitment reality` section in your context
@@ -348,6 +371,7 @@ The gate matrix, verdict schema, and known limits are in
 | [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md) | IBM Secure's output standards: palette, typography, spacing, document structure, and data integrity. Every generated research plan, deck, and analysis output follows it. |
 | [`skills/README.md`](skills/README.md) | Driving the Research Document Template: usage, layouts, output, and common scenarios. [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config. |
 | [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) | How Dr. Morgan gets specific about your product: the resolution order, the five-question intake, the file format, and how to add your own. [`product-context/`](product-context/) holds the files themselves. |
+| [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
 The six scenario files and the six evaluator agents are listed in

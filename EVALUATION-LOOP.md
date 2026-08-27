@@ -354,45 +354,61 @@ drafted. §4.1 covers the plan around it; this covers the instrument.
 **Severity scales with the kind of guide.** A verbatim script is held to every
 item below at full strength. A semi-structured guide — a roadmap the interviewer
 departs from, which is what most of these are — is held at full strength on
-structure, sequence, and priming, and one level down on wording, except items 1
-and 3, which stay blocking because they set the moderator's framing even when the
+structure, sequence, and priming, and one level down on wording, except items 2
+and 4, which stay blocking because they set the moderator's framing even when the
 exact words change. A topic list gets structure and sequence review only.
 
 **Question craft**
 
-1. No leading, self-answering, or presupposing questions — including the
+1. Main questions open with TED+W — Tell me about, Explain, Describe, Walk me
+   through. A positive rule, and the one that prevents most of the rest: a
+   question that genuinely opens this way is hard to make leading, compound, or
+   yes/no. Reported as a share rather than enforced per question, since a
+   well-formed "what happened next" fails it harmlessly
+2. No leading, self-answering, or presupposing questions — including the
    "because" form ("did you pick that because it was faster?")
-2. No double-barreled or compound questions
-3. No future-hypothetical question is the only route to a topic. Hypotheticals
+3. No double-barreled or compound questions
+4. No future-hypothetical question is the only route to a topic. Hypotheticals
    are legitimate with a stimulus present or as a counterfactual probe on a real
    event — and when used, the guide says the resulting data is stated
    preference, not behavior
-4. Questions ask what happened, not why the participant thinks they did it.
+5. Questions ask what happened, not why the participant thinks they did it.
    People have little introspective access to their own decision processes and
    supply a plausible theory instead; interpretation is the researcher's job
-5. No question asks a participant to form an opinion they don't already hold —
+6. No question asks a participant to form an opinion they don't already hold —
    establish the topic is live for them before asking what they think of it
-6. Sensitive questions carry a normalizing preamble and forgiving wording, not
+7. Sensitive questions carry a normalizing preamble and forgiving wording, not
    just careful placement
-7. Yes/no questions carry a probe
-8. Every section has written-in follow-up probes, and the guide balances main
+8. Yes/no questions carry a probe
+9. Every section has written-in follow-up probes, and the guide balances main
    questions, follow-ups, and probes rather than only the first
-9. In a usability script, task wording states a goal without naming the control
-   and without presupposing the participant would want to perform it
+10. In a usability script, every task carries a user goal, lean realistic
+   context, the information the participant needs, and a reachable end state —
+   and its wording names no control, presupposes no desire to perform it, and
+   carries no loaded or emotionally charged framing. In a measured session, no
+   probes are written into the task sequence
+11. The guide instructs the moderator to probe subjective and evaluative
+   language — *easy, hard, confusing, obvious, intuitive, seamless, fine,
+   frustrating, overwhelming, straightforward* — and no such word appears inside
+   a question, where it supplies the evaluation the participant should supply
+12. The guide ends with a moderator reminders block: the always-probe list,
+   TED+W openers for going off-guide, mirroring, the pause after the participant
+   stops speaking, and permission to depart from the guide. This is the only
+   lever any gate has on live moderation, which is where most leading happens
 
 **Evidence hierarchy**
 
-10. **Every topic the guide covers is reachable through at least one behavioral
+13. **Every topic the guide covers is reachable through at least one behavioral
     question** — a specific past instance, not a generalized habit. This is the
     bar
-11. Behavioral questions bound the recall window, by recency or by a landmark
+14. Behavioral questions bound the recall window, by recency or by a landmark
     event. An unbounded "tell me about a time…" invites reconstruction and
     telescoping
-12. Counts and ratio per section are reported. **No published work supports any
+15. Counts and ratio per section are reported. **No published work supports any
     particular ratio** — roughly two-thirds behavioral in the core is a
     reasonable place to start an argument about the balance, and nothing more
-    than that. The per-topic rule in item 10 is the requirement
-13. The guide does not imply that retrospective self-report is observed
+    than that. The per-topic rule in item 13 is the requirement
+16. The guide does not imply that retrospective self-report is observed
     behavior. An interview produces self-report throughout; a specific past
     instance is better-quality self-report, not behavioral data. Where a
     research question needs behavior an interview can't reach, that is flagged
@@ -400,38 +416,41 @@ exact words change. A topic list gets structure and sequence review only.
 
 **Repetition**
 
-14. No verbatim or near-verbatim duplicate question
-15. Two questions eliciting the same construct in different words are either
+17. No verbatim or near-verbatim duplicate question
+18. Two questions eliciting the same construct in different words are either
     marked as a deliberate re-approach or flagged as a probable drafting
     accident. Not called triangulation, which means combining methods, sources,
     investigators, or theories — not re-asking inside one interview
-16. No question re-collects what the screener or intake already has
+19. No question re-collects what the screener or intake already has
 
 **Sequence**
 
-17. A warm-up precedes the core questions; nothing touching competence,
+20. A warm-up precedes the core questions; nothing touching competence,
     mistakes, or workarounds sits in the opening section
-18. Broad before narrow, within the guide and within each section. A grand-tour
+21. Broad before narrow, within the guide and within each section. A grand-tour
     opener is legitimate; a section that ends on the generalization without ever
     reaching an instance is not
-19. Questions about a workflow follow the order the participant lives it
-20. No question depends on a concept the guide has not yet introduced
-21. Unprimed questions — current workflow, expectations, unmet needs — come
+22. Questions about a workflow follow the order the participant lives it
+23. No question depends on a concept the guide has not yet introduced
+24. Unprimed questions — current workflow, expectations, unmet needs — come
     before any stimulus, concept description, or feature name that would answer
     them for the participant. The best-evidenced item on this list
-22. Screener and demographic questions sit at the end unless they gate a branch
-23. A wrap-up exists, including "what haven't I asked about?"
+25. Screener and demographic questions sit at the end unless they gate a branch
+26. A wrap-up exists, including "what haven't I asked about?"
 
 **Timing and piloting**
 
-24. Question count and per-section estimates are stated, and the total is
-    compared against the stated session length. A substantive open question with
-    probes runs perhaps 4–6 minutes — a working heuristic, not a measured rate,
-    so an overrun is flagged rather than blocking
-25. The guide has been piloted with someone who resembles a participant, or a
+27. Question count and per-section estimates are stated, and the total is
+    compared against the stated session length, cross-checked against the
+    planning ranges (45 min: 6–8 interview questions or 5–7 tasks · 60 min: 8–12
+    or 5–7 · 90 min: 12–17 or 8–12). A substantive open question with probes runs
+    perhaps 4–6 minutes. All of these are working heuristics with assumptions
+    attached, not measured rates, so an overrun is flagged rather than blocking,
+    and a `methods/` file with better numbers for that method overrides them
+28. The guide has been piloted with someone who resembles a participant, or a
     pilot is scheduled. The gate is not a pilot and says so
 
-26. Meets `VOICE-AND-STYLE.md`
+29. Meets `VOICE-AND-STYLE.md`
 
 **What this rubric cannot reach.** It scores a document. It cannot see the
 moderator, and most leading happens live — in an unwritten follow-up, in a
@@ -558,7 +577,7 @@ which is the same standard this suite holds research to.
   document. Whether a question is ambiguous *to a platform engineer at a
   regulated bank at 4pm on a Thursday* is the only version of that question that
   matters, and one pilot session answers it better than this gate ever will —
-  which is why §4.6 item 25 asks for one. It is also blind to the largest source
+  which is why §4.6 item 28 asks for one. It is also blind to the largest source
   of leading in real sessions: the unwritten follow-up, and the silence a nervous
   moderator fills with a hypothesis. A clean guide can still produce contaminated
   data.

@@ -30,6 +30,29 @@ known gaps.
 
 New product files need no code change. They are found by listing the directory.
 
+## Method context lives beside it
+
+`methods/` holds one file per method; `METHODS.md` is the format. Same resolution
+pattern as product context — file, nearest neighbour, generic-and-said-so — and
+the same rule that it never lowers a bar.
+
+The constraint that keeps this from becoming forty duplicated files: **a method
+file carries only what differs by method.** Question craft, the behavioral bar,
+sequencing, probing, and the gates are shared and are defined once, in the agent
+and in `EVALUATION-LOOP.md` §4.6. If you catch yourself writing the same rule
+into two method files, it belongs in neither — lift it to §4.6.
+
+Two fields are load-bearing downstream. `what it cannot tell you` is written to
+be pasted into a plan's methodology section, because `plan-reviewer` blocks a
+plan that doesn't name its method's blind spot. `counts` is quoted by
+`guide-checker` as a cross-check on timing, and overrides the generic ranges in
+§4.6 item 27 for that method.
+
+Unlike product context, no method file is mirrored into the agent. The agent
+carries the resolution order only. A pasted Dr. Morgan therefore has the rigor
+rules and none of the operational numbers, and is instructed to say so rather
+than invent them.
+
 ## What is deliberately not product-specific
 
 `DOMAIN CHALLENGES TO ALWAYS RAISE` in the agent holds only challenges that are
