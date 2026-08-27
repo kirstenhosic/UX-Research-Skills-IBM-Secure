@@ -121,3 +121,8 @@ This skill is designed for:
 - **Security/Compliance** — documenting research methodology and consent
 
 Use consistently across teams so every research document meets the same professional standard. The repo copy (`skills/research-document-template.py`) is the source of truth — sync any local `~/.claude/skills/` copy from here.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

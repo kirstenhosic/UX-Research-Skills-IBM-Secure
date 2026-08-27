@@ -363,4 +363,4 @@ This design system is **living documentation**. As the team adopts new tools or 
 4. Document the rationale in the git commit message
 
 **Last Updated:** July 2026  
-**Maintainer:** Kirsten Hosic (@kirstenhosic)
+**Author and maintainer:** Kirsten Hosic (@kirstenhosic), UX Research Strategy Lead, Security Product Design

@@ -321,3 +321,8 @@ vagueness that reads generated.
 some of it is legitimately a form — timeline, consent, screener criteria. Voice
 matters in the framing, the questions, and the rationale. It does not need to
 be present in the logistics table.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

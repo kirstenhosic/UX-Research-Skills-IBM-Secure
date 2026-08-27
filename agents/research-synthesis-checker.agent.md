@@ -179,3 +179,8 @@ Set `next_action: ESCALATE` — regardless of iteration count — if the corpus 
 At iteration 3, a `FAIL` becomes `ESCALATE`. Two revision passes is the cap; past that, the problem is upstream of the wording.
 
 Keep the report factual and concise. Do not propose rewrites unless the user explicitly asks for corrections.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

@@ -240,3 +240,8 @@ for the intended destination. Those are decisions for a person.
   can do nothing with "a large financial institution."
 - **Do not pass silently on material you cannot read.** List it.
 - **Do not rewrite the artifact.** Quote, locate, and name the rule.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

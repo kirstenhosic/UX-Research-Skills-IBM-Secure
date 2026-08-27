@@ -866,3 +866,8 @@ See: the full-plan example above, and `skills/README.md`
 **Version:** 1.0  
 **Last Updated:** July 2026  
 **Maintainer:** UX Research Team
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

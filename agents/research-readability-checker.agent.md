@@ -210,3 +210,8 @@ artifact releases.
   and consent sections are legitimately forms. Voice matters in framing,
   questions, findings, and rationale.
 - **Do not run on Coach mode conversation.** This gate is for artifacts only.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

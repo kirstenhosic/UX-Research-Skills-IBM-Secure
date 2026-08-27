@@ -318,3 +318,8 @@ Document the decision so you can explain it later to skeptics.
 5. **Iterate** before finalizing with stakeholders
 
 Happy researching! 🚀
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

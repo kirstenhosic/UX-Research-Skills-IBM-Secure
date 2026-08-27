@@ -4,6 +4,10 @@ IBM HashiCorp Secure — Research Document Template
 Generates professionally formatted Word documents for UX research artifacts
 (research plans, rationales, briefs, and custom documents) following the
 repo design system (DESIGN-SYSTEM.md).
+
+Part of the Dr. Morgan UX research suite.
+Author: Kirsten Hosic, UX Research Strategy Lead, Security Product Design.
+License: MIT.
 """
 
 import json

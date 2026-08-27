@@ -291,3 +291,8 @@ named decision, if the corpus is incomplete, or if analysis was done from
 memory.
 
 Keep the report factual and short. Do not propose rewrites unless asked.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

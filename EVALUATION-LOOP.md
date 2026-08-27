@@ -149,8 +149,8 @@ not in a report they've already closed.
 ## 3. Gate matrix
 
 Gates attach to **artifact types**, not to skills. Four artifact types are gated
-by agents — one pre-flight plus four evaluators in sequence — so most run the
-pre-flight and two or three gates rather than all of them. The fifth row, the
+by agents — one pre-flight plus five evaluators in sequence — so most run the
+pre-flight and two or three gates rather than all of them. The last row, the
 theme set, has no agent gate at all: it gets a human checkpoint instead (§9).
 
 Every row below is preceded by `research-safety-checker` (pre-flight, always).
@@ -158,7 +158,9 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | Artifact | Produced by | Gates, in order |
 |---|---|---|
 | **Theme set** | Scenario A, F — Draft mode only | **Human checkpoint, no agent gate.** See §9 |
-| **Research plan / discussion guide** | Scenario C, D; `research-document-template` | `plan-reviewer` → `readability-checker` |
+| **Research plan, no guide attached** | Scenario C, D; `research-document-template` | `plan-reviewer` → `readability-checker` |
+| **Research plan with a discussion guide** | Scenario C, D; `research-document-template` | `plan-reviewer` → `guide-checker` → `readability-checker` |
+| **Discussion guide / interview script, standalone** | Scenario C, D; any Draft-mode guide | `guide-checker` → `readability-checker` |
 | **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
@@ -167,6 +169,31 @@ Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
 reads, if it turns out not to be supported. A `FAIL` at any gate stops the
 sequence; later gates don't run until the artifact clears the earlier one.
+
+### Why a guide gets its own gate
+
+`plan-reviewer` used to review the guide's questions itself, in a short pass
+appended to the upstream audit. That pass was doing two jobs badly. Deciding
+whether a guide *points at the right targets* needs the research questions in
+hand; deciding whether its questions are *any good* needs to read the guide as a
+conversation and needs no plan at all. Splitting them means each gate can be run
+alone — a guide with no plan yet still gets a real review — and it removes the
+case where one agent held two standards for the same question and quietly
+applied whichever it reached first.
+
+**The split:** `plan-reviewer` maps the guide against the research questions in
+both directions, weighs coverage against stated priority, and checks that the
+instrument is the right *kind* for the method. `guide-checker` reads the
+instrument itself: question craft, the behavioral-versus-hypothetical balance,
+the same question asked twice in different words, and the order — including the
+priming failure where a stimulus appears before the unprimed baseline questions.
+Neither reaches into the other.
+
+**A guide is gated the moment it is drafted, not when the study is planned.**
+Draft mode produces guides in several places — Scenario C phase 5, Scenario D
+after a rebuild, a standalone request — and every one of them runs this gate
+before a session is scheduled. A defect in a guide has a hard deadline: it stops
+being fixable the moment the first participant answers the question.
 
 ### Why the deck is re-checked
 
@@ -205,14 +232,15 @@ That report is a warning, not a verdict. Nothing passes, fails, or gets revised
 on it. It exists so that whoever compares the document against the reviewed
 plan is told what is missing instead of being left to notice.
 
-### The five evaluators
+### The six evaluators
 
 | Agent | Verifies | Cannot see |
 |---|---|---|
 | `research-safety-checker` | Is this safe to share with *this* audience? | Whether any of it is true, relevant, or readable |
 | `research-synthesis-checker` | Is each claim traceable to source text? | Whether the claim matters |
 | `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
-| `research-plan-reviewer` | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
+| `research-plan-reviewer` | Will this study answer its question? Does the guide cover it? | Anything post-fieldwork; the wording, order, and repetition inside the guide |
+| `research-guide-checker` | Are the questions well-formed, behavioral, non-repeating, and in an order a conversation could follow? | Whether the study is worth running; whether the guide covers the research questions; **the moderator**, where most leading actually happens |
 | `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
 
 Each column-3 entry is the reason there is more than one evaluator. A
@@ -229,7 +257,7 @@ The bar each artifact is measured against. Evaluators are handed the relevant
 section as their rubric — so the standard lives in one place and the evaluator
 isn't inventing it fresh each run.
 
-### 4.1 Research plan / discussion guide
+### 4.1 Research plan
 
 1. A named decision, with an owner and a date. What changes because of this?
 2. Research questions that are specific, researchable, and prioritized
@@ -238,9 +266,10 @@ isn't inventing it fresh each run.
    with sample size given as a rule of thumb plus its assumptions
 5. Recruitment path realistic against the team's actual constraints, with a
    timeline that reflects them
-6. Every question in the guide maps to a research question; anything mapping to
-   none is cut or justified
-7. No leading, double-barreled, or future-hypothetical questions
+6. Every question in the guide maps to a research question, and every research
+   question is served by at least one — anything mapping to none is cut or
+   justified
+7. The guide itself clears §4.6
 8. An analysis plan exists before fieldwork starts
 9. Consent, de-identification, storage, and retention are addressed
 10. Out-of-scope is stated explicitly
@@ -313,6 +342,101 @@ contain for the review to be possible at all. Full procedure in §9.
    with reasons — the reasoning, not just the conclusions
 6. Each theme has a disposition field: accept / revise / split / reject
 7. The outcome is recorded as `theme_review` on every finding derived from it
+
+---
+
+### 4.6 Discussion guide / interview script
+
+The bar `research-guide-checker` scores against. It sits after 4.5 because it
+was added last, not because it runs last — a guide is gated the moment it is
+drafted. §4.1 covers the plan around it; this covers the instrument.
+
+**Severity scales with the kind of guide.** A verbatim script is held to every
+item below at full strength. A semi-structured guide — a roadmap the interviewer
+departs from, which is what most of these are — is held at full strength on
+structure, sequence, and priming, and one level down on wording, except items 1
+and 3, which stay blocking because they set the moderator's framing even when the
+exact words change. A topic list gets structure and sequence review only.
+
+**Question craft**
+
+1. No leading, self-answering, or presupposing questions — including the
+   "because" form ("did you pick that because it was faster?")
+2. No double-barreled or compound questions
+3. No future-hypothetical question is the only route to a topic. Hypotheticals
+   are legitimate with a stimulus present or as a counterfactual probe on a real
+   event — and when used, the guide says the resulting data is stated
+   preference, not behavior
+4. Questions ask what happened, not why the participant thinks they did it.
+   People have little introspective access to their own decision processes and
+   supply a plausible theory instead; interpretation is the researcher's job
+5. No question asks a participant to form an opinion they don't already hold —
+   establish the topic is live for them before asking what they think of it
+6. Sensitive questions carry a normalizing preamble and forgiving wording, not
+   just careful placement
+7. Yes/no questions carry a probe
+8. Every section has written-in follow-up probes, and the guide balances main
+   questions, follow-ups, and probes rather than only the first
+9. In a usability script, task wording states a goal without naming the control
+   and without presupposing the participant would want to perform it
+
+**Evidence hierarchy**
+
+10. **Every topic the guide covers is reachable through at least one behavioral
+    question** — a specific past instance, not a generalized habit. This is the
+    bar
+11. Behavioral questions bound the recall window, by recency or by a landmark
+    event. An unbounded "tell me about a time…" invites reconstruction and
+    telescoping
+12. Counts and ratio per section are reported. **No published work supports any
+    particular ratio** — roughly two-thirds behavioral in the core is a
+    reasonable place to start an argument about the balance, and nothing more
+    than that. The per-topic rule in item 10 is the requirement
+13. The guide does not imply that retrospective self-report is observed
+    behavior. An interview produces self-report throughout; a specific past
+    instance is better-quality self-report, not behavioral data. Where a
+    research question needs behavior an interview can't reach, that is flagged
+    and handed to `plan-reviewer`, which owns method fit
+
+**Repetition**
+
+14. No verbatim or near-verbatim duplicate question
+15. Two questions eliciting the same construct in different words are either
+    marked as a deliberate re-approach or flagged as a probable drafting
+    accident. Not called triangulation, which means combining methods, sources,
+    investigators, or theories — not re-asking inside one interview
+16. No question re-collects what the screener or intake already has
+
+**Sequence**
+
+17. A warm-up precedes the core questions; nothing touching competence,
+    mistakes, or workarounds sits in the opening section
+18. Broad before narrow, within the guide and within each section. A grand-tour
+    opener is legitimate; a section that ends on the generalization without ever
+    reaching an instance is not
+19. Questions about a workflow follow the order the participant lives it
+20. No question depends on a concept the guide has not yet introduced
+21. Unprimed questions — current workflow, expectations, unmet needs — come
+    before any stimulus, concept description, or feature name that would answer
+    them for the participant. The best-evidenced item on this list
+22. Screener and demographic questions sit at the end unless they gate a branch
+23. A wrap-up exists, including "what haven't I asked about?"
+
+**Timing and piloting**
+
+24. Question count and per-section estimates are stated, and the total is
+    compared against the stated session length. A substantive open question with
+    probes runs perhaps 4–6 minutes — a working heuristic, not a measured rate,
+    so an overrun is flagged rather than blocking
+25. The guide has been piloted with someone who resembles a participant, or a
+    pilot is scheduled. The gate is not a pilot and says so
+
+26. Meets `VOICE-AND-STYLE.md`
+
+**What this rubric cannot reach.** It scores a document. It cannot see the
+moderator, and most leading happens live — in an unwritten follow-up, in a
+silence filled with a hypothesis. A clean guide in the wrong hands produces
+contaminated data and passes every item above.
 
 ---
 
@@ -414,7 +538,7 @@ which is the same standard this suite holds research to.
   Strict-verdict rules and blind context reduce this; they don't remove it.
 - **An evaluator sharing a model and context with the producer shares its blind
   spots.** Blind evaluation (source + claim only) is the main defense.
-- **Chained gates compound false positives.** Four gates each with a small
+- **Chained gates compound false positives.** Five gates each with a small
   false-alarm rate produce a system that flags something almost every run. If
   flags become noise, people stop reading them. Watch for gates that flag
   constantly, and tighten the ones that do.
@@ -430,6 +554,32 @@ which is the same standard this suite holds research to.
 - **A green verdict is not a correct study.** These gates catch fabrication,
   irrelevance, incoherence, and opacity. They cannot catch a well-executed
   study of the wrong question that everyone agreed on at the start.
+- **`guide-checker` is not a pilot, and it cannot see the moderator.** It reads a
+  document. Whether a question is ambiguous *to a platform engineer at a
+  regulated bank at 4pm on a Thursday* is the only version of that question that
+  matters, and one pilot session answers it better than this gate ever will —
+  which is why §4.6 item 25 asks for one. It is also blind to the largest source
+  of leading in real sessions: the unwritten follow-up, and the silence a nervous
+  moderator fills with a hypothesis. A clean guide can still produce contaminated
+  data.
+- **A rubric with blocking verdicts is a contested instrument for qualitative
+  work.** Braun and Clarke — cited throughout this suite — reject reporting
+  checklists such as COREQ and SRQR as incongruent with the values of reflexive
+  thematic analysis, and published their own reporting guidelines in 2024 to
+  replace them. §4.6 is a checklist that issues blocking verdicts on a
+  qualitative instrument, which is exactly the form of that objection. The
+  defense is narrow and worth stating: these gates check *craft defects with
+  known mechanisms* — a presupposition in a question, a stimulus placed before
+  the baseline — not the interpretive quality of the research, which is why the
+  theme checkpoint (§9) is a person and not a sixth rubric. Where the two
+  collide, the researcher's judgment wins and the flag rides along as a Reviewer
+  Note.
+- **Some rules here are convention, not evidence.** The behavioral-question
+  ratio and the 4–6 minutes per question have no published basis and are marked
+  as such where they appear. The priming rule, the hypothetical rule, and the
+  double-barreled rule do have one. Don't let the file's uniform tone flatten
+  that difference — an evaluator that cites a convention as though it were a
+  finding is doing the thing this suite exists to catch.
 
 ---
 
@@ -456,9 +606,24 @@ which is the same standard this suite holds research to.
 1. Draft plan (Dr. Morgan, Scenario C or D)
 2. research-safety-checker         → PRE-FLIGHT, always runs first
 3. research-plan-reviewer          → FAIL? revise, re-run
+4. research-guide-checker          → only if a guide is attached. FAIL? revise,
+                                      re-run
+5. research-readability-checker    → FAIL? revise, re-run
+6. Release
+```
+
+**Producing a discussion guide or interview script on its own:**
+
+```
+1. Draft guide (Dr. Morgan, Scenario C phase 5 or Scenario D)
+2. research-safety-checker         → PRE-FLIGHT, always runs first
+3. research-guide-checker          → FAIL? revise blocking items, re-run
 4. research-readability-checker    → FAIL? revise, re-run
 5. Release
 ```
+
+A guide drafted inside a plan runs the same gate; it does not wait for the whole
+plan to be finished.
 
 **Producing a deck:**
 
@@ -478,7 +643,7 @@ Cap: 2 revisions per gate. Then a person looks at it.
 
 ## 9. The theme checkpoint — a person in the middle, not only at the end
 
-Everything above this section is a machine filter. Five agents check artifacts
+Everything above this section is a machine filter. Six agents check artifacts
 and return verdicts; the human decides at the end. That works well for findings,
 because a finding is a checkable object — a quote either matches the transcript
 or it doesn't.
@@ -654,3 +819,8 @@ checkpoint from being handed an unreviewable packet.
 The producer asks rather than deciding alone: are the single-use codes genuine
 one-offs worth keeping, or one idea split across several labels? Merge before
 clustering.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

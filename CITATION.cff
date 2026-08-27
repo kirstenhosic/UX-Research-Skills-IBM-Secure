@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "Dr. Morgan — UX Research Skills & Agents"
+message: "If you use, adapt, or build on this suite, please cite it."
+type: software
+authors:
+  - family-names: Hosic
+    given-names: Kirsten
+    affiliation: "IBM — UX Research Strategy Lead, Security Product Design"
+repository-code: "https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure"
+abstract: >-
+  An invokable UX research mentor for IBM product teams, with a scenario router
+  covering analysis, method selection, study planning, plan and discussion-guide
+  critique, competitive analysis, and integrity-first qualitative analysis —
+  plus six independent evaluator agents that gate every drafted artifact for
+  participant safety, plan soundness, discussion-guide quality, groundedness,
+  significance, and readability.
+keywords:
+  - ux-research
+  - user-research
+  - qualitative-analysis
+  - discussion-guide
+  - research-operations
+  - llm-agents
+  - evaluation
+license: MIT

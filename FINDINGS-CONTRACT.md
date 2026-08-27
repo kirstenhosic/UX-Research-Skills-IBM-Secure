@@ -285,3 +285,8 @@ findings are agreed. What can never be dropped, at any study size:
 
 Those five are what make a finding checkable at all. Below that it isn't a
 finding, it's a recollection.
+
+---
+
+*Part of the Dr. Morgan UX research suite. Author: **Kirsten Hosic**, UX Research
+Strategy Lead, Security Product Design.*

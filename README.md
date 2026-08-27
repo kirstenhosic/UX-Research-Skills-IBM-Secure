@@ -1,8 +1,11 @@
 # Dr. Morgan — UX Research Skills & Agents
 
-An invokable UX research mentor for **IBM Secure products** — HashiCorp Vault,
-Boundary, Consul, and Radar, with the addition of Terraform — plus the skills and
-evaluator agents that check its work.
+An invokable UX research mentor for IBM product teams — plus the skills and
+evaluator agents that check its work. It ships with **IBM Secure** context filled
+in (HashiCorp Vault, Boundary, Consul, and Radar, with the addition of
+Terraform), and works on any IBM product once you give it that product's context.
+
+By **Kirsten Hosic**, UX Research Strategy Lead, Security Product Design.
 
 Load the **Dr. Morgan** agent, say what you're working on, and it coaches you
 through the research, or drafts the artifact and then picks it apart with you.
@@ -21,9 +24,12 @@ has to look. When Dr. Morgan does the analysis itself, it stops and asks you to
 sign off on the themes before anything gets built on top of them. The checks catch
 the obvious failures. Judging whether the work is any good is still yours.
 
-Any team at IBM is welcome to use this. The IBM Secure product context is already
-filled in. If you work on a different product, message the maintainer on Slack
-about adapting the suite for yours.
+Any team at IBM is welcome to use this, on any product. The IBM Secure context is
+already filled in and is what Dr. Morgan uses by default. For a different
+product, either drop a context file into
+[`product-context/`](product-context/) or answer five questions when Dr. Morgan
+asks — see [Using this on another product](#using-this-on-another-product). The
+rigor doesn't change with the product; only the specificity does.
 
 ---
 
@@ -65,6 +71,41 @@ you'd treat any outside tool holding research data.
 That's the whole loop for coaching. If you used Draft mode and now have an
 artifact you intend to show someone, go to
 [Releasing an artifact](#releasing-an-artifact).
+
+### Using this on another product
+
+Generic research advice helps nobody. "Define your participants" is true
+everywhere; "your operators and your end users are different people with
+different mental models, and this finding conflates them" only lands if Dr.
+Morgan knows what an operator is on your product. So it resolves product context
+before it gets specific, in this order:
+
+1. **A file in [`product-context/`](product-context/)** matching the product you
+   name. That's the durable option, and it means your team writes the context
+   once instead of every session.
+2. **The default**, [`product-context/ibm-secure.md`](product-context/ibm-secure.md).
+3. **Five questions**, asked in conversation, when no file matches or you pasted
+   the agent in without repo access: what the product is, who the personas are,
+   whether the person who configures it is the person who uses it daily, the key
+   workflows, and what constrains recruiting. Dr. Morgan will offer to write your
+   answers up as a context file you can contribute back.
+4. **Nothing**, if you'd rather not. Dr. Morgan works product-neutral and marks
+   what it's missing.
+
+**It won't guess.** With no context it says so and labels the affected guidance
+rather than inventing personas — a plausible wrong persona in a research plan is
+worse than an obvious gap, because someone will recruit against it.
+
+To add your product: copy
+[`product-context/TEMPLATE.md`](product-context/TEMPLATE.md), fill in the four
+required fields, and open a pull request.
+[`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) has the format and the rules.
+
+One thing to know if you're outside IBM Secure: Scenario B's recruitment
+constraints — routing through PMs, external SMEs as the fallback — describe the
+IBM Secure team specifically. A `recruitment reality` section in your context
+file overrides them. Without one, Dr. Morgan will ask whether they apply to you
+before planning against them.
 
 ---
 
@@ -108,7 +149,7 @@ takes.
 
 ---
 
-## The five checkers
+## The six checkers
 
 Each evaluator verifies one thing and is blind to the rest. That blindness is the
 reason there's more than one: a groundedness checker will pass a perfectly-sourced
@@ -118,13 +159,25 @@ decision-relevant finding built on a fabricated quote.
 | Agent | Verifies | Cannot see |
 |---|---|---|
 | [`research-safety-checker`](agents/research-safety-checker.agent.md) | Could this expose a participant, given who will read it? | Whether any of it is true, relevant, or readable |
-| [`research-plan-reviewer`](agents/research-plan-reviewer.agent.md) | Will this study answer its question? Is the guide sound? | Anything post-fieldwork |
+| [`research-plan-reviewer`](agents/research-plan-reviewer.agent.md) | Will this study answer its question? Does the guide cover it? | Anything post-fieldwork; the wording, order, and repetition inside the guide |
+| [`research-guide-checker`](agents/research-guide-checker.agent.md) | Are the questions well-formed, behavioral, non-repeating, and in an order a conversation could follow? | Whether the study is worth running; whether the guide covers the research questions; the moderator, where most leading actually happens |
 | [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) | Is each claim traceable to source text? | Whether the claim matters |
 | [`research-significance-checker`](agents/research-significance-checker.agent.md) | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
 | [`research-readability-checker`](agents/research-readability-checker.agent.md) | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
 
 Each agent's own file carries its detail: what it checks, what blocks versus
 flags, and the verdict it emits.
+
+**Two of them read the same discussion guide, and the split is the point.**
+`research-plan-reviewer` holds the research questions, so it is the one that can
+say whether the guide points at the right targets — every question mapped to a
+research question and back again. `research-guide-checker` never sees the
+research questions, and reads the guide as a conversation instead: whether a
+question leads, doubles up, asks for a prediction where it should ask for a
+memory, repeats something asked twenty minutes earlier in different words, or
+sits in an order that primes its own answer. Any guide Dr. Morgan drafts runs
+this gate before a session is scheduled, because a defect in a guide stops being
+fixable the moment the first participant answers the question.
 
 ---
 
@@ -156,7 +209,7 @@ flowchart TD
     SY --> ART
 
     ART --> PF["<b>Pre-flight · research-safety-checker</b><br/>could this expose a participant?<br/>the bar rises with the audience: team → org → public"]
-    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · synthesis-checker<br/>significance-checker · readability-checker<br/><i>only the ones that fit the artifact run</i>"]
+    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · guide-checker<br/>synthesis-checker · significance-checker<br/>readability-checker<br/><i>only the ones that fit the artifact run</i>"]
     G --> V{"Verdict"}
 
     V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flags ride along as Reviewer Notes"])
@@ -219,6 +272,16 @@ worth having. None of them is a substitute for you reading the thing.
 - **Stop where judgment is required.** In Draft mode you review every theme before
   synthesis is built on it. That is where the interpretation gets set, and no
   checker can verify what data means.
+- **Catch the guide defects that can't be fixed later.** A leading question, a
+  stimulus shown before the unprimed baseline, the same thing asked twice in
+  different words — [`research-guide-checker`](agents/research-guide-checker.agent.md)
+  reads every drafted guide for these before a session is scheduled, because a
+  defect in a guide stops being fixable the moment the first participant answers
+  the question. Two caveats it states in its own report and that are worth
+  repeating: **it is not a pilot**, and **it cannot see the moderator**. Whether
+  a question is ambiguous to an actual practitioner is answered by one pilot
+  session, not by review; and most leading happens live, in an unwritten
+  follow-up or a silence someone fills with a hypothesis.
 
 **What they can't do**
 
@@ -284,11 +347,12 @@ The gate matrix, verdict schema, and known limits are in
 | [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) | How outputs should read, and the rubric the readability gate scores against. |
 | [`DESIGN-SYSTEM.md`](DESIGN-SYSTEM.md) | IBM Secure's output standards: palette, typography, spacing, document structure, and data integrity. Every generated research plan, deck, and analysis output follows it. |
 | [`skills/README.md`](skills/README.md) | Driving the Research Document Template: usage, layouts, output, and common scenarios. [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config. |
+| [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) | How Dr. Morgan gets specific about your product: the resolution order, the five-question intake, the file format, and how to add your own. [`product-context/`](product-context/) holds the files themselves. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
-The six scenario files and the five evaluator agents are listed in
+The six scenario files and the six evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
-[The five checkers](#the-five-checkers).
+[The six checkers](#the-six-checkers).
 
 <details>
 <summary><b>Frameworks and canon referenced</b></summary>
@@ -332,7 +396,7 @@ citations live in the individual files.
 | agent | A prompt packaged so a tool can load it by name. The configuration at the top of an `.agent.md` file is called *frontmatter*; you don't need to touch it. |
 | skill | A prompt bundled with its supporting files (templates, reference docs, scripts). Bob can invoke one by name. |
 | custom instructions | The box in Bob or Copilot Chat where you set standing instructions for a whole conversation instead of retyping them. Sometimes called a system prompt. |
-| gate | A checker that reads a finished artifact and reports whether it passes. Four of the five run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
+| gate | A checker that reads a finished artifact and reports whether it passes. Five of the six run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL`. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
 | checkpoint | A stop where a *person* decides, not an agent. Two exist: the **theme checkpoint** after clustering (the default one), and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
@@ -350,4 +414,5 @@ citations live in the individual files.
 - **Clone:** `https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure.git`
 - **Product-agnostic sibling:** [kirstenhosic/UX-Research-Skills](https://github.com/kirstenhosic/UX-Research-Skills) *(private, and not available to IBM teams)*. The same suite, with fill-in PRODUCT CONTEXT placeholders instead of the IBM Secure context, for use outside IBM
 - **License:** MIT
-- **Maintainer:** [@kirstenhosic](https://github.com/kirstenhosic)
+- **Author and maintainer:** Kirsten Hosic ([@kirstenhosic](https://github.com/kirstenhosic)), UX Research Strategy Lead, Security Product Design
+- **Cite it:** see [`CITATION.cff`](CITATION.cff)
