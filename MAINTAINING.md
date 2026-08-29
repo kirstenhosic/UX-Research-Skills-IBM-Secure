@@ -9,7 +9,7 @@ needed to *use* them — that's [`README.md`](README.md).
 
 Before you change a gate, a rubric, or `EVALUATION-LOOP.md`, run the fixtures in
 [kirstenhosic/UX-Research-Skills-testing](https://github.com/kirstenhosic/UX-Research-Skills-testing).
-`gate-fixture/` is the one that came from here: 14 planted defects, an answer key,
+`gate-fixture/` is the one that came from here: 15 planted defects, an answer key,
 and named controls that must not trigger. It's what caught the safety-scan ordering
 flaw — and on a later run it caught two errors in its own answer key, which is the
 outcome §7 of `EVALUATION-LOOP.md` tells you to expect. When a gate disagrees with
