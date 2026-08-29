@@ -23,13 +23,13 @@ discussion guide the gate must refuse by name. Its controls include the two item
 where the correct answer is a judgment rather than a verdict — the don't-know pair
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building it surfaced
-five ambiguities in §4.7, the gate, and §2's verdict schema. All five are still
-open, all five are listed in `survey-fixture/README.md`, and none has been
-resolved here. Two are worth looking at first. §2's verdict enum has no value for
-"wrong artifact type," and two gates in separate contexts independently invented
-the same one. And no document says whether an unmodified standardized instrument
-is exempt from the general scale rules — three runs inferred that it is, which is
-the cheapest one-line fix here and the best evidenced.
+five ambiguities in §4.7, the gate, and §2's verdict schema, all listed in
+`survey-fixture/README.md`. **Two are closed** — §2 now carries `NOT_APPLICABLE`
+and `ROUTE`, and §4.7 item 32 now states that an unmodified standardized
+instrument is exempt from the general scale rules. Both were closed because three
+runs converged on something no document said. **Three remain open**, and all three
+are severity or scope questions the runs disagreed with each other about, which is
+why they are still open.
 
 On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
 found seven more that were in the instrument and not in the key, plus three broken
@@ -121,6 +121,13 @@ is repeated verbatim in every skill file. That's the cost of portability. When y
 edit that block, mirror it to all skill files, or pick one as canonical and
 regenerate the rest. Same goes for the `RELEASE GATE` / `REVISION PROTOCOL` /
 `COVERAGE` / `VOICE` block appended to each one.
+
+**Widening the verdict schema is a nine-file edit.** The `result` and
+`next_action` enums in §2 of `EVALUATION-LOOP.md` are repeated verbatim in the
+output-format block of all seven agents, and `README.md`'s glossary row spells
+them out in prose. Adding `NOT_APPLICABLE` and `ROUTE` touched all nine. The
+scenario files do not carry the enum, so neither drift check sees this edit —
+grep for `PASS_WITH_FLAGS` and confirm the count before and after.
 
 The `RELEASE GATE` block names every gate in order. Adding or removing an
 evaluator is the most expensive edit in this repo, and the drift check below

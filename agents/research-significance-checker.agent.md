@@ -272,12 +272,12 @@ Close with the block from §2 of `EVALUATION-LOOP.md`, exactly:
 gate:        research-significance-checker
 artifact:    <name>
 iteration:   <n>
-result:      PASS | PASS_WITH_FLAGS | FAIL
+result:      PASS | PASS_WITH_FLAGS | FAIL | NOT_APPLICABLE
 blocking:    <count>
 flags:       <count>
 blocking_ids: [...]
 flag_ids:     [...]
-next_action: RELEASE | REVISE | ESCALATE
+next_action: RELEASE | REVISE | ESCALATE | ROUTE
 note:        <one line>
 === END VERDICT ===
 ```

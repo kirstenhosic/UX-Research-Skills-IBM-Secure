@@ -111,12 +111,12 @@ orchestrating agent branch on the result instead of reading prose.
 gate:        <agent name>
 artifact:    <file or artifact name>
 iteration:   <1 | 2 | 3>
-result:      PASS | PASS_WITH_FLAGS | FAIL
+result:      PASS | PASS_WITH_FLAGS | FAIL | NOT_APPLICABLE
 blocking:    <count>
 flags:       <count>
 blocking_ids: [<claim/section ids>]
 flag_ids:     [<claim/section ids>]
-next_action: RELEASE | REVISE | ESCALATE
+next_action: RELEASE | REVISE | ESCALATE | ROUTE
 note:        <one line, plain language>
 === END VERDICT ===
 ```
@@ -128,6 +128,24 @@ note:        <one line, plain language>
 | `PASS` | Nothing blocking, nothing flagged. | `RELEASE` |
 | `PASS_WITH_FLAGS` | Nothing blocking. Some items need **human judgment**, not correction. | `RELEASE` |
 | `FAIL` | At least one blocking defect. The artifact is wrong, not merely debatable. | `REVISE` (or `ESCALATE` at cap) |
+| `NOT_APPLICABLE` | **The artifact is out of this gate's scope and was not reviewed.** Counts are zero because nothing was scored, not because nothing is wrong. `note` must name the gate that owns it. | `ROUTE` |
+
+`NOT_APPLICABLE` is a routing outcome, not a judgment, and it is the only result
+that asserts nothing about the artifact. It exists because the other three all
+lie in this situation: `PASS` and `PASS_WITH_FLAGS` claim the artifact cleared a
+review it never received, and `FAIL` tells the drafter to revise against a rubric
+that does not apply to it. A gate handed the wrong artifact type — a survey to
+`guide-checker`, a discussion guide to `survey-checker` — returns this, names the
+right gate, and stops.
+
+It was added because two gates in separate contexts independently invented the
+same value when the schema gave them nothing usable, and one said so in its own
+output. When an evaluator has to depart from this block to be honest, the block
+is wrong.
+
+Do not use `NOT_APPLICABLE` for an artifact this gate owns but cannot score for
+want of an input — that is a `FAIL` or an `ESCALATE`, and §4.7's missing-analysis-
+plan case is the worked example.
 
 **Blocking vs. flagged is the most important distinction in this file.**
 
@@ -646,7 +664,13 @@ the severity calls depend on the assumption.
     or is not called by its name.** Dropping items, relabelling points, or
     changing the scale length forfeits the norms and the psychometrics that were
     the only reason to use it, and the resulting number is then reported against
-    a benchmark it no longer belongs to. **Blocking.** Note separately that NPS's
+    a benchmark it no longer belongs to. **Blocking.** An unmodified one is
+    correspondingly **exempt from items 9, 10, and 11** — its labelling, its
+    length, and its balance are fixed by the published form, and changing any of
+    them to satisfy those items would be the modification this rule blocks. Score
+    it against the published version and nothing else, and say you excepted it so
+    a reader does not think you missed it. Three independent runs inferred that
+    exemption before it was written down, which is why it is written down. Note separately that NPS's
     business claims are contested in the measurement literature; that is a
     method-fit question for `plan-reviewer`, not a reason to fail the instrument
 

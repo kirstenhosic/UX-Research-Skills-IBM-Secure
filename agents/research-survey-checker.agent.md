@@ -291,6 +291,13 @@ the fielded form to verify.
 If a block is SUS, UMUX-Lite, SEQ, NPS, or any other instrument with published
 norms, check it against the published version verbatim.
 
+**An unmodified standardized instrument is exempt from Part 2's general rules on
+labelling, scale length, and balance.** NPS is endpoint-anchored and eleven
+points; SUS is agree/disagree; SEQ is seven points with anchors only at the ends.
+Every one of those would draw a flag as a question you wrote yourself, and
+"fixing" any of them is the modification Part 6 blocks. Say in your report that
+you excepted it and why, so a reader does not think you missed it.
+
 **Modified, and still called by its name → blocking.** Dropping items,
 relabelling points, changing the scale length, or translating without a validated
 translation forfeits the norms and the psychometrics, which were the only reason
@@ -428,12 +435,12 @@ marked `illustration:`.
 gate:        research-survey-checker
 artifact:    <name>
 iteration:   <n>
-result:      PASS | PASS_WITH_FLAGS | FAIL
+result:      PASS | PASS_WITH_FLAGS | FAIL | NOT_APPLICABLE
 blocking:    <count>
 flags:       <count>
 blocking_ids: [...]
 flag_ids:     [...]
-next_action: RELEASE | REVISE | ESCALATE
+next_action: RELEASE | REVISE | ESCALATE | ROUTE
 note:        <one line>
 === END VERDICT ===
 ```

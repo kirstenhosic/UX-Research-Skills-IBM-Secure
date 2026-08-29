@@ -177,12 +177,12 @@ All 21 items, pass/fail, in order. Terse — this is a checklist, not an essay.
 gate:        research-readability-checker
 artifact:    <name>
 iteration:   <n>
-result:      PASS | PASS_WITH_FLAGS | FAIL
+result:      PASS | PASS_WITH_FLAGS | FAIL | NOT_APPLICABLE
 blocking:    <count>
 flags:       <count>
 blocking_ids: [<rubric item numbers>]
 flag_ids:     [<rubric item numbers>]
-next_action: RELEASE | REVISE | ESCALATE
+next_action: RELEASE | REVISE | ESCALATE | ROUTE
 note:        <one line>
 === END VERDICT ===
 ```

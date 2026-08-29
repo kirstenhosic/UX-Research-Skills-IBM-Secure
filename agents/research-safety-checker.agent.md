@@ -210,12 +210,12 @@ destination: internal-team | internal-org | external
 participants: customer-direct | internal-direct | internal-proxy | sme-external | mixed
 consent:     stricter | aligned | looser | not-located
 iteration:   <n>
-result:      PASS | PASS_WITH_FLAGS | FAIL
+result:      PASS | PASS_WITH_FLAGS | FAIL | NOT_APPLICABLE
 blocking:    <count>
 flags:       <count>
 blocking_ids: [...]
 flag_ids:     [...]
-next_action: RELEASE | REVISE | ESCALATE
+next_action: RELEASE | REVISE | ESCALATE | ROUTE
 note:        <one line>
 === END VERDICT ===
 ```
