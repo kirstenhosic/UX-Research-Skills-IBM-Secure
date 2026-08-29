@@ -18,13 +18,20 @@ outcome §7 of `EVALUATION-LOOP.md` tells you to expect. When a gate disagrees w
 the key, check the corpus before recording a score.
 
 `survey-fixture/` covers `research-survey-checker` and §4.7: a 28-item instrument
-with 41 planted defects, the plan context needed to score them, and a decoy
+with 48 planted defects, the plan context needed to score them, and a decoy
 discussion guide the gate must refuse by name. Its controls include the two items
 where the correct answer is a judgment rather than a verdict — the don't-know pair
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building it surfaced
-three ambiguities in §4.7 and the gate that are still open; they are listed in
-`survey-fixture/README.md` and none of them has been resolved here.
+four ambiguities in §4.7, the gate, and §2's verdict schema. All four are still
+open, all four are listed in `survey-fixture/README.md`, and none has been
+resolved here. The fourth is the one to look at first: the verdict enum has no
+value for "wrong artifact type," and two gates in separate contexts independently
+invented the same one.
+
+On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
+found seven more that were in the instrument and not in the key, plus three broken
+controls. Third time a fixture here has found the fault in its own key.
 
 Neither fixture has had an adversarial read. Both were built from the rubrics they
 score against, by the person who wrote them, so a clean run says the specification
