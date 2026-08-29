@@ -581,7 +581,7 @@ RELEASE GATE (apply to every artifact this file produces)
   Anything you draft here — plan, discussion guide, findings,
   competitive analysis, deck — goes through evaluation gates
   before it is shared. You are the producer and the reviser.
-  You are never the evaluator. Six separate agents do the
+  You are never the evaluator. Seven separate agents do the
   checking, and they never edit; that separation is what keeps
   the check independent.
 
@@ -618,6 +618,17 @@ RELEASE GATE (apply to every artifact this file produces)
 
     Discussion guide / interview script, on its own
       research-guide-checker
+      research-readability-checker
+
+    Research plan with a survey instrument
+      research-plan-reviewer
+      research-survey-checker           (can this be fielded
+                                         once and mean
+                                         something?)
+      research-readability-checker
+
+    Survey instrument, on its own
+      research-survey-checker
       research-readability-checker
 
     Synthesis findings
@@ -690,6 +701,31 @@ RELEASE GATE (apply to every artifact this file produces)
   sessions — neither you nor the gate can tell whether a
   question is ambiguous to an actual practitioner, and that is
   the only version of the question that matters.
+
+  A SURVEY INSTRUMENT goes to research-survey-checker, never to
+  research-guide-checker, which refuses questionnaires on
+  purpose. Wording in an instrument answered alone answers to a
+  different literature — response scales, acquiescence,
+  satisficing, which option sits at the top of the list — and
+  the guide rubric scored against a survey gives confident,
+  wrong advice. The standard is section 4.7 of
+  EVALUATION-LOOP.md. Say which kind of instrument you are
+  handing over.
+
+  Its deadline is harder than the guide's. A guide with a
+  defect can be corrected before the next participant. A survey
+  has no next participant: field it and the list is spent, the
+  people who answered will not answer a revision, and the
+  distribution you got is the one that gets reported. Three
+  habits carry most of the weight — bound every frequency
+  question to a real reference period ("in the last 30 days,"
+  not "how often do you usually"), ask the construct directly
+  instead of in agree/disagree form, and write the analysis
+  plan before the instrument so every item is one you already
+  know how you will cut. Then pilot it with ten people. The
+  gate is not a cognitive pretest, and it cannot see who
+  answered or who didn't — which is the question that decides
+  whether the numbers mean anything.
 
   Record who each participant was: customer-direct,
   internal-direct, internal-proxy, or sme-external. It drives

@@ -39,14 +39,16 @@ the same rule that it never lowers a bar.
 The constraint that keeps this from becoming forty duplicated files: **a method
 file carries only what differs by method.** Question craft, the behavioral bar,
 sequencing, probing, and the gates are shared and are defined once, in the agent
-and in `EVALUATION-LOOP.md` §4.6. If you catch yourself writing the same rule
-into two method files, it belongs in neither — lift it to §4.6.
+and in `EVALUATION-LOOP.md` §4.6 — or §4.7 for a self-administered instrument. If
+you catch yourself writing the same rule into two method files, it belongs in
+neither; lift it to whichever of those two sections covers that instrument mode.
 
 Two fields are load-bearing downstream. `what it cannot tell you` is written to
 be pasted into a plan's methodology section, because `plan-reviewer` blocks a
-plan that doesn't name its method's blind spot. `counts` is quoted by
-`guide-checker` as a cross-check on timing, and overrides the generic ranges in
-§4.6 item 27 for that method.
+plan that doesn't name its method's blind spot. `counts` is quoted by whichever
+instrument gate covers the method — `guide-checker` as a cross-check on session
+timing, `survey-checker` as a cross-check on completion time — and overrides the
+generic ranges in §4.6 item 27 and §4.7 item 26 respectively.
 
 Unlike product context, no method file is mirrored into the agent. The agent
 carries the resolution order only. A pasted Dr. Morgan therefore has the rigor
@@ -88,9 +90,34 @@ regenerate the rest. Same goes for the `RELEASE GATE` / `REVISION PROTOCOL` /
 `COVERAGE` / `VOICE` block appended to each one.
 
 The `RELEASE GATE` block names every gate in order. Adding or removing an
-evaluator means editing that block in all six scenario files, the gate matrix in
-`EVALUATION-LOOP.md` §3, the gate table in the agent, and the checker table in
-`README.md` — five places, and the drift check below only catches the first.
+evaluator is the most expensive edit in this repo, and the drift check below
+only catches the first item on this list. Adding `research-survey-checker` took
+all of it:
+
+1. The `RELEASE GATE` block in all six scenario files, byte-identical
+2. The gate matrix in `EVALUATION-LOOP.md` §3, and its preamble sentence, which
+   counts the evaluators
+3. The evaluator table in §3, whose heading also counts them
+4. A new Definition-of-Done section in §4, and a `Why <x> gets its own gate`
+   subsection in §3 explaining why the work didn't go into an existing gate
+5. §7, if the new gate closes a known limit — and §7 gets the new gate's own
+   limits in the same pass, because a gate that ships without them is the thing
+   §7 exists to prevent
+6. §8's quick-reference sequences, and the sentence in §9 that counts agents
+7. The gate table in `agents/dr-morgan.agent.md`, its "N separate agents do the
+   checking" line, the drafting guidance for that artifact type, and the count in
+   its maintenance note
+8. The checker table in `README.md`, its heading and the two cross-references to
+   that heading by anchor, the mermaid gate node, the principles bullet, and the
+   glossary's `gate` and `artifact` rows
+9. The neighbouring gates' `What you are blind to` sections, in both directions —
+   a new gate that nobody hands work to never runs
+10. `METHODS.md`'s instrument-gate table, and the `Gating` note at the top of any
+    `methods/` file the new gate now covers
+11. `CITATION.cff`, whose abstract counts them too
+
+Grep for the count words before you commit — `six`, `seven`, `five separate` —
+because every one of them is a claim about the suite that goes stale silently.
 
 Quick drift check, run from the repo root. Each block should report `OK`, and the
 file names beside each hash make a mismatch diagnosable:
@@ -119,7 +146,7 @@ against them. It's the file most likely to drift, and it has to be checked by
 reading — the scenario list in its opening paragraph, the embedded IBM Secure
 product context, and its closing sync note are the places that go stale first.
 
-## Two gates read the discussion guide, and the split is load-bearing
+## Three gates read an instrument, and the splits are load-bearing
 
 `research-plan-reviewer` holds the research questions and maps coverage in both
 directions. `research-guide-checker` never sees them and reads the guide as a
@@ -134,6 +161,19 @@ contradicting each other, and it was the reason for the split in the first place
 — `plan-reviewer` used to hold both standards and applied whichever it reached
 first. The rationale is written up in `EVALUATION-LOOP.md` §3, under *Why a guide
 gets its own gate*.
+
+`research-survey-checker` is the third, and it divides on a different axis:
+**instrument mode, not artifact family.** A guide is read as a conversation with
+a moderator in it. A survey is read as a document answered alone, where nothing
+gets clarified and nobody notices a blank look. That is why widening
+`guide-checker` to cover questionnaires was the wrong fix — the rules genuinely
+differ, and only two cross over (no leading or presupposing items, no
+double-barreled ones), which §4.7 names rather than restates.
+
+Each gate refuses the other's artifact explicitly and by name. Keep that: a gate
+that silently reviews the wrong instrument type produces findings that are
+confident, specific, and wrong, which is worse than no gate. `guide-checker`
+refusing a survey is the behavior, not a gap.
 
 ---
 

@@ -148,10 +148,10 @@ not in a report they've already closed.
 
 ## 3. Gate matrix
 
-Gates attach to **artifact types**, not to skills. Four artifact types are gated
-by agents — one pre-flight plus five evaluators in sequence — so most run the
-pre-flight and two or three gates rather than all of them. The last row, the
-theme set, has no agent gate at all: it gets a human checkpoint instead (§9).
+Gates attach to **artifact types**, not to skills. One pre-flight plus six
+evaluators cover them, and no artifact runs all seven — most run the pre-flight
+and two or three gates. The last row, the theme set, has no agent gate at all: it
+gets a human checkpoint instead (§9).
 
 Every row below is preceded by `research-safety-checker` (pre-flight, always).
 
@@ -161,6 +161,8 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Research plan, no guide attached** | Scenario C, D; `research-document-template` | `plan-reviewer` → `readability-checker` |
 | **Research plan with a discussion guide** | Scenario C, D; `research-document-template` | `plan-reviewer` → `guide-checker` → `readability-checker` |
 | **Discussion guide / interview script, standalone** | Scenario C, D; any Draft-mode guide | `guide-checker` → `readability-checker` |
+| **Research plan with a survey instrument** | Scenario C, D; `research-document-template` | `plan-reviewer` → `survey-checker` → `readability-checker` |
+| **Survey instrument, standalone** | Scenario C, D; any Draft-mode questionnaire | `survey-checker` → `readability-checker` |
 | **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
@@ -194,6 +196,35 @@ Draft mode produces guides in several places — Scenario C phase 5, Scenario D
 after a rebuild, a standalone request — and every one of them runs this gate
 before a session is scheduled. A defect in a guide has a hard deadline: it stops
 being fixable the moment the first participant answers the question.
+
+### Why a survey gets its own gate rather than a share of the guide's
+
+`guide-checker` declares survey instruments out of scope, and did so before there
+was anywhere to send them. That exclusion was right and it stays: question wording
+in a self-administered instrument answers to a different literature — response
+scales, acquiescence, satisficing, primacy in a visual option list, item order
+inside a matrix — and §4.6 scored against a questionnaire produces confident,
+wrong advice. Widening `guide-checker` to cover both would have meant one gate
+holding two standards for the same word, which is the failure the guide split
+existed to fix.
+
+So the gates divide by **instrument mode, not by artifact family**. A guide is
+read as a conversation with a moderator in it. A survey is read as a document
+answered alone, where nothing gets clarified and nobody notices a blank look.
+Only two rules cross the line — no leading or presupposing items, no
+double-barreled ones — and §4.7 names them rather than restating them.
+
+**A survey's deadline is harder than a guide's.** A defect in a guide stops being
+fixable when the first participant answers the question; the second participant
+can still get the corrected version. A survey has no second participant. Field it
+and the list is spent — the people who answered will not answer a revision, and
+the distribution you got is the one you will report. That is why the gate runs the
+moment the instrument is drafted, and why the pilot in §4.7 item 33 is closer to
+mandatory than the equivalent item for a guide.
+
+**What it still cannot see is bigger than what it can.** Non-response decides
+whether a survey means anything, and it is invisible until after fielding. The
+gate reads the instrument; the sample belongs to `plan-reviewer` and to a person.
 
 ### Why the deck is re-checked
 
@@ -232,7 +263,7 @@ That report is a warning, not a verdict. Nothing passes, fails, or gets revised
 on it. It exists so that whoever compares the document against the reviewed
 plan is told what is missing instead of being left to notice.
 
-### The six evaluators
+### The seven evaluators
 
 | Agent | Verifies | Cannot see |
 |---|---|---|
@@ -241,6 +272,7 @@ plan is told what is missing instead of being left to notice.
 | `research-significance-checker` | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
 | `research-plan-reviewer` | Will this study answer its question? Does the guide cover it? | Anything post-fieldwork; the wording, order, and repetition inside the guide |
 | `research-guide-checker` | Are the questions well-formed, behavioral, non-repeating, and in an order a conversation could follow? | Whether the study is worth running; whether the guide covers the research questions; **the moderator**, where most leading actually happens |
+| `research-survey-checker` | Are the items, response options, order, and routing sound enough to field once? | Whether a survey should answer this at all; **the sample and non-response**, where a survey's validity actually lives |
 | `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
 
 Each column-3 entry is the reason there is more than one evaluator. A
@@ -459,6 +491,183 @@ contaminated data and passes every item above.
 
 ---
 
+### 4.7 Survey instrument
+
+The bar `research-survey-checker` scores against. §4.1 covers the plan around it
+— the decision, the research questions, the sample, the analysis plan. This
+covers the instrument: the items, the response options, the order, and the
+routing.
+
+**Only two items of §4.6 carry over**, and they are not restated below. Item 2
+(leading, self-answering, presupposing) and item 3 (double-barreled) are defects
+in any instrument in any mode. Everything else in §4.6 assumes a moderator in the
+room — probes, follow-ups, someone to notice a blank look — and a survey has
+none of that. Which is the reason this section exists rather than a note saying
+"as above."
+
+**Severity scales with what happens to the numbers.**
+
+- **Tracking or benchmark wave** — full strength throughout, and a wording change
+  between waves is itself a defect: an item reworded mid-track breaks the
+  comparison that was the whole reason to field it twice.
+- **One-off instrument informing a named decision** — full strength.
+- **Internal pulse to a colleague-adjacent audience, reported as texture rather
+  than as measurement** — full strength on routing, order, and structure; wording
+  defects one level down.
+
+If you weren't told which it is, infer it, say which you assumed, and note that
+the severity calls depend on the assumption.
+
+**Item craft**
+
+1. Frequency and duration items carry a bounded reference period — "in the last
+   30 days," "since the last upgrade" — not "typically" or "how often do you
+   usually." Nobody's memory holds a rate. An unbounded frequency item returns a
+   self-image, and it returns it as a number, which is worse
+2. No agree/disagree, true/false, or yes/no attitude items. Ask the construct
+   directly, with labelled points — "how difficult or easy was it to…" rather
+   than "I found it easy to… (agree/disagree)." Agree/disagree formats carry
+   acquiescence bias: a measurable share of respondents agree with whatever is
+   put to them, in both directions, and the effect is concentrated in the
+   respondents already doing the least work (Krosnick & Presser, 2010).
+   **Blocking** where the instrument is built on the format; flagged for one or
+   two items
+3. No item asks a respondent to explain their own behavior, or to predict it.
+   Same reason as §4.6 item 5, and worse here — there is no follow-up to catch
+   the theory being invented
+4. No item asks for an opinion the respondent may not hold. The query effect
+   operates in self-administered instruments too, and here it produces a
+   distribution rather than a sentence. Filter first — establish the topic is
+   live for them — then ask
+5. Sensitive items carry a normalizing preamble and forgiving wording. Self-
+   administration already reduces misreporting relative to an interviewer being
+   present (Tourangeau & Yan, 2007), which is a reason to choose the mode, not a
+   reason to skip the framing
+6. The vocabulary is the respondent's, not the product's. In an interview a
+   mismatch gets queried out loud; in a survey it is answered anyway, and the
+   answer is to a different question
+7. No item depends on a term, feature, or concept the instrument has not yet
+   defined. A forward reference in a survey does not get clarified — it gets
+   guessed at, silently
+
+**Response options and scales**
+
+8. Options are exhaustive and mutually exclusive. Overlapping bands and a list
+   that omits a real case are the two common forms, and both are **blocking**:
+   neither is recoverable in analysis
+9. Every scale point is labelled, not only the endpoints. Fully labelled scales
+   are more reliable than endpoint-anchored ones (Krosnick & Presser, 2010)
+10. Bipolar constructs use 5 or 7 points, and the instrument uses the same length
+    throughout. Mixing 5-point and 7-point scales makes items non-comparable to
+    each other and makes the respondent re-learn the task each block
+11. Poles are balanced — as many favourable options as unfavourable, at matching
+    intensity. An imbalanced scale is a leading question with numbers on it
+12. The response range does not itself tell the respondent what is normal.
+    Offering "fewer than 1 / 1–2 / 3–5 / more than 5" and offering "fewer than 5
+    / 5–10 / more than 10" for the same behavior produce different reported
+    frequencies *and* different self-assessments (Schwarz et al., 1985). Where
+    the plausible range is genuinely unknown, ask an open numeric item rather
+    than inventing bands, because invented bands become the finding
+13. "Not applicable" is offered wherever the item can be inapplicable. Forcing a
+    choice there manufactures data — the most common way a survey generates a
+    finding about nothing
+14. **"Don't know" is a judgment call, and this rubric declines to settle it.**
+    The intuitive rule — always offer a no-opinion out — is not supported:
+    no-opinion options do not improve data quality and can discard real if weakly
+    held attitudes, because the people who take them include the ones
+    satisficing (Krosnick et al., 2002). Flag its *absence* on knowledge-dependent
+    items and its *presence* on attitude items the respondent plausibly has a
+    view on. Neither call blocks
+15. Option order is randomized where the list has no natural sequence. Visually
+    presented lists show primacy — options near the top are chosen more (Krosnick
+    & Alwin, 1987) — and a fixed order makes position part of the result
+16. Ordinal scales are never randomized, and neither are items whose order is
+    load-bearing. Randomization is a defect when applied to a sequence that means
+    something
+
+**Order and context**
+
+17. The screener runs first, stays short, and does not reveal which answer
+    qualifies. A screener that names its own target — "do you manage secrets
+    daily?" — recruits the people who want to be recruited
+18. A warm-up item precedes the core blocks: one easy, relevant question.
+    Demographics are not a warm-up
+19. General before specific within a construct. Asking the specific item first and
+    the general one after produces part-whole effects that are large, documented,
+    and invisible in the results (Schuman & Presser, 1981; Tourangeau, Rips &
+    Rasinski, 2000)
+20. One construct per block, most important block first, and independent blocks
+    randomized. Attention decays through the instrument, so the order is a
+    decision about what you are willing to measure badly
+21. No item primes a later one. This is §4.6 item 24 in a different mode, resting
+    on the same literature, and it is the best-evidenced item here as it is there
+22. Sensitive items sit after the constructs they could contaminate, never in the
+    opening block
+23. Classification items — demographics, firmographics, role — sit **last**,
+    where abandonment costs you nothing
+24. Open-text items are few, late, and optional, and nothing in the instrument or
+    the plan treats them as qualitative data. They produce fragments from the
+    minority who bother
+
+**Length, and the analysis discipline that sets it**
+
+25. Every item appears in at least one planned analysis cut. The analysis plan is
+    attached or referenced; without it, length cannot be judged and the gate says
+    so rather than guessing. An item in no planned cut is cut or justified — this
+    is §4.1 item 8 doing work it can only do before fielding
+26. Item count is stated and compared against the stated completion time, using
+    the ranges in `methods/survey.md` (3–5 min: 10–15 items · 8–10 min: 20–30 ·
+    15 min+: expect degradation in the final third). Those are conventions with
+    assumptions attached — a professional respondent, answering unpaid — not
+    measured rates, so an overrun is flagged rather than blocking. Say that
+27. Matrix grids are short, or broken up. Long grids invite straightlining, which
+    is the form survey fatigue actually takes: not abandonment but a vertical
+    column of middle options answered without reading (Krosnick, 1991). Note that
+    reverse-coded items detect it at the cost of confusing respondents and
+    introducing a method artifact — a trade-off to state, not a rule to enforce
+
+**Routing and mechanics**
+
+28. Skip logic reaches every item it should and no item it shouldn't. Trace each
+    branch: an item reachable by someone for whom it is incoherent is **blocking**,
+    and so is a branch that dead-ends
+29. Forced response is used only where an unanswered item invalidates the record.
+    Making every item required converts a hesitation into an abandonment
+30. The instrument opens by stating what the data is for, the estimated
+    completion time, and who to contact — and the estimate matches the count in
+    item 26. An estimate contradicted by the instrument's own length is
+    **blocking**; it is the one claim in a survey that the respondent can check
+31. The instrument renders on the device the population will actually answer it
+    on. Grids in particular do not survive a phone
+
+**Standardized instruments**
+
+32. A standardized instrument — SUS, UMUX-Lite, SEQ, NPS — is used **unmodified,
+    or is not called by its name.** Dropping items, relabelling points, or
+    changing the scale length forfeits the norms and the psychometrics that were
+    the only reason to use it, and the resulting number is then reported against
+    a benchmark it no longer belongs to. **Blocking.** Note separately that NPS's
+    business claims are contested in the measurement literature; that is a
+    method-fit question for `plan-reviewer`, not a reason to fail the instrument
+
+**Piloting**
+
+33. The instrument has been piloted — ten people, watched or debriefed — or a
+    pilot is scheduled. Cognitive pretesting exists as a discipline because
+    reading a question predicts poorly how it lands (Willis, 2005). The gate is
+    not a pilot and says so
+34. Meets `VOICE-AND-STYLE.md` in the prose a respondent reads: the invitation,
+    the preamble, the close
+
+**What this rubric cannot reach.** It scores an instrument. It cannot see the
+sample frame, the invitation list, or who declines — and non-response is the
+whole validity question for a survey, answered after fielding and not by any
+gate here. It also cannot re-run: an interview guide gets another participant, a
+survey population gets spent. A clean instrument fielded to the willing measures
+the willing, and passes every item above.
+
+---
+
 ## 5. Research-question coverage — flag both directions
 
 A coverage check that only runs one way misses half the problem. Run it both
@@ -557,7 +766,7 @@ which is the same standard this suite holds research to.
   Strict-verdict rules and blind context reduce this; they don't remove it.
 - **An evaluator sharing a model and context with the producer shares its blind
   spots.** Blind evaluation (source + claim only) is the main defense.
-- **Chained gates compound false positives.** Five gates each with a small
+- **Chained gates compound false positives.** Six gates each with a small
   false-alarm rate produce a system that flags something almost every run. If
   flags become noise, people stop reading them. Watch for gates that flag
   constantly, and tighten the ones that do.
@@ -581,15 +790,22 @@ which is the same standard this suite holds research to.
   of leading in real sessions: the unwritten follow-up, and the silence a nervous
   moderator fills with a hypothesis. A clean guide can still produce contaminated
   data.
-- **Two methods have no instrument gate.** A survey and an A/B test both produce
-  findings the loop checks, and neither produces an *instrument* the loop can
-  read. `guide-checker` excludes surveys deliberately — self-administered
-  question wording answers to a different literature, and scoring one against
-  §4.6 would produce confident, wrong advice — and an experiment design has no
-  artifact of the shape any gate here expects. `methods/survey.md` and
-  `methods/ab-test.md` state this at the top and carry the craft standards
-  instead. A second human reader is the current control. `research-survey-checker`
-  is the obvious way to close the first gap.
+- **An A/B test design has no instrument gate.** An experiment produces findings
+  the loop checks and no artifact of the shape any gate here expects — no guide,
+  no questionnaire, no recruited participants, no transcript. `methods/ab-test.md`
+  states this at the top and carries the craft standards instead, and a second
+  human reader is the control. This was one of two such gaps; the survey half was
+  closed by `research-survey-checker` and §4.7, which is what the shape of a fix
+  looks like if anyone takes on the experiment half: a separate gate with its own
+  literature, not a widened existing one.
+- **`survey-checker` cannot see the sample, which is where a survey's validity
+  lives.** It reads the instrument. Who was invited, who answered, and who
+  declined decide whether the numbers mean anything, and none of it exists until
+  after fielding. A clean instrument pushed to a channel of willing respondents
+  measures the willing and passes this gate. It is also not a cognitive pretest —
+  same limit `guide-checker` has with piloting, and it bites harder here, because
+  a guide gets another participant and a survey population is spent on the first
+  field.
 - **A rubric with blocking verdicts is a contested instrument for qualitative
   work.** Braun and Clarke — cited throughout this suite — reject reporting
   checklists such as COREQ and SRQR as incongruent with the values of reflexive
@@ -599,13 +815,16 @@ which is the same standard this suite holds research to.
   defense is narrow and worth stating: these gates check *craft defects with
   known mechanisms* — a presupposition in a question, a stimulus placed before
   the baseline — not the interpretive quality of the research, which is why the
-  theme checkpoint (§9) is a person and not a sixth rubric. Where the two
+  theme checkpoint (§9) is a person and not one more rubric. Where the two
   collide, the researcher's judgment wins and the flag rides along as a Reviewer
   Note.
 - **Some rules here are convention, not evidence.** The behavioral-question
-  ratio and the 4–6 minutes per question have no published basis and are marked
-  as such where they appear. The priming rule, the hypothetical rule, and the
-  double-barreled rule do have one. Don't let the file's uniform tone flatten
+  ratio, the 4–6 minutes per question, and the survey length-to-item-count table
+  in §4.7 item 26 have no published basis and are marked as such where they
+  appear. The priming rule, the hypothetical rule, the double-barreled rule, and
+  most of §4.7's scale and order items do have one — and §4.7 item 14 is a third
+  case worth keeping distinct: a question the literature has actively unsettled,
+  which is why it flags in both directions and blocks in neither. Don't let the file's uniform tone flatten
   that difference — an evaluator that cites a convention as though it were a
   finding is doing the thing this suite exists to catch.
 
@@ -636,6 +855,8 @@ which is the same standard this suite holds research to.
 3. research-plan-reviewer          → FAIL? revise, re-run
 4. research-guide-checker          → only if a guide is attached. FAIL? revise,
                                       re-run
+   research-survey-checker         → only if a survey instrument is attached.
+                                      FAIL? revise, re-run
 5. research-readability-checker    → FAIL? revise, re-run
 6. Release
 ```
@@ -652,6 +873,18 @@ which is the same standard this suite holds research to.
 
 A guide drafted inside a plan runs the same gate; it does not wait for the whole
 plan to be finished.
+
+**Producing a survey instrument:**
+
+```
+1. Draft instrument (Dr. Morgan, Scenario C or D)
+2. research-safety-checker         → PRE-FLIGHT, always runs first
+3. research-survey-checker         → FAIL? revise blocking items, re-run
+4. research-readability-checker    → FAIL? revise, re-run
+5. Pilot it with ten people before the link goes out. The gate is not a pilot,
+   and the population can only be fielded once
+6. Release
+```
 
 **Producing a deck:**
 
@@ -671,7 +904,7 @@ Cap: 2 revisions per gate. Then a person looks at it.
 
 ## 9. The theme checkpoint — a person in the middle, not only at the end
 
-Everything above this section is a machine filter. Six agents check artifacts
+Everything above this section is a machine filter. Seven agents check artifacts
 and return verdicts; the human decides at the end. That works well for findings,
 because a finding is a checkable object — a quote either matches the transcript
 or it doesn't.
@@ -701,7 +934,7 @@ That is the gap this section closes.
 A checkpoint is a **stop-and-wait**: Dr. Morgan emits a review packet and does
 not proceed to Stage 5 until a person returns decisions.
 
-A sixth *agent* would not do this job. An LLM judging an LLM's themes is a
+One more *agent* would not do this job. An LLM judging an LLM's themes is a
 second opinion from the same kind of reasoner, drawn from the same context, with
 the same blind spots — §7 already says so about evaluators generally. What is
 missing at this stage isn't verification. It's judgment about what the data

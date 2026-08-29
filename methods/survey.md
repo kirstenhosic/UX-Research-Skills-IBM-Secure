@@ -8,15 +8,19 @@
 present, used to measure how widely something holds across a population you
 already understand.
 
-**Gating — read this before you draft one.** `research-guide-checker` declares
-survey instruments **out of scope**, deliberately: question wording in a
-self-administered instrument answers to a different literature (response scales,
-acquiescence, satisficing, item order within a matrix), and applying the
-discussion-guide rubric to a survey gives confident, wrong advice. So **a survey
-instrument currently has no gate.** `safety-checker` still runs pre-flight, and
-the analysis and findings that come out the other end are gated normally. The
-instrument itself is not. Treat the craft rules below as the standard, and treat
-a survey as a place where a second human reader matters more than usual.
+**Gating — read this before you draft one.** The instrument goes to
+`research-survey-checker`, scored against §4.7 of `EVALUATION-LOOP.md`. **Not**
+`research-guide-checker`, which declares survey instruments out of scope
+deliberately: question wording in a self-administered instrument answers to a
+different literature (response scales, acquiescence, satisficing, item order
+within a matrix), and applying the discussion-guide rubric to a survey gives
+confident, wrong advice. Send it to the right one and say which it is.
+
+The craft rules below are the operational half of that rubric. Two things the
+gate cannot do for you, and both are named in every report it writes: it is not a
+cognitive pretest, and it cannot see who answered or who didn't. Pilot it, and
+have a second human read it — on this method more than any other, because you
+only get one field.
 
 ## What it can tell you
 
@@ -88,9 +92,17 @@ becomes 15.
 7-point scales in one instrument makes the results incomparable and the
 respondent's job harder. Label every point, not just the ends.
 
-**Offer an honest out.** "Not applicable" and "don't know" are real answers, and
-forcing a choice manufactures data. This is the single most common way a survey
+**Offer "not applicable" wherever the item can be inapplicable.** Forcing a
+choice there manufactures data, and it is the single most common way a survey
 generates a finding about nothing.
+
+**"Don't know" is a genuinely open question — decide it per item.** The intuitive
+rule is to always offer a no-opinion out, and the evidence does not support it:
+no-opinion options don't improve data quality and can discard real if weakly held
+attitudes, because the people who take the out include the ones answering the
+whole instrument as fast as possible. Offer it on knowledge questions. Think
+harder about it on attitude questions. `survey-checker` flags this in both
+directions and blocks in neither, on purpose.
 
 **Balance the poles.** As many favourable options as unfavourable, worded with
 matching intensity. An imbalanced scale is a leading question with numbers.
@@ -99,8 +111,10 @@ matching intensity. An imbalanced scale is a leading question with numbers.
 block order where blocks are independent — otherwise position becomes part of
 the finding.
 
-**Beware the matrix grid.** Long grids invite straightlining. Break them up,
-or reverse-code an item or two so you can detect it.
+**Beware the matrix grid.** Long grids invite straightlining. Break them up.
+Reverse-coding an item or two detects it, at the cost of confusing respondents
+and introducing a method artifact of its own — a trade-off worth making
+knowingly, not a default.
 
 **Pilot it.** Ten people, watched or debriefed, before it goes out. Cognitive
 pretesting exists as a discipline because reading a question is a bad predictor

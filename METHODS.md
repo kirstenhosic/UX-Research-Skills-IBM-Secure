@@ -47,25 +47,29 @@ If you find yourself writing a rule into two method files, it belongs in neither
 ## Not every method has a gate
 
 The evaluation loop was built around instruments the gates can read: a plan, a
-discussion guide, a synthesis, a deck. Two methods in this directory fall outside
-it, and the files say so at the top rather than letting a reader assume coverage.
+discussion guide, a survey instrument, a synthesis, a deck. One method in this
+directory still falls outside it, and the file says so at the top rather than
+letting a reader assume coverage.
 
 | Method | Instrument gate | What still runs |
 |---|---|---|
 | Interview, usability, diary, concept test | `guide-checker` (§4.6) | Everything |
 | Tree test | `guide-checker`, task rules only — the interview items don't apply | Everything |
-| **Survey** | **None.** `guide-checker` declares survey instruments out of scope on purpose: self-administered wording answers to a different literature, and the guide rubric would give confident, wrong advice | Pre-flight safety, and the analysis and findings downstream |
+| Survey | `survey-checker` (§4.7). Not `guide-checker`, which declares survey instruments out of scope on purpose: self-administered wording answers to a different literature, and the guide rubric would give confident, wrong advice on one | Everything |
 | **A/B test** | **None.** No guide, no recruited participants, no transcript — there is no artifact of the shape the loop expects | Pre-flight safety, and the findings downstream |
 
-Both gaps are real and neither is an oversight. Closing them means a second gate
-with its own literature — `research-survey-checker` is the obvious candidate,
-since survey instruments have a large and well-established methodology behind
-them. Until one exists, the craft sections in those two files are the standard,
-and a second human reader matters more there than anywhere else in the suite.
+There were two gaps here. The survey one was closed the way a gap like this has
+to be closed — a separate gate with its own literature, `research-survey-checker`
+against §4.7, rather than a widened `guide-checker` holding two standards for the
+same word. The experiment gap is still open, and `methods/ab-test.md` carries the
+craft standards instead. A second human reader matters more there than anywhere
+else in the suite.
 
 Say which case you are in when you hand something to a gate. A tree-test task set
 sent to `guide-checker` without that context gets scored against TED+W and the
-behavioral bar, and comes back full of findings that do not apply.
+behavioral bar, and comes back full of findings that do not apply — and a
+questionnaire sent to the same gate gets refused outright and pointed at
+`survey-checker`, which is the behavior you want.
 
 ## The file format
 

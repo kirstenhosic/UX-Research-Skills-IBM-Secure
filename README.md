@@ -213,7 +213,7 @@ takes.
 
 ---
 
-## The six checkers
+## The seven checkers
 
 Each evaluator verifies one thing and is blind to the rest. That blindness is the
 reason there's more than one: a groundedness checker will pass a perfectly-sourced
@@ -225,6 +225,7 @@ decision-relevant finding built on a fabricated quote.
 | [`research-safety-checker`](agents/research-safety-checker.agent.md) | Could this expose a participant, given who will read it? | Whether any of it is true, relevant, or readable |
 | [`research-plan-reviewer`](agents/research-plan-reviewer.agent.md) | Will this study answer its question? Does the guide cover it? | Anything post-fieldwork; the wording, order, and repetition inside the guide |
 | [`research-guide-checker`](agents/research-guide-checker.agent.md) | Are the questions well-formed, behavioral, non-repeating, and in an order a conversation could follow? | Whether the study is worth running; whether the guide covers the research questions; the moderator, where most leading actually happens |
+| [`research-survey-checker`](agents/research-survey-checker.agent.md) | Are the items, response options, order, and routing sound enough to field once? | Whether a survey should answer this at all; the sample and non-response, where a survey's validity actually lives |
 | [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) | Is each claim traceable to source text? | Whether the claim matters |
 | [`research-significance-checker`](agents/research-significance-checker.agent.md) | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
 | [`research-readability-checker`](agents/research-readability-checker.agent.md) | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
@@ -242,6 +243,15 @@ memory, repeats something asked twenty minutes earlier in different words, or
 sits in an order that primes its own answer. Any guide Dr. Morgan drafts runs
 this gate before a session is scheduled, because a defect in a guide stops being
 fixable the moment the first participant answers the question.
+
+**A survey gets a third gate, because it is a different instrument wearing
+similar clothes.** `research-guide-checker` refuses questionnaires on purpose —
+wording in something answered alone, with no moderator to clarify it, answers to
+a different literature entirely: response scales, acquiescence, satisficing,
+which option sits at the top of the list. `research-survey-checker` holds that
+one. Its deadline is the hardest in the suite: a guide with a defect in it can be
+corrected before the next participant, and a survey cannot. Field it and the list
+is spent.
 
 ---
 
@@ -273,7 +283,7 @@ flowchart TD
     SY --> ART
 
     ART --> PF["<b>Pre-flight · research-safety-checker</b><br/>could this expose a participant?<br/>the bar rises with the audience: team → org → public"]
-    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · guide-checker<br/>synthesis-checker · significance-checker<br/>readability-checker<br/><i>only the ones that fit the artifact run</i>"]
+    PF --> G["<b>Quality gates, in order</b><br/>plan-reviewer · guide-checker · survey-checker<br/>synthesis-checker · significance-checker<br/>readability-checker<br/><i>only the ones that fit the artifact run</i>"]
     G --> V{"Verdict"}
 
     V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flags ride along as Reviewer Notes"])
@@ -346,6 +356,15 @@ worth having. None of them is a substitute for you reading the thing.
   a question is ambiguous to an actual practitioner is answered by one pilot
   session, not by review; and most leading happens live, in an unwritten
   follow-up or a silence someone fills with a hypothesis.
+- **Check the survey before you spend the list.** An agree/disagree item that
+  measures agreeableness, options that overlap or leave someone out, a band set
+  that quietly tells the respondent what normal looks like, demographics on
+  screen one —
+  [`research-survey-checker`](agents/research-survey-checker.agent.md) reads the
+  instrument before it is fielded, because a survey has no second participant.
+  It states its own two limits every run: it is not a cognitive pretest, and it
+  cannot see who answered or who didn't, which is the question that decides
+  whether the numbers mean anything.
 
 **What they can't do**
 
@@ -415,9 +434,9 @@ The gate matrix, verdict schema, and known limits are in
 | [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files, and the table of which methods have an instrument gate and which don't. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
-The six scenario files and the six evaluator agents are listed in
+The six scenario files and the seven evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
-[The six checkers](#the-six-checkers).
+[The seven checkers](#the-seven-checkers).
 
 <details>
 <summary><b>Frameworks and canon referenced</b></summary>
@@ -457,11 +476,11 @@ citations live in the individual files.
 
 | Term | What it means here |
 |---|---|
-| artifact | Anything the suite produces for someone else to read: a research plan, a discussion guide, a findings doc, a competitive analysis, a slide deck. |
+| artifact | Anything the suite produces for someone else to read: a research plan, a discussion guide, a survey instrument, a findings doc, a competitive analysis, a slide deck. |
 | agent | A prompt packaged so a tool can load it by name. The configuration at the top of an `.agent.md` file is called *frontmatter*; you don't need to touch it. |
 | skill | A prompt bundled with its supporting files (templates, reference docs, scripts). Bob can invoke one by name. |
 | custom instructions | The box in Bob or Copilot Chat where you set standing instructions for a whole conversation instead of retyping them. Sometimes called a system prompt. |
-| gate | A checker that reads a finished artifact and reports whether it passes. Five of the six run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
+| gate | A checker that reads a finished artifact and reports whether it passes. Six of the seven run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL`. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
 | checkpoint | A stop where a *person* decides, not an agent. Two exist: the **theme checkpoint** after clustering (the default one), and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |

@@ -1,5 +1,5 @@
 ---
-description: "Use to gate a research plan before fieldwork starts. Audits the upstream decisions — is there a named decision, are the research questions researchable, can the method actually answer them, are participants defined and recruitable, is there an analysis plan and a consent approach — and maps the discussion guide against the research questions in both directions, catching questions that serve nothing and research questions nothing serves. Question craft, sequencing, and repetition inside the guide belong to research-guide-checker, which runs after this gate; do not duplicate its checks."
+description: "Use to gate a research plan before fieldwork starts. Audits the upstream decisions — is there a named decision, are the research questions researchable, can the method actually answer them, are participants defined and recruitable, is there an analysis plan and a consent approach — and maps the discussion guide against the research questions in both directions, catching questions that serve nothing and research questions nothing serves. Question craft, sequencing, and repetition inside the guide belong to research-guide-checker, and the items, scales, order, and routing inside a survey instrument belong to research-survey-checker; both run after this gate, and neither's checks should be duplicated here. What stays here for a survey: whether a survey can answer the question at all, and whether the sample supports the cuts the plan intends to report."
 name: "Research Plan Reviewer"
 tools: [read, search]
 user-invocable: true
@@ -27,6 +27,15 @@ decide whether the guide points at the right targets. It decides whether the
 questions are any good at hitting them. Keep that line; two gates ruling on the
 same question is how they start contradicting each other.
 
+**The inside of a survey instrument**, on the same terms and for the same reason.
+Response options, scale construction, item order, and routing are
+`research-survey-checker`, against §4.7. Two things there are yours and stay
+yours: whether a survey can answer the research question at all — and this is the
+method where it most often cannot, because a survey run before any qualitative
+work measures the team's own assumptions back to them — and whether the sample
+supports the cuts the plan intends to report, per segment rather than in total.
+That gate cannot see the sample. You can.
+
 ## Inputs
 
 - **The plan and/or discussion guide** to review
@@ -37,12 +46,16 @@ same question is how they start contradicting each other.
 If you have only a guide and no plan, say explicitly that the upstream decisions
 were not available to audit, and check only what the guide itself reveals about
 them — a guide can be flawless and still be the wrong instrument. Send the guide
-to `research-guide-checker` regardless; that gate needs no plan to run.
+to `research-guide-checker` regardless; that gate needs no plan to run. A survey
+instrument goes to `research-survey-checker` on the same terms, and it needs the
+analysis plan from §4.1 item 8 to judge the instrument's length — so if the plan
+you are reviewing has one, say so when you hand it over.
 
 ## Rubric
 
 §4.1 of `EVALUATION-LOOP.md` (Definition of Done — research plan). Use that
-standard; do not invent one. §4.6, the guide's own bar, is not yours to apply.
+standard; do not invent one. §4.6 and §4.7 — the guide's and the survey's own
+bars — are not yours to apply.
 
 ---
 

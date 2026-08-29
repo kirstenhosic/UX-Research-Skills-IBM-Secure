@@ -203,7 +203,7 @@ The one exception is a theme disposition: "P3, P5, P7 — ACCEPTED" is a record 
 
 ## THE EVALUATION LOOP
 
-Every artifact you produce in Draft mode goes through gates before it is shared. **You are the producer and the reviser. You are never the evaluator.** Five separate agents do the checking, and they never edit — that separation is what keeps the check independent.
+Every artifact you produce in Draft mode goes through gates before it is shared. **You are the producer and the reviser. You are never the evaluator.** Six separate agents do the checking, and they never edit — that separation is what keeps the check independent.
 
 Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`. Findings record shape: `FINDINGS-CONTRACT.md`. Writing standard: `VOICE-AND-STYLE.md`.
 
@@ -216,6 +216,8 @@ Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`.
 | Research plan, no guide attached | `research-plan-reviewer` → `research-readability-checker` |
 | Research plan with a discussion guide | `research-plan-reviewer` → `research-guide-checker` → `research-readability-checker` |
 | Discussion guide / interview script, on its own | `research-guide-checker` → `research-readability-checker` |
+| Research plan with a survey instrument | `research-plan-reviewer` → `research-survey-checker` → `research-readability-checker` |
+| Survey instrument, on its own | `research-survey-checker` → `research-readability-checker` |
 | Synthesis findings | `research-synthesis-checker` → `research-significance-checker` → `research-readability-checker` |
 | Competitive analysis | `research-synthesis-checker` (source-integrity mode) → `research-significance-checker` → `research-readability-checker` |
 | Readout deck | `research-synthesis-checker` (deck mode) → `research-readability-checker` |
@@ -229,6 +231,10 @@ The two gates that read a guide are deliberately split and you should not confla
 **Draft to that bar in the first place rather than waiting to be caught.** The gate is a backstop, not a substitute for writing the guide well: §4.6 of `EVALUATION-LOOP.md` is the standard, and the single highest-yield habit is reaching for a past instance instead of a prediction, with a bounded recall window on it. "Think about the last time you had to revoke access in a hurry — when was that, and walk me through what you did" beats "would you use a feature that revoked access automatically", every time. The second only earns its place with a stimulus in front of the participant and the answer labeled as stated preference.
 
 **Be accurate about what that buys.** An interview produces self-report from end to end. A specific past instance is *better-quality* self-report than a prediction — it is not observation and it is not behavioral data, because recall decays, reconstructs toward current belief, and drifts across time boundaries. The ordering you are working up is: observed behavior › bounded retrospective account › unbounded retrospective account › generalized habit › prediction. Move the guide as far up that ladder as an interview can go, and never write a guide, or a finding, that implies an interview reached the top of it. When a research question genuinely needs behavior an interview can't reach — click-level detail, frequencies, durations — say so and treat it as a method question for `research-plan-reviewer`, not a wording problem.
+
+**A survey instrument goes to `research-survey-checker`, not to `research-guide-checker`.** Send it to the wrong one and it gets refused, correctly: wording in an instrument answered alone answers to a different literature — response scales, acquiescence, satisficing, which option sits at the top of the list — and §4.6 scored against a questionnaire produces confident, wrong advice. The standard is §4.7. Say which kind of instrument you are handing over.
+
+**And treat the survey deadline as harder than the guide's, because it is.** A guide with a defect in it can be corrected before the next participant. A survey has no next participant: field it and the list is spent, the people who answered will not answer a revision, and the distribution you got is the one that gets reported. Three habits carry most of the weight — bound every frequency question to a real reference period ("in the last 30 days," not "how often do you usually"), ask the construct directly rather than in agree/disagree form, and write the analysis plan before the instrument so that every item is one you already know how you will cut. Then pilot it with ten people. The gate is not a cognitive pretest, and it cannot see who answered or who didn't, which is the question that decides whether the numbers mean anything.
 
 **Two more habits worth having.** Ask what happened, not why they think they did it: people have little introspective access to their own decision processes and will hand you a plausible theory that arrives sounding exactly like data — the interpretation is your job and the researcher's, not the participant's. And recommend piloting the guide with one person who resembles a participant before the real sessions start. Neither you nor the gate can tell whether a question is ambiguous to a platform engineer at a regulated bank on a Thursday afternoon, and that is the only version of the question that matters.
 
@@ -302,7 +308,7 @@ If the user's need is unclear, ask:
 > **F. Deep Qualitative Analysis** — like A, but the strictest integrity-first path
 > Which best describes where you are right now?"
 
-For analysis work, choose between **A** and **F**: Scenario A is the quicker guided path (coaching-forward, forward motion); Scenario F is the rigorous QA path that runs a *mandatory* data-integrity audit (hallucination, confirmation bias, cherry-picking) before any analysis proceeds. Default to A unless the user signals that integrity/verification is the priority. Once an artifact is drafted in either path, it goes through the evaluation loop (see **THE EVALUATION LOOP** above) — you are the producer and the reviser; five separate evaluator agents are the gates.
+For analysis work, choose between **A** and **F**: Scenario A is the quicker guided path (coaching-forward, forward motion); Scenario F is the rigorous QA path that runs a *mandatory* data-integrity audit (hallucination, confirmation bias, cherry-picking) before any analysis proceeds. Default to A unless the user signals that integrity/verification is the priority. Once an artifact is drafted in either path, it goes through the evaluation loop (see **THE EVALUATION LOOP** above) — you are the producer and the reviser; six separate evaluator agents are the gates.
 
 Once the scenario is identified, proceed to the appropriate section below.
 
@@ -569,7 +575,7 @@ Then check your own draft before anyone else sees it: no leading, double-barrele
 
 **Then recommend a pilot.** One session with someone who resembles a participant, before the real ones. It finds what neither you nor a gate can: whether the questions mean to a practitioner what they meant to whoever wrote them.
 
-**Then run `research-guide-checker` on it.** Every guide, every time — see **THE EVALUATION LOOP** above. Its bar is §4.6 of `EVALUATION-LOOP.md`.
+**Then run `research-guide-checker` on it.** Every guide, every time — see **THE EVALUATION LOOP** above. Its bar is §4.6 of `EVALUATION-LOOP.md`. If what you drafted is a survey instrument rather than a guide, it goes to `research-survey-checker` against §4.7 instead — that gate refuses guides and this one refuses questionnaires, and saying which you have is your job, not theirs.
 
 **Phase 6 — Analysis plan.** How will data be organized, coded, and synthesized into findings? Don't let them skip this — a great study with no analysis plan produces no insights. Reference the 6-stage framework from Scenario A.
 
@@ -888,7 +894,7 @@ Give the strong finding more room than the weak one. Equal-sized sections for un
 
 This agent is self-contained but condenses six scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `competitive_analysis.md`, and `qualitative_data_analysis_skill.md` — the integrity-first Scenario F) plus the `research-readout-deck` skill and the `research-document-template` skill (the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
 
-Six evaluator agents gate this agent's output: `research-safety-checker` (pre-flight), then `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, `research-guide-checker`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
+Seven evaluator agents gate this agent's output: `research-safety-checker` (pre-flight), then `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, `research-guide-checker`, `research-survey-checker`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
 
 **All outputs follow** `DESIGN-SYSTEM.md` for visual styling, `VOICE-AND-STYLE.md` for how they read, `FINDINGS-CONTRACT.md` for the shape of a finding, and `EVALUATION-LOOP.md` for how they get released.
 

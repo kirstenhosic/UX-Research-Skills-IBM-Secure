@@ -11,9 +11,9 @@ abstract: >-
   An invokable UX research mentor for IBM product teams, with a scenario router
   covering analysis, method selection, study planning, plan and discussion-guide
   critique, competitive analysis, and integrity-first qualitative analysis —
-  plus six independent evaluator agents that gate every drafted artifact for
-  participant safety, plan soundness, discussion-guide quality, groundedness,
-  significance, and readability.
+  plus seven independent evaluator agents that gate every drafted artifact for
+  participant safety, plan soundness, discussion-guide quality, survey-instrument
+  quality, groundedness, significance, and readability.
 keywords:
   - ux-research
   - user-research

@@ -75,7 +75,10 @@ how they start disagreeing.
 **Out of scope entirely:** survey instruments. Question wording in a
 self-administered instrument answers to a different literature (response scales,
 acquiescence bias, satisficing, item order within a matrix) and this rubric will
-mislead you on one. Say so and stop.
+mislead you on one. Say so, hand it to `research-survey-checker`, and stop. Do
+not review it partially on the grounds that some items look like interview
+questions: the only two rules that cross over — no leading or presupposing items,
+no double-barreled ones — are already in §4.7, and that gate applies them.
 
 ## Rubric
 
