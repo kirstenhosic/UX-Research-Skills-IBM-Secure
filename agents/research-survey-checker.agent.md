@@ -185,7 +185,8 @@ screener: drop-off is highest here, and every item before the qualification is
 spent on people you will discard.
 
 **Warm-up before the core.** One easy, relevant item. Demographics are not a
-warm-up.
+warm-up — unless the item also gates a branch, in which case it has to run early,
+it doubles as the warm-up, and neither this nor the classification rule fires.
 
 **General before specific, within a construct.** Ask the specific item first and
 the general one after, and you get a part-whole effect: the general judgment is
@@ -193,19 +194,32 @@ answered as *"apart from what I just told you."* Schuman & Presser (1981)
 documented it; Tourangeau, Rips & Rasinski (2000) explain the mechanism. It is
 large and it is invisible in the results.
 
-**No item primes a later one.** A block that describes a concept, names a
-feature, or reveals what the study hopes to find, placed before the items that
-would have measured the unprimed baseline — **blocking**, with the contaminated
-items named. Same rule as §4.6 item 24, same literature, and it is the
-best-evidenced call you make.
+**No item primes a later one — in the describable sense only.** Text that names a
+concept, feature, design, or hypothesis, placed before the items that would have
+measured the unprimed baseline — **blocking**, and name the contaminated items in
+full: **every item after the priming text**, not only the block it opens.
+Contamination does not stop at a block boundary.
+
+**Do not read this as a rule against order effects in general.** Every item
+conditions every later one; order effects are conserved, not eliminated. A
+general reading fires on every multi-item instrument ever written, and it would
+condemn the very arrangement item 20 requires — randomized independent blocks
+prime each other by construction. It does not fire on general-before-specific
+ordering (that is item 19's business, and item 19 mandates it), and it does not
+fire on block randomization. If you find yourself flagging an instrument for
+having an order, you are applying the wrong item. Where the effect is real but
+you cannot name the text that causes it, put it in the report as a limit rather
+than on the blocking list.
 
 **Sensitive items after what they could contaminate**, never in the opening
 block.
 
 **Classification last.** Demographics, firmographics, role, tenure. They are the
 cheapest items to lose to abandonment and the most expensive to place early. Flag
-any instrument that opens with them — and note it is also the most common single
-defect you will see.
+any instrument that opens with them — **unless the item gates a branch**, which
+is §4.6 item 25's clause and applies here too: an item that routes the instrument
+cannot sit after the routing. This is a common defect in drafts; how common is a
+base-rate claim about a corpus you have not observed, so do not make one.
 
 **One construct per block, most important block first.** Attention decays through
 the instrument, so block order is a decision about what you are willing to
@@ -221,11 +235,17 @@ have preceded this.
 
 ## Part 4 — Length, and the analysis discipline that sets it
 
-**Every item appears in a planned cut.** Ask for the analysis plan and walk it
-against the instrument. An item that appears in no planned cross-tab is a
-"nice to know," and nice-to-knows are how a 5-minute survey becomes a 15-minute
-one. Report them as a list with a count — the list is more persuasive than the
-argument.
+**Every item appears in a planned cut, with four exemptions.** Ask for the
+analysis plan and walk it against the instrument. An item that appears in no
+planned cross-tab is a "nice to know," and nice-to-knows are how a 5-minute survey
+becomes a 15-minute one. Report them as a list with a count — the list is more
+persuasive than the argument.
+
+**Do not count the screener, the warm-up, open-text items, or consent, contact,
+and recontact fields.** This rubric requires all four and forbids analysing the
+open text, so counting them against this item would make it unsatisfiable by any
+instrument that obeys items 17, 18, and 24. Exclude them silently; they are not
+findings.
 
 If there is no analysis plan, say that you could not run this check, that the
 length findings below are therefore weaker than they look, and that §4.1 item 8
@@ -236,6 +256,7 @@ requires the plan before fieldwork anyway.
 | Target completion time | Items |
 |---|---|
 | 3–5 min | 10–15 |
+| 5–8 min | 15–20 |
 | 8–10 min | 20–30 |
 | 15 min+ | Expect meaningful drop-off and degraded quality in the final third |
 
@@ -271,10 +292,13 @@ of a draft almost never does, which is why it is worth your time.
   blanket required-everything, and name what it converts: a hesitation becomes an
   abandonment, and the abandonment is silent.
 - **The preamble states what the data is for, the estimated completion time, and
-  who to contact.** Check the estimate against your item count from Part 4. An
-  estimate the instrument's own length contradicts is **blocking** — it is the
-  one claim in a survey the respondent can independently verify, and getting it
-  wrong costs the response rate on the next one too.
+  who to contact.** Check the estimate against your item count from Part 4,
+  counting grid rows as items. It is the one claim in a survey the respondent can
+  independently verify, and getting it wrong costs the response rate on the next
+  one too. **Block only on a gross gap — the real length is double the stated one
+  or more, or the count lands two bands away.** Anything smaller is Part 4's flag:
+  those ranges are conventions, not measured rates, and blocking on a yardstick
+  this gate declines to stand behind is how a gate loses its credibility.
 - **Device.** Ask what the population will answer on. If grids or wide option
   matrices are present and the answer is "a phone," or nobody knows, flag it and
   hand it to the live-form check below.

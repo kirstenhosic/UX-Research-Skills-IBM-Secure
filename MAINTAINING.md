@@ -54,7 +54,17 @@ verdict with no citation attached, that item 30 blocks on a yardstick item 26
 disclaims, and that several citations do not support what rests on them — including
 the don't-know framing in §4.7 item 14 and in §7. An instrument written to be
 defensible fires 20 of 36 items and fails on five blocking calls, none of them real.
-One bug was fixed during the read; everything else is open and ranked in that file.
+**All five Tier 1 findings are now fixed** — items 18, 21, 23, 25, 26, and 30 in
+§4.7, the matching parts of the gate, and the counts table in `methods/survey.md`.
+None of those fixes has been re-run against `survey-fixture/`. Tiers 2 through 4 —
+the citation problems, the items that fire on everything, and the omissions — are
+open and ranked in that file.
+
+**Editing §4.7 is a four-file edit.** The rubric, the gate that applies it,
+`methods/survey.md` where the length conventions actually live, and
+`survey-fixture/README.md`, whose answer key goes stale the moment a rule changes.
+The item 25 fix moved a keyed defect from 13 items to 12; nothing would have caught
+that but reading the key.
 
 **§4.6 has not had one, and the read implicates it twice** — it contains zero
 citations, and §4.7 item 21 claims to rest on "the same literature."

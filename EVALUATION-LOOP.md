@@ -609,7 +609,9 @@ the severity calls depend on the assumption.
     qualifies. A screener that names its own target — "do you manage secrets
     daily?" — recruits the people who want to be recruited
 18. A warm-up item precedes the core blocks: one easy, relevant question.
-    Demographics are not a warm-up
+    Demographics are not a warm-up — **unless the item also gates a branch**, in
+    which case it has to run early and doubles as the warm-up. Say that is what
+    it is doing
 19. General before specific within a construct. Asking the specific item first and
     the general one after produces part-whole effects that are large, documented,
     and invisible in the results (Schuman & Presser, 1981; Tourangeau, Rips &
@@ -617,25 +619,50 @@ the severity calls depend on the assumption.
 20. One construct per block, most important block first, and independent blocks
     randomized. Attention decays through the instrument, so the order is a
     decision about what you are willing to measure badly
-21. No item primes a later one. This is §4.6 item 24 in a different mode, resting
-    on the same literature, and it is the best-evidenced item here as it is there
+21. No item primes a later one, in the specific and describable sense: **text
+    that names a concept, feature, design, or hypothesis**, placed before the
+    items meant to measure the unprimed baseline. That is **blocking**, and the
+    contaminated items are named in full — **every item after the priming text**,
+    because contamination does not stop at the block boundary that introduced it.
+    An instrument that must show a concept shows it after every unprimed measure.
+
+    **This is not a rule against order effects in general, and it must not be
+    applied as one.** Every item conditions every later item; order effects are
+    conserved, not eliminated, and a reading that forbids them cannot be satisfied
+    by any instrument with more than one item. In particular it does not fire on
+    item 19's general-before-specific ordering, and it does not fire on item 20's
+    randomized independent blocks — item 20 *mandates* an arrangement that a
+    general reading of this item would forbid. Where the effect is real but not
+    nameable, that belongs in the report as a limit, not here as a defect.
+
+    The mechanism is the standard account of context effects in survey response
+    (Tourangeau, Rips & Rasinski, 2000). Note that §4.6 item 24 calls itself the
+    best-evidenced item on its list and carries no citation, as §4.6 carries none
+    anywhere; this item no longer inherits that claim
 22. Sensitive items sit after the constructs they could contaminate, never in the
     opening block
 23. Classification items — demographics, firmographics, role — sit **last**,
-    where abandonment costs you nothing
+    where abandonment costs you nothing, **unless they gate a branch**. This is
+    §4.6 item 25's clause, which this section dropped and should not have: an item
+    that routes the instrument cannot sit after the routing
 24. Open-text items are few, late, and optional, and nothing in the instrument or
     the plan treats them as qualitative data. They produce fragments from the
     minority who bother
 
 **Length, and the analysis discipline that sets it**
 
-25. Every item appears in at least one planned analysis cut. The analysis plan is
-    attached or referenced; without it, length cannot be judged and the gate says
-    so rather than guessing. An item in no planned cut is cut or justified — this
-    is §4.1 item 8 doing work it can only do before fielding
+25. Every item appears in at least one planned analysis cut, **except the items
+    this rubric requires that cannot be in one**: the screener (item 17), the
+    warm-up (item 18), open-text items (item 24, which forbids analysing them),
+    and consent, contact, and recontact fields. Without those exemptions this item
+    contradicts items 17, 18, and 24 outright — it would be unsatisfiable by any
+    instrument that obeys them, and it fires on every instrument ever written.
+    Everything else is in a cut or is cut. The analysis plan is attached or
+    referenced; without it, length cannot be judged and the gate says so rather
+    than guessing — this is §4.1 item 8 doing work it can only do before fielding
 26. Item count is stated and compared against the stated completion time, using
-    the ranges in `methods/survey.md` (3–5 min: 10–15 items · 8–10 min: 20–30 ·
-    15 min+: expect degradation in the final third). Those are conventions with
+    the ranges in `methods/survey.md` (3–5 min: 10–15 items · 5–8 min: 15–20 ·
+    8–10 min: 20–30 · 15 min+: expect degradation in the final third). Those are conventions with
     assumptions attached — a professional respondent, answering unpaid — not
     measured rates, so an overrun is flagged rather than blocking. Say that
 27. Matrix grids are short, or broken up. Long grids invite straightlining, which
@@ -652,9 +679,13 @@ the severity calls depend on the assumption.
 29. Forced response is used only where an unanswered item invalidates the record.
     Making every item required converts a hesitation into an abandonment
 30. The instrument opens by stating what the data is for, the estimated
-    completion time, and who to contact — and the estimate matches the count in
-    item 26. An estimate contradicted by the instrument's own length is
-    **blocking**; it is the one claim in a survey that the respondent can check
+    completion time, and who to contact — and the estimate is consistent with the
+    count in item 26. It is the one claim in a survey the respondent can check
+    while answering. **Blocking only where the gap is gross — the real length is
+    double the stated one or more**, or the count sits two bands away. A smaller
+    overrun is item 26's flag and nothing more: item 26 marks its own ranges as
+    conventions rather than measured rates, and this item must not block on a
+    yardstick the rubric declines to stand behind. Count grid rows as items
 31. The instrument renders on the device the population will actually answer it
     on. Grids in particular do not survive a phone
 

@@ -71,6 +71,7 @@ Rule of thumb. Assumes a professional respondent answering unpaid.
 | Target completion time | Questions |
 |---|---|
 | 3–5 min | 10–15 |
+| 5–8 min | 15–20 |
 | 8–10 min | 20–30 |
 | 15 min+ | Expect meaningful drop-off and degraded quality in the final third |
 
