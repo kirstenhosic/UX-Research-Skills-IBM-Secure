@@ -594,13 +594,19 @@ the severity calls depend on the assumption.
 13. "Not applicable" is offered wherever the item can be inapplicable. Forcing a
     choice there manufactures data — the most common way a survey generates a
     finding about nothing
-14. **"Don't know" is a judgment call, and this rubric declines to settle it.**
-    The intuitive rule — always offer a no-opinion out — is not supported:
-    no-opinion options do not improve data quality and can discard real if weakly
-    held attitudes, because the people who take them include the ones
-    satisficing (Krosnick et al., 2002). Flag its *absence* on knowledge-dependent
-    items and its *presence* on attitude items the respondent plausibly has a
-    view on. Neither call blocks
+14. **"Don't know" is a judgment call, and this rubric declines to make it for
+    the researcher.** That is a policy choice, not a report that the field is
+    divided — the cited work leans one way. The intuitive rule, always offer a
+    no-opinion out, is not supported: no-opinion options do not improve data
+    quality and can discard real if weakly held attitudes, because the people who
+    take them include the ones satisficing (Krosnick et al., 2002; Krosnick &
+    Presser, 2010). The 2002 recommendation to omit them is itself hedged as
+    worth further testing, which is why this rubric declines to turn it into a
+    rule. Flag the option's *presence* on attitude items the respondent plausibly
+    has a view on, and cite that work when you do. Flag its *absence* on
+    knowledge-dependent items too — but mark that half as this rubric's own
+    judgment rather than a finding, because the cited work is about attitude
+    questions and says nothing about knowledge ones. Neither call blocks
 15. Option order is randomized where the list has no natural sequence. Visually
     presented lists show primacy — options near the top are chosen more (Krosnick
     & Alwin, 1987) — and a fixed order makes position part of the result
@@ -887,10 +893,14 @@ which is the same standard this suite holds research to.
   in §4.7 item 26 have no published basis and are marked as such where they
   appear. The priming rule, the hypothetical rule, the double-barreled rule, and
   most of §4.7's scale and order items do have one — and §4.7 item 14 is a third
-  case worth keeping distinct: a question the literature has actively unsettled,
-  which is why it flags in both directions and blocks in neither. Don't let the file's uniform tone flatten
-  that difference — an evaluator that cites a convention as though it were a
-  finding is doing the thing this suite exists to catch.
+  case worth keeping distinct: a policy choice made across the grain of the
+  evidence it cites. The cited work leans against routinely offering a no-opinion
+  out; item 14 flags in both directions and blocks in neither anyway, because the
+  call belongs to the researcher. One half of it — flagging the option's absence
+  on knowledge-dependent items — has no source at all, and says so. Don't let the
+  file's uniform tone flatten these differences — an evaluator that cites a
+  convention, or a policy choice, as though it were a finding is doing the thing
+  this suite exists to catch.
 
 ---
 

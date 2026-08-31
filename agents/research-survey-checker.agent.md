@@ -161,15 +161,19 @@ measured.
 and say the consequence plainly: the forced answer is not a neutral answer, it is
 manufactured data that looks exactly like the real kind.
 
-**"Don't know" — report the call, don't settle it.** Do not apply the intuitive
-rule here. Krosnick et al. (2002) found no-opinion options do not improve data
-quality and can discard real if weakly held attitudes, because the respondents
-who take the out include the ones satisficing. So: flag its absence on
-knowledge-dependent items, flag its presence on attitude items the respondent
-plausibly holds a view on, and in both cases present it as a judgment for the
-researcher with the trade-off named. **Neither direction blocks.** A gate that
-blocks on a contested question in the literature is asserting something the field
-has not settled.
+**"Don't know" — report the call, leave it to the researcher.** Do not apply the
+intuitive rule here. Krosnick et al. (2002) found no-opinion options do not
+improve data quality and can discard real if weakly held attitudes, because the
+respondents who take the out include the ones satisficing, and Krosnick & Presser
+(2010) reach the same conclusion. So: flag its presence on attitude items the
+respondent plausibly holds a view on, and name that work. Flag its absence on
+knowledge-dependent items too — but say, when you raise it, that this half is the
+rubric's judgment rather than a finding, because the cited work covers attitude
+questions only. In both cases present it as a judgment for the researcher with
+the trade-off named. **Neither direction blocks.** That is a policy choice this
+rubric makes deliberately — the call is the researcher's. Do not describe it as a
+question the field has left open, because the work cited here does not leave it
+open.
 
 **Randomization, in both directions.** Unordered option lists and independent
 blocks should be randomized — visually presented lists show primacy, and a fixed
@@ -495,7 +499,8 @@ this list from memory.
 - **Krosnick, J. A., & Presser, S. (2010).** Question and Questionnaire Design.
   In *Handbook of Survey Research* (2nd ed.). The standard modern summary. Source
   of the recommendation against agree/disagree formats, of fully labelled scales,
-  and of 5–7 points for bipolar constructs.
+  of 5–7 points for bipolar constructs, and of the conclusion (p. 284) that data
+  quality does not improve when no-opinion options are explicitly included.
 - **Krosnick, J. A. (1991).** Response Strategies for Coping with the Cognitive
   Demands of Attitude Measures in Surveys. *Applied Cognitive Psychology, 5*(3),
   213–236. Satisficing — why a long instrument degrades by being straightlined
@@ -504,8 +509,11 @@ this list from memory.
   of Response-Order Effects in Survey Measurement. *Public Opinion Quarterly,
   51*(2), 201–219. Primacy in visually presented option lists.
 - **Krosnick, J. A., Holbrook, A. L., Berent, M. K., et al. (2002).** The Impact
-  of "No Opinion" Response Options on Data Quality. *Public Opinion Quarterly,
-  66*(3), 371–403. Why the don't-know question is a judgment call and not a rule.
+  of "No Opinion" Response Options on Data Quality: Non-Attitude Reduction or an
+  Invitation to Satisfice? *Public Opinion Quarterly, 66*(3), 371–403. Recommends
+  omitting no-opinion options and measuring attitude strength directly — hedged
+  as worth further testing, and about attitude questions only. Item 14 declines
+  to make this a rule as a matter of policy, not because the paper is unclear.
 - **Schwarz, N., Hippler, H.-J., Deutsch, B., & Strack, F. (1985).** Response
   Scales: Effects of Category Range on Reported Behavior and Comparative
   Judgments. *Public Opinion Quarterly, 49*(3), 388–395. The band set you invent

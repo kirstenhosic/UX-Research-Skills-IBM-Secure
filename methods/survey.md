@@ -97,13 +97,15 @@ respondent's job harder. Label every point, not just the ends.
 choice there manufactures data, and it is the single most common way a survey
 generates a finding about nothing.
 
-**"Don't know" is a genuinely open question — decide it per item.** The intuitive
-rule is to always offer a no-opinion out, and the evidence does not support it:
-no-opinion options don't improve data quality and can discard real if weakly held
-attitudes, because the people who take the out include the ones answering the
-whole instrument as fast as possible. Offer it on knowledge questions. Think
-harder about it on attitude questions. `survey-checker` flags this in both
-directions and blocks in neither, on purpose.
+**"Don't know" is yours to decide, item by item.** The intuitive rule is to
+always offer a no-opinion out, and the evidence does not support it: no-opinion
+options don't improve data quality and can discard real if weakly held attitudes,
+because the people who take the out include the ones answering the whole
+instrument as fast as possible. Think hard about it on attitude questions, where
+that evidence lands. Offer it on knowledge questions — that half is our judgment
+and not a finding; the evidence is about attitudes. `survey-checker` flags this
+in both directions and blocks in neither, on purpose: the call is yours, not the
+gate's.
 
 **Balance the poles.** As many favourable options as unfavourable, worded with
 matching intensity. An imbalanced scale is a leading question with numbers.
