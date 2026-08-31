@@ -24,12 +24,16 @@ where the correct answer is a judgment rather than a verdict — the don't-know 
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building it surfaced
 five ambiguities in §4.7, the gate, and §2's verdict schema, all listed in
-`survey-fixture/README.md`. **Two are closed** — §2 now carries `NOT_APPLICABLE`
-and `ROUTE`, and §4.7 item 32 now states that an unmodified standardized
-instrument is exempt from the general scale rules. Both were closed because three
-runs converged on something no document said. **Three remain open**, and all three
-are severity or scope questions the runs disagreed with each other about, which is
-why they are still open.
+`survey-fixture/README.md`. **Four are closed** — §2 now carries `NOT_APPLICABLE`
+and `ROUTE`, §4.7 item 32 now states that an unmodified standardized
+instrument is exempt from the general scale rules, item 21 states how far priming
+contamination runs, and item 12 is settled as a **flag** at every tier. Each closed
+the same way: independent runs converging on something no document stated.
+
+**One remains open** — item 32's behavior at the internal-pulse tier — and it is
+open because no run has been put to the question. No fixture here declares itself
+a pulse. Flipping `survey-fixture/survey-plan.md` to an internal pulse is run
+variant 1 in that file's key, and nobody has run it.
 
 On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
 found seven more that were in the instrument and not in the key, plus three broken

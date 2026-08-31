@@ -52,9 +52,15 @@ guessing is how a gate loses its credibility.
 - **One-off instrument informing a named decision** — full severity.
 - **Internal pulse, reported as texture rather than as measurement** — full
   severity on routing, order, and structure; wording defects one level down,
-  *blocking* becoming *flag*, except items 2, 8, and 12 of §4.7, which stay
-  blocking because each produces a confident number that is wrong rather than a
-  soft one.
+  *blocking* becoming *flag*, except items 2 and 8 of §4.7, which stay blocking
+  because each produces a confident number that is wrong rather than a soft one.
+
+  **Item 12 used to be on that exception list and is not any more.** It is a
+  **flag** at every tier, per §4.7. The old wording said it "stayed" blocking,
+  which presupposed a severity §4.7 never gave it — and produced the inversion of
+  making an invented band set *harder* on a Slack pulse than on the instrument
+  behind a funded decision. Five independent runs called it a flag; the rubric now
+  says so.
 
 If you weren't told which it is, infer it, say which you assumed, and note that
 the severity calls depend on that assumption.

@@ -585,7 +585,12 @@ the severity calls depend on the assumption.
     / 5–10 / more than 10" for the same behavior produce different reported
     frequencies *and* different self-assessments (Schwarz et al., 1985). Where
     the plausible range is genuinely unknown, ask an open numeric item rather
-    than inventing bands, because invented bands become the finding
+    than inventing bands, because invented bands become the finding. **Flag.**
+    Settled as a flag on 2026-08-31 after this item drew a flag from five
+    independent gate runs out of five, against a rubric that had assigned it no
+    severity at all and a gate whose pulse-tier exception implied blocking. It
+    stays a flag at every tier: it is not a wording defect, so the internal-pulse
+    step-down does not reach it either
 13. "Not applicable" is offered wherever the item can be inapplicable. Forcing a
     choice there manufactures data — the most common way a survey generates a
     finding about nothing
