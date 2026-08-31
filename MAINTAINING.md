@@ -42,9 +42,24 @@ every blocking defect. The edges did not: one item drew a flag, a block, and
 silence across three runs. Run it the same way when you need a variance read, and
 expect blocking counts to differ by a few without either run being wrong.
 
-Neither fixture has had an adversarial read. Both were built from the rubrics they
-score against, by the person who wrote them, so a clean run says the specification
-is internally consistent and nothing about whether it is right.
+Both fixtures were built from the rubrics they score against, by the person who
+wrote them, so a clean run says the specification is internally consistent and
+nothing about whether it is right.
+
+**§4.7 has now had an adversarial read** — `adversarial-reads/survey-4.7-2026-08.md`
+in the fixtures repo. Four hostile contexts, plus a skeptic briefed to refute the
+first one's claims. It found that item 25 is logically unsatisfiable, that item 23
+dropped a carve-out §4.6 has, that item 21 carries a superlative and a blocking
+verdict with no citation attached, that item 30 blocks on a yardstick item 26
+disclaims, and that several citations do not support what rests on them — including
+the don't-know framing in §4.7 item 14 and in §7. An instrument written to be
+defensible fires 20 of 36 items and fails on five blocking calls, none of them real.
+One bug was fixed during the read; everything else is open and ranked in that file.
+
+**§4.6 has not had one, and the read implicates it twice** — it contains zero
+citations, and §4.7 item 21 claims to rest on "the same literature."
+
+`gate-fixture/` has not had one either.
 
 ## Product context lives in one place
 

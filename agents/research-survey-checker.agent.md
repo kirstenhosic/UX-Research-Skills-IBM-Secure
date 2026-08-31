@@ -291,8 +291,10 @@ the fielded form to verify.
 If a block is SUS, UMUX-Lite, SEQ, NPS, or any other instrument with published
 norms, check it against the published version verbatim.
 
-**An unmodified standardized instrument is exempt from Part 2's general rules on
-labelling, scale length, and balance.** NPS is endpoint-anchored and eleven
+**An unmodified standardized instrument is exempt from item 2's agree/disagree
+rule and from Part 2's general rules on labelling, scale length, and balance.**
+SUS and UMUX-Lite *are* agree/disagree instruments; without that exemption you
+would block them for being what they are. NPS is endpoint-anchored and eleven
 points; SUS is agree/disagree; SEQ is seven points with anchors only at the ends.
 Every one of those would draw a flag as a question you wrote yourself, and
 "fixing" any of them is the modification Part 6 blocks. Say in your report that

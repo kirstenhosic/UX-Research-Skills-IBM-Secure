@@ -665,9 +665,13 @@ the severity calls depend on the assumption.
     changing the scale length forfeits the norms and the psychometrics that were
     the only reason to use it, and the resulting number is then reported against
     a benchmark it no longer belongs to. **Blocking.** An unmodified one is
-    correspondingly **exempt from items 9, 10, and 11** — its labelling, its
-    length, and its balance are fixed by the published form, and changing any of
-    them to satisfy those items would be the modification this rule blocks. Score
+    correspondingly **exempt from items 2, 9, 10, and 11** — its response format,
+    its labelling, its length, and its balance are fixed by the published form,
+    and changing any of them to satisfy those items would be the modification
+    this rule blocks. Item 2 is on that list because SUS and UMUX-Lite are
+    agree/disagree instruments by construction: without the exemption item 2
+    blocks them for being what they are, and no compliant instrument containing
+    one could exist. Score
     it against the published version and nothing else, and say you excepted it so
     a reader does not think you missed it. Three independent runs inferred that
     exemption before it was written down, which is why it is written down. Note separately that NPS's
