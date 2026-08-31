@@ -22,22 +22,36 @@ with 48 planted defects, the plan context needed to score them, and a decoy
 discussion guide the gate must refuse by name. Its controls include the two items
 where the correct answer is a judgment rather than a verdict — the don't-know pair
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
-instrument rather than escalating on its defect density. Building it surfaced
-five ambiguities in §4.7, the gate, and §2's verdict schema, all listed in
-`survey-fixture/README.md`. **Four are closed** — §2 now carries `NOT_APPLICABLE`
+instrument rather than escalating on its defect density. Building and running it has
+surfaced eight ambiguities in §4.7, the gate, and §2's verdict schema, all listed
+in `survey-fixture/README.md`. **Four are closed** — §2 now carries `NOT_APPLICABLE`
 and `ROUTE`, §4.7 item 32 now states that an unmodified standardized
 instrument is exempt from the general scale rules, item 21 states how far priming
 contamination runs, and item 12 is settled as a **flag** at every tier. Each closed
 the same way: independent runs converging on something no document stated.
 
-**One remains open** — item 32's behavior at the internal-pulse tier — and it is
-open because no run has been put to the question. No fixture here declares itself
-a pulse. Flipping `survey-fixture/survey-plan.md` to an internal pulse is run
-variant 1 in that file's key, and nobody has run it.
+**Four remain open, and three of them live at the internal-pulse tier**, which was
+specified in three documents and fielded in none of them until 2026-08-31. Run
+variant 1 finally put it to a gate — `survey-fixture/survey-plan-pulse.md`, the
+plan with the declared type changed and nothing else — and the tier behaved: every
+wording defect stepped down, routing and order held. Item 32 **held blocking**,
+which is the direction the exception list's logic predicts and its text does not
+say. That is one instance, not the independent convergence the other four closed
+on, so it stays open.
+
+The same run opened three more. The pulse exception says items 2 and 8 "stay
+blocking," which read literally promotes a two-item agree/disagree case to
+blocking at the pulse tier that would be a flag on a funded decision — the same
+inversion item 12's fix removed, sitting on the same list. §4.6's carryover items
+have no stated pulse behavior at all. And item 22 states an absolute with no
+severity attached. All three are candidate fixes in this repo.
 
 On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
 found seven more that were in the instrument and not in the key, plus three broken
-controls. Third time a fixture here has found the fault in its own key.
+controls. Third time a fixture here has found the fault in its own key. The fourth
+run did it again from the other direction: it **missed a keyed blocking defect**,
+Q2's overlapping bands, at a tier that does not touch that item. A fixture measures
+the gate and the gate measures the fixture, and neither reading is safe to skip.
 
 The second run was fielded as **two independent instances on identical text**, and
 is the suite's cleanest variance measurement to date. The core held three for
@@ -59,10 +73,14 @@ disclaims, and that several citations do not support what rests on them — incl
 the don't-know framing in §4.7 item 14 and in §7. An instrument written to be
 defensible fires 20 of 36 items and fails on five blocking calls, none of them real.
 **All five Tier 1 findings are now fixed** — items 18, 21, 23, 25, 26, and 30 in
-§4.7, the matching parts of the gate, and the counts table in `methods/survey.md`.
-None of those fixes has been re-run against `survey-fixture/`. Tiers 2 through 4 —
-the citation problems, the items that fire on everything, and the omissions — are
-open and ranked in that file.
+§4.7, the matching parts of the gate, and the counts table in `methods/survey.md`
+— **and all five are verified** by a third blind run of two instances on identical
+text, which returned the same 13 blocking and 29 flags both times. The first Tier 2
+finding is fixed too: item 14 and §7 no longer describe the don't-know question as
+one the literature has left open, because the work they cite does not leave it
+open. The rule did not change — the justification did. The rest of Tiers 2
+through 4 — the remaining citation problems, the items that fire on everything,
+and the omissions — are open and ranked in that file.
 
 **Editing §4.7 is a four-file edit.** The rubric, the gate that applies it,
 `methods/survey.md` where the length conventions actually live, and
