@@ -531,7 +531,9 @@ none of that. Which is the reason this section exists rather than a note saying
 - **One-off instrument informing a named decision** — full strength.
 - **Internal pulse to a colleague-adjacent audience, reported as texture rather
   than as measurement** — full strength on routing, order, and structure; wording
-  defects one level down.
+  defects one level down. **Items 2, 8, and 32 do not step down** — see
+  `research-survey-checker`, which carries the list and the reasoning for each
+  entry. Do not read the shorter statement here as a different rule.
 
 If you weren't told which it is, infer it, say which you assumed, and note that
 the severity calls depend on the assumption.
@@ -716,7 +718,10 @@ the severity calls depend on the assumption.
     one could exist. Score
     it against the published version and nothing else, and say you excepted it so
     a reader does not think you missed it. Three independent runs inferred that
-    exemption before it was written down, which is why it is written down. Note separately that NPS's
+    exemption before it was written down, which is why it is written down.
+    **This item does not step down at the internal-pulse tier**, settled
+    2026-08-31 on two independent pulse-tier runs that both blocked a modified SEQ
+    and neither of which counted the call as close. Note separately that NPS's
     business claims are contested in the measurement literature; that is a
     method-fit question for `plan-reviewer`, not a reason to fail the instrument
 

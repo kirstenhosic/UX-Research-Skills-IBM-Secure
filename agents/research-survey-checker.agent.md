@@ -52,8 +52,19 @@ guessing is how a gate loses its credibility.
 - **One-off instrument informing a named decision** — full severity.
 - **Internal pulse, reported as texture rather than as measurement** — full
   severity on routing, order, and structure; wording defects one level down,
-  *blocking* becoming *flag*, except items 2 and 8 of §4.7, which stay blocking
-  because each produces a confident number that is wrong rather than a soft one.
+  *blocking* becoming *flag*, except items 2, 8, and 32 of §4.7, which do not step
+  down, because each produces a confident number that is wrong rather than a soft
+  one. The exception preserves whatever severity the item would otherwise carry —
+  it does not promote anything. Item 2 flags at one or two agree/disagree items on
+  a pulse exactly as it does anywhere else.
+
+  **Item 32 was added to that list on 2026-08-31**, on two independent runs of the
+  same pulse-tier instrument that both blocked a modified SEQ without hedging it,
+  and neither of which listed the call among the ones it said it was torn on. A
+  modified instrument reported under its own name gets compared against a
+  benchmark it no longer belongs to, and a pulse is if anything the *easier* place
+  for that number to travel unattributed. The list had named the logic and omitted
+  the item.
 
   **Item 12 used to be on that exception list and is not any more.** It is a
   **flag** at every tier, per §4.7. The old wording said it "stayed" blocking,
