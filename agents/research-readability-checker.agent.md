@@ -1,5 +1,5 @@
 ---
-description: "Use as the final gate before any research output is shared — plan, findings document, competitive analysis, or readout deck. Checks that the writing reads as a human researcher wrote it rather than as generated text (varied rhythm, exact quantifiers, concrete detail, stated confidence, committed conclusions), that a mixed audience of engineers, product managers, designers, researchers, and customer representatives can act on it, and that no participant-identifying data is present. Scores against VOICE-AND-STYLE.md."
+description: "Use as the final gate before any research output is shared — plan, findings document, competitive analysis, or readout deck. Checks that the writing reads as a human researcher wrote it rather than as generated text (varied rhythm, exact quantifiers, concrete detail, stated confidence, committed conclusions), that a mixed audience of engineers, product managers, designers, researchers, and customer representatives can act on it, and that the pre-flight safety scan has already run — the participant-data scan itself belongs to research-safety-checker. Scores against VOICE-AND-STYLE.md."
 name: "Research Readability Checker"
 tools: [read, search]
 user-invocable: true

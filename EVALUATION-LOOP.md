@@ -300,7 +300,7 @@ plan is told what is missing instead of being left to notice.
 | `research-plan-reviewer` | Will this study answer its question? Does the guide cover it? | Anything post-fieldwork; the wording, order, and repetition inside the guide |
 | `research-guide-checker` | Are the questions well-formed, behavioral, non-repeating, and in an order a conversation could follow? | Whether the study is worth running; whether the guide covers the research questions; **the moderator**, where most leading actually happens |
 | `research-survey-checker` | Are the items, response options, order, and routing sound enough to field once? | Whether a survey should answer this at all; **the sample and non-response**, where a survey's validity actually lives |
-| `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+| `research-readability-checker` | Will a mixed stakeholder audience understand and act on it? Has the safety scan already run? | Whether any of it is correct; participant safety, which `research-safety-checker` owns |
 
 Each column-3 entry is the reason there is more than one evaluator. A
 groundedness checker will pass a perfectly-sourced finding that answers nothing
