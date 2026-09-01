@@ -357,7 +357,8 @@ Ask them to share:
    - Have themes but struggling to reach insights?
    - Have findings but unsure how to communicate them?
 5. **Any internal context that would help:** known personas your team has validated; past research on this product or workflow; stakeholders who will consume these findings and what they care about; any hypotheses the team held going in (important for spotting confirmation bias later).
-6. **Any data or documents** they can paste directly into the chat — transcripts, notes, affinity clusters, survey results, draft findings. Raw and messy is fine.
+6. **Where this is going** — internal-team, internal-org, or external. It sets the safety bar at the release gate, and it decides how far the integrity audit goes.
+7. **Any data or documents** they can paste directly into the chat — transcripts, notes, affinity clusters, survey results, draft findings. Raw and messy is fine.
 
 Tell them: the more context they share, the more specific and useful your guidance will be. You're not here to judge their data or process — you're here to help them find what's true and make it matter.
 
