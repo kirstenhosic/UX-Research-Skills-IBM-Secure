@@ -585,6 +585,46 @@ citations live in the individual files.
 
 ---
 
+## How this was tested
+
+Everything above claims the checkers catch things. Here is how those claims
+were checked, in plain terms. The full record — run by run, including the
+misses — is in [`MAINTAINING.md`](MAINTAINING.md) and the separate
+[testing repo](https://github.com/kirstenhosic/UX-Research-Skills-testing)
+*(private)*.
+
+- **The checkers were graded against work with known, planted defects.** A
+  findings set with 15 deliberate flaws and an answer key. A 28-item survey
+  with 48. Each fixture also carries *controls* — clean items the checker must
+  leave alone — so the test catches false alarms as well as misses. The survey
+  fixture even includes a decoy discussion guide the survey checker has to
+  refuse by name.
+- **The same test was run more than once, independently.** The core held run
+  to run: every planted blocking defect, every control. The edges did not —
+  one borderline item drew a flag, a block, and silence across three runs.
+  That variance is measured and written down, and it is why the docs say a
+  single checker run is not a measurement of the checker.
+- **The rubrics got hostile reads** — sessions deliberately set up to make a
+  rule fail or mislead. Every change those reads forced is recorded with the
+  transcript that forced it, cited by filename, so no rule here rests on a
+  test nobody can open.
+- **The tests found real flaws, which is the point.** One caught an ordering
+  flaw in how the safety scan ran; the fixtures have caught errors in their
+  own answer keys three times. Both outcomes are documented as expected —
+  a test that never embarrasses its author isn't testing.
+- **The mechanical claims are checked mechanically.** The blocks that repeat
+  across files are verified byte-identical, and the built artifacts (the deck
+  skill, the rubric excerpts) rebuild to the exact same bytes from their
+  sources — so what you read is provably what runs.
+- **What none of this proves.** The fixtures were built from the same rubrics
+  they score against, by the person who wrote them. A clean run says the
+  system is internally consistent — not that it is right, and not that your
+  study is. That's what [How much to trust the
+  output](#how-much-to-trust-the-output) is about, and it is why the last gate
+  is still you reading the thing.
+
+---
+
 ## Repo
 
 - **Repository:** [kirstenhosic/UX-Research-Skills-IBM-Secure](https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure) *(private)*
