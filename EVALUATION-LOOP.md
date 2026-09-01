@@ -139,6 +139,14 @@ note:        <one line, plain language>
 === END VERDICT ===
 ```
 
+**A gate may append gate-specific fields after the standard ones** — as
+`research-safety-checker` does with `destination`, `participants`, and
+`consent` — provided the standard fields keep their names, order, and meaning,
+and the gate's own file documents its extras. Anything that parses the block
+reads the standard fields and ignores what follows. What a gate may never do is
+redefine or omit a standard field: when an evaluator has to do *that* to be
+honest, the block is wrong and this section gets fixed.
+
 ### Result semantics
 
 | Result | Meaning | `next_action` |
