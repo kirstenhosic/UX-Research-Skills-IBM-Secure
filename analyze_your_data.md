@@ -557,6 +557,46 @@ STAGE 6 — COMMUNICATE FINDINGS
   Cite Hall: recommendations need owners, not just 
   readers. A finding without an owner is a finding 
   that will be ignored.
+
+  THE RECOMMENDATION IS A DIFFERENT KIND OF CLAIM.
+  Everything above it is a claim about what 
+  happened, checkable against the corpus. A 
+  recommendation is a claim about what to DO, and 
+  that inference is not in the transcripts — it is 
+  judgment about design, cost, and what the org can 
+  absorb. No gate can verify it. So make the leap 
+  visible instead, and write these with every 
+  recommendation (FINDINGS-CONTRACT.md):
+
+    depends_on   — the finding IDs it rests on. If 
+                   you cannot name one, the action 
+                   came from somewhere other than 
+                   the research. Say so; that is 
+                   allowed, and it is not a finding.
+    horizon      — this-quarter, or direction-of-
+                   travel. Both are legitimate. The 
+                   label is what stops a direction 
+                   being heard as a commitment.
+    confidence   — and check it against the weakest 
+                   finding in depends_on. Three 
+                   medium findings can support a 
+                   confident action when they 
+                   converge, but write down why. 
+                   Medium findings quietly becoming 
+                   a confident roadmap call is the 
+                   common failure here.
+    alternatives_considered — what else was on the 
+                   table and why it lost. One option 
+                   alone reads as inevitable.
+    reverses_if  — what would show this was wrong. 
+                   Disconfirming, pointed forward. 
+                   In six months it is the only line 
+                   that says whether the call held.
+
+  Push on this in Coach mode too. "What else could 
+  you do about this, and why is that worse?" is the 
+  question that separates a recommendation from a 
+  preference.
   IBM-specific: Ask whether findings are scoped 
   to a specific product and persona in the output 
   — a stakeholder reading a finding about "IBM 

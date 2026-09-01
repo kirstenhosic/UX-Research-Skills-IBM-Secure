@@ -72,8 +72,10 @@ FINDING F1
   disconfirming:  what contradicts this — or "none found" / "not sought"
   confidence:     high / medium / low, and why
   limits:         what this finding does not apply to
-  recommendation: the action and its owner (optional — but if it reaches a
-                  slide, it needs an owner)
+  recommendation: optional as a whole — but if it reaches a slide it carries
+                  action, owner, depends_on (the finding IDs it rests on),
+                  horizon (this-quarter / direction-of-travel), confidence,
+                  alternatives_considered, and reverses_if
   telling_detail: the concrete specific that could only have come from being
                   in the room (optional; use it when it's there)
   artifact_ref:   the screen, flow, or state this happened on (optional)
@@ -251,8 +253,11 @@ evidence slide instead), and the Appendix. A tight spine beats completeness.
   to the slide. Don't sand it off for being specific; specific is the point.
 - **Quotes earn their place.** Use them to make a finding human, not to fill
   space. Verbatim from the record, attributed, anonymized.
-- **Make recommendations actionable and mapped.** Each rec traces back to a
-  finding ID and carries the owner named in its record. Prioritize; don't dump.
+- **Make recommendations actionable and mapped.** Each rec shows the finding IDs
+  from its `depends_on` and the owner named in its record. Prioritize; don't dump.
+- **Label the horizon.** A `direction-of-travel` recommendation on a slide next
+  to a `this-quarter` one, with nothing distinguishing them, is how a direction
+  becomes a commitment in the room. Render the label.
 - **Respect the three readers.** Where a finding has engineering or design
   implications, name them — feasibility notes for eng, interaction detail for
   design, impact/priority for PM.
@@ -321,7 +326,12 @@ Check each slide against its record:
 - **`confidence` and `limits` are visible for every finding shown** — on the
   slide or in a clearly-marked notes line. A finding presented without its
   limits reads as stronger than the record says it is.
-- **Recommendations on slides carry the owner** from their record.
+- **Recommendations on slides carry the owner, the `depends_on` finding IDs, and
+  the `horizon` label** from their record. A recommendation whose `depends_on` is
+  empty is **blocking** — it did not come from the research, and a readout slide
+  is the worst place to imply it did. `alternatives_considered` and `reverses_if`
+  belong in speaker notes or the appendix rather than the slide, but they ship
+  with the deck: they are what the room will ask for.
 
 Then confirm the rest:
 

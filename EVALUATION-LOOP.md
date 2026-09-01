@@ -356,6 +356,17 @@ isn't inventing it fresh each run.
     findings were built on, and `theme_review` records it. Blocking at
     `internal-org` and `external`; flagged at `internal-team`. Omitted, not
     blank, for Coach-mode analysis. See §9
+14. Every recommendation names the findings it rests on, in `depends_on`.
+    **Blocking** when empty — an action citing no finding did not come from the
+    research, and the gates above cannot tell the difference
+15. Every recommendation carries `horizon`, `confidence`,
+    `alternatives_considered`, and `reverses_if`. Flagged when missing. Flagged
+    also when `confidence` exceeds the weakest finding in `depends_on` without
+    saying what justifies the step up — three medium findings can honestly
+    support a confident action, but the argument has to be written down
+
+Items 14 and 15 are appended rather than inserted because items 4 through 13 are
+cited by number in `research-significance-checker`.
 
 ### 4.3 Competitive analysis
 

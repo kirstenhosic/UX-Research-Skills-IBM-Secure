@@ -51,6 +51,19 @@ FINDING F1
     action:    Surface the permission outcome before method selection in the
                auth method setup flow.
     owner:     [TBD — needs an owner before release]
+    depends_on: F1, F3
+    horizon:   this-quarter
+    confidence: medium — F1 is high, F3 is medium, and this action needs both
+    alternatives_considered:
+      - Inline help on the method selector. Rejected: P3 and P7 both read the
+        existing help and still chose method-first, so more text at the same
+        point is unlikely to move it.
+      - Reordering the whole Access section. Rejected as out of proportion to
+        the evidence; nothing in the corpus is about navigation.
+    reverses_if:
+      Operators who complete the redesigned flow still grant broader access
+      than they intend. That would put the cause somewhere other than the
+      ordering, and this action would be the wrong fix.
   telling_detail:
     P2 kept a hand-written list of namespace paths on a sticky note beside the
     monitor, and checked it twice while configuring.
@@ -82,7 +95,12 @@ FINDING F1
 | `disconfirming` | yes | What contradicts this — or `none found` / `not sought`. Blank is not allowed. |
 | `confidence` | yes | `high` / `medium` / `low`, **and why**. |
 | `limits` | yes | What this does not apply to. |
-| `recommendation` | no | If present, needs an `owner`. `[TBD]` is acceptable in draft, blocking at release. |
+| `recommendation` | no | If present, needs an `owner`. `[TBD]` is acceptable in draft, blocking at release. The five sub-fields below apply whenever it is present. |
+| `recommendation.depends_on` | yes, if a recommendation exists | The finding IDs this action rests on. A recommendation citing no finding did not come from the research. |
+| `recommendation.horizon` | yes, if a recommendation exists | `this-quarter` (specific enough to act on now) or `direction-of-travel`. Both legitimate; the label is what stops one being read as the other. |
+| `recommendation.confidence` | yes, if a recommendation exists | `high` / `medium` / `low`, **and why**. Should not exceed the weakest finding in `depends_on` without saying what justifies the step up. |
+| `recommendation.alternatives_considered` | yes, if a recommendation exists | What else was on the table and why it lost. `none — this was the only action the evidence pointed to` is an answer. Blank is not. |
+| `recommendation.reverses_if` | yes, if a recommendation exists | What would show this was the wrong call. Same discipline as `disconfirming`, pointed forward instead of backward. |
 | `telling_detail` | no | One concrete specific that could only have come from being in the session. Verbatim or observed, like any evidence — not colour added later. |
 | `artifact_ref` | no | The screen, flow, state, or document this happened on. Required in practice for any finding about an interface. |
 | `theme_review` | conditional | Who reviewed the theme this finding came from, when, and their disposition. **Required when the analysis ran in Draft mode.** Blocking at `internal-org` and `external`; flagged at `internal-team`. Omit entirely for Coach-mode analysis — see below. |
@@ -126,6 +144,45 @@ than most because it is designed to be convincing.
 `artifact_ref` is the screen the finding happened on. Without it a deck builder
 has to guess which screenshot belongs to which finding, and a confidently wrong
 screenshot misdirects every engineer who reads the slide.
+
+### The recommendation is a different kind of claim
+
+Everything else in this record is a claim about what happened. A recommendation
+is a claim about what to do, and the two do not answer to the same evidence.
+
+The gates already handle the first kind well. `research-synthesis-checker`
+verifies a finding against the transcript; `research-significance-checker`
+verifies it matters. Neither can tell you whether the action actually follows
+from the finding, because that inference is not in the corpus — it is a judgment
+about design, cost, and what an organization can absorb. A perfectly grounded
+finding can carry a recommendation that does not follow from it at all, and
+every gate will pass it.
+
+The five sub-fields do not fix that. What they do is make the inference
+*visible*, so a person reviewing the readout can disagree with the reasoning
+rather than only with the finding:
+
+- **`depends_on`** is the load-bearing one. It forces the recommendation to name
+  its findings, which is what makes the leap inspectable. A recommendation that
+  cannot name one came from somewhere other than the research — which is
+  allowed, and needs saying.
+- **`confidence`, against `depends_on`.** Three medium findings can honestly
+  support a confident action when they converge, but the step up is an argument
+  and it should be written down. The failure this catches is common and quiet:
+  medium-confidence findings aggregating into a roadmap commitment that nobody
+  remembers was medium.
+- **`alternatives_considered`** is where a recommendation earns being the
+  recommendation. One option presented alone reads as inevitable; naming what
+  lost, and why, is the difference between a proposal and an assertion.
+- **`reverses_if`** is `disconfirming` pointed forward. A researcher who has
+  already said what would prove them wrong is much harder to ambush in the
+  room — and, six months on, it is the only line that tells anyone whether the
+  call held.
+- **`horizon`** stops a direction of travel being read as a commitment for this
+  quarter, which is how roadmap arguments start.
+
+None of this makes the recommendation right. It makes it arguable, which is the
+most a contract can do for a judgment.
 
 ### The fields people want to skip
 
@@ -193,7 +250,14 @@ semantics, same required fields.
       "disconfirming": "…",
       "confidence": { "level": "high", "why": "…" },
       "limits": "…",
-      "recommendation": { "action": "…", "owner": null },
+      "recommendation": {
+        "action": "…", "owner": null,
+        "depends_on": ["F1", "F3"],
+        "horizon": "this-quarter",
+        "confidence": { "level": "medium", "why": "…" },
+        "alternatives_considered": [ { "option": "…", "rejected_because": "…" } ],
+        "reverses_if": "…"
+      },
       "telling_detail": { "text": "…", "participant": "P2", "source": "session-notes-p2.md", "locator": "line 22" },
       "artifact_ref": "Vault UI — Access › Auth Methods, step 2 of 3, the method-type selector",
       "theme_review": {
