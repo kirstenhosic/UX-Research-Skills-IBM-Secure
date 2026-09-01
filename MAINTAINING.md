@@ -266,6 +266,13 @@ edit that block, mirror it to all skill files, or pick one as canonical and
 regenerate the rest. Same goes for the `RELEASE GATE` / `REVISION PROTOCOL` /
 `COVERAGE` / `VOICE` block appended to each one.
 
+**`rubrics/` is generated — never edit it.** Each file there is §2 plus one
+§4.x of `EVALUATION-LOOP.md`, extracted verbatim by `./build-rubrics.sh` so a
+checker session can carry its own rubric without the other six. Edit
+`EVALUATION-LOOP.md`, run the script, commit both. The check is the same as
+the `.skill` build: run it and confirm `git status` stays clean — a dirty
+rubric after a rebuild means someone edited the excerpt instead of the source.
+
 **Widening the verdict schema is a nine-file edit.** The `result` and
 `next_action` enums in §2 of `EVALUATION-LOOP.md` are repeated verbatim in the
 output-format block of all seven agents, and `README.md`'s glossary row spells

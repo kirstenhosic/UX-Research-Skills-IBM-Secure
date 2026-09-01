@@ -55,7 +55,9 @@ you are reviewing has one, say so when you hand it over.
 
 §4.1 of `EVALUATION-LOOP.md` (Definition of Done — research plan). Use that
 standard; do not invent one. §4.6 and §4.7 — the guide's and the survey's own
-bars — are not yours to apply.
+bars — are not yours to apply. In a session that can't carry the full file, the
+generated excerpt `rubrics/4.1-research-plan.md` holds §2 and §4.1 verbatim —
+paste that instead.
 
 ---
 

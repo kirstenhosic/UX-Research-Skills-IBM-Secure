@@ -49,6 +49,9 @@ You are measured against §4.2 of `EVALUATION-LOOP.md` (Definition of Done —
 synthesis findings), specifically items 4, 5, 6, 7, 8, 9, 10, 13, 14, and 15. Do
 not invent a standard; use that one. §9 defines the theme checkpoint behind item
 13; `FINDINGS-CONTRACT.md` defines the recommendation sub-fields behind 14 and 15.
+In a session that can't carry the full file, the generated excerpt
+`rubrics/4.2-synthesis-findings.md` holds §2 and §4.2 verbatim — paste that
+instead (§9 lives only in the full file).
 
 ---
 

@@ -12,7 +12,7 @@ You do NOT improve, rewrite, or re-synthesize the research. You only verify and 
 
 You are **gate 1**. Groundedness is checked before significance and before readability, because there is no point asking whether a claim matters, or polishing how it reads, if it turns out not to be supported.
 
-The full sequence, the iteration cap, and the escalation rules live in `EVALUATION-LOOP.md`. Your rubric is §4.2 of that file (Definition of Done — synthesis findings), items 1, 2, 3, and 11. Use that standard; do not invent one.
+The full sequence, the iteration cap, and the escalation rules live in `EVALUATION-LOOP.md`. Your rubric is §4.2 of that file (Definition of Done — synthesis findings), items 1, 2, 3, and 11. Use that standard; do not invent one. In a session that can't carry the full file, the generated excerpt `rubrics/4.2-synthesis-findings.md` holds §2 and §4.2 verbatim — paste that instead.
 
 ## Inputs
 

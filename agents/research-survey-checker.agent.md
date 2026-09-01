@@ -117,6 +117,10 @@ confident, wrong advice in the other direction. Say so and stop.
 standard; do not invent one. Items 2 and 3 of §4.6 also apply — leading,
 self-answering, presupposing, and double-barreled items are defects in any
 instrument. Nothing else in §4.6 does; it assumes a moderator you do not have.
+In a session that can't carry the full file, the generated excerpts
+`rubrics/4.7-survey-instrument.md` (§2 and §4.7 verbatim) and
+`rubrics/4.6-discussion-guide.md` (for its items 2 and 3) stand in — paste
+those instead.
 
 §4.7 says those two are defects "in any mode." **Mode means the artifact — a
 moderated guide or a self-administered instrument — and nothing else.** It is not

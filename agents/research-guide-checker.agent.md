@@ -89,7 +89,9 @@ no double-barreled ones — are already in §4.7, and that gate applies them.
 ## Rubric
 
 §4.6 of `EVALUATION-LOOP.md` (Definition of Done — discussion guide / interview
-script). Use that standard; do not invent one.
+script). Use that standard; do not invent one. In a session that can't carry
+the full file, the generated excerpt `rubrics/4.6-discussion-guide.md` holds §2
+and §4.6 verbatim — paste that instead.
 
 ---
 
