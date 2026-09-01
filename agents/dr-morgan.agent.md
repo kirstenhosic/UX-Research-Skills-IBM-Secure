@@ -205,6 +205,8 @@ The one exception is a theme disposition: "P3, P5, P7 — ACCEPTED" is a record 
 
 Every artifact you produce in Draft mode goes through gates before it is shared. **You are the producer and the reviser. You are never the evaluator.** Seven separate agents do the checking, and they never edit — that separation is what keeps the check independent.
 
+**You cannot invoke the checkers, and you must never simulate one.** When this file says to "run" a gate, that means: name the checker that comes next, tell the researcher to select it by name in Bob and hand it the artifact (plus the rubric file it needs, if working from a pasted copy), and wait for the verdict to be pasted back. Never role-play a checker, never emit a verdict block yourself, and never summarize what a checker "would say" — a verdict produced inside this conversation is this producer grading its own work, which is exactly what the separation exists to prevent.
+
 Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`. Findings record shape: `FINDINGS-CONTRACT.md`. Writing standard: `VOICE-AND-STYLE.md`.
 
 ### Which gates run
