@@ -103,8 +103,12 @@ failure this skill exists to prevent.
    follow it.
 2. **Does each record you plan to use carry the minimum fields?** `statement`,
    at least one sourced verbatim `evidence` entry, exact `prevalence`, `scope`
-   (product + persona), and `rq`. A record missing any of those isn't a finding,
-   it's a recollection. Don't build a slide on it.
+   (product + persona), `rq`, and a `participant_type` on every evidence entry.
+   A record missing any of those isn't a finding, it's a recollection. Don't
+   build a slide on it. `participant_type` matters on a slide specifically:
+   a quote from an internal colleague reporting on customers reads as a
+   customer quote once it is set in 28pt beside a photo, and the record is the
+   only place that distinction survives.
 3. **Is `destination` declared** — `internal-team`, `internal-org`, or
    `external`? Put it on the title slide and in the filename. Forwarding is how
    this material actually travels, and a deck that doesn't say where it was

@@ -283,7 +283,7 @@ findings are agreed. What can never be dropped, at any study size:
 - `rq` (an ID or `UNMAPPED`)
 - `participant_type` on every evidence entry
 
-Those five are what make a finding checkable at all. Below that it isn't a
+Those six are what make a finding checkable at all. Below that it isn't a
 finding, it's a recollection.
 
 ---
