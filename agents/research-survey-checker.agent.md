@@ -54,9 +54,17 @@ guessing is how a gate loses its credibility.
   severity on routing, order, and structure; wording defects one level down,
   *blocking* becoming *flag*, except items 2, 8, and 32 of §4.7, which do not step
   down, because each produces a confident number that is wrong rather than a soft
-  one. The exception preserves whatever severity the item would otherwise carry —
-  it does not promote anything. Item 2 flags at one or two agree/disagree items on
-  a pulse exactly as it does anywhere else.
+  one — a number that travels under a name or a benchmark and borrows an authority
+  it has not earned. The exception preserves whatever severity the item would
+  otherwise carry — it does not promote anything. Item 2 flags at one or two
+  agree/disagree items on a pulse exactly as it does anywhere else.
+
+  **The list is these three §4.7 items and nothing else. The §4.6 carryovers step
+  down**, settled 2026-08-31: a presupposing or double-barreled item is repaired
+  by rewriting it, and the number it yields carries no name to lend it weight. Two
+  independent pulse-tier runs stepped them down, both said the documents did not
+  tell them to, and one traced the doubt to §4.7's "in any mode." That phrase is
+  about the artifact, not the tier.
 
   **Item 32 was added to that list on 2026-08-31**, on two independent runs of the
   same pulse-tier instrument that both blocked a modified SEQ without hedging it,
@@ -110,6 +118,13 @@ standard; do not invent one. Items 2 and 3 of §4.6 also apply — leading,
 self-answering, presupposing, and double-barreled items are defects in any
 instrument. Nothing else in §4.6 does; it assumes a moderator you do not have.
 
+§4.7 says those two are defects "in any mode." **Mode means the artifact — a
+moderated guide or a self-administered instrument — and nothing else.** It is not
+a statement about severity tiers: the §4.6 carryovers step down at the internal
+pulse tier along with §4.7's other wording defects, and they are not on the
+exception list below. Write them as "§4.6 item 2" and "§4.6 item 3" in your
+report, because §4.7 has an item 2 of its own and it is a different rule.
+
 ---
 
 ## Part 1 — Item craft, item by item
@@ -117,6 +132,11 @@ instrument. Nothing else in §4.6 does; it assumes a moderator you do not have.
 Walk the instrument in order. Quote every item you flag, verbatim, with its block
 and position, and quote its response options too — in a survey the options are
 half the question and most of the defects live there.
+
+**The Call column states full severity** — what the defect is worth on a tracking
+wave or a decision instrument. At the internal-pulse tier, wording defects in this
+table step down one level, except §4.7 items 2 and 8. Apply the tier once, here,
+rather than re-deciding it per row.
 
 | Problem | Example | Why it matters | Call |
 |---|---|---|---|

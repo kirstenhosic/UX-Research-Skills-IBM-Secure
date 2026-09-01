@@ -516,12 +516,18 @@ The bar `research-survey-checker` scores against. §4.1 covers the plan around i
 covers the instrument: the items, the response options, the order, and the
 routing.
 
-**Only two items of §4.6 carry over**, and they are not restated below. Item 2
-(leading, self-answering, presupposing) and item 3 (double-barreled) are defects
-in any instrument in any mode. Everything else in §4.6 assumes a moderator in the
-room — probes, follow-ups, someone to notice a blank look — and a survey has
-none of that. Which is the reason this section exists rather than a note saying
-"as above."
+**Only two items of §4.6 carry over**, and they are not restated below. §4.6 item
+2 (leading, self-answering, presupposing) and §4.6 item 3 (double-barreled) are
+defects in any instrument in any **mode** — meaning a moderated guide or a
+self-administered instrument, which is the only thing "mode" means here. It is
+**not** a claim about severity tiers, and it does not exempt these two from the
+tier rule below. Everything else in §4.6 assumes a moderator in the room — probes,
+follow-ups, someone to notice a blank look — and a survey has none of that. Which
+is the reason this section exists rather than a note saying "as above."
+
+Throughout this section, a bare item number means a **§4.7** item. The two
+carryovers are always written as "§4.6 item 2" and "§4.6 item 3", because both
+sections have an item 2 and they are different rules.
 
 **Severity scales with what happens to the numbers.**
 
@@ -531,9 +537,20 @@ none of that. Which is the reason this section exists rather than a note saying
 - **One-off instrument informing a named decision** — full strength.
 - **Internal pulse to a colleague-adjacent audience, reported as texture rather
   than as measurement** — full strength on routing, order, and structure; wording
-  defects one level down. **Items 2, 8, and 32 do not step down** — see
+  defects one level down. **§4.7 items 2, 8, and 32 do not step down** — see
   `research-survey-checker`, which carries the list and the reasoning for each
   entry. Do not read the shorter statement here as a different rule.
+
+  **The two §4.6 carryovers do step down**, settled 2026-08-31. They are wording
+  defects, repaired by rewriting the item, and the exception list is not "every
+  rule that yields a number" — it is the three whose numbers *travel*: an
+  agree/disagree share read as an attitude rate, an invented band set read as
+  prevalence, a standardized score read against published norms. Each borrows an
+  authority it has not earned. A presupposing or double-barreled item yields a
+  number that means nothing on its own and carries no name to lend it weight, so
+  on a pulse reported as texture it costs a flag, not a fail. The case worth
+  reopening if a run argues it is self-answering: a study's own hypothesis handed
+  back as agreement is the one §4.6 item 2 defect that travels well *as* texture.
 
 If you weren't told which it is, infer it, say which you assumed, and note that
 the severity calls depend on the assumption.
