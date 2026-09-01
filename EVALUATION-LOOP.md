@@ -184,13 +184,13 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 
 | Artifact | Produced by | Gates, in order |
 |---|---|---|
-| **Theme set** | Scenario A, F — Draft mode only | **Human checkpoint, no agent gate.** See §9 |
+| **Theme set** | Scenario A — Draft mode only | **Human checkpoint, no agent gate.** See §9 |
 | **Research plan, no guide attached** | Scenario C, D; `research-document-template` | `plan-reviewer` → `readability-checker` |
 | **Research plan with a discussion guide** | Scenario C, D; `research-document-template` | `plan-reviewer` → `guide-checker` → `readability-checker` |
 | **Discussion guide / interview script, standalone** | Scenario C, D; any Draft-mode guide | `guide-checker` → `readability-checker` |
 | **Research plan with a survey instrument** | Scenario C, D; `research-document-template` | `plan-reviewer` → `survey-checker` → `readability-checker` |
 | **Survey instrument, standalone** | Scenario C, D; any Draft-mode questionnaire | `survey-checker` → `readability-checker` |
-| **Synthesis findings** | Scenario A, F | `synthesis-checker` → `significance-checker` → `readability-checker` |
+| **Synthesis findings** | Scenario A | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 

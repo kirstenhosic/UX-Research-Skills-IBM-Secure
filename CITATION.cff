@@ -9,8 +9,8 @@ authors:
 repository-code: "https://github.com/kirstenhosic/UX-Research-Skills-IBM-Secure"
 abstract: >-
   An invokable UX research mentor for IBM product teams, with a scenario router
-  covering analysis, method selection, study planning, plan and discussion-guide
-  critique, competitive analysis, and integrity-first qualitative analysis —
+  covering analysis (with an integrity-first audit built in), method selection,
+  study planning, plan and discussion-guide critique, and competitive analysis —
   plus seven independent evaluator agents that gate every drafted artifact for
   participant safety, plan soundness, discussion-guide quality, survey-instrument
   quality, groundedness, significance, and readability.
