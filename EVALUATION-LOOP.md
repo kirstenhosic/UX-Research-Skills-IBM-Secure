@@ -705,7 +705,15 @@ the severity calls depend on the assumption.
 
 28. Skip logic reaches every item it should and no item it shouldn't. Trace each
     branch: an item reachable by someone for whom it is incoherent is **blocking**,
-    and so is a branch that dead-ends
+    and so is a branch that dead-ends. **Incoherent reachability is not confined
+    to branching**, settled 2026-08-31. An item whose referent an earlier item
+    destroyed — a singular "that method" after a select-all — is incoherent for
+    everyone who reaches it, and it is this item's defect rather than a wording
+    one, even though no branch is involved. The test is whether the respondent has
+    something coherent to answer, not how they arrived. Two of three independent
+    pulse-tier runs filed such an item here; the third read this item as strictly
+    about branches and filed it as a forward-reference flag, which is a step-down
+    tier and one blocking finding lighter
 29. Forced response is used only where an unanswered item invalidates the record.
     Making every item required converts a hesitation into an abandonment
 30. The instrument opens by stating what the data is for, the estimated

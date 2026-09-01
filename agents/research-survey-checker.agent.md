@@ -327,7 +327,15 @@ of a draft almost never does, which is why it is worth your time.
 - **Every item is reachable by the people it makes sense for, and nobody else.**
   An item reachable by a respondent for whom it is incoherent — asked about a
   feature they just said they don't use — is **blocking**. It produces a forced
-  answer from someone with nothing to say.
+  answer from someone with nothing to say. **This is not only about branches.** An
+  item whose referent an earlier item destroyed is incoherent for everyone who
+  reaches it, with no skip logic involved: a singular "that method" after a
+  select-all is this defect, not a wording defect, and it does not step down at the
+  pulse tier. Ask whether the respondent has something coherent to answer, not how
+  they got there. Both halves are easy to miss in opposite directions — one run
+  filed the destroyed referent correctly here and then missed a textbook branch
+  case, an open text asking what made a rotation necessary of respondents who had
+  just answered "Never" to rotating.
 - **Every branch terminates.** A branch that dead-ends, or loops, is **blocking**.
 - **Forced response only where an unanswered item invalidates the record.** Flag
   blanket required-everything, and name what it converts: a hesitation becomes an
