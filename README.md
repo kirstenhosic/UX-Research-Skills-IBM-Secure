@@ -187,13 +187,13 @@ Each file is self-contained, so you never need the others loaded.
 | **C — Build a plan from scratch** | Nothing exists yet. Seven phases in order: frame, questions, participants, method, guide, analysis, output — with depth scaled to the stakes. | [`ux_plan_from_scratch.md`](ux_plan_from_scratch.md) |
 | **D — Challenge and refine a plan** | You have a draft and want it stress-tested. Audits the upstream decisions first, then the guide for leading, double-barreled, and hypothetical questions. | [`challenge_and_refine_plan.md`](challenge_and_refine_plan.md) |
 | **E — Competitive analysis** | You're comparing two to four products across UX, capability, and market lenses, ending in a verdict tied to a real decision. Includes UI teardowns from sourced screenshots and demo video. | [`competitive_analysis.md`](competitive_analysis.md) |
-| **F — Deep qualitative analysis** | Same territory as A, strictest path. Runs a mandatory data-integrity audit for hallucination, confirmation bias, and cherry-picking before any analysis proceeds. | [`qualitative_data_analysis_skill.md`](qualitative_data_analysis_skill.md) |
 
-**A or F?** Both analyze data. A is the quicker guided path and keeps you moving;
-F front-loads a mandatory integrity audit for hallucination, confirmation bias, and
-cherry-picking before it will analyze anything. Start with A unless verification is
-the point. Either way, [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
-is a different thing again — it never analyzes, it only checks a finished synthesis
+**One analysis path.** A used to have a stricter twin you chose between. It's
+merged in: the hard rules, the integrity audit, and the per-finding checks now run
+on every study, with the audit's depth set by facts about the study rather than by
+whether you suspected a problem in your own work. Note that
+[`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) is a
+different thing again — it never analyzes, it only checks a finished synthesis
 against the source, claim by claim.
 
 **Need a deck?** [`research-readout-deck.skill`](research-readout-deck.skill)
@@ -262,7 +262,7 @@ flowchart TD
     START(["<b>START HERE</b><br/>You, with a research question"])
     START --> DM
 
-    DM["<b>Dr. Morgan</b><br/>routes six scenarios, A through F"]
+    DM["<b>Dr. Morgan</b><br/>routes five scenarios, A through E"]
 
     DM -->|"Coach mode<br/>the default"| COACH["Dr. Morgan questions<br/>and challenges your thinking"]
     COACH --> WORK["You analyze, draft,<br/>and rethink"]
@@ -424,7 +424,7 @@ The gate matrix, verdict schema, and known limits are in
 
 | File | What it's for |
 |---|---|
-| [`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md) | The main agent — an `.agent.md` file Bob can load by name. Routes between all six scenarios and switches mid-conversation. Start here. |
+| [`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md) | The main agent — an `.agent.md` file Bob can load by name. Routes between all five scenarios and switches mid-conversation. Start here. |
 | [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) | How release works: the gate matrix, the verdict shape, the two-pass cap, escalation triggers, Definition of Done per artifact type, and the known limits. Read before adding a skill or evaluator. |
 | [`FINDINGS-CONTRACT.md`](FINDINGS-CONTRACT.md) | One shape for a finding, shared by everything that produces or reads one. Because the deck skill can only render fields a record contains, this is what structurally stops evidence from being invented during deck building. |
 | [`VOICE-AND-STYLE.md`](VOICE-AND-STYLE.md) | How outputs should read, and the rubric the readability gate scores against. |
@@ -434,7 +434,7 @@ The gate matrix, verdict schema, and known limits are in
 | [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files, and the table of which methods have an instrument gate and which don't. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
 
-The six scenario files and the seven evaluator agents are listed in
+The five scenario files and the seven evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
 [The seven checkers](#the-seven-checkers).
 

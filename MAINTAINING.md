@@ -263,7 +263,7 @@ evaluator is the most expensive edit in this repo, and the drift check below
 only catches the first item on this list. Adding `research-survey-checker` took
 all of it:
 
-1. The `RELEASE GATE` block in all six scenario files, byte-identical
+1. The `RELEASE GATE` block in all five scenario files, byte-identical
 2. The gate matrix in `EVALUATION-LOOP.md` §3, and its preamble sentence, which
    counts the evaluators
 3. The evaluator table in §3, whose heading also counts them
@@ -330,9 +330,9 @@ Whitespace-normalized, so wrapping doesn't matter:
 
 ````
 spine() {
-  for f in analyze_your_data.md qualitative_data_analysis_skill.md \
-           ux_plan_from_scratch.md challenge_and_refine_plan.md \
-           select_best_method.md competitive_analysis.md; do
+  for f in analyze_your_data.md ux_plan_from_scratch.md \
+           challenge_and_refine_plan.md select_best_method.md \
+           competitive_analysis.md; do
     miss=$(tr -s ' \n' ' ' < "$f" | grep -c "$1") 
     [ "$miss" = 0 ] && echo "    DRIFT — $f is missing: $1"
   done
@@ -341,9 +341,9 @@ spine 'service discovery across hybrid environments'
 spine 'infrastructure as code with policy enforcement via Sentinel'
 spine 'scanning continuously in real time'
 spine 'surfacing detected risks by category and rank'
-for f in analyze_your_data.md qualitative_data_analysis_skill.md \
-         ux_plan_from_scratch.md challenge_and_refine_plan.md \
-         select_best_method.md competitive_analysis.md; do
+for f in analyze_your_data.md ux_plan_from_scratch.md \
+         challenge_and_refine_plan.md select_best_method.md \
+         competitive_analysis.md; do
   grep -q 'HashiCorp Vault Radar' "$f" && echo "    DRIFT — $f: product is 'Vault Radar'"
 done
 ````
@@ -360,15 +360,17 @@ Saldaña, Beyer & Holtzblatt, and Young. `challenge_and_refine_plan.md` adds
 seniority-calibrated citation guidance that belongs nowhere else. A drift check
 here would report six variants forever and train you to ignore it.
 
-**The one pair that must agree** is `analyze_your_data.md` and
-`qualitative_data_analysis_skill.md`, which cover the same activity at two
-strictness levels. They had already diverged — the standard path cited Tullis &
-Albert and Sauro & Lewis for the quantitative stage and the strict path cited
-neither, and Braun & Clarke was "6-step" in one file and "6-phase" in the other.
-Diff the two book lists whenever you touch either:
+**The pair that used to need this check is now one file.**
+`analyze_your_data.md` and `qualitative_data_analysis_skill.md` covered the same
+activity at two strictness levels, and their book lists had already diverged —
+the standard path cited Tullis & Albert and Sauro & Lewis for the quantitative
+stage and the strict path cited neither. They were merged for that reason among
+others, so there is no longer a pair to diff. If a second file ever covers an
+activity another one already covers, diff their book lists before assuming the
+difference was deliberate:
 
 ````
-diff <(grep '📚' analyze_your_data.md) <(grep '📚' qualitative_data_analysis_skill.md)
+diff <(grep '📚' file-a.md) <(grep '📚' file-b.md)
 ````
 
 Differences here are a decision, not automatically a defect — the strict path may

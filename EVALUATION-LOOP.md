@@ -999,7 +999,7 @@ which is the same standard this suite holds research to.
 ```
 0. THEME CHECKPOINT (Draft mode only)  → a person accepts/revises/splits/rejects
                                           each theme before synthesis. §9
-1. Draft synthesis (Dr. Morgan, Scenario A or F)
+1. Draft synthesis (Dr. Morgan, Scenario A)
 2. Emit findings per FINDINGS-CONTRACT.md, with a declared destination
    and theme_review carried through from step 0
 3. research-safety-checker         → PRE-FLIGHT, always runs first
