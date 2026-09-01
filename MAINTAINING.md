@@ -111,6 +111,29 @@ Both fixtures were built from the rubrics they score against, by the person who
 wrote them, so a clean run says the specification is internally consistent and
 nothing about whether it is right.
 
+**§4.6 has now had one too** — `adversarial-reads/guide-4.6-2026-08.md`. Five
+hostile contexts plus a refutation pass, with the false-positive audit **split in
+two** so that one context wrote a guide to professional standard and a different
+one scored it blind. The headline runs opposite to §4.7's: the defensible guide
+drew **2 blocking and 12 flags**, not five blocking with none real. Five Tier 1
+findings were fixed and verified the same day by a second blind scoring — §4.6
+items 26 and 29, four rules the gate scored with no rubric item behind them (§4.6
+gained items 31–33 and the gate's Part 1 table gained a Rubric column naming the
+item for every row), and a new item 30 for what the participant is told before
+questions start, which nothing in the suite was asking on the standalone-guide
+path. §4.6 went from 29 numbered items to 33, appended rather than inserted,
+because items 2, 3, 5, 10, 11, 24, 25, 27 and 28 are cited by number elsewhere.
+
+Two things that verification did **not** confirm, both worth carrying: the
+blocking count fell from 2 to 1 on a call no fix touched — instance variance on
+the guide gate, the first measured here, matching what both fixtures show — and
+the live uncounted "absolute" that motivated item 32 was refuted by the second run
+as a misclassification, so item 32 now has a sound rationale and no observed
+defect behind it. Also open, and the best-evidenced proposal the read produced:
+**both blind runs independently argued that item 14 should permit an unbounded
+instance request where the drafter states a base-rate justification and a dating
+procedure.** Low-frequency events are the case it does not handle.
+
 **§4.7 has now had an adversarial read** — `adversarial-reads/survey-4.7-2026-08.md`
 in the fixtures repo. Four hostile contexts, plus a skeptic briefed to refute the
 first one's claims. It found that item 25 is logically unsatisfiable, that item 23
