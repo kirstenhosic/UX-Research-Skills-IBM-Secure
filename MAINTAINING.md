@@ -24,14 +24,16 @@ where the correct answer is a judgment rather than a verdict — the don't-know 
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building and running it has
 surfaced nine ambiguities in §4.7, the gate, and §2's verdict schema, all listed
-in `survey-fixture/README.md`. **Five are closed** — §2 now carries `NOT_APPLICABLE`
+in `survey-fixture/README.md`. **Six are closed** — §2 now carries `NOT_APPLICABLE`
 and `ROUTE`, §4.7 item 32 now states that an unmodified standardized
 instrument is exempt from the general scale rules, item 21 states how far priming
-contamination runs, item 12 is settled as a **flag** at every tier, and item 32
-**does not step down at the internal-pulse tier**. Each closed the same way:
-independent runs converging on something no document stated.
+contamination runs, item 12 is settled as a **flag** at every tier, item 32
+**does not step down at the internal-pulse tier**, and the two §4.6 carryovers
+**do**. Five closed the same way: independent runs converging on something no
+document stated. The sixth did not, and the difference is worth keeping — see
+below.
 
-**Four remain open, and all four live at the internal-pulse tier**, which was
+**Three remain open, and all three live at the internal-pulse tier**, which was
 specified in three documents and fielded in none of them until 2026-08-31. Run
 variant 1 finally put it to a gate — `survey-fixture/survey-plan-pulse.md`, the
 plan with the declared type changed and nothing else — in two independent
@@ -41,13 +43,23 @@ was run to close; item 32 is now on the gate's exception list and §4.7 says it 
 not step down.
 
 Fielding the tier once closed one ambiguity and opened four, which is what the
-first run of an untested branch should be expected to do. The best-evidenced is
-§4.6's carryover items, which have no stated pulse behavior at all: both instances
-stepped them down, both volunteered it as the call they were least sure of, and
-one traced it to §4.7's preamble calling those items defects "in any instrument in
-any mode" — absolute language read against a tier system. Three findings turn on
-it. The pulse exception's "stay blocking" wording is fixed but unverified: it now
-says the exception preserves whatever severity an item would otherwise carry
+first run of an untested branch should be expected to do. One of those four is now
+closed: §4.6's carryover items had no stated pulse behavior at all, and both
+instances stepped them down while volunteering it as the call they were least sure
+of. **They step down, and both files now say so.** "In any mode" says what it
+always meant — a moderated guide or a self-administered instrument, not a severity
+tier — and the reason is stated: the exception list is not every rule that yields a
+number, it is the three whose numbers travel under a name or a benchmark.
+
+That one closed differently from the other five, and the distinction matters for
+how the next one gets closed. The others closed on runs converging on something no
+document stated. Here the runs converged on a *default* the silence pushed them
+into, which is weaker evidence, so it was settled on the principle behind the rule
+with the runs as corroboration. §4.6 item 2's self-answering half is named in both
+files as the case to reopen if a later run argues it.
+
+Still open: the pulse exception's "stay blocking" wording is fixed but unverified,
+now saying the exception preserves whatever severity an item would otherwise carry
 rather than promoting anything, which is what both instances did anyway. Item 22
 states an absolute with no severity attached. And the two instances split on
 whether item 28 reaches a referent destroyed by routing or only a branch — a split
