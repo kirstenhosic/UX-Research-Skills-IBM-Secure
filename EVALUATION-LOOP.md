@@ -77,8 +77,8 @@ improve, rewrite, or re-synthesize"). Every evaluator holds it.
 | Iteration | What happens |
 |---|---|
 | 1 | Draft produced. Gates run. |
-| 2 | First revision. Blocking items only. Gates re-run. |
-| 3 | Second revision. Gates re-run. |
+| 2 | First revision. Blocking items only. The failed gate re-runs; earlier passes stand. |
+| 3 | Second revision. The failed gate re-runs. |
 | — | Still `FAIL` after iteration 3 → **ESCALATE**. Stop. |
 
 Two revision passes, then it goes to a person. If an artifact can't clear the
@@ -91,6 +91,15 @@ Revision is **narrow**. Pass the producer the blocking items and the evidence
 the source actually supports — not the whole artifact with "make it better."
 Open-ended revision reintroduces problems the earlier gates already cleared,
 and the iteration count stops meaning anything.
+
+**One targeted exception to "earlier passes stand": a revision that changes a
+quote, a count, or an attribution re-runs `synthesis-checker`, even if it
+already passed.** Those three are exactly what that gate verifies, and they are
+exactly what a revision made for a *later* gate is most likely to disturb — a
+quote tightened to answer a significance finding, a "4 of 8" that shifted when
+a claim was rescoped. The trigger is mechanical: diff the revision; if a quote,
+a number, or a participant ID moved, the pass behind it is stale. This does not
+consume an extra iteration — it re-verifies the same one.
 
 ### Escalate immediately, regardless of iteration count
 
@@ -1000,6 +1009,14 @@ which is the same standard this suite holds research to.
   theme checkpoint (§9) is a person and not one more rubric. Where the two
   collide, the researcher's judgment wins and the flag rides along as a Reviewer
   Note.
+- **A pass can go stale in ways this loop never re-checks.** After a
+  revision, only the failed gate re-runs (plus `synthesis-checker` when a
+  quote, count, or attribution moved — see §1). A revision can still degrade
+  something else an earlier gate passed — readability, most plausibly. That
+  residue is accepted deliberately: a readability regression is visible to any
+  human reader of the final artifact, where a shifted count is not, and
+  re-running every passed gate on every revision would double the cost of the
+  loop to catch the one failure class a person catches anyway.
 - **Some rules here are convention, not evidence.** The behavioral-question
   ratio, the 4–6 minutes per question, and the survey length-to-item-count table
   in §4.7 item 26 have no published basis and are marked as such where they
