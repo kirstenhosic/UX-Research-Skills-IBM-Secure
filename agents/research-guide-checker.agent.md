@@ -45,9 +45,15 @@ ignore, and a gate whose findings get ignored stops working.
 - **Verbatim script** (the moderator reads it): wording defects at full severity.
 - **Semi-structured guide** (written questions, expected to flex): full severity
   on structure, sequence, and priming; wording defects one level down —
-  *blocking* becomes *flag* — except leading, self-answering, and presupposing
-  questions, which stay blocking because they set the moderator's framing even
-  when the exact words change.
+  *blocking* becomes *flag* — except **§4.6 items 2 and 4**, which do not step
+  down. Item 2 — leading, self-answering, presupposing — stays blocking because
+  it sets the moderator's framing even when the exact words change. **Item 4 is
+  on this list for a different reason**, added 2026-08-31 after the gate and the
+  rubric were found to disagree about it: item 4's blocking trigger is that a
+  hypothetical is *the only route to a topic*, which is a coverage defect rather
+  than a wording one, so the wording step-down never reached it. Rewriting the
+  question does not fix a topic with no behavioral route; only adding one does.
+  The same logic settles §4.7 item 12 one section over.
 - **Topic list** (headings and prompts, no written questions): review structure,
   sequence, and coverage of probes only. Report that question-level review was
   not possible and say what would make it possible.
@@ -93,21 +99,29 @@ Walk the guide in order. Quote every question you flag, verbatim, with its
 section and position. A defect named in the abstract gets argued with; a defect
 quoted gets fixed.
 
-| Problem | Example | Why it matters | Call |
-|---|---|---|---|
-| **Leading** | "How frustrating was it when the policy failed?" | Supplies the answer with the question. The participant now has to contradict you to disagree, and most won't. Cite Fitzpatrick; NN/g is explicit that leading questions compromise the validity of the data. | **Blocking** |
-| **Self-answering** | "Don't you find the lease model confusing?" | Not a question. Rhetoric with a question mark. | **Blocking** |
-| **Double-barreled or compound** | "How do you configure and monitor policies?" | Two questions, one answer, and you will never know which half it addressed. NN/g frames the cost as working-memory overload: the participant answers the last part and the first is lost. | **Blocking** |
-| **Loaded or presupposing** | "What workarounds do you use for the sync delay?" | Presupposes the delay, the workaround, and that they noticed either. The "because" form — "did you pick that because it was faster?" — is the same defect wearing a clarifying question's clothes. | **Blocking** |
-| **Future-hypothetical standing alone** | "Would you use a feature that auto-rotated credentials?" | People are poor predictors of their own behavior, and generous ones. See Part 2. | **Blocking** if it is the only route to that topic; **flag** if a behavioral question anchors it first |
-| **Asking for the reason behind their own behavior** | "Why did you choose that approach?" | People have little introspective access to what actually drove a choice and supply a plausible-sounding theory instead (Nisbett & Wilson, 1977). You get an explanation, not a cause, and it arrives sounding exactly like data. Ask what they did and what was happening around it; the interpretation is the researcher's job, not the participant's. **Scope this narrowly.** A *main question* asking someone to account for their own decision is the defect. "Why?" or "how so?" sitting in a probe bank, used to invite elaboration on a story already in play, is good interviewing and is not flagged. Flag repeated "why" chains as the moderator's only tool — NN/g recommends a probe bank instead. | Flag |
-| **Manufacturing an opinion** | "What do you think of the new risk dashboard layout?" asked of someone who has never noticed it | The query effect: asked for a view they don't hold, people construct one on the spot, and it is reported later as a pre-existing preference. Establish that the topic is live for them before asking what they think of it. | Flag |
-| **Sensitive question with no framing** | "How often do you skip the review step?" | Misreporting on sensitive topics is common and largely *situational* (Tourangeau & Yan, 2007), which means wording carries as much of the effect as placement does. A normalizing preamble ("some teams do this every time, some skip it when they're under pressure…") and forgiving phrasing recover more than a bare ask. Placement is Part 4; this is the wording half. | Flag |
-| **Yes/no with no probe** | "Did you find that difficult?" | Produces one word from a senior practitioner who has somewhere else to be. | Flag |
-| **Stacked** | Three questions delivered as one turn | The participant answers the last one and the first two are lost. | Flag |
-| **Absolutes** | "Do you always review the audit log?" | Invites a self-flattering generalization instead of an instance. | Flag |
-| **Jargon mismatch** | "When you think about your secrets-management posture…" | Only when the participant would not use the phrase. For senior technical audiences, product and domain jargon is usually correct and stripping it sounds condescending. Flag genuine mismatches, not vocabulary. | Flag |
-| **Scale without an anchor** | "On a scale of 1 to 10, how usable was it?" | In a qualitative session an unanchored number is a number nobody can interpret and a story nobody told. | Flag |
+**Every row names the §4.6 item it scores.** A row with no rubric item behind it
+is this gate inventing a standard, which the section above forbids. Four rows had
+none until 2026-08-31 — absolutes, jargon mismatch, an unanchored scale, and
+stacked questions — and one of them was hit by a real guide and could not be
+filed, so it went uncounted. If you find yourself wanting to flag something no row
+covers, say so in your report as an unfileable finding rather than filing it under
+the nearest number.
+
+| Problem | Example | Why it matters | Rubric | Call |
+|---|---|---|---|---|
+| **Leading** | "How frustrating was it when the policy failed?" | Supplies the answer with the question. The participant now has to contradict you to disagree, and most won't. Cite Fitzpatrick; NN/g is explicit that leading questions compromise the validity of the data. | §4.6 item 2 | **Blocking** |
+| **Self-answering** | "Don't you find the lease model confusing?" | Not a question. Rhetoric with a question mark. | §4.6 item 2 | **Blocking** |
+| **Double-barreled or compound** | "How do you configure and monitor policies?" | Two questions, one answer, and you will never know which half it addressed. NN/g frames the cost as working-memory overload: the participant answers the last part and the first is lost. | §4.6 item 3 | **Blocking** |
+| **Loaded or presupposing** | "What workarounds do you use for the sync delay?" | Presupposes the delay, the workaround, and that they noticed either. The "because" form — "did you pick that because it was faster?" — is the same defect wearing a clarifying question's clothes. | §4.6 item 2 | **Blocking** |
+| **Future-hypothetical standing alone** | "Would you use a feature that auto-rotated credentials?" | People are poor predictors of their own behavior, and generous ones. See Part 2. | §4.6 item 4 | **Blocking** if it is the only route to that topic; **flag** if a behavioral question anchors it first |
+| **Asking for the reason behind their own behavior** | "Why did you choose that approach?" | People have little introspective access to what actually drove a choice and supply a plausible-sounding theory instead (Nisbett & Wilson, 1977). You get an explanation, not a cause, and it arrives sounding exactly like data. Ask what they did and what was happening around it; the interpretation is the researcher's job, not the participant's. **Scope this narrowly.** A *main question* asking someone to account for their own decision is the defect. "Why?" or "how so?" sitting in a probe bank, used to invite elaboration on a story already in play, is good interviewing and is not flagged. Flag repeated "why" chains as the moderator's only tool — NN/g recommends a probe bank instead. | §4.6 item 5 | Flag |
+| **Manufacturing an opinion** | "What do you think of the new risk dashboard layout?" asked of someone who has never noticed it | The query effect: asked for a view they don't hold, people construct one on the spot, and it is reported later as a pre-existing preference. Establish that the topic is live for them before asking what they think of it. | §4.6 item 6 | Flag |
+| **Sensitive question with no framing** | "How often do you skip the review step?" | Misreporting on sensitive topics is common and largely *situational* (Tourangeau & Yan, 2007), which means wording carries as much of the effect as placement does. A normalizing preamble ("some teams do this every time, some skip it when they're under pressure…") and forgiving phrasing recover more than a bare ask. Placement is Part 4; this is the wording half. | §4.6 item 7 | Flag |
+| **Yes/no with no probe** | "Did you find that difficult?" | Produces one word from a senior practitioner who has somewhere else to be. | §4.6 item 8 | Flag |
+| **Stacked** | Three questions delivered as one turn | The participant answers the last one and the first two are lost. | §4.6 item 3 | Flag |
+| **Absolutes** | "Do you always review the audit log?" | Invites a self-flattering generalization instead of an instance. | §4.6 item 32 | Flag |
+| **Jargon mismatch** | "When you think about your secrets-management posture…" | Only when the participant would not use the phrase. For senior technical audiences, product and domain jargon is usually correct and stripping it sounds condescending. Flag genuine mismatches, not vocabulary. | §4.6 item 31 | Flag |
+| **Scale without an anchor** | "On a scale of 1 to 10, how usable was it?" | In a qualitative session an unanchored number is a number nobody can interpret and a story nobody told. | §4.6 item 33 | Flag |
 
 ### The positive rule: TED+W
 
@@ -359,7 +373,10 @@ recovered from that session. **Blocking**, with the contaminated questions
 named. The same applies to a question that reveals what the study hopes to find
 before asking whether the participant sees it.
 
-This is the best-evidenced severity call in this file. Schuman & Presser (1981)
+This is the best-evidenced severity call in this file — with the caveat that
+both sources are survey attitude-order work, so what carries into a moderated
+interview is the accessibility mechanism rather than the measured effects. Not
+untrue; untested here. Schuman & Presser (1981)
 documented both consistency and contrast effects from preceding questions;
 Tourangeau, Rips & Rasinski (2000) is the standard account of why. Earlier
 questions make particular beliefs accessible, and the later answer is drawn from
@@ -368,6 +385,14 @@ what's accessible.
 **Screener and demographic questions at the end**, unless they gate which branch
 of the guide runs. Opening a session with an intake form spends the participant's
 freshest ten minutes on the least valuable data.
+
+**The opening block.** Before the warm-up, does the guide say — or point at a
+consent script that says — that the session is recorded, who else is present,
+that the participant may decline a question or stop, and what happens to the
+recording? A pointer is enough; the words need not be in this document. §4.6 item
+30. Check it on every guide, and check it hardest on a standalone one: with no
+research plan attached, `plan-reviewer` never runs and this is the only place in
+the suite the question gets asked.
 
 **Wrap-up exists.** "What haven't I asked about that I should have?" and the
 referral ask. The first regularly produces the best material in the session; a

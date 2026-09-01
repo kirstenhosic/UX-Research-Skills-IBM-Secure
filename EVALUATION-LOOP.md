@@ -484,9 +484,20 @@ exact words change. A topic list gets structure and sequence review only.
 23. No question depends on a concept the guide has not yet introduced
 24. Unprimed questions — current workflow, expectations, unmet needs — come
     before any stimulus, concept description, or feature name that would answer
-    them for the participant. The best-evidenced item on this list
+    them for the participant. The evidence is real but borrowed: it is survey
+    attitude-order work (Schuman & Presser 1981; Tourangeau, Rips & Rasinski
+    2000), and what transfers to a moderated interview is the accessibility
+    mechanism rather than the measured effects. **This item used to call itself
+    the best-evidenced on the list.** It carried no citation, as this section
+    carries none anywhere, and §4.7 item 21 had already declined to inherit the
+    claim; the superlative came out 2026-08-31 rather than sit above a blocking
+    rule that is also an escalation condition
 25. Screener and demographic questions sit at the end unless they gate a branch
-26. A wrap-up exists, including "what haven't I asked about?"
+26. A wrap-up exists, including "what haven't I asked about?" and the referral
+    ask. The referral half was added 2026-08-31: the gate and
+    `methods/interview-generative.md` have
+    always required the referral and this item did not, so a guide could clear the
+    rubric and draw a flag from the gate for the same wrap-up
 
 **Timing and piloting**
 
@@ -500,7 +511,48 @@ exact words change. A topic list gets structure and sequence review only.
 28. The guide has been piloted with someone who resembles a participant, or a
     pilot is scheduled. The gate is not a pilot and says so
 
-29. Meets `VOICE-AND-STYLE.md`
+29. Meets `VOICE-AND-STYLE.md` **in the prose a participant hears** — the
+    introduction, the consent language, the questions as spoken, and the close.
+    Scoped 2026-08-31, copying §4.7 item 34: that file applies to "anything a
+    stakeholder will open" and names neither guides nor this gate, so its Part 4
+    rubric — lead with the answer, a verbatim quote per finding, every
+    recommendation an action with an owner — has no coherent reading against an
+    interview instrument, and applying it literally generates nonsense failures
+
+**Appended items.** The four below were added 2026-08-31 and sit outside the
+thematic blocks above on purpose. Items 2, 3, 5, 10, 11, 24, 25, 27 and 28 are
+cross-referenced from §4.7, both gates, `methods/tree-testing.md` and the survey
+fixture, so inserting anything in place would renumber rules other documents cite
+by number. Out of order and correct beats tidy and broken.
+
+30. **The guide states, or points at, what the participant is told before the
+    questions start** — that the session is recorded, who else is present or
+    watching, that they may decline any question or stop at any time, and what
+    happens to the recording afterwards. A pointer to a separate consent script
+    satisfies this; the words do not have to live here. Storage, retention and
+    de-identification are §4.1 item 9 and stay there — this is only what is said
+    in the room. Added because a standalone guide routes `guide-checker` →
+    `readability-checker` with no `plan-reviewer` in the path, so nothing else in
+    the suite was asking. A guide can otherwise clear all 29 items above while
+    telling the participant nothing at all
+31. **The vocabulary is the participant's, not the product's.** Flag a genuine
+    mismatch, not domain jargon a senior technical audience uses daily — stripping
+    that sounds condescending and is usually wrong. §4.7 item 6 is the same rule
+    for surveys and has always had one; this section did not, while its gate
+    scored the defect anyway
+32. **No absolutes.** "Do you always review the audit log?" invites a
+    self-flattering generalization instead of an instance, and the generalization
+    is what gets reported. The repair is the same as item 13's: ask for the last
+    time
+33. **A rating scale asked in a session carries an anchor.** "On a scale of 1 to
+    10, how usable was it?" produces a number nobody can interpret and a story
+    nobody told. This item is about the ad-hoc number. **A standardized block
+    inside a moderated session — SUS, SEQ, UMUX-Lite — is a known routing gap and
+    is not covered here or anywhere**: §4.7 item 32 holds the rule that a modified
+    instrument reported under its own name is blocking, but `research-survey-
+    checker` declares moderated scripts out of scope and stops, so an eight-item
+    "SUS" with relabelled anchors currently reaches no gate. Name it in your
+    report and say no gate owns it, rather than scoring it against this section
 
 **What this rubric cannot reach.** It scores a document. It cannot see the
 moderator, and most leading happens live — in an unwritten follow-up, in a
