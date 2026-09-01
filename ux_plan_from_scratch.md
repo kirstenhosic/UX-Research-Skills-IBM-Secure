@@ -226,6 +226,26 @@ PHASE 1 — FRAME: DECISION, BACKGROUND & SCOPE
   - What is explicitly OUT of scope for this study? Naming this early 
     prevents scope creep and unrealistic stakeholder expectations.
 
+  ── DECISION CHECKPOINT — ask the decision's owner, record what
+     comes back. Required to ask; never blocks. Four questions:
+       1. What decision does this inform, who makes it, by when?
+       2. What would you do if this came back empty, or came back
+          after your date? "The same thing" means the study is not
+          informing the decision — worth knowing in week one.
+       3. Which of these questions, answered either way, would
+          change what you do? Name the ones that wouldn't; those
+          are candidates for cutting.
+       4. What answer would you find hardest to accept? This is
+          the pre-study hypothesis. Record it — it triggers the
+          full-form integrity audit at analysis, and it ranks
+          theme risk at the theme checkpoint.
+     Ask the OWNER, not the researcher, unless the researcher
+     genuinely owns the decision — and say which in the record.
+     Disposition: CONFIRMED / RESCOPED / NOT A DECISION /
+     DEFERRED. `not obtained` is valid: write who was asked and
+     when, then continue. Full procedure: section 10 of
+     EVALUATION-LOOP.md.
+
 PHASE 2 — RESEARCH QUESTIONS & HYPOTHESES
   - Separate three layers and don't let them blur: research GOALS 
     (why we're doing this), research QUESTIONS (the specific, 

@@ -275,8 +275,11 @@ flowchart TD
     ART[["<b>Dr. Morgan drafts the artifact</b>"]]
     CL["Dr. Morgan codes your corpus<br/>and clusters the codes into themes"]
 
-    Q -->|"Study context or sources<br/>plan · guide · comparison"| ART
+    Q -->|"Study context or sources<br/>plan · guide · comparison"| DC
     Q -->|"A corpus to analyze<br/>findings"| CL
+
+    DC{{"DECISION CHECKPOINT<br/>the decision's owner answers, not an agent<br/>confirmed · rescoped · not a decision · deferred<br/><i>Dr. Morgan must ask — the answer never blocks</i>"}}
+    DC --> ART
 
     CL --> TC{{"THEME CHECKPOINT<br/>you decide each theme, not an agent<br/>accept · revise · split · reject"}}
     TC --> SY["Synthesis<br/>built on the themes you approved"]
@@ -304,7 +307,7 @@ flowchart TD
     classDef ending fill:#5B6B80,stroke:#37424F,stroke-width:2px,color:#FFFFFF
     class START entry
     class COACH,WORK coach
-    class TC human
+    class TC,DC human
     class ENDC,ENDR,ENDE ending
 ```
 
@@ -483,7 +486,7 @@ citations live in the individual files.
 | gate | A checker that reads a finished artifact and reports whether it passes. Six of the seven run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL` — plus `NOT_APPLICABLE`, which a gate returns when it was handed an artifact it does not own, and which asserts nothing about the artifact. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
-| checkpoint | A stop where a *person* decides, not an agent. Two exist: the **theme checkpoint** after clustering (the default one), and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
+| checkpoint | A stop where a *person* decides, not an agent. Three exist: the **decision checkpoint** before the study, where the decision's owner says whether the decision is real (advisory — Dr. Morgan must ask, the answer never blocks); the **theme checkpoint** after clustering (the default one, and it blocks by destination); and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |

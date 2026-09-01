@@ -383,6 +383,26 @@ against them. It's the file most likely to drift, and it has to be checked by
 reading — the scenario list in its opening paragraph, the embedded IBM Secure
 product context, and its closing sync note are the places that go stale first.
 
+## §10 is advisory on purpose — don't promote it without evidence
+
+The decision checkpoint records an answer and never blocks. That reads like an
+oversight next to §9, which blocks by destination, and the temptation for the
+next maintainer will be to "finish" it by giving it a dial.
+
+It was a choice, and the reasoning is in §10 itself: the checkpoint fires before
+fieldwork, when the team is keenest to start, and a blocking stop at that moment
+gets routed around rather than answered. A recorded `not obtained` is worth more
+than a stop everyone learns to bypass.
+
+What would justify promoting it: a run of studies where `disposition: not
+obtained` is the norm rather than the exception. That is measurable, and it is
+the evidence to collect before changing this. If you do promote it, reuse §9's
+destination dial — §9 says "don't add a second dial" and that still holds.
+
+The corresponding risk in the other direction is that the four questions grow.
+Four is already at the edge of what a stakeholder will answer in one message.
+An owner who is asked eight questions answers none of them.
+
 ## Three gates read an instrument, and the splits are load-bearing
 
 `research-plan-reviewer` holds the research questions and maps coverage in both

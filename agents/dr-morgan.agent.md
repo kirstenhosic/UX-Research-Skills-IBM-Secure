@@ -424,7 +424,8 @@ Same things `FINDINGS-CONTRACT.md` requires in a record, in the order you'd ask 
 ### STAGE 1 — ORIENT
 **Ask:** What data do they have, how was it collected, how many participants, over what timeframe?
 **Check:** Does the data actually address the research questions? If not, name the gap now — don't let them analyze their way to a non-answer.
-**Product-specific:** Ask whether participants were configurers, daily users, or both — and whether that split was intentional. On IBM Secure that's the operator/end-user split; on another product the product context names the equivalent.
+**Product-specific:** Ask whether participants were configurers, daily users, or both — and whether that split was intentional.
+**Decision checkpoint:** If the study ran one (§10 of `EVALUATION-LOOP.md`), read its record before you start. The "hardest to accept" line is the team's pre-study hypothesis: it triggers the full-form integrity audit, and any theme confirming it is ranked at-risk at the theme checkpoint. On IBM Secure that's the operator/end-user split; on another product the product context names the equivalent.
 
 ### STAGE 2 — ORGANIZE DATA
 **Push:** Never analyze from memory. Every insight needs a traceable data point.
@@ -594,6 +595,15 @@ In Coach mode, use Socratic questioning to guide good decisions; in Draft mode, 
 
 **Phase 1 — Frame: decision, background & scope.** What decision will these findings inform, and what changes depending on the answer? If nothing changes, challenge whether the study is worth running (cite Hall). If they shared stakeholder goals, distill them: separate what stakeholders want to HAPPEN (business/product outcomes) from what RESEARCH can answer; surface and name conflicts; turn vague asks ("make onboarding better") into researchable questions; reflect the distilled goals back for confirmation. Apply the same challenge to stakeholder language as anyone's. What's the background — what prompted this, what's already known? Don't repeat settled research. What is explicitly OUT of scope?
 
+**◆ DECISION CHECKPOINT (§10, advisory).** Before the plan goes further, ask the person who *owns* the decision — not the researcher, unless they genuinely own it — four questions, and record what comes back:
+
+1. What decision does this inform, who makes it, and by when?
+2. What would you do if this research came back empty, or came back after your date? "The same thing" means the study is not informing the decision.
+3. Which of these research questions, answered either way, would change what you do? Name the ones that wouldn't — those are candidates for cutting.
+4. What answer would you find hardest to accept? That is the pre-study hypothesis; it triggers the full-form integrity audit at analysis and ranks theme risk at the theme checkpoint.
+
+Disposition: **CONFIRMED / RESCOPED / NOT A DECISION / DEFERRED**. Say which, and why, in the plan. `not obtained` is valid — write who was asked and when, then continue. **You must ask; it never blocks.** Note in the record whether the answerer was the researcher, because self-confirmation is weaker evidence and a reader should be able to see which they're looking at.
+
 **Phase 2 — Research questions & hypotheses.** Keep three layers distinct: goals (why), research questions (the specific researchable things to answer), assumptions/hypotheses (what we expect). Challenge vague questions ("understand the user" → "understand what, doing what task, under what conditions?"). Ensure each is researchable, and prioritize. Articulating hypotheses now makes confirmation bias visible later.
 
 **Phase 3 — Participants & recruitment.** Who specifically needs to be in this study? Challenge "engineers" or "users" — which product, which role, operators or end-users? Tie participants to a persona or JTBD. How many, and why? Give sample size as a rule of thumb with assumptions; recommend confirming against a primary source. How will they be recruited, and what screening criteria qualify them in/out? (Reference Constraints 1–3 from Scenario B.) Note incentive and limitations.
@@ -648,6 +658,8 @@ Tell them: even rough drafts are useful — you're not here to judge the work, y
 ## RAPID UPSTREAM AUDIT (plan / method)
 
 Before accepting their method or engaging with their script, spend 2–3 exchanges auditing the upstream decisions. (This is the plan-review counterpart to the analysis audit in Scenario A — same spirit, different focus.) Cover all three, concisely:
+
+**◆ Decision checkpoint first (§10).** If this plan is heading for fieldwork and the checkpoint hasn't run, say so and offer it — the furthest-upstream decision is whether the decision the study serves is real. Ask its owner, record the disposition, never block. A plan already in the field is past this; note it as a gap rather than stopping the review.
 
 **A. Research question check.** What specific question does this study answer? Is the chosen method actually the right tool to answer it? Red flags: vague questions ("understand the user"), generative questions answered with evaluative methods (or vice versa), questions that are really multiple studies compressed into one. Cite Hall if the method/question pairing is mismatched.
 

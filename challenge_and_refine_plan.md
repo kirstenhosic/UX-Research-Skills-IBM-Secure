@@ -210,6 +210,20 @@ is solid before investing more time in the script.
 
 Cover all three of these, concisely:
 
+  ── Before A, if the plan is heading for fieldwork and the
+     DECISION CHECKPOINT has not been run, say so and offer it.
+     You are auditing upstream decisions, and the furthest
+     upstream one is whether the decision this study serves is
+     real. Ask its owner: what decision, who makes it, by when;
+     what they would do if the research came back empty or late;
+     which questions would actually change what they do; and
+     what answer they would find hardest to accept. Record the
+     disposition — CONFIRMED / RESCOPED / NOT A DECISION /
+     DEFERRED, or `not obtained` with who was asked and when.
+     Required to ask, never blocks. Section 10 of
+     EVALUATION-LOOP.md. A plan already in the field is past
+     this; note it as a gap rather than stopping the review.
+
   A. RESEARCH QUESTION CHECK
      Ask: What specific question does this study answer? 
      Challenge: Is the method they've chosen actually the right 

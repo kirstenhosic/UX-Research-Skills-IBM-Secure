@@ -16,6 +16,10 @@ removes work you shouldn't have to do by hand. It is not an approval.
 ## 1. The cycle
 
 ```
+◆ DECISION CHECKPOINT ◆ ──► PLAN ──► FIELDWORK ──► CODE ──┐
+(the decision's owner                                     │
+ answers — §10, advisory)                                 │
+                                                          ▼
 CODE ──► CLUSTER ──► ◆ THEME CHECKPOINT ◆ ──► SYNTHESIZE ──┐
 (Dr. Morgan,          (a person decides — §9)              │
  Draft mode only)                                          │
@@ -33,9 +37,14 @@ DRAFT ──► PRE-FLIGHT ──► GATE 1 ──► GATE 2 ──► GATE 3 �
                                                └──► ESCALATE ──► human
 ```
 
-The top row is new, and it is a different kind of thing from the rest of the
-diagram. Everything after `DRAFT` is a machine filter. The **theme checkpoint**
-is a person, in the middle, before synthesis — see §9.
+The top two rows are a different kind of thing from the rest of the diagram.
+Everything after `DRAFT` is a machine filter. The two **checkpoints** are people.
+The **decision checkpoint** is the decision's owner, before the study exists —
+§10, advisory, and the asking is what's required. The **theme checkpoint** is a
+person in the middle, before synthesis — §9, and it blocks by destination.
+
+Between them they cover the two things a gate structurally cannot reach: whether
+the study is worth running, and what the data means.
 
 ### Pre-flight — safety runs before everything
 
@@ -939,7 +948,11 @@ which is the same standard this suite holds research to.
   evaluated, check the disagreement against the source before recording a score.
 - **A green verdict is not a correct study.** These gates catch fabrication,
   irrelevance, incoherence, and opacity. They cannot catch a well-executed
-  study of the wrong question that everyone agreed on at the start.
+  study of the wrong question that everyone agreed on at the start. §10's
+  decision checkpoint is the partial answer — it asks the decision's owner
+  whether the question is the right one while that is still cheap to change.
+  Partial because it is advisory: it records the answer, it does not require
+  one, and a team that agreed on the wrong question can agree on it there too.
 - **`guide-checker` is not a pilot, and it cannot see the moderator.** It reads a
   document. Whether a question is ambiguous *to a platform engineer at a
   regulated bank at 4pm on a Thursday* is the only version of that question that
@@ -1012,6 +1025,10 @@ which is the same standard this suite holds research to.
 **Producing a plan:**
 
 ```
+0. DECISION CHECKPOINT (advisory)  → the decision's owner answers four
+                                     questions; the disposition is recorded in
+                                     the plan whatever it is, including
+                                     `not obtained`. Never blocks. §10
 1. Draft plan (Dr. Morgan, Scenario C or D)
 2. research-safety-checker         → PRE-FLIGHT, always runs first
 3. research-plan-reviewer          → FAIL? revise, re-run
@@ -1242,6 +1259,124 @@ checkpoint from being handed an unreviewable packet.
 The producer asks rather than deciding alone: are the single-use codes genuine
 one-offs worth keeping, or one idea split across several labels? Merge before
 clustering.
+
+---
+
+## 10. The decision checkpoint — before the study, not after it
+
+§7 states the limit this closes, in its own words: *a green verdict is not a
+correct study. These gates catch fabrication, irrelevance, incoherence, and
+opacity. They cannot catch a well-executed study of the wrong question that
+everyone agreed on at the start.*
+
+Every gate in §3 runs **after** the study exists. The commitment that justifies
+the study — that there is a real decision, that it is still open, that these
+questions would move it — is made before any of them, usually by someone who is
+not in the room when the gates run. `research-plan-reviewer` checks that a
+decision is *named* (§4.1 item 1). Nothing checks that the named decision is
+*real*.
+
+A model cannot check this. Whether a VP will actually change the roadmap in
+November is a fact about an organization, not a property of a document, and no
+amount of reading the plan reveals it. The only instrument is asking the person.
+
+### It is advisory, and that was a choice
+
+| | Theme checkpoint (§9) | Decision checkpoint |
+|---|---|---|
+| Blocks | Yes, scaled by destination | **Never** |
+| Required | The stop is required | **The asking is required** |
+| On no answer | Synthesis does not proceed | Recorded as `not obtained`, work continues |
+
+Dr. Morgan must raise it and must record what comes back. It does not stop the
+study, and a non-answer is a legitimate outcome that gets written down rather
+than chased.
+
+Be honest about what that buys and what it doesn't. A checkpoint that cannot
+stop anything is weaker than one that can, and §9 says plainly that a checkpoint
+people can walk past teaches them it is theatre. The counterweight is that this
+one fires at the moment when stopping is most expensive and least welcome —
+before fieldwork, when the team is keen to start — and a blocking stop there
+gets routed around rather than answered. Recorded non-answers are worth more
+than a stop everyone learns to bypass. If that turns out to be wrong, the
+evidence will be a run of studies where `disposition: not obtained` is the norm;
+raise it to blocking at `internal-org` and `external` and reuse §9's dial rather
+than inventing a second one.
+
+### Who answers
+
+**The person who owns the decision**, named in the record. Not the researcher —
+unless the researcher genuinely owns it, in which case say so in the record.
+Self-confirmation is weaker evidence than a stakeholder's, and a reader should
+be able to tell at a glance which one they are looking at. §9's rule holds here
+too: asking someone to sign off on their own reasoning is not a checkpoint.
+
+### The four questions
+
+Ask all four. They are short on purpose; the second is the one that does the
+work.
+
+1. **What decision does this inform, who makes it, and by when?**
+2. **What would you do if this research came back empty, or came back after
+   your date?** If the answer is "the same thing," the study is not informing
+   the decision. That is worth knowing in week one rather than at the readout.
+3. **Which of these research questions, answered either way, would change what
+   you do?** Ask them to name the ones that wouldn't. Those are candidates for
+   cutting, and cutting them buys session time for the ones that would.
+4. **What answer would you find hardest to accept?** This surfaces the
+   pre-study hypothesis while it is still cheap. It feeds two things
+   downstream: it is a full-form trigger for the integrity audit in
+   `analyze_your_data.md`, and it is risk signal 5 in §9's theme ranking —
+   *confirms a stated pre-study hypothesis*.
+
+### Ask for a disposition, not a conversation
+
+As in §9. One of four, recorded:
+
+- **CONFIRMED** — the decision is real, open, and these questions bear on it
+- **RESCOPED** — real decision, wrong questions; say which ones changed
+- **NOT A DECISION** — nothing changes based on the outcome. The study may still
+  be worth running as groundwork, but it is not decision research and the plan
+  should stop calling it that
+- **DEFERRED** — the owner cannot answer yet. Record who and when, and carry it
+
+`NOT A DECISION` does not stop the study here. It does travel:
+`research-significance-checker` escalates when a findings set has no named
+decision at all, so a study that starts here and does not resolve it will meet
+that verdict later. Better to have the sentence on record from week one.
+
+### The record
+
+Goes in the plan, under the decision. Carry it into the findings set when there
+is one — `research-significance-checker` asks for the named decision, and this
+is where the good version of that answer comes from.
+
+```
+decision_review:
+  owner:       [name or role of the person who makes the decision]
+  is_researcher: no
+  date:        2026-09-01
+  disposition: rescoped — RQ3 (pricing perception) dropped; the owner said
+               pricing is set regardless of what we find. RQ1 and RQ2 confirmed
+               as decision-bearing.
+  counterfactual: "We'd ship the current design and fix it in Q1." Real
+               alternative, so the study is load-bearing.
+  hardest_to_accept: "That operators don't want the unified dashboard at all."
+               → treat as a stated hypothesis; full-form integrity audit at
+               analysis, and rank any theme confirming it as at-risk.
+```
+
+`not obtained` is a valid disposition. Write it, say who was asked and when,
+and move on.
+
+### What it does not do
+
+- It does not block, override the researcher, or gate the plan
+- It does not replace §4.1 item 1. That checks the plan *names* a decision;
+  this asks whether the named one is real. A plan can pass the gate and fail
+  this conversation
+- It is not a stakeholder alignment exercise. Four questions, one owner, a
+  disposition. If it turns into a workshop, it has stopped being a checkpoint
 
 ---
 

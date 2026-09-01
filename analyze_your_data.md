@@ -351,7 +351,11 @@ them volunteering that they might have some.
   FULL FORM — run all three parts below when ANY of these is true. 
   Ask; do not infer, and do not wait to be asked:
     - the destination is internal-org or external
-    - the team held a stated hypothesis going into the study
+    - the team held a stated hypothesis going into the study. If the 
+      study ran a decision checkpoint (section 10 of EVALUATION-LOOP.md), 
+      its "what answer would you find hardest to accept" line IS that 
+      hypothesis — read it before you start, and rank any theme that 
+      confirms it as at-risk at the theme checkpoint
     - the researcher did not personally attend every session
     - the findings arrived already written, by someone else
     - the analysis is from notes or memory rather than transcripts
