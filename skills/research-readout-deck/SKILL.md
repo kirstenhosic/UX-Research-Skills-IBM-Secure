@@ -1,16 +1,19 @@
 ---
 name: research-readout-deck
 description: >-
-  Turn raw user-research findings (interview notes, survey results, usability
-  observations, verbatim quotes) into a clean, easy-to-digest readout slide deck
-  (.pptx) for a product team. Use this whenever someone wants to present, share,
-  or "write up" research findings as slides, build a UXR readout or research
-  share-out, turn study notes into a deck, or summarize what users said for PMs,
-  engineers, and designers. Trigger on phrases like "research readout," "findings
-  deck," "share out my study," "turn these notes into slides," "UXR presentation,"
-  or "make a deck from this research," even when the word "skill" isn't used. The
-  deck follows a findings-first narrative arc and is built for a mixed product-team
-  audience (PM + Eng + UXD).
+  Render a clean, easy-to-digest readout slide deck (.pptx) from synthesized
+  findings records — the output of a completed analysis (Scenario A) — for a
+  product team. Use this whenever someone wants to present, share, or "write
+  up" research findings as slides, build a UXR readout or research share-out,
+  or summarize what users said for PMs, engineers, and designers. Trigger on
+  phrases like "research readout," "findings deck," "share out my study," "turn
+  these notes into slides," "UXR presentation," or "make a deck from this
+  research," even when the word "skill" isn't used — including requests that
+  arrive with only raw notes, transcripts, or a prose summary. Take those too,
+  but recommend running the analysis first and say what the shortcut costs; a
+  notes-built deck cannot match one built on a full analysis. The deck follows
+  a findings-first narrative arc and is built for a mixed product-team audience
+  (PM + Eng + UXD).
 ---
 
 # Research Readout Deck
@@ -49,9 +52,11 @@ and asked to make the deck. You can do this, and sometimes it's the only option.
 But say once, plainly, what it costs — because synthesizing *while* building
 slides is exactly where readouts go wrong. A quote gets tightened to fit a text
 box. A "4 of 8" softens into "most." A hedge gets dropped because the line
-scanned better without it. Offer to run synthesis first. If the user wants to
-proceed anyway, proceed — then flag every inference you had to make, by name, at
-the end.
+scanned better without it. Recommend running synthesis first — not as a
+formality, but because a notes-built deck cannot reach the quality of one built
+on a full analysis, and this skill exists for the records-first case. If the
+user wants to proceed anyway, proceed — then flag every inference you had to
+make, by name, at the end, and say how far the deck can travel (below).
 
 ## Step 1 — Start from findings records
 
@@ -155,8 +160,9 @@ pretend it's equivalent. Do this instead:
    whole corpus: `disconfirming` (what contradicts this finding), `limits` (what
    it doesn't apply to), and `confidence` (how much weight it bears). A deck
    built from notes will simply not have them, and their absence is invisible on
-   a slide — which is precisely what makes it dangerous. Offer to run synthesis
-   first.
+   a slide — which is precisely what makes it dangerous. Recommend running the
+   analysis first (Scenario A); this path exists for the deadline, not as an
+   alternative of equal standing.
 2. **If they'd rather proceed, proceed.** A useful deck today beats a rigorous
    one that never gets built.
 3. **Then reconstruct records as you go.** For each finding you put on a slide,
@@ -167,6 +173,15 @@ pretend it's equivalent. Do this instead:
    treated X as the headline finding; nothing in the notes gave me a
    participant count for the onboarding issue, so that slide says 'multiple
    participants' and should be corrected before you present it").
+5. **Say how far this deck can travel.** Every deck faces the safety scan and
+   `research-synthesis-checker` in deck mode before it ships. Records
+   reconstructed from notes — marked inferred, `disconfirming: not sought` —
+   are honest, and that honesty draws flags: workable for an `internal-team`
+   readout, where flags ride along as Reviewer Notes, and the wrong foundation
+   for anything headed `internal-org` or `external`, where deck mode starts
+   blocking. If the deck is going beyond the team, say so now: that is the
+   moment to stop and run the analysis, because that is the version that
+   passes clean.
 
 ## Step 2 — Separate observation, interpretation, and recommendation
 
