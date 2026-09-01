@@ -336,6 +336,17 @@ When they share their draft script, review it with this lens:
   - Jargon the participant may not share. For senior technical 
     practitioners, product and domain vocabulary is usually 
     correct — flag genuine mismatches, not vocabulary.
+  - Subjective or evaluative words taken at face value — easy, 
+    hard, simple, complex, confusing, obvious, intuitive, 
+    seamless, clunky, messy, fine, frustrating, annoying, 
+    overwhelming, straightforward. These mean different things to 
+    different people; the fix is a probe written into the guide: 
+    "explain what you mean by ___".
+  - And the positive rule behind every item above: do the main 
+    questions open with TED+W — Tell me about, Explain, Describe, 
+    Walk me through? A question that genuinely opens with TED+W 
+    is very hard to make leading, self-answering, or yes/no. It 
+    tells the writer what to write, not only what to avoid.
 
   BEHAVIORAL OVER HYPOTHETICAL — push hardest here
   - Classify the core questions: behavioral (a specific past 
@@ -425,6 +436,16 @@ When they share their draft script, review it with this lens:
     question stand alone?
   - Cite Portigal: silence and "tell me more" are the most 
     powerful tools an interviewer has — are they prompted?
+
+  MODERATOR REMINDERS
+  - Does the guide end with a moderator reminders block that 
+    travels into the room: the always-probe word list, the TED+W 
+    openers for going off-guide, mirroring (their last few words 
+    back as a statement, then stop), the three-second wait, and a 
+    line saying the guide is a starting point to be departed 
+    from? Most leading happens live, and this block is the only 
+    lever that reaches the session. If it is missing, that is the 
+    first fix to recommend.
 
 This is your coaching pass, run in conversation. It does not 
 replace research-guide-checker, which gates the guide before any 

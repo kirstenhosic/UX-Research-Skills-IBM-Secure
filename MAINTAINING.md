@@ -237,9 +237,24 @@ Every file uses Dr. Morgan and the same plain instruction opener
 
 ## Keep the agent in sync
 
-`agents/dr-morgan.agent.md` embeds condensed copies of each scenario, so a change
-to a standalone file needs mirroring into the agent. Or treat the agent as
-canonical and regenerate the standalones. They will drift otherwise.
+**The standalones are canonical; the agent follows them.** This is a decision,
+not a preference — the README promises each standalone "goes deeper than the
+agent's condensed copy," and that promise only holds in one direction.
+`agents/dr-morgan.agent.md` embeds condensed copies of each scenario, so a
+change to a standalone file needs mirroring into the agent — and an improvement
+drafted in the agent first is not done until it has been written into the
+standalone it condenses. They will drift otherwise, and the drift runs
+backwards: the agent quietly becomes the richer file, and a researcher who
+loads the "deeper" standalone drafts an artifact the suite's own gates flag.
+
+**The guide-craft set is a greppable parity check.** TED+W, the always-probe
+word list, and the moderator reminders block must appear together wherever
+interview-guide craft is taught or audited: the agent (Scenario C),
+`ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, `EVALUATION-LOOP.md`
+§4.6, `agents/research-guide-checker.agent.md`, and the interview-shaped
+`methods/` files. When you improve any of them, grep for `TED+W` and
+`always-probe` and visit every hit before you commit — the same sweep as the
+count words below.
 
 ## Shared blocks are duplicated on purpose
 

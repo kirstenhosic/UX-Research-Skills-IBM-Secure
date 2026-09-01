@@ -296,6 +296,12 @@ PHASE 5 — DISCUSSION GUIDE / TASKS
     each core question [behavioral], [contextual], or [hypothetical] 
     in the draft; the label costs one word and makes the balance 
     arguable instead of invisible. Cite Fitzpatrick: The Mom Test.
+  - Open every main question with TED+W — Tell me about, Explain, 
+    Describe, Walk me through. A positive rule rather than a 
+    prohibition: it tells you what to write, not only what to 
+    avoid. The convention comes from investigative interviewing, 
+    where open prompts get a free narrative before any probing; 
+    "walk me through" is the workflow-research extension.
   - Be accurate about the ceiling. A behavioral question does not make 
     an interview produce behavioral data — it produces better-quality 
     self-report. If the research question needs what people actually 
@@ -331,6 +337,21 @@ PHASE 5 — DISCUSSION GUIDE / TASKS
     session length — a substantive open question with probes runs 
     perhaps 4–6 minutes, a working heuristic rather than a measured 
     rate.
+  - Subjective and evaluative words never pass at face value — 
+    easy, hard, simple, complex, confusing, obvious, intuitive, 
+    seamless, clunky, messy, fine, frustrating, annoying, 
+    overwhelming, straightforward. The probe is "explain what you 
+    mean by ___". Put that list in the guide's moderator 
+    reminders, not just in your head.
+  - End every guide with a moderator reminders block. Neither you 
+    nor the gate can see the session, and most leading happens 
+    live — so the one lever available is instructions that travel 
+    with the artifact into the room. Include the always-probe 
+    list, the TED+W openers to use when going off-guide, mirroring 
+    (repeat their last few words back as a statement, then stop), 
+    waiting three seconds after they finish before responding, and 
+    a line saying the guide is a starting point to be departed 
+    from.
   - Pilot it with one person who resembles a participant before the 
     real sessions start. Reading a question is a bad predictor of how 
     it lands.
@@ -494,7 +515,10 @@ Warm-up:
 
 Core sections (mapped to research questions, general → specific,
 chronological within a workflow narrative):
-  - [Section per research question]
+  - [Section per research question, with a timing estimate — a 
+    substantive open question with probes runs 4–6 minutes]
+  - Open main questions with TED+W: "Tell me about…", "Explain…", 
+    "Describe…", "Walk me through…"
   - Enter each topic through a specific past instance: "tell me 
     about the last time you…" → "walk me through what you did".
     Mark each question [behavioral], [contextual], or [hypothetical].
@@ -513,6 +537,21 @@ Wrap-up:
 Close:
   Thank you for sharing your thoughts — this helps us understand 
   what matters and what to prioritize. Have a great day!
+
+Moderator reminders (this block travels with the guide into the 
+room — most leading happens live, and this is the one lever that 
+reaches the session):
+  - Always probe these words — easy, hard, simple, complex, 
+    confusing, obvious, intuitive, seamless, clunky, messy, fine, 
+    frustrating, annoying, overwhelming, straightforward → 
+    "explain what you mean by ___"
+  - Going off-guide, open with TED+W: "Tell me about…", 
+    "Explain…", "Describe…", "Walk me through…"
+  - Mirror: repeat their last few words back as a statement, 
+    then stop.
+  - Wait three seconds after they finish before responding.
+  - This guide is a starting point. Depart from it when the 
+    participant takes you somewhere better.
 
 RELEASE GATE (apply to every artifact this file produces)
 
