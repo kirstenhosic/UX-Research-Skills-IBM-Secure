@@ -1,184 +1,141 @@
 # Dr. Morgan — UX Research Skills & Agents
 
-An invokable UX research mentor for IBM product teams — plus the skills and
-evaluator agents that check its work. It ships with **IBM Secure** context filled
-in (HashiCorp Vault, Boundary, Consul, and Radar, with the addition of
-Terraform), and works on any IBM product once you give it that product's context.
+A UX research mentor you talk to inside **IBM Bob**, plus the checkers that
+inspect its work before anyone else sees it. It ships with **IBM Secure**
+context filled in (HashiCorp Vault, Boundary, Consul, and Radar, with the
+addition of Terraform), and works on any IBM product once you give it that
+product's context.
 
 By **Kirsten Hosic**, UX Research Strategy Lead, Security Product Design.
 
-Load the **Dr. Morgan** agent, say what you're working on, and it coaches you
-through the research, or drafts the artifact and then picks it apart with you.
-**Use IBM Bob**, with Copilot Chat as a fallback.
+You don't need to have used an AI tool before, and you don't need to code.
+You load the **Dr. Morgan** agent, say what you're working on in a plain
+sentence, and it coaches you through the research — or drafts the artifact
+and then picks it apart with you. **Use IBM Bob**, with Copilot Chat as a
+fallback.
 
-Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before handing
-over answers, argues with weak reasoning, insists that every finding trace back to
-evidence you can point to, and cites real, checkable literature. It challenges a
-senior researcher as a peer and teaches a novice from the fundamentals. Coaching
-is the default. Ask for **Draft mode** and it produces a real plan, guide, coding
-frame, finding, or matrix, then critiques it with you at the same standard.
+Dr. Morgan is a senior researcher with a PhD in HCI: asks questions before
+handing over answers, argues with weak reasoning, insists that every finding
+trace back to evidence you can point to, and cites real, checkable
+literature. It challenges a senior researcher as a peer and teaches a novice
+from the fundamentals. Coaching is the default. Ask for **Draft mode** and it
+produces a real plan, guide, coding frame, finding, or matrix, then critiques
+it with you at the same standard.
 
-Every drafted artifact gets checked before you share it: a safety scan first, then
-the quality gates that fit it, with revision capped at two passes before a person
-has to look. When Dr. Morgan does the analysis itself, it stops and asks you to
-sign off on the themes before anything gets built on top of them. The checks catch
-the obvious failures. Judging whether the work is any good is still yours.
+Every drafted artifact gets checked before you share it: a safety scan first,
+then the quality gates that fit it, with revision capped at two passes before
+a person has to look. When Dr. Morgan does the analysis itself, it stops and
+asks you to sign off on the themes before anything gets built on top of them.
+The checks catch the obvious failures. Judging whether the work is any good
+is still yours.
 
-Any team at IBM is welcome to use this, on any product. The IBM Secure context is
-already filled in and is what Dr. Morgan uses by default. For a different
-product, either drop a context file into
-[`product-context/`](product-context/) or answer five questions when Dr. Morgan
-asks — see [Using this on another product](#using-this-on-another-product). The
-rigor doesn't change with the product; only the specificity does.
+Any team at IBM is welcome to use this, on any product. The IBM Secure
+context is already filled in and is what Dr. Morgan uses by default. For a
+different product, either drop a context file into
+[`product-context/`](product-context/) or answer five questions when Dr.
+Morgan asks — see
+[Using this on another product](#using-this-on-another-product). The rigor
+doesn't change with the product; only the specificity does.
+
+---
+
+## New to AI agents? Read this first
+
+Sixty seconds of orientation. If you've used Bob before, skip to
+[Quick start](#quick-start).
+
+- **IBM Bob** is IBM's AI assistant. You type to it in plain English, in a
+  chat window or in your editor; it types back. That's the whole interface.
+- **An agent** is a set of instructions Bob loads that turns it into a
+  specialist. Dr. Morgan is one: load it, and instead of a general-purpose
+  assistant you're talking to a research mentor with opinions, standards, and
+  a review process. Loading an agent is a menu action in Bob, not a technical
+  step.
+- **You drive with sentences, not commands.** "I have eight interviews and I
+  don't know where to start" is a perfectly good message. There is no syntax
+  to learn and nothing you can break by asking the wrong question.
+- **Expect to be questioned.** Most AI tools answer immediately and agree
+  with you. Dr. Morgan is built to do the opposite: it will ask what decision
+  your research serves before it helps, and it will push back on weak
+  reasoning. That friction is the product working, not failing.
+- **One rule matters before anything else:** swap participant names, email
+  addresses, and phone numbers for IDs (P1, P2) *before* you paste anything
+  in. More on this in [Quick start](#quick-start), step 3.
+- **Words in this README that come from AI tooling** — *agent*, *skill*,
+  *gate*, *verdict*, *artifact* — are all defined in the
+  [Glossary](#glossary) at the bottom. Nothing in here assumes you already
+  know them.
 
 ---
 
 ## Quick start
 
-**1. Connect the repo, then invoke the agent.** In IBM Bob, connect this repo so
-you can reach the files directly — you can ask Bob to help you do this. Then select
-the **Dr. Morgan** agent
-([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md)) by name and start
-talking to it.
+**1. Connect the repo, then invoke the agent.** In IBM Bob, connect this repo
+so you can reach the files directly — if you're not sure how, ask Bob itself:
+"connect me to the UX-Research-Skills-IBM-Secure repo." Then select the
+**Dr. Morgan** agent ([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md))
+by name and start talking to it.
 
-No repo connection? Open the agent file, copy the whole thing, and paste it into
-Bob or Copilot Chat. That works — but it is not equivalent, and the difference
-matters:
+**2. Say what you're working on.** A plain sentence is fine. Three real
+openers, and what happens next:
 
-> - **A pasted copy has no file access.** Dr. Morgan defers to those files for the
->   things it only summarizes: the verdict schema, the Definition-of-Done rubrics,
->   the 21-item readability rubric, the theme-checkpoint procedure. Pasted, those
->   pointers are dead ends — and the risk isn't a refusal, it's a rubric
->   reconstructed from memory and delivered with the same confidence. Paste the
->   file a gate needs alongside the agent, or run that gate in a session with the
->   repo connected.
-> - **Custom instructions beat a first chat message.** Custom instructions are
->   re-applied every turn. A first message is just an early turn, and it gets
->   buried as you paste transcripts in — which is exactly when you're asking for
->   the most rigor. Use the custom-instructions box.
+> *"I have eight interviews about Vault's setup flow and I don't know where
+> to start."* → Dr. Morgan routes to analysis and asks about your research
+> questions and your transcripts before it touches a theme.
+>
+> *"My PM wants a survey out this week and I'm not sure a survey is right."*
+> → It routes to method selection and asks what decision the data has to
+> support.
+>
+> *"Tear this discussion guide apart before I run sessions on Thursday."* →
+> It routes to plan critique, audits the upstream decisions first, then goes
+> question by question.
 
-**2. Say what you're working on.** A plain sentence is fine: "I have eight
-interviews about Vault's setup flow and I don't know where to start." Dr. Morgan
-routes to the right scenario. You can also name one, or switch mid-conversation.
+You can also name a scenario outright, or switch mid-conversation. The full
+list is in [What you can ask for](#what-you-can-ask-for).
 
-**3. Add your materials when asked** — share a folder with Bob, or paste them in.
-Research questions, transcripts, draft guides, competitor notes. Swap participant
-names, email addresses, and phone numbers for IDs (P1, P2) first. Roles, account
-names, and regions can stay — they're what make a finding actionable, and a
-separate check governs where they're allowed to travel. Treat the chat the way
-you'd treat any outside tool holding research data.
+**3. Add your materials when asked** — share a folder with Bob, or paste them
+in. Research questions, transcripts, draft guides, competitor notes. **Swap
+participant names, email addresses, and phone numbers for IDs (P1, P2)
+first.** Roles, account names, and regions can stay — they're what make a
+finding actionable, and a separate check governs where they're allowed to
+travel. Treat the chat the way you'd treat any outside tool holding research
+data.
 
 That's the whole loop for coaching. If you used Draft mode and now have an
 artifact you intend to show someone, go to
 [Releasing an artifact](#releasing-an-artifact).
 
-### Using this on another product
+### If you can't connect the repo
 
-Generic research advice helps nobody. "Define your participants" is true
-everywhere; "your operators and your end users are different people with
-different mental models, and this finding conflates them" only lands if Dr.
-Morgan knows what an operator is on your product. So it resolves product context
-before it gets specific, in this order:
+Open the agent file, copy the whole thing, and paste it into Bob or Copilot
+Chat. That works — but it is not equivalent, and the difference matters:
 
-1. **A file in [`product-context/`](product-context/)** matching the product you
-   name. That's the durable option, and it means your team writes the context
-   once instead of every session.
-2. **The default**, [`product-context/ibm-secure.md`](product-context/ibm-secure.md).
-3. **Five questions**, asked in conversation, when no file matches or you pasted
-   the agent in without repo access: what the product is, who the personas are,
-   whether the person who configures it is the person who uses it daily, the key
-   workflows, and what constrains recruiting. Dr. Morgan will offer to write your
-   answers up as a context file you can contribute back.
-4. **Nothing**, if you'd rather not. Dr. Morgan works product-neutral and marks
-   what it's missing.
-
-**It won't guess.** With no context it says so and labels the affected guidance
-rather than inventing personas — a plausible wrong persona in a research plan is
-worse than an obvious gap, because someone will recruit against it.
-
-To add your product: copy
-[`product-context/TEMPLATE.md`](product-context/TEMPLATE.md), fill in the four
-required fields, and open a pull request.
-[`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) has the format and the rules.
-
-### Keeping a long session healthy
-
-Everything in a conversation shares one budget: the agent, your whole history,
-every file read in, every transcript pasted, every tool result. There's no
-setting to change — the ceiling is the model's context window, it varies by
-model, and nothing warns you as it fills. Check your tool's documentation for
-your model's limit; the number moves, the mechanics don't.
-
-**What going over looks like.** Not an error message. The symptoms, worst first:
-
-1. **A quote comes back close to your transcript rather than identical to it.**
-   This is the one to watch. Verbatim recall is the first thing to degrade under
-   context pressure, and it is exactly the guardrail everything else here rests
-   on. A paraphrase presented as a quote reads like ordinary work.
-2. Dr. Morgan asks for something you already gave it.
-3. A summary drifts — a count changes, a hedge vanishes, a theme picks up a
-   participant it never had.
-
-Spot-check a quote against your transcript when a session has run long. It is
-the cheapest thing to verify and the most damaging thing to get wrong.
-
-**Move before it happens.** Ask Dr. Morgan for a **carry-over packet** and paste
-it as the first message of a fresh conversation. It carries scenario and mode,
-product and method context, the decision and research questions, participant IDs
-and the declared destination, where you are in the flow, theme dispositions, gate
-verdicts with iteration numbers, and open flags. Good moments to do it: after the
-theme checkpoint, after a gate verdict, when you switch scenarios, and — best of
-all — right before pasting a large corpus, so the new conversation starts with
-it rather than adding it to a full one.
-
-**The packet carries state, not evidence.** Your corpus does not travel with it,
-by design. Re-paste it in the new conversation, and until you do, Dr. Morgan
-won't quote, count, or attribute anything. A summary that carries claims without
-the text underneath is how a fabrication survives a handoff and arrives looking
-clean.
-
-**Three habits that buy you a lot of room:** paste a corpus once and work from
-participant IDs afterwards; don't load a standalone scenario file alongside the
-agent, since the agent already contains it; and load one product-context and one
-method file rather than the directories.
-
-### Method depth
-
-A second directory, [`methods/`](methods/), answers the other half of "be
-specific": not *who are these people* but *what does a good instrument for this
-method actually look like.* One file per method — generative interview, moderated
-usability test, diary study, concept test so far — each carrying session shape,
-how many questions or tasks fit in an hour, the craft rules particular to that
-instrument, and a **what it cannot tell you** section written to drop into a
-plan's methodology section verbatim.
-
-Dr. Morgan resolves it the same way it resolves product context: the matching
-file, then the nearest neighbour with the difference declared, then generic and
-said out loud. It will not invent a task count for a method it has no file for.
-
-These files carry *only what differs by method*. Everything shared — question
-craft, the behavioral bar, sequencing, the gates — stays defined once, in the
-agent and in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md). That is the deliberate
-alternative to a self-contained skill per method, which buys the same depth and
-pays for it in duplication: the same probing rules and sample-size guidance
-restated in forty files, drifting apart the first time one is improved.
-[`METHODS.md`](METHODS.md) has the format, and
-[`methods/TEMPLATE.md`](methods/TEMPLATE.md) is the starting point for a new one.
-
-One thing to know if you're outside IBM Secure: Scenario B's recruitment
-constraints — routing through PMs, external SMEs as the fallback — describe the
-IBM Secure team specifically. A `recruitment reality` section in your context
-file overrides them. Without one, Dr. Morgan will ask whether they apply to you
-before planning against them.
+> - **A pasted copy has no file access.** Dr. Morgan defers to those files
+>   for the things it only summarizes: the verdict schema, the
+>   Definition-of-Done rubrics, the 21-item readability rubric, the
+>   theme-checkpoint procedure. Pasted, those pointers are dead ends — and
+>   the risk isn't a refusal, it's a rubric reconstructed from memory and
+>   delivered with the same confidence. Paste the file a gate needs alongside
+>   the agent, or run that gate in a session with the repo connected. For the
+>   checkers, that file is small on purpose: [`rubrics/`](rubrics/) holds a
+>   generated excerpt per artifact type — the verdict schema plus that gate's
+>   rubric, verbatim — so a pasted checker session carries a few pages instead
+>   of all of `EVALUATION-LOOP.md`. Each checker names its own excerpt.
+> - **Custom instructions beat a first chat message.** Custom instructions
+>   are re-applied every turn. A first message is just an early turn, and it
+>   gets buried as you paste transcripts in — which is exactly when you're
+>   asking for the most rigor. Use the custom-instructions box.
 
 ---
 
 ## What you can ask for
 
-Six scenarios. Name one, let Dr. Morgan detect which fits, or move between them as
-the work moves. Each also exists as a standalone file that goes deeper than the
-agent's condensed copy — load one directly when you already know what you need.
-Each file is self-contained, so you never need the others loaded.
+Five scenarios. Name one, let Dr. Morgan detect which fits, or move between
+them as the work moves. Each also exists as a standalone file that goes
+deeper than the agent's condensed copy — load one directly when you already
+know what you need. Each file is self-contained, so you never need the
+others loaded.
 
 | Scenario | Use it when | Deeper file |
 |---|---|---|
@@ -189,36 +146,42 @@ Each file is self-contained, so you never need the others loaded.
 | **E — Competitive analysis** | You're comparing two to four products across UX, capability, and market lenses, ending in a verdict tied to a real decision. Includes UI teardowns from sourced screenshots and demo video. | [`competitive_analysis.md`](competitive_analysis.md) |
 
 **One analysis path.** A used to have a stricter twin you chose between. It's
-merged in: the hard rules, the integrity audit, and the per-finding checks now run
-on every study, with the audit's depth set by facts about the study rather than by
-whether you suspected a problem in your own work. Note that
-[`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) is a
-different thing again — it never analyzes, it only checks a finished synthesis
-against the source, claim by claim.
+merged in: the hard rules, the integrity audit, and the per-finding checks
+now run on every study, with the audit's depth set by facts about the study
+rather than by whether you suspected a problem in your own work. Note that
+[`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) is
+a different thing again — it never analyzes, it only checks a finished
+synthesis against the source, claim by claim.
 
 **Need a deck?** [`research-readout-deck.skill`](research-readout-deck.skill)
-renders a findings-first `.pptx` from findings records, validating each one before
-it builds a slide and reporting gaps by finding ID. Defaults to IBM theming
-(Carbon Design System, IBM Plex). Unzip it to inspect; it needs the separate
-**pptx** skill to render. It turns finished findings into slides — if they aren't
-synthesized yet, run Scenario A first.
+renders a findings-first `.pptx` from findings records, validating each one
+before it builds a slide and reporting gaps by finding ID. Defaults to IBM
+theming (Carbon Design System, IBM Plex). Unzip it to inspect; it needs the
+separate **pptx** skill to render. It turns finished findings into slides —
+if they aren't synthesized yet, run Scenario A first.
 
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
 a separate tool Dr. Morgan hands off to. It renders a `.docx` in IBM Secure's
-design system and doesn't coach — invoke it as a skill in Bob or run the script
-directly. [`skills/README.md`](skills/README.md) has the full documentation and
-[`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md) documents the JSON config it
-takes.
+design system and doesn't coach — invoke it as a skill in Bob or run the
+script directly. [`skills/README.md`](skills/README.md) has the full
+documentation and [`skills/CONFIG-SCHEMA.md`](skills/CONFIG-SCHEMA.md)
+documents the JSON config it takes.
 
 ---
 
 ## The seven checkers
 
-Each evaluator verifies one thing and is blind to the rest. That blindness is the
-reason there's more than one: a groundedness checker will pass a perfectly-sourced
-finding that answers nothing anyone asked, and a significance checker will pass a
-decision-relevant finding built on a fabricated quote.
+When Dr. Morgan drafts something you intend to show people, the draft goes
+through checkers — separate agents that read the finished artifact and report
+a verdict. You select each one in Bob by name when Dr. Morgan tells you which
+comes next; you never need to remember the order.
+
+Each evaluator verifies one thing and is blind to the rest. That blindness is
+the reason there's more than one: a groundedness checker will pass a
+perfectly-sourced finding that answers nothing anyone asked, and a
+significance checker will pass a decision-relevant finding built on a
+fabricated quote.
 
 | Agent | Verifies | Cannot see |
 |---|---|---|
@@ -228,30 +191,31 @@ decision-relevant finding built on a fabricated quote.
 | [`research-survey-checker`](agents/research-survey-checker.agent.md) | Are the items, response options, order, and routing sound enough to field once? | Whether a survey should answer this at all; the sample and non-response, where a survey's validity actually lives |
 | [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md) | Is each claim traceable to source text? | Whether the claim matters |
 | [`research-significance-checker`](agents/research-significance-checker.agent.md) | Does it map to a question and a decision? Does it reach insight level? Is the corpus complete? | Whether the claim is true |
-| [`research-readability-checker`](agents/research-readability-checker.agent.md) | Will a mixed stakeholder audience understand and act on it? Is it free of PII? | Whether any of it is correct |
+| [`research-readability-checker`](agents/research-readability-checker.agent.md) | Will a mixed stakeholder audience understand and act on it? Has the safety scan already run? | Whether any of it is correct; participant safety, which `research-safety-checker` owns |
 
 Each agent's own file carries its detail: what it checks, what blocks versus
 flags, and the verdict it emits.
 
 **Two of them read the same discussion guide, and the split is the point.**
-`research-plan-reviewer` holds the research questions, so it is the one that can
-say whether the guide points at the right targets — every question mapped to a
-research question and back again. `research-guide-checker` never sees the
-research questions, and reads the guide as a conversation instead: whether a
-question leads, doubles up, asks for a prediction where it should ask for a
-memory, repeats something asked twenty minutes earlier in different words, or
-sits in an order that primes its own answer. Any guide Dr. Morgan drafts runs
-this gate before a session is scheduled, because a defect in a guide stops being
-fixable the moment the first participant answers the question.
+`research-plan-reviewer` holds the research questions, so it is the one that
+can say whether the guide points at the right targets — every question mapped
+to a research question and back again. `research-guide-checker` never sees
+the research questions, and reads the guide as a conversation instead:
+whether a question leads, doubles up, asks for a prediction where it should
+ask for a memory, repeats something asked twenty minutes earlier in different
+words, or sits in an order that primes its own answer. Any guide Dr. Morgan
+drafts runs this gate before a session is scheduled, because a defect in a
+guide stops being fixable the moment the first participant answers the
+question.
 
 **A survey gets a third gate, because it is a different instrument wearing
-similar clothes.** `research-guide-checker` refuses questionnaires on purpose —
-wording in something answered alone, with no moderator to clarify it, answers to
-a different literature entirely: response scales, acquiescence, satisficing,
-which option sits at the top of the list. `research-survey-checker` holds that
-one. Its deadline is the hardest in the suite: a guide with a defect in it can be
-corrected before the next participant, and a survey cannot. Field it and the list
-is spent.
+similar clothes.** `research-guide-checker` refuses questionnaires on
+purpose — wording in something answered alone, with no moderator to clarify
+it, answers to a different literature entirely: response scales,
+acquiescence, satisficing, which option sits at the top of the list.
+`research-survey-checker` holds that one. Its deadline is the hardest in the
+suite: a guide with a defect in it can be corrected before the next
+participant, and a survey cannot. Field it and the list is spent.
 
 ---
 
@@ -311,83 +275,90 @@ flowchart TD
     class ENDC,ENDR,ENDE ending
 ```
 
-*Green is where you start · teal is coaching · amber is the one stop where you
-decide instead of an agent · slate is an end state · dotted arrows loop back.*
+*Green is where you start · teal is coaching · amber is the one stop where
+you decide instead of an agent · slate is an end state · dotted arrows loop
+back.*
 
 ---
 
 ## How much to trust the output
 
 Everything here is produced by a language model, including the checkers — and
-confident, well-formatted prose is what these systems produce when they are wrong
-as readily as when they are right. **Read every output the way you would read work
-from a contractor you are about to put your name on.** The guardrails below are
-worth having. None of them is a substitute for you reading the thing.
+confident, well-formatted prose is what these systems produce when they are
+wrong as readily as when they are right. **Read every output the way you
+would read work from a contractor you are about to put your name on.** The
+guardrails below are worth having. None of them is a substitute for you
+reading the thing.
 
 **What they do**
 
-- **Make fabrication harder to introduce.** Dr. Morgan is instructed to quote only
-  text you provided, use your participant IDs, and cite only verifiable sources,
-  and [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
+- **Make fabrication harder to introduce.** Dr. Morgan is instructed to quote
+  only text you provided, use your participant IDs, and cite only verifiable
+  sources, and
+  [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
   reads the finished synthesis back against the source, claim by claim. That
-  catches a great deal — and it is still one language model checking another's
-  work. Spot-check quotes against your transcripts: cheapest thing to verify,
-  most damaging thing to get wrong.
-- **Put weaker evidence on the record.** Proxy evidence — a colleague describing
-  customers rather than a customer describing themselves — gets flagged, and
-  competitive claims carry `[verified]`, `[vendor claim]`, `[inference]`, or
-  `[unknown]`. A missing label means the labeling missed something, not that the
-  claim underneath is solid.
-- **Add a second pass at participant data, not the first one.** De-identifying
-  before you paste is still your job.
-  [`research-safety-checker`](agents/research-safety-checker.agent.md) reads the
-  artifact against the destination you declared and catches things people miss,
-  but it can only flag what it recognizes.
-- **Keep the inconvenient findings in.** A finding that falls outside your original
-  research questions is kept and flagged rather than cut, and a research question
-  that nothing answered is flagged too.
-- **Stop where judgment is required.** In Draft mode you review every theme before
-  synthesis is built on it. That is where the interpretation gets set, and no
-  checker can verify what data means.
-- **Catch the guide defects that can't be fixed later.** A leading question, a
-  stimulus shown before the unprimed baseline, the same thing asked twice in
-  different words — [`research-guide-checker`](agents/research-guide-checker.agent.md)
-  reads every drafted guide for these before a session is scheduled, because a
-  defect in a guide stops being fixable the moment the first participant answers
-  the question. Two caveats it states in its own report and that are worth
-  repeating: **it is not a pilot**, and **it cannot see the moderator**. Whether
-  a question is ambiguous to an actual practitioner is answered by one pilot
-  session, not by review; and most leading happens live, in an unwritten
-  follow-up or a silence someone fills with a hypothesis.
+  catches a great deal — and it is still one language model checking
+  another's work. Spot-check quotes against your transcripts: cheapest thing
+  to verify, most damaging thing to get wrong.
+- **Put weaker evidence on the record.** Proxy evidence — a colleague
+  describing customers rather than a customer describing themselves — gets
+  flagged, and competitive claims carry `[verified]`, `[vendor claim]`,
+  `[inference]`, or `[unknown]`. A missing label means the labeling missed
+  something, not that the claim underneath is solid.
+- **Add a second pass at participant data, not the first one.**
+  De-identifying before you paste is still your job.
+  [`research-safety-checker`](agents/research-safety-checker.agent.md) reads
+  the artifact against the destination you declared and catches things people
+  miss, but it can only flag what it recognizes.
+- **Keep the inconvenient findings in.** A finding that falls outside your
+  original research questions is kept and flagged rather than cut, and a
+  research question that nothing answered is flagged too.
+- **Stop where judgment is required.** In Draft mode you review every theme
+  before synthesis is built on it. That is where the interpretation gets set,
+  and no checker can verify what data means.
+- **Catch the guide defects that can't be fixed later.** A leading question,
+  a stimulus shown before the unprimed baseline, the same thing asked twice
+  in different words —
+  [`research-guide-checker`](agents/research-guide-checker.agent.md) reads
+  every drafted guide for these before a session is scheduled, because a
+  defect in a guide stops being fixable the moment the first participant
+  answers the question. Two caveats it states in its own report and that are
+  worth repeating: **it is not a pilot**, and **it cannot see the
+  moderator**. Whether a question is ambiguous to an actual practitioner is
+  answered by one pilot session, not by review; and most leading happens
+  live, in an unwritten follow-up or a silence someone fills with a
+  hypothesis.
 - **Check the survey before you spend the list.** An agree/disagree item that
-  measures agreeableness, options that overlap or leave someone out, a band set
-  that quietly tells the respondent what normal looks like, demographics on
-  screen one —
-  [`research-survey-checker`](agents/research-survey-checker.agent.md) reads the
-  instrument before it is fielded, because a survey has no second participant.
-  It states its own two limits every run: it is not a cognitive pretest, and it
-  cannot see who answered or who didn't, which is the question that decides
-  whether the numbers mean anything.
+  measures agreeableness, options that overlap or leave someone out, a band
+  set that quietly tells the respondent what normal looks like, demographics
+  on screen one —
+  [`research-survey-checker`](agents/research-survey-checker.agent.md) reads
+  the instrument before it is fielded, because a survey has no second
+  participant. It states its own two limits every run: it is not a cognitive
+  pretest, and it cannot see who answered or who didn't, which is the
+  question that decides whether the numbers mean anything.
 
 **What they can't do**
 
 A `PASS` means nothing blocking was found — not that the study is right.
 These checks catch fabrication, irrelevance, incoherence, and opacity; a
-well-executed study of the wrong question passes every one of them. LLM evaluators
-also grade leniently on text that reads as rigorous, and chained checks compound
-false positives, so neither a pass nor a flag proves much on its own. The rest of
-the limits are written down in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7.
+well-executed study of the wrong question passes every one of them. LLM
+evaluators also grade leniently on text that reads as rigorous, and chained
+checks compound false positives, so neither a pass nor a flag proves much on
+its own. The rest of the limits are written down in
+[`EVALUATION-LOOP.md`](EVALUATION-LOOP.md) §7.
 
 ---
 
 ## Releasing an artifact
 
-Draft-mode artifacts go through the loop before they reach anyone else. Dr. Morgan
-runs the loop and tells you which checker comes next — select it by name in Bob,
-then bring the verdict back. You don't need to track which gates apply.
+Draft-mode artifacts go through the loop before they reach anyone else. Dr.
+Morgan runs the loop and tells you which checker comes next — select it by
+name in Bob, then bring the verdict back. You don't need to track which gates
+apply.
 
-**Say where it's going.** The safety scan runs first on everything, and its bar
-depends on who will read it. Dr. Morgan asks if you haven't said.
+**Say where it's going.** The safety scan runs first on everything, and its
+bar depends on who will read it. Dr. Morgan asks if you haven't said.
 
 | Destination | Who sees it |
 |---|---|
@@ -410,16 +381,129 @@ region scale with the destination, and stricter consent terms win.
 
 **Then act on the verdict.** `RELEASE` ships it, with any flags attached as
 Reviewer Notes for you to weigh. `REVISE` means Dr. Morgan fixes the blocking
-items and re-runs that gate — twice at most. `ESCALATE` means stop and look at
-it yourself.
+items and re-runs that gate — twice at most, and if the fix moved a quote, a
+count, or an attribution, the synthesis gate re-checks too, because the pass
+behind it is stale. `ESCALATE` means stop and look
+at it yourself.
 
-Two calls stay yours: the themes, which you accept, revise, split, or reject one
-at a time before synthesis is built on them, and whether the artifact actually
-ships. Passing the gates isn't approval. A readout deck is a new artifact and
-runs the checks again.
+Two calls stay yours: the themes, which you accept, revise, split, or reject
+one at a time before synthesis is built on them, and whether the artifact
+actually ships. Passing the gates isn't approval. A readout deck is a new
+artifact and runs the checks again.
 
 The gate matrix, verdict schema, and known limits are in
 [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
+
+---
+
+## Keeping a long session healthy
+
+Everything in a conversation shares one budget: the agent, your whole
+history, every file read in, every transcript pasted, every tool result.
+There's no setting to change — the ceiling is the model's context window, it
+varies by model, and nothing warns you as it fills. Check your tool's
+documentation for your model's limit; the number moves, the mechanics don't.
+
+**What going over looks like.** Not an error message. The symptoms, worst
+first:
+
+1. **A quote comes back close to your transcript rather than identical to
+   it.** This is the one to watch. Verbatim recall is the first thing to
+   degrade under context pressure, and it is exactly the guardrail everything
+   else here rests on. A paraphrase presented as a quote reads like ordinary
+   work.
+2. Dr. Morgan asks for something you already gave it.
+3. A summary drifts — a count changes, a hedge vanishes, a theme picks up a
+   participant it never had.
+
+Spot-check a quote against your transcript when a session has run long. It is
+the cheapest thing to verify and the most damaging thing to get wrong.
+
+**Move before it happens.** Ask Dr. Morgan for a **carry-over packet** and
+paste it as the first message of a fresh conversation. It carries scenario
+and mode, product and method context, the decision and research questions,
+participant IDs and the declared destination, where you are in the flow,
+theme dispositions, gate verdicts with iteration numbers, and open flags.
+Good moments to do it: after the theme checkpoint, after a gate verdict, when
+you switch scenarios, and — best of all — right before pasting a large
+corpus, so the new conversation starts with it rather than adding it to a
+full one.
+
+**The packet carries state, not evidence.** Your corpus does not travel with
+it, by design. Re-paste it in the new conversation, and until you do, Dr.
+Morgan won't quote, count, or attribute anything. A summary that carries
+claims without the text underneath is how a fabrication survives a handoff
+and arrives looking clean.
+
+**Three habits that buy you a lot of room:** paste a corpus once and work
+from participant IDs afterwards; don't load a standalone scenario file
+alongside the agent, since the agent already contains it; and load one
+product-context and one method file rather than the directories.
+
+---
+
+## Using this on another product
+
+Generic research advice helps nobody. "Define your participants" is true
+everywhere; "your operators and your end users are different people with
+different mental models, and this finding conflates them" only lands if Dr.
+Morgan knows what an operator is on your product. So it resolves product
+context before it gets specific, in this order:
+
+1. **A file in [`product-context/`](product-context/)** matching the product
+   you name. That's the durable option, and it means your team writes the
+   context once instead of every session.
+2. **The default**,
+   [`product-context/ibm-secure.md`](product-context/ibm-secure.md).
+3. **Five questions**, asked in conversation, when no file matches or you
+   pasted the agent in without repo access: what the product is, who the
+   personas are, whether the person who configures it is the person who uses
+   it daily, the key workflows, and what constrains recruiting. Dr. Morgan
+   will offer to write your answers up as a context file you can contribute
+   back.
+4. **Nothing**, if you'd rather not. Dr. Morgan works product-neutral and
+   marks what it's missing.
+
+**It won't guess.** With no context it says so and labels the affected
+guidance rather than inventing personas — a plausible wrong persona in a
+research plan is worse than an obvious gap, because someone will recruit
+against it.
+
+To add your product: copy
+[`product-context/TEMPLATE.md`](product-context/TEMPLATE.md), fill in the
+four required fields, and open a pull request.
+[`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) has the format and the rules.
+
+### Method depth
+
+A second directory, [`methods/`](methods/), answers the other half of "be
+specific": not *who are these people* but *what does a good instrument for
+this method actually look like.* One file per method — generative interview,
+moderated usability test, diary study, concept test so far — each carrying
+session shape, how many questions or tasks fit in an hour, the craft rules
+particular to that instrument, and a **what it cannot tell you** section
+written to drop into a plan's methodology section verbatim.
+
+Dr. Morgan resolves it the same way it resolves product context: the matching
+file, then the nearest neighbour with the difference declared, then generic
+and said out loud. It will not invent a task count for a method it has no
+file for.
+
+These files carry *only what differs by method*. Everything shared — question
+craft, the behavioral bar, sequencing, the gates — stays defined once, in the
+agent and in [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md). That is the
+deliberate alternative to a self-contained skill per method, which buys the
+same depth and pays for it in duplication: the same probing rules and
+sample-size guidance restated in forty files, drifting apart the first time
+one is improved. [`METHODS.md`](METHODS.md) has the format, and
+[`methods/TEMPLATE.md`](methods/TEMPLATE.md) is the starting point for a new
+one.
+
+One thing to know if you're outside IBM Secure: Scenario B's recruitment
+constraints — routing through PMs, external SMEs as the fallback — describe
+the IBM Secure team specifically. A `recruitment reality` section in your
+context file overrides them. Without one, Dr. Morgan will ask whether they
+apply to you before planning against them.
 
 ---
 
@@ -463,17 +547,22 @@ citations live in the individual files.
 - Sauro & Lewis — *Quantifying the User Experience* (also the source of the
   SUS ≈ 68 average benchmark and letter grades)
 - Tullis & Albert — *Measuring the User Experience*
-- Jakob Nielsen / Nielsen Norman Group — usability heuristics, sample-size guidance
+- Jakob Nielsen / Nielsen Norman Group — usability heuristics, sample-size
+  guidance
 
 **Competitive analysis (Scenario E)**
-- Michael E. Porter — *Competitive Strategy* (1980): Five Forces, generic strategies
-- Christensen, Hall, Dillon & Duncan — *Competing Against Luck* (2016): Jobs to Be Done
+- Michael E. Porter — *Competitive Strategy* (1980): Five Forces, generic
+  strategies
+- Christensen, Hall, Dillon & Duncan — *Competing Against Luck* (2016): Jobs
+  to Be Done
 - April Dunford — *Obviously Awesome* (2019): product positioning
 - Marty Cagan — *Inspired*: product judgment
-- Amy Schade & Tim Neusesser (Nielsen Norman Group) — competitive usability evaluation
+- Amy Schade & Tim Neusesser (Nielsen Norman Group) — competitive usability
+  evaluation
 
 </details>
 
+<a id="glossary"></a>
 <details>
 <summary><b>Glossary</b> — the words that come from AI tooling, or that this repo uses in a particular way</summary>
 
@@ -490,6 +579,7 @@ citations live in the individual files.
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |
+| context window | The fixed amount of text a model can hold in one conversation — the agent, your messages, and everything pasted all share it. See [Keeping a long session healthy](#keeping-a-long-session-healthy). |
 
 </details>
 
