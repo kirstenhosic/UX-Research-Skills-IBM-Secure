@@ -519,11 +519,21 @@ exact words change. A topic list gets structure and sequence review only.
     recommendation an action with an owner — has no coherent reading against an
     interview instrument, and applying it literally generates nonsense failures
 
-**Appended items.** The four below were added 2026-08-31 and sit outside the
+**Appended items.** The three below were added 2026-08-31 and sit outside the
 thematic blocks above on purpose. Items 2, 3, 5, 10, 11, 24, 25, 27 and 28 are
 cross-referenced from §4.7, both gates, `methods/tree-testing.md` and the survey
 fixture, so inserting anything in place would renumber rules other documents cite
 by number. Out of order and correct beats tidy and broken.
+
+A fourth was added and **removed the same day**. It banned absolutes — "do you
+always review the audit log?" — and was added because a blind run had identified
+one in a real guide and had no item to file it under. A second blind run refuted
+the classification: the question was "have you *ever*," which asks about a single
+occurrence and is the opposite defect. The rule was left with a sound rationale
+and no observed instance, so it came out rather than stand on evidence that had
+dissolved. The gate's matching table row came out with it. Its removal also
+retires a §4.6/§4.7 item 32 collision, and this section has already been bitten
+once by both having an item 2.
 
 30. **The guide states, or points at, what the participant is told before the
     questions start** — that the session is recorded, who else is present or
@@ -540,11 +550,7 @@ by number. Out of order and correct beats tidy and broken.
     that sounds condescending and is usually wrong. §4.7 item 6 is the same rule
     for surveys and has always had one; this section did not, while its gate
     scored the defect anyway
-32. **No absolutes.** "Do you always review the audit log?" invites a
-    self-flattering generalization instead of an instance, and the generalization
-    is what gets reported. The repair is the same as item 13's: ask for the last
-    time
-33. **A rating scale asked in a session carries an anchor.** "On a scale of 1 to
+32. **A rating scale asked in a session carries an anchor.** "On a scale of 1 to
     10, how usable was it?" produces a number nobody can interpret and a story
     nobody told. This item is about the ad-hoc number. **A standardized block
     inside a moderated session — SUS, SEQ, UMUX-Lite — is a known routing gap and

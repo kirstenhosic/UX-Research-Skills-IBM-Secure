@@ -101,11 +101,13 @@ quoted gets fixed.
 
 **Every row names the §4.6 item it scores.** A row with no rubric item behind it
 is this gate inventing a standard, which the section above forbids. Four rows had
-none until 2026-08-31 — absolutes, jargon mismatch, an unanchored scale, and
-stacked questions — and one of them was hit by a real guide and could not be
-filed, so it went uncounted. If you find yourself wanting to flag something no row
-covers, say so in your report as an unfileable finding rather than filing it under
-the nearest number.
+none until 2026-08-31 — jargon mismatch, an unanchored scale, stacked questions,
+and absolutes. The first two became §4.6 items 31 and 32, stacked was pointed at
+item 3 which already covered it, and **the absolutes row was deleted** once a
+second blind run showed the instance behind it had been misclassified. If you find
+yourself wanting to flag something no row covers, say so in your report as an
+unfileable finding rather than filing it under the nearest number — that channel
+is how the absolutes row got tested, and it is how the next one will.
 
 | Problem | Example | Why it matters | Rubric | Call |
 |---|---|---|---|---|
@@ -119,9 +121,8 @@ the nearest number.
 | **Sensitive question with no framing** | "How often do you skip the review step?" | Misreporting on sensitive topics is common and largely *situational* (Tourangeau & Yan, 2007), which means wording carries as much of the effect as placement does. A normalizing preamble ("some teams do this every time, some skip it when they're under pressure…") and forgiving phrasing recover more than a bare ask. Placement is Part 4; this is the wording half. | §4.6 item 7 | Flag |
 | **Yes/no with no probe** | "Did you find that difficult?" | Produces one word from a senior practitioner who has somewhere else to be. | §4.6 item 8 | Flag |
 | **Stacked** | Three questions delivered as one turn | The participant answers the last one and the first two are lost. | §4.6 item 3 | Flag |
-| **Absolutes** | "Do you always review the audit log?" | Invites a self-flattering generalization instead of an instance. | §4.6 item 32 | Flag |
 | **Jargon mismatch** | "When you think about your secrets-management posture…" | Only when the participant would not use the phrase. For senior technical audiences, product and domain jargon is usually correct and stripping it sounds condescending. Flag genuine mismatches, not vocabulary. | §4.6 item 31 | Flag |
-| **Scale without an anchor** | "On a scale of 1 to 10, how usable was it?" | In a qualitative session an unanchored number is a number nobody can interpret and a story nobody told. | §4.6 item 33 | Flag |
+| **Scale without an anchor** | "On a scale of 1 to 10, how usable was it?" | In a qualitative session an unanchored number is a number nobody can interpret and a story nobody told. | §4.6 item 32 | Flag |
 
 ### The positive rule: TED+W
 
