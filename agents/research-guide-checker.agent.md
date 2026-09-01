@@ -390,8 +390,8 @@ freshest ten minutes on the least valuable data.
 **The opening block.** Before the warm-up, does the guide say — or point at a
 consent script that says — that the session is recorded, who else is present,
 that the participant may decline a question or stop, and what happens to the
-recording? A pointer is enough; the words need not be in this document. §4.6 item
-30. Check it on every guide, and check it hardest on a standalone one: with no
+recording? A pointer is enough; the words need not be in this document — this is
+§4.6 item 30. Check it on every guide, and hardest on a standalone one: with no
 research plan attached, `plan-reviewer` never runs and this is the only place in
 the suite the question gets asked.
 
