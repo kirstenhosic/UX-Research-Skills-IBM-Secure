@@ -23,17 +23,18 @@ discussion guide the gate must refuse by name. Its controls include the two item
 where the correct answer is a judgment rather than a verdict — the don't-know pair
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building and running it has
-surfaced nine ambiguities in §4.7, the gate, and §2's verdict schema, all listed
-in `survey-fixture/README.md`. **Six are closed** — §2 now carries `NOT_APPLICABLE`
+surfaced thirteen ambiguities in §4.7, the gate, and §2's verdict schema, all
+listed in `survey-fixture/README.md`. **Eight are closed** — §2 now carries `NOT_APPLICABLE`
 and `ROUTE`, §4.7 item 32 now states that an unmodified standardized
 instrument is exempt from the general scale rules, item 21 states how far priming
 contamination runs, item 12 is settled as a **flag** at every tier, item 32
-**does not step down at the internal-pulse tier**, and the two §4.6 carryovers
-**do**. Five closed the same way: independent runs converging on something no
-document stated. The sixth did not, and the difference is worth keeping — see
-below.
+**does not step down at the internal-pulse tier**, the two §4.6 carryovers **do**,
+item 2's exception preserves severity rather than promoting it, and item 28's
+incoherent-reachability clause **is not confined to branching**. Five closed the
+same way: independent runs converging on something no document stated. Three did
+not, and the differences are worth keeping — see below.
 
-**Three remain open, and all three live at the internal-pulse tier**, which was
+**Five remain open, and all five live at the internal-pulse tier**, which was
 specified in three documents and fielded in none of them until 2026-08-31. Run
 variant 1 finally put it to a gate — `survey-fixture/survey-plan-pulse.md`, the
 plan with the declared type changed and nothing else — in two independent
@@ -58,12 +59,35 @@ into, which is weaker evidence, so it was settled on the principle behind the ru
 with the runs as corroboration. §4.6 item 2's self-answering half is named in both
 files as the case to reopen if a later run argues it.
 
-Still open: the pulse exception's "stay blocking" wording is fixed but unverified,
-now saying the exception preserves whatever severity an item would otherwise carry
-rather than promoting anything, which is what both instances did anyway. Item 22
-states an absolute with no severity attached. And the two instances split on
-whether item 28 reaches a referent destroyed by routing or only a branch — a split
-that decides a blocking call.
+A third instance was fielded on 2026-08-31 against the same variant, to verify the
+first of those fixes and break the second. **It did both.** It flagged the two
+agree/disagree items and quoted the corrected exception to say why, adding that it
+had not promoted anything — the fix is now verified in the output and not only in
+the document. It blocked the destroyed referent under item 28, making it two of
+three, and named the reason that clause is hard to find: it sits inside an item
+titled "Skip logic reaches every item it should," illustrated only from the
+skip-logic side. §4.7 item 28 and the gate now say incoherent reachability is not
+confined to branching. **That run also missed a keyed blocking defect the other two
+caught** — the textbook branch case, an open text asking what made a rotation
+necessary of people who had just said they never rotate — so the gate names both
+directions, because widening an item is exactly the edit that can cost its narrow
+half.
+
+Three instances of one instrument have now produced **three different blocking
+sets** — 6, 7 and 8 — intersecting on five and uniting on all eight. Only one was
+complete, and the two that were not missed different defects, neither a tier
+effect. A single instance of this gate is not a measurement of it.
+
+Still open: item 22 states an absolute with no severity attached, and so do twenty
+other §4.7 items — three runs have inferred "flag" for all of them and all three
+said they were defaulting. The pulse tier's "one level down" is defined for
+blocking and undefined for a defect that is already a flag, which is worth roughly
+fifteen flags between two conscientious runs and has been silently governing the
+flag column for three of them. §4.7's own "reopen if a run argues it" clause on
+self-answering items **has now been argued**, and leaving it fired invites the
+divergence it exists to prevent. And the gate's Part 1 table carries the undefined
+evaluative word, which is §4.6 item 11 — a rule §4.7 says does not carry over —
+while all three runs found the defect it names.
 
 On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
 found seven more that were in the instrument and not in the key, plus three broken
