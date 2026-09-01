@@ -17,6 +17,13 @@ flaw — and on a later run it caught two errors in its own answer key, which is
 outcome §7 of `EVALUATION-LOOP.md` tells you to expect. When a gate disagrees with
 the key, check the corpus before recording a score.
 
+`adversarial-reads/` holds the hostile-read transcripts cited below — one per
+rubric section, named `<section>-<month>.md`. They are the evidence for the §4.6
+and §4.7 changes recorded here, and they live there rather than in this repo
+because they carry the fixture text the reads were run against. Cite them by
+filename; a claim in this file that rests on a read nobody can open is the thing
+`FINDINGS-CONTRACT.md` exists to prevent, applied to the repo's own record.
+
 `survey-fixture/` covers `research-survey-checker` and §4.7: a 28-item instrument
 with 48 planted defects, the plan context needed to score them, and a decoy
 discussion guide the gate must refuse by name. Its controls include the two items
@@ -111,10 +118,10 @@ Both fixtures were built from the rubrics they score against, by the person who
 wrote them, so a clean run says the specification is internally consistent and
 nothing about whether it is right.
 
-**§4.6 has now had one too** — `adversarial-reads/guide-4.6-2026-08.md`. Five
-hostile contexts plus a refutation pass, with the false-positive audit **split in
-two** so that one context wrote a guide to professional standard and a different
-one scored it blind. The headline runs opposite to §4.7's: the defensible guide
+**§4.6 has now had one too** — `adversarial-reads/guide-4.6-2026-08.md` in the
+testing repo. Five hostile contexts plus a refutation pass, with the
+false-positive audit **split in two** so that one context wrote a guide to
+professional standard and a different one scored it blind. The headline runs opposite to §4.7's: the defensible guide
 drew **2 blocking and 12 flags**, not five blocking with none real. Five Tier 1
 findings were fixed and verified the same day by a second blind scoring — §4.6
 items 26 and 29, four rules the gate scored with no rubric item behind them (§4.6
@@ -140,7 +147,7 @@ instance request where the drafter states a base-rate justification and a dating
 procedure.** Low-frequency events are the case it does not handle.
 
 **§4.7 has now had an adversarial read** — `adversarial-reads/survey-4.7-2026-08.md`
-in the fixtures repo. Four hostile contexts, plus a skeptic briefed to refute the
+in the testing repo. Four hostile contexts, plus a skeptic briefed to refute the
 first one's claims. It found that item 25 is logically unsatisfiable, that item 23
 dropped a carve-out §4.6 has, that item 21 carries a superlative and a blocking
 verdict with no citation attached, that item 30 blocks on a yardstick item 26
