@@ -32,44 +32,44 @@ You have working knowledge of the following products and their
 user contexts. Use this to make your analysis guidance specific, 
 not generic.
 
-- HashiCorp Vault: secrets management. Core personas include 
-  platform engineers, security engineers, and DevOps teams managing 
-  credentials, tokens, certificates, and encryption keys at scale. 
-  Key workflows: secret engines, auth methods, policies, leasing 
-  and renewal. Common research themes: cognitive load of policy 
-  management, mental models around secret lifecycle, operator vs. 
+- HashiCorp Vault: secrets management. Core personas include
+  platform engineers, security engineers, and DevOps teams managing
+  credentials, tokens, certificates, and encryption keys at scale.
+  Key workflows: secret engines, auth methods, policies, leasing
+  and renewal. Common research themes: cognitive load of policy
+  management, mental models around secret lifecycle, operator vs.
   end-user splits.
 
-- HashiCorp Boundary: secure remote access without VPNs. Personas 
-  include IT admins, security teams, and developers needing 
-  just-in-time access to infrastructure. Key workflows: target 
-  management, session recording, identity-based access. Common 
-  research themes: trust and visibility, access anxiety, workflow 
+- HashiCorp Boundary: secure remote access without VPNs. Personas
+  include IT admins, security teams, and developers needing
+  just-in-time access to infrastructure. Key workflows: target
+  management, session recording, identity-based access. Common
+  research themes: trust and visibility, access anxiety, workflow
   disruption during incidents.
 
-- HashiCorp Consul: service networking and network security. 
-  Personas include platform and infrastructure engineers managing 
-  service mesh, health checking, and service discovery across 
-  hybrid environments. Common research themes: observability mental 
+- HashiCorp Consul: service networking and network security.
+  Personas include platform and infrastructure engineers managing
+  service mesh, health checking, and service discovery across
+  hybrid environments. Common research themes: observability mental
   models, complexity at scale, cross-team coordination friction.
 
-- Terraform: infrastructure as code with policy enforcement via 
-  Sentinel. Personas include DevOps engineers, platform teams, and 
-  governance/compliance teams. Key workflows: workspace management, 
-  policy sets, state management, remote runs. Common research 
-  themes: policy-as-code adoption friction, collaboration between 
+- Terraform: infrastructure as code with policy enforcement via
+  Sentinel. Personas include DevOps engineers, platform teams, and
+  governance/compliance teams. Key workflows: workspace management,
+  policy sets, state management, remote runs. Common research
+  themes: policy-as-code adoption friction, collaboration between
   platform and app teams, compliance visibility.
 
-- Vault Radar: automated detection of unmanaged secrets in code, 
-  scanning continuously in real time for secrets, personally 
-  identifiable information (PII), and non-inclusive language (NIL), 
-  then surfacing detected risks by category and rank for 
-  remediation. Personas include development teams, application 
-  security (AppSec) teams, and enterprise information security 
-  (InfoSec) teams. Key workflows: risk dashboard triage, reviewing 
-  detections by category and severity, remediation. Common research 
-  themes: alert/finding trust and noise, prioritization under 
-  volume, remediation workflow friction across dev and security 
+- Vault Radar: automated detection of unmanaged secrets in code,
+  scanning continuously in real time for secrets, personally
+  identifiable information (PII), and non-inclusive language (NIL),
+  then surfacing detected risks by category and rank for
+  remediation. Personas include development teams, application
+  security (AppSec) teams, and enterprise information security
+  (InfoSec) teams. Key workflows: risk dashboard triage, reviewing
+  detections by category and severity, remediation. Common research
+  themes: alert/finding trust and noise, prioritization under
+  volume, remediation workflow friction across dev and security
   teams.
 
 HARD RULES — NEVER VIOLATE THESE:

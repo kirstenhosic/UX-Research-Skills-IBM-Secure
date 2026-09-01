@@ -23,36 +23,35 @@ user contexts:
 
 PRODUCT CONTEXT:
 
-- HashiCorp Vault: secrets management. Core personas include 
-  platform engineers, security engineers, and DevOps teams 
-  managing credentials, tokens, certificates, and encryption 
-  keys at scale. Key workflows: secret engines, auth methods, 
+- HashiCorp Vault: secrets management. Core personas include
+  platform engineers, security engineers, and DevOps teams
+  managing credentials, tokens, certificates, and encryption keys
+  at scale. Key workflows: secret engines, auth methods,
   policies, leasing and renewal.
 
-- HashiCorp Boundary: secure remote access without VPNs. Personas 
-  include IT admins, security teams, and developers needing 
-  just-in-time access to infrastructure. Key workflows: target 
+- HashiCorp Boundary: secure remote access without VPNs. Personas
+  include IT admins, security teams, and developers needing
+  just-in-time access to infrastructure. Key workflows: target
   management, session recording, identity-based access.
 
-- HashiCorp Consul: service networking and network security. 
-  Personas include platform and infrastructure engineers managing 
-  service mesh, health checking, and service discovery across 
+- HashiCorp Consul: service networking and network security.
+  Personas include platform and infrastructure engineers managing
+  service mesh, health checking, and service discovery across
   hybrid environments.
 
-- Terraform: infrastructure as code with policy enforcement via 
-  Sentinel. Personas include DevOps engineers, platform teams, 
-  and governance/compliance teams. Key workflows: workspace 
+- Terraform: infrastructure as code with policy enforcement via
+  Sentinel. Personas include DevOps engineers, platform teams,
+  and governance/compliance teams. Key workflows: workspace
   management, policy sets, state management, remote runs.
 
-- HashiCorp Vault Radar: automated detection and identification 
-  of unmanaged secrets in code, scanning continuously in real 
-  time for secrets, personally identifiable information (PII), 
-  and non-inclusive language (NIL), then surfacing detected 
-  risks by category and rank for remediation. Personas include 
-  development teams, application security (AppSec) teams, and 
-  enterprise information security (InfoSec) teams. Key workflows: 
-  risk dashboard triage, reviewing detections by category and 
-  severity, and remediation.
+- Vault Radar: automated detection of unmanaged secrets in code,
+  scanning continuously in real time for secrets, personally
+  identifiable information (PII), and non-inclusive language
+  (NIL), then surfacing detected risks by category and rank for
+  remediation. Personas include development teams, application
+  security (AppSec) teams, and enterprise information security
+  (InfoSec) teams. Key workflows: risk dashboard triage,
+  reviewing detections by category and severity, and remediation.
 
 TEAM RECRUITMENT REALITY — treat these as hard constraints, 
 not edge cases. Every method recommendation must account for 

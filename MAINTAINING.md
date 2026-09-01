@@ -302,6 +302,72 @@ check 'RELEASE GATE (apply to every artifact' ''
 
 Literal prefix matching, no regex, no GNU-only flags. It runs as-is on macOS.
 
+### The product-context spine, which wraps differently in every file
+
+The five `PRODUCT CONTEXT` bullets are **not** byte-identical and should not be
+made so. Each file wraps to its own width, and each appends its own tail: the two
+analysis files add `Key workflows:` and `Common research themes:`,
+`select_best_method.md` adds workflows only, `competitive_analysis.md` adds
+`Key UI surfaces:`, and the two planning files carry personas alone. That
+tailoring is deliberate — a plan file does not need recurring research themes to
+write a screener.
+
+What must not drift is the **spine**: the product one-liner and the personas
+sentence, which every file carries and which `product-context/ibm-secure.md`
+owns. It had drifted four ways before this check existed — Consul lost "across
+hybrid environments" in three files, Terraform lost "via Sentinel" in two, Radar
+lost "in real time" in two, and two files called it "HashiCorp Vault Radar."
+None of it was visible to a byte-hash, because the wrapping differs anyway.
+
+Whitespace-normalized, so wrapping doesn't matter:
+
+````
+spine() {
+  for f in analyze_your_data.md qualitative_data_analysis_skill.md \
+           ux_plan_from_scratch.md challenge_and_refine_plan.md \
+           select_best_method.md competitive_analysis.md; do
+    miss=$(tr -s ' \n' ' ' < "$f" | grep -c "$1") 
+    [ "$miss" = 0 ] && echo "    DRIFT — $f is missing: $1"
+  done
+}
+spine 'service discovery across hybrid environments'
+spine 'infrastructure as code with policy enforcement via Sentinel'
+spine 'scanning continuously in real time'
+spine 'surfacing detected risks by category and rank'
+for f in analyze_your_data.md qualitative_data_analysis_skill.md \
+         ux_plan_from_scratch.md challenge_and_refine_plan.md \
+         select_best_method.md competitive_analysis.md; do
+  grep -q 'HashiCorp Vault Radar' "$f" && echo "    DRIFT — $f: product is 'Vault Radar'"
+done
+````
+
+Silence is a pass. When you edit `product-context/ibm-secure.md`, add the changed
+phrase here — this check only catches what it is told to look for, which is the
+honest limit of it.
+
+### `MENTORING RULES` is per-scenario on purpose — do not hash it
+
+Six variants, and they should stay six. The planning files cite Portigal, Hall,
+Fitzpatrick, Goodman, and Creswell; the analysis files cite Braun & Clarke,
+Saldaña, Beyer & Holtzblatt, and Young. `challenge_and_refine_plan.md` adds
+seniority-calibrated citation guidance that belongs nowhere else. A drift check
+here would report six variants forever and train you to ignore it.
+
+**The one pair that must agree** is `analyze_your_data.md` and
+`qualitative_data_analysis_skill.md`, which cover the same activity at two
+strictness levels. They had already diverged — the standard path cited Tullis &
+Albert and Sauro & Lewis for the quantitative stage and the strict path cited
+neither, and Braun & Clarke was "6-step" in one file and "6-phase" in the other.
+Diff the two book lists whenever you touch either:
+
+````
+diff <(grep '📚' analyze_your_data.md) <(grep '📚' qualitative_data_analysis_skill.md)
+````
+
+Differences here are a decision, not automatically a defect — the strict path may
+legitimately not need the quant references. What is a defect is the difference
+arriving by accident, which is what happened.
+
 This covers the six standalone scenario files only. `agents/dr-morgan.agent.md`
 carries the same guidance in markdown rather than plain text, so it can't be hashed
 against them. It's the file most likely to drift, and it has to be checked by

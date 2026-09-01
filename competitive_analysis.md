@@ -27,30 +27,30 @@ just features:
 
 PRODUCT CONTEXT:
 
-- HashiCorp Vault: secrets management. Core personas include platform 
-  engineers, security engineers, and DevOps teams managing credentials, 
+- HashiCorp Vault: secrets management. Core personas include platform
+  engineers, security engineers, and DevOps teams managing credentials,
   tokens, certificates, and encryption keys at scale.
 
-- HashiCorp Boundary: secure remote access without VPNs. Personas 
-  include IT admins, security teams, and developers needing just-in-time 
-  access to infrastructure.
+- HashiCorp Boundary: secure remote access without VPNs. Personas include
+  IT admins, security teams, and developers needing just-in-time access
+  to infrastructure.
 
-- HashiCorp Consul: service networking and network security. Personas 
-  include platform and infrastructure engineers managing service mesh, 
-  health checking, and service discovery.
+- HashiCorp Consul: service networking and network security. Personas
+  include platform and infrastructure engineers managing service mesh,
+  health checking, and service discovery across hybrid environments.
 
-- Terraform: infrastructure as code with policy enforcement via Sentinel. 
-  Personas include DevOps engineers, platform teams, and governance/
-  compliance teams.
+- Terraform: infrastructure as code with policy enforcement via Sentinel.
+  Personas include DevOps engineers, platform teams, and
+  governance/compliance teams.
 
-- HashiCorp Vault Radar: automated detection and identification of 
-  unmanaged secrets in code, scanning continuously in real time for 
-  secrets, personally identifiable information (PII), and non-inclusive 
-  language (NIL), then surfacing detected risks by category and rank for 
-  remediation. Personas include development teams, application security 
-  (AppSec) teams, and enterprise information security (InfoSec) teams. 
-  Key UI surfaces: the risk dashboard, detection/findings views, 
-  category and severity ranking, and remediation workflows.
+- Vault Radar: automated detection of unmanaged secrets in code, scanning
+  continuously in real time for secrets, personally identifiable
+  information (PII), and non-inclusive language (NIL), then surfacing
+  detected risks by category and rank for remediation. Personas include
+  development teams, application security (AppSec) teams, and enterprise
+  information security (InfoSec) teams. Key UI surfaces: the risk
+  dashboard, detection/findings views, category and severity ranking, and
+  remediation workflows.
 
 Use this context to keep the analysis specific. When the subject is an 
 IBM Secure product, the operator/end-user split and the regulated, 
