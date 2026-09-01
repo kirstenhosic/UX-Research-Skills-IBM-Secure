@@ -23,35 +23,46 @@ discussion guide the gate must refuse by name. Its controls include the two item
 where the correct answer is a judgment rather than a verdict — the don't-know pair
 and the reverse-coded grid row — and a Part 8 check that the gate reviews the
 instrument rather than escalating on its defect density. Building and running it has
-surfaced eight ambiguities in §4.7, the gate, and §2's verdict schema, all listed
-in `survey-fixture/README.md`. **Four are closed** — §2 now carries `NOT_APPLICABLE`
+surfaced nine ambiguities in §4.7, the gate, and §2's verdict schema, all listed
+in `survey-fixture/README.md`. **Five are closed** — §2 now carries `NOT_APPLICABLE`
 and `ROUTE`, §4.7 item 32 now states that an unmodified standardized
 instrument is exempt from the general scale rules, item 21 states how far priming
-contamination runs, and item 12 is settled as a **flag** at every tier. Each closed
-the same way: independent runs converging on something no document stated.
+contamination runs, item 12 is settled as a **flag** at every tier, and item 32
+**does not step down at the internal-pulse tier**. Each closed the same way:
+independent runs converging on something no document stated.
 
-**Four remain open, and three of them live at the internal-pulse tier**, which was
+**Four remain open, and all four live at the internal-pulse tier**, which was
 specified in three documents and fielded in none of them until 2026-08-31. Run
 variant 1 finally put it to a gate — `survey-fixture/survey-plan-pulse.md`, the
-plan with the declared type changed and nothing else — and the tier behaved: every
-wording defect stepped down, routing and order held. Item 32 **held blocking**,
-which is the direction the exception list's logic predicts and its text does not
-say. That is one instance, not the independent convergence the other four closed
-on, so it stays open.
+plan with the declared type changed and nothing else — in two independent
+instances. The tier behaved: every wording defect stepped down, routing and order
+held in both. Item 32 **blocked in both**, unhedged, which closed the ambiguity it
+was run to close; item 32 is now on the gate's exception list and §4.7 says it does
+not step down.
 
-The same run opened three more. The pulse exception says items 2 and 8 "stay
-blocking," which read literally promotes a two-item agree/disagree case to
-blocking at the pulse tier that would be a flag on a funded decision — the same
-inversion item 12's fix removed, sitting on the same list. §4.6's carryover items
-have no stated pulse behavior at all. And item 22 states an absolute with no
-severity attached. All three are candidate fixes in this repo.
+Fielding the tier once closed one ambiguity and opened four, which is what the
+first run of an untested branch should be expected to do. The best-evidenced is
+§4.6's carryover items, which have no stated pulse behavior at all: both instances
+stepped them down, both volunteered it as the call they were least sure of, and
+one traced it to §4.7's preamble calling those items defects "in any instrument in
+any mode" — absolute language read against a tier system. Three findings turn on
+it. The pulse exception's "stay blocking" wording is fixed but unverified: it now
+says the exception preserves whatever severity an item would otherwise carry
+rather than promoting anything, which is what both instances did anyway. Item 22
+states an absolute with no severity attached. And the two instances split on
+whether item 28 reaches a referent destroyed by routing or only a branch — a split
+that decides a blocking call.
 
 On its first blind run `survey-fixture/` caught all 41 defects then keyed — and
 found seven more that were in the instrument and not in the key, plus three broken
-controls. Third time a fixture here has found the fault in its own key. The fourth
-run did it again from the other direction: it **missed a keyed blocking defect**,
-Q2's overlapping bands, at a tier that does not touch that item. A fixture measures
-the gate and the gate measures the fixture, and neither reading is safe to skip.
+controls. Third time a fixture here has found the fault in its own key.
+
+The fourth run is the first here to show what a single instance buys you. Its two
+instances agreed on six blocking calls and split on two: one **missed a keyed
+blocking defect** — Q2's overlapping bands, at a tier that does not touch that
+item — and the other caught it and hit the predicted count exactly. Had only the
+first been fielded, the record would show item 32 closing on one data point and a
+miss reading as a tier effect. Field two.
 
 The second run was fielded as **two independent instances on identical text**, and
 is the suite's cleanest variance measurement to date. The core held three for
