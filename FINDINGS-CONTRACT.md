@@ -34,12 +34,15 @@ FINDING F1
     - quote:     "I just want to say 'this team gets these secrets' — I don't
                   care which method does it."
       source:    P3, transcript-p3.txt, 14:22
+      participant_type: customer-direct
     - quote:     "I picked userpass because it was first. I assumed I'd set
                   the permissions after."
       source:    P7, transcript-p7.txt, 09:48
+      participant_type: customer-direct
     - behavior:  P2 configured, then reconfigured, the same auth method three
                  times before reaching the policy screen.
       source:    session-notes-p2.md, line 61
+      participant_type: customer-direct
   disconfirming:
     P5 described the method-first model correctly and unprompted. P5 is the
     only participant who had completed HashiCorp certification.
@@ -245,7 +248,7 @@ semantics, same required fields.
       "prevalence": { "n": 5, "of": 8, "note": "all operators; no end-users" },
       "scope": { "product": "Vault", "persona": "platform operators", "condition": "…" },
       "evidence": [
-        { "type": "quote", "text": "…", "participant": "P3", "participant_type": "internal-proxy", "source": "transcript-p3.txt", "locator": "14:22" }
+        { "type": "quote", "text": "…", "participant": "P3", "participant_type": "customer-direct", "source": "transcript-p3.txt", "locator": "14:22" }
       ],
       "disconfirming": "…",
       "confidence": { "level": "high", "why": "…" },
