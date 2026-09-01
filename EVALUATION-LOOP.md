@@ -1391,6 +1391,10 @@ is where the good version of that answer comes from.
 decision_review:
   owner:       [name or role of the person who makes the decision]
   is_researcher: no
+  asked_via:   [meeting / message / relayed by researcher / owner is the
+               researcher] — how the owner's answer reached this record. A
+               reader weighs "relayed" differently from "meeting", and the
+               field is what lets them.
   date:        2026-09-01
   disposition: rescoped — RQ3 (pricing perception) dropped; the owner said
                pricing is set regardless of what we find. RQ1 and RQ2 confirmed
