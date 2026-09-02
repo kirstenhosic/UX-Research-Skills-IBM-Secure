@@ -211,6 +211,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
+| **Customer impact summary** | `customer-impact-summary` | `synthesis-checker` (impact mode) → `readability-checker` |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -931,6 +932,56 @@ and the names half of 14 are blocking. The rest are flags.
 
 ---
 
+### 4.9 Customer impact summary
+
+The bar for the customer-facing email the `customer-impact-summary` skill
+drafts: a short "what we heard, what we did" note to an external customer
+who gave research feedback. The destination is **`external` by definition**
+— the safety scan always runs at its highest bar — and the email mixes two
+claim types with different sources: "what we heard" renders from findings
+records that passed §4.2, and "what we did" renders from **impact items**
+(status + named source + date, defined in the skill), because product
+status lives in no findings record. `synthesis-checker` in impact mode
+verifies each line against its own source type.
+
+1. Every "what we heard" line maps to finding records that passed §4.2,
+   aggregated for an external reader — no line without a record behind it.
+   **Blocking**
+2. Every "what we did" line carries a status — `shipped` / `in-progress` /
+   `planned` / `under-consideration` — a named source, and a date. No
+   invented status, and no status upgraded in the wording ("planned"
+   never reads as "coming soon"). **Blocking**
+3. No participant other than the recipient is identifiable: no names,
+   companies, quotes, or narrowing details of anyone else, and counts are
+   aggregated ("operators at eight organizations"), never the exact
+   small-n counts used internally. **Blocking**
+4. The recipient's recontact is covered by the study's consent terms, the
+   email is addressed individually (no visible participant list), and
+   `research-safety-checker` has cleared it at the `external` bar.
+   **Blocking** — the safety gate owns this item
+5. No commitment beyond what the named source supports: `in-progress` and
+   `planned` items read as intentions, and carry no dates the source
+   doesn't carry. **Blocking**
+6. No internal jargon, internal links, code names, ticket numbers, or
+   confidential product detail beyond what the impact item's source makes
+   shareable. **Blocking**
+7. Feedback with no action yet is acknowledged in one honest line — or its
+   omission was the researcher's explicit call, noted in Reviewer Notes
+8. A named human sender appears, and the product owner has confirmed every
+   impact item's status and wording. Flagged while unconfirmed; blocking
+   at send
+9. Roughly 200–350 words, opening with thanks anchored to the specific
+   study. Over-length is a flag; cut impact items before honesty
+10. Meets `VOICE-AND-STYLE.md`, including its item 22 — no sentence
+    interrupted by an em dash or en dash
+
+Items 1–6 are blocking, item 8 blocks at send, and the rest are flags. The
+skill drafts only: sending, scheduling, or addressing mail is out of scope
+for every agent and skill in this suite, and a person sends from their own
+address.
+
+---
+
 ## 5. Research-question coverage — flag both directions
 
 A coverage check that only runs one way misses half the problem. Run it both
@@ -1197,6 +1248,23 @@ plan to be finished.
 5. research-synthesis-checker (report mode — verify against findings records)
 6. research-readability-checker
 7. Release with Reviewer Notes attached
+```
+
+**Producing a customer impact summary:**
+
+```
+1. Findings must have cleared the findings sequence first
+2. Collect impact items — each with status, named source, and date; no
+   source, no email line
+3. Draft the email (customer-impact-summary) — aggregated, individually
+   addressed, no other participant identifiable
+4. research-safety-checker (external bar, always — the destination is not
+   optional for this artifact)
+5. research-synthesis-checker (impact mode — heard-lines against findings
+   records, did-lines against sourced impact items)
+6. research-readability-checker
+7. Product owner confirms every impact item; a named person sends it from
+   their own address
 ```
 
 Cap: 2 revisions per gate. Then a person looks at it.

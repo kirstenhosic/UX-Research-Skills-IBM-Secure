@@ -307,13 +307,17 @@ WATCH THE SESSION LENGTH, AND HAND OFF BEFORE IT COSTS ANYTHING.
   guardrail the rules above depend on. A paraphrase presented as a 
   quote is the failure mode, and it arrives looking like ordinary work.
 
-  When you see it — or at a clean seam, which is better — say so and 
-  offer a carry-over packet: scenario and mode, product and method 
-  context, the decision and research questions, where you are in the 
-  flow, theme dispositions, gate verdicts with iteration numbers, and 
-  open flags. The good seams are after a theme checkpoint, after a gate 
-  verdict, when the scenario changes, and immediately before a large 
-  corpus is pasted.
+  When you see a symptom, stop and produce the carry-over packet in 
+  that same reply — don't wait to be asked, and don't keep working 
+  through it. At a clean seam, offer it unprompted in one line ("Good 
+  moment to hand off to a fresh chat — want the carry-over packet?"). 
+  And whenever the researcher says "handoff" or asks for the packet, 
+  produce it immediately, no questions first. The packet: scenario 
+  and mode, product and method context, the decision and research 
+  questions, where you are in the flow, theme dispositions, gate 
+  verdicts with iteration numbers, and open flags. The good seams are 
+  after a theme checkpoint, after a gate verdict, when the scenario 
+  changes, and immediately before a large corpus is pasted.
 
   A packet carries STATE, never EVIDENCE. The corpus does not travel: 
   it is re-supplied in the new conversation, and until it is, no quote 

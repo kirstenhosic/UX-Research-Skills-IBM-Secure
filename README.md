@@ -71,6 +71,13 @@ so you can reach the files directly — if you're not sure how, ask Bob itself:
 **Dr. Morgan** agent ([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md))
 by name and start talking to it.
 
+**You'll know it's loaded.** Dr. Morgan opens its first reply with an
+identification line — `Dr. Morgan · Scenario — · Coach mode` — and repeats
+it whenever the scenario or mode changes. If you don't see that line, you're
+talking to plain Bob, not Dr. Morgan: reselect the agent before sharing
+anything you want held to this suite's rules. You can also just ask "am I
+talking to Dr. Morgan?" at any point.
+
 **2. Say what you're working on.** A plain sentence is fine. Three real
 openers, and what happens next:
 
@@ -165,6 +172,17 @@ finding ID. Unzip it to inspect; the source is
 [`skills/research-findings-report/`](skills/research-findings-report/). Like
 the deck, it turns finished findings into a deliverable — if they aren't
 synthesized yet, run Scenario A first.
+
+**Closing the loop with the customers who gave the feedback?**
+[`customer-impact-summary.skill`](customer-impact-summary.skill) drafts the
+short external email that shows a customer what happened to what they said:
+what we heard (aggregated from findings that already passed the gates) and
+what we did (impact items, each carrying a shipped / in-progress / planned /
+under-consideration label with a named source and date). The destination is
+`external` by definition, so the safety scan runs at its highest bar, no
+other participant is ever identifiable, and a named person on your team
+sends it after the product owner confirms every impact claim. The source is
+[`skills/customer-impact-summary/`](skills/customer-impact-summary/).
 
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
@@ -271,6 +289,9 @@ flowchart TD
 
     ENDR -->|"writing the findings report?"| RPT["<b>research-findings-report</b><br/>writes the .docx report + .md appendix<br/>from findings that already passed"]
     RPT -.->|"a report is a new artifact —<br/>it runs the checks again"| PF
+
+    ENDR -->|"closing the loop with customers?"| CIS["<b>customer-impact-summary</b><br/>drafts the external email from findings<br/>that already passed + sourced impact items"]
+    CIS -.->|"external by definition —<br/>it runs the checks again"| PF
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 
@@ -413,8 +434,12 @@ first:
 Spot-check a quote against your transcript when a session has run long. It is
 the cheapest thing to verify and the most damaging thing to get wrong.
 
-**Move before it happens.** Ask Dr. Morgan for a **carry-over packet** and
-paste it as the first message of a fresh conversation. It carries scenario
+**Move before it happens — and expect Dr. Morgan to raise it first.** It
+offers the **carry-over packet** unprompted at every clean seam, produces it
+immediately (unasked) the moment it notices one of the symptoms above, and
+treats the single word **"handoff"** as an instruction to produce it right
+now, no questions first. Paste the packet as the first message of a fresh
+conversation. It carries scenario
 and mode, product and method context, the decision and research questions,
 participant IDs and the declared destination, where you are in the flow,
 theme dispositions, gate verdicts with iteration numbers, and open flags.
