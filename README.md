@@ -1,12 +1,11 @@
 # Dr. Morgan — UX Research Skills & Agents
+By **Kirsten Hosic**, UX Research Strategy Lead, Security Product Design.
 
 A UX research mentor you talk to inside **IBM Bob**, plus the checkers that
 inspect its work before anyone else sees it. It ships with **IBM Secure**
 context filled in (HashiCorp Vault, Boundary, Consul, and Radar, with the
 addition of Terraform), and works on any IBM product once you give it that
 product's context.
-
-By **Kirsten Hosic**, UX Research Strategy Lead, Security Product Design.
 
 You don't need to have used an AI tool before, and you don't need to code.
 You load the **Dr. Morgan** agent, say what you're working on in a plain
