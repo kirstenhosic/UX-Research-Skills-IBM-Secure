@@ -251,7 +251,7 @@ flowchart TD
     V -->|"PASS or PASS WITH FLAGS<br/>→ RELEASE"| ENDR(["<b>Released to your team</b><br/>flags ride along as Reviewer Notes"])
 
     V -->|"FAIL → REVISE<br/>blocking items only"| RV["Dr. Morgan revises.<br/>Evaluators never edit."]
-    RV -.->|"two passes maximum"| PF
+    RV -.->|"two passes maximum<br/>safety + the failed gate re-run<br/>a moved quote or count<br/>re-checks synthesis too"| PF
 
     V -->|"ESCALATE"| ENDE(["<b>Stop. You look.</b><br/>The corpus, question, or method<br/>is the real problem."])
 
