@@ -278,9 +278,13 @@ them:
    source is named; only the PM can check that the source is still true,
    and that the team would recognize itself in what the email says it is
    weighing.
-2. **A person sends it**, from their own address, after reading it as
-   themselves. This skill drafts; it never sends, schedules, or addresses
-   mail, and it flags any request to do so back to the user.
+2. **A person sends it**, from their own address, after reading every word
+   as themselves, making their own edits, and recording the release
+   sign-off (§11 of `EVALUATION-LOOP.md`). Of every artifact in this
+   suite, this is the one where an unread sentence costs the most: it
+   lands in a participant's inbox under a real name. This skill drafts; it
+   never sends, schedules, or addresses mail, and it flags any request to
+   do so back to the user.
 
 ---
 

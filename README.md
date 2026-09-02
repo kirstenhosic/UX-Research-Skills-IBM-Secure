@@ -401,16 +401,27 @@ permitted detail, not less.
 Names, emails, and phone numbers block at every tier. Role, account name, and
 region scale with the destination, and stricter consent terms win.
 
-**Then act on the verdict.** `RELEASE` ships it, with any flags attached as
-Reviewer Notes for you to weigh. `REVISE` means Dr. Morgan fixes the blocking
+**Then act on the verdict.** `RELEASE` means the gates are done — not that
+the artifact is. `REVISE` means Dr. Morgan fixes the blocking
 items and re-runs that gate — twice at most, and if the fix moved a quote, a
 count, or an attribution, the synthesis gate re-checks too, because the pass
 behind it is stale. `ESCALATE` means stop and look at it yourself.
 
-Two calls stay yours: the themes, which you accept, revise, split, or reject
-one at a time before synthesis is built on them, and whether the artifact
-actually ships. Passing the gates isn't approval. A readout deck is a new
-artifact and runs the checks again.
+**Then you read the thing — all of it — and sign off.** Before any final
+output goes anywhere, Dr. Morgan asks for your sign-off: you read the whole
+artifact (every section, every slide, every speaker note), make your own
+edits, and it records that you did. This isn't a formality it can skip and
+isn't one you should: six green verdicts read as "someone checked this,"
+and the someone was a set of language models, each blind by design to most
+of what can be wrong. The output ships under your name. "Reviewed and
+accepted as is" is a fine outcome; unread is not. If your edits move a
+quote, a count, or an attribution, the synthesis gate re-checks, same as
+any revision.
+
+Three calls stay yours: the themes, which you accept, revise, split, or
+reject one at a time before synthesis is built on them; the sign-off; and
+whether the artifact actually ships. Passing the gates isn't approval. A
+readout deck is a new artifact and runs the checks again.
 
 The gate matrix, verdict schema, and known limits are in
 [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
@@ -600,7 +611,7 @@ citations live in the individual files.
 | gate | A checker that reads a finished artifact and reports whether it passes. Six of the seven run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL` — plus `NOT_APPLICABLE`, which a gate returns when it was handed an artifact it does not own, and which asserts nothing about the artifact. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
-| checkpoint | A stop where a *person* decides, not an agent. Three exist: the **decision checkpoint** before the study, where the decision's owner says whether the decision is real (advisory — Dr. Morgan must ask, the answer never blocks); the **theme checkpoint** after clustering (the default one, and it blocks by destination); and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
+| checkpoint | A stop where a *person* decides, not an agent. Four exist: the **decision checkpoint** before the study, where the decision's owner says whether the decision is real (advisory — Dr. Morgan must ask, the answer never blocks); the **theme checkpoint** after clustering (the default one, and it blocks by destination); a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass; and the **release sign-off** after the last gate, where the researcher records that they read the whole final output and made their own edits — without it the artifact stays a draft. |
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |

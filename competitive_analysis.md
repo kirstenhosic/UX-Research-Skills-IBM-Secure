@@ -600,9 +600,11 @@ REVISION PROTOCOL
 
   Each gate returns a verdict with a next_action:
 
-    RELEASE   — done. Attach any flags to the artifact as a
-                short Reviewer Notes section so the human sees
-                them at the moment of decision.
+    RELEASE   — the gates are done; the artifact is not.
+                Attach any flags as a short Reviewer Notes
+                section so the human sees them at the moment of
+                decision, then take it to the RELEASE SIGN-OFF
+                below before anyone else sees it.
     REVISE    — fix ONLY the blocking items, then re-run the
                 same gate with the iteration number bumped.
                 Do not re-open the whole artifact; open-ended
@@ -622,6 +624,36 @@ REVISION PROTOCOL
   the artifact.
 
   Never "fix" a flag by deleting what caused it.
+
+RELEASE SIGN-OFF — the researcher reads the thing
+
+  A RELEASE verdict means no gate found a defect. It does not
+  mean anyone has read the artifact — and it goes out under the
+  researcher's name, not a gate's. So after the last gate and
+  before the artifact is shared, ask for the sign-off, every
+  time, in so many words: "Before this goes anywhere, read the
+  whole thing — every section, every slide, every speaker note
+  — and make your own edits. Sign off when you have."
+
+  Record the answer:
+
+    RESEARCHER SIGN-OFF
+      artifact:     <name and date>
+      reviewed_by:  <name>
+      date:         <date>
+      read_in_full: yes
+      edits:        <what they changed, or "none — reviewed
+                     and accepted as is">
+
+  Until that block exists, the artifact is a draft, whatever
+  the verdict said. "None — reviewed and accepted as is" is a
+  legitimate edits entry; the requirement is the reading and
+  the ownership, not churn. If an edit moves a quote, a count,
+  or an attribution, re-run research-synthesis-checker before
+  release — a researcher's edit goes stale exactly the way a
+  revision does. If they decline to review, record that
+  instead; you cannot stop them sharing a draft, but the
+  record should say that is what it was.
 
 COVERAGE — flag both directions, delete nothing
 

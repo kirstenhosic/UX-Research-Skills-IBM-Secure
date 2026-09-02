@@ -9,7 +9,10 @@ loop — with an explicit bar, a revision step, a cap on iterations, and a
 defined moment where the machine stops and a person decides.
 
 **The human is always the final gate.** Everything below is a filter that
-removes work you shouldn't have to do by hand. It is not an approval.
+removes work you shouldn't have to do by hand. It is not an approval. §11
+turns that stance into a recorded step: no final output releases without the
+researcher's sign-off that they read the whole thing and made their own
+edits.
 
 ---
 
@@ -1198,8 +1201,10 @@ which is the same standard this suite holds research to.
 4. research-synthesis-checker      → FAIL? revise blocking claims, re-run
 5. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
 6. research-readability-checker    → FAIL? revise, re-run
-7. Release with Reviewer Notes attached
-8. Then ask, every time: "Want to close the loop with the people who took
+7. RELEASE SIGN-OFF (§11)          → the researcher reads the whole artifact
+                                     and makes their own edits; recorded
+8. Release with Reviewer Notes attached
+9. Then ask, every time: "Want to close the loop with the people who took
    part?" — internal participants and external customers alike. Yes routes
    to participant-impact-summary (§4.9); no is a fine answer, recorded and
    not revisited
@@ -1220,7 +1225,9 @@ which is the same standard this suite holds research to.
    research-survey-checker         → only if a survey instrument is attached.
                                       FAIL? revise, re-run
 5. research-readability-checker    → FAIL? revise, re-run
-6. Release
+6. RELEASE SIGN-OFF (§11)          → the researcher reads it all and makes
+                                     their own edits; recorded
+7. Release
 ```
 
 **Producing a discussion guide or interview script on its own:**
@@ -1230,7 +1237,9 @@ which is the same standard this suite holds research to.
 2. research-safety-checker         → PRE-FLIGHT, always runs first
 3. research-guide-checker          → FAIL? revise blocking items, re-run
 4. research-readability-checker    → FAIL? revise, re-run
-5. Release
+5. RELEASE SIGN-OFF (§11)          → the researcher reads it all and makes
+                                     their own edits; recorded
+6. Release
 ```
 
 A guide drafted inside a plan runs the same gate; it does not wait for the whole
@@ -1245,7 +1254,9 @@ plan to be finished.
 4. research-readability-checker    → FAIL? revise, re-run
 5. Pilot it with ten people before the link goes out. The gate is not a pilot,
    and the population can only be fielded once
-6. Release
+6. RELEASE SIGN-OFF (§11)          → the researcher reads every item and makes
+                                     their own edits; recorded
+7. Release
 ```
 
 **Producing a deck:**
@@ -1259,7 +1270,9 @@ plan to be finished.
 4. research-safety-checker (deck mode — speaker notes and screenshots included)
 5. research-synthesis-checker (deck mode — verify against findings records)
 6. research-readability-checker
-7. Release
+7. RELEASE SIGN-OFF (§11) — every slide and every speaker note, then their
+   own edits; recorded
+8. Release
 ```
 
 **Producing a findings report:**
@@ -1275,7 +1288,9 @@ plan to be finished.
    included)
 5. research-synthesis-checker (report mode — verify against findings records)
 6. research-readability-checker
-7. Release with Reviewer Notes attached
+7. RELEASE SIGN-OFF (§11) — body, appendix, and materials list, then their
+   own edits; recorded
+8. Release with Reviewer Notes attached
 ```
 
 **Producing a participant impact summary:**
@@ -1295,7 +1310,9 @@ plan to be finished.
 5. research-synthesis-checker (impact mode — heard-lines against findings
    records, did-lines against sourced impact items)
 6. research-readability-checker
-7. Product owner confirms every impact item; a named person sends it from
+7. RELEASE SIGN-OFF (§11) — the sender reads every word as themselves and
+   makes their own edits; recorded
+8. Product owner confirms every impact item; a named person sends it from
    their own address
 ```
 
@@ -1601,6 +1618,63 @@ and move on.
   this conversation
 - It is not a stakeholder alignment exercise. Four questions, one owner, a
   disposition. If it turns into a workshop, it has stopped being a checkpoint
+
+---
+
+## 11. The release sign-off — the researcher reads the thing
+
+Every gate in this file checks the artifact. None of them checks that the
+person whose name goes on it has read it, and the gap is not theoretical: a
+clean run of verdicts invites exactly the skim it should prevent. Six green
+gates read as "someone checked this," and the someone was a set of language
+models, each blind by design to most of what can be wrong. The last gate has
+been "still you reading the thing" in this repo's own words since the
+beginning; this section makes it a recorded step instead of a closing
+sentiment.
+
+**When.** After the last gate returns `RELEASE`, before the artifact is
+shared with anyone — every final output: findings, readout deck, findings
+report, participant impact summary, plan, guide, survey instrument.
+
+**What the researcher agrees to, and what the record shows they did.** Read
+the whole artifact — every section, the appendix, every slide, every speaker
+note, every linked material description — and make their own edits. The ask
+is made in so many words, every time: producers must not soften it to "look
+this over." The sign-off is the researcher's statement that the reading
+happened and the output is now their work.
+
+```
+RESEARCHER SIGN-OFF
+  artifact:     <name and date>
+  reviewed_by:  <name>
+  date:         <date>
+  read_in_full: yes
+  edits:        <what they changed, or "none — reviewed and accepted as is">
+```
+
+Until the block exists, the artifact is a **draft**, whatever the verdict
+said. "None — reviewed and accepted as is" is a legitimate `edits` entry;
+the requirement is the reading and the ownership, not churn for its own
+sake.
+
+**The staleness rule follows the researcher too.** An edit that moves a
+quote, a count, or an attribution re-runs `research-synthesis-checker`
+before release, exactly as a gate-driven revision does (§1), and without
+consuming an iteration. A researcher's hand in the file is not a safe hand
+by virtue of being human — it is the same three fragile things moving. A
+purely stylistic edit re-runs nothing: a readability regression the
+researcher introduces in their own voice is theirs to own, and is visible
+to any reader in a way a shifted count is not.
+
+**Why this is a checkpoint and not a gate.** No agent can verify that
+reading happened; an evaluator scoring "was this reviewed?" would be
+scoring the presence of a block, which any producer can emit. Like the
+theme checkpoint (§9), the value is the person's judgment, not the
+paperwork; the paperwork exists so the moment can't be skipped silently.
+Unlike the decision checkpoint (§10), it is not advisory: the artifact
+stays a draft without it. And if the researcher declines to review, that
+is recorded in place of the block — nobody can stop a person sharing a
+draft, but the record should say that is what it was.
 
 ---
 

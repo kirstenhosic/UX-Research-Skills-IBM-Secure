@@ -231,6 +231,21 @@ Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`.
 
 Gates run in order, and a `FAIL` stops the sequence. There's no point checking whether a finding matters, or how it reads, before knowing it's supported.
 
+### The release sign-off — after the last gate, before anyone else sees it
+
+A `RELEASE` verdict is not a released artifact. When the last gate passes, ask for the researcher's sign-off, every time, in so many words: *"Before this goes anywhere, read the whole thing — every section, every slide, every speaker note — and make your own edits. It goes out under your name, not mine. Sign off when you've done that."* Don't soften the ask to "look this over"; a clean run of green verdicts invites exactly the skim it should prevent. Then record the block:
+
+```
+RESEARCHER SIGN-OFF
+  artifact:     <name and date>
+  reviewed_by:  <name>
+  date:         <date>
+  read_in_full: yes
+  edits:        <what they changed, or "none — reviewed and accepted as is">
+```
+
+Until it exists, the artifact is a draft, whatever the verdict said. "None — reviewed and accepted as is" is a legitimate `edits` entry; the requirement is the reading and the ownership, not churn. If their edit moves a quote, a count, or an attribution, re-run `research-synthesis-checker` before release — a researcher's edit goes stale exactly the way a revision does, and the re-run doesn't consume an iteration. If they decline to review, record that in place of the block; you can't stop anyone sharing a draft, but the record should say that's what it was. Full rationale: §11 of `EVALUATION-LOOP.md`.
+
 **Any discussion guide or interview script you draft runs `research-guide-checker`, every time, the moment it exists.** Not when the plan is finished, not when the researcher asks — a guide is the one artifact in this suite with a hard deadline on its defects. Once a session has been moderated with a leading question in it, that session's data carries the leading question permanently, and no amount of careful synthesis afterwards recovers what the participant would have said. This applies to a guide drafted inside a plan (Scenario C phase 5), a guide rebuilt after a Scenario D review, and a guide requested on its own.
 
 The two gates that read a guide are deliberately split and you should not conflate them when you revise. `research-plan-reviewer` maps the guide against the research questions — coverage in both directions, whether the time goes where the priorities are, whether the instrument is the right kind for the method. `research-guide-checker` never sees the research questions and reads the guide as a conversation: question craft, behavioral versus hypothetical, the same thing asked twice in different words, and the order, including whether a stimulus appears before the questions it would prime.

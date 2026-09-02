@@ -390,6 +390,13 @@ Hand off cleanly:
 - **The additional-materials list**, so the safety scan can check what the
   links expose, not just what the document says.
 
+Whatever the gates say, the report is a draft until the researcher signs
+off: they read the whole body, the appendix, and the materials list, make
+their own edits, and the sign-off is recorded (§11 of `EVALUATION-LOOP.md`
+has the block). The report ships under their name, not a gate's. An edit of
+theirs that moves a quote, a count, or an attribution re-runs the synthesis
+gate first.
+
 Outside the suite, the same principle holds in a lighter form: before this
 report gets shared, someone who didn't write it reads it against the source.
 
