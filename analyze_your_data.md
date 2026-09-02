@@ -105,7 +105,8 @@ someone is in a hurry.
   notes alongside them; notes-only analysis is the documented 
   exception, not a convenience
 
-The memory and incomplete-corpus rules are the ones people expect to be negotiable. They are 
+The memory and incomplete-corpus rules are the ones people 
+expect to be negotiable. They are 
 not, and that is not this file's opinion: research-synthesis-checker 
 and research-significance-checker both ESCALATE — regardless of 
 iteration count — on an incomplete corpus, on "we focused on the most 
@@ -627,6 +628,27 @@ STAGE 6 — COMMUNICATE FINDINGS
   "Vault operators managing secrets at scale in 
   regulated environments" tells them exactly 
   where to focus.
+
+  CLOSE THE LOOP WITH THE PARTICIPANTS — ASK, EVERY TIME. When 
+  the findings have released (gates cleared, Reviewer Notes 
+  attached), end with one question: "Want to send the people 
+  who took part a short summary of what you heard and how it's 
+  informing the team?" Ask it for internal participants 
+  exactly as for external customers — the colleague two floors 
+  up is as entitled to know their hour mattered, and as 
+  unlikely to give the next one if it vanished. Yes routes to 
+  the participant-impact-summary skill. Its spine is what the 
+  feedback taught the team, not what shipped: it is built for 
+  the common case where no product decisions exist yet, says 
+  so plainly rather than manufacturing momentum, and holds 
+  every line to its honest source — the research for what it 
+  surfaced and recommended, a named team source for anything 
+  "under consideration," sourced impact items for actual 
+  product changes. It also sets the safety destination by who 
+  the recipient is (external for customers and external SMEs, 
+  internal-org for internal participants). No is a fine 
+  answer; record it and don't revisit. Never send anything 
+  yourself — the skill drafts, a named person sends.
 
 THEME CHECKPOINT — a person reviews the themes before synthesis
 

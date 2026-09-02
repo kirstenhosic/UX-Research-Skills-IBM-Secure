@@ -211,7 +211,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
-| **Customer impact summary** | `customer-impact-summary` | `synthesis-checker` (impact mode) → `readability-checker` |
+| **Participant impact summary** | `participant-impact-summary` | `synthesis-checker` (impact mode) → `readability-checker` |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -932,39 +932,63 @@ and the names half of 14 are blocking. The rest are flags.
 
 ---
 
-### 4.9 Customer impact summary
+### 4.9 Participant impact summary
 
-The bar for the customer-facing email the `customer-impact-summary` skill
-drafts: a short "what we heard, what we did" note to an external customer
-who gave research feedback. The destination is **`external` by definition**
-— the safety scan always runs at its highest bar — and the email mixes two
-claim types with different sources: "what we heard" renders from findings
-records that passed §4.2, and "what we did" renders from **impact items**
+The bar for the participant-facing email the `participant-impact-summary`
+skill drafts: a short "what we heard, what we did" note to someone who gave
+research feedback — an external customer or an internal participant. The
+destination is **set by the recipient, never chosen**: `external` for
+`customer-direct` and `sme-external` recipients, `internal-org` for
+`internal-direct` and `internal-proxy` ones, and a study with both kinds
+gets two drafts, each cleared at its own bar. The email mixes three claim
+types with different sources: "what we heard" renders from findings
+records that passed §4.2; "how it's informing us" renders either from the
+findings themselves (a research recommendation, attributed as such) or
+from a named team source (a "we're considering" line needs the team behind
+it); and "what changed in the product" renders from **impact items**
 (status + named source + date, defined in the skill), because product
-status lives in no findings record. `synthesis-checker` in impact mode
-verifies each line against its own source type.
+status lives in no findings record. The spine of the email is the
+informing tier: **zero product changes is the normal state shortly after a
+study**, an email with none is complete, and the failure this rubric
+exists to catch is the reader hearing commitment in a list of maybes.
+`synthesis-checker` in impact mode verifies each line against its own
+source type.
 
 1. Every "what we heard" line maps to finding records that passed §4.2,
    aggregated for an external reader — no line without a record behind it.
    **Blocking**
-2. Every "what we did" line carries a status — `shipped` / `in-progress` /
-   `planned` / `under-consideration` — a named source, and a date. No
-   invented status, and no status upgraded in the wording ("planned"
-   never reads as "coming soon"). **Blocking**
+2. Every claim about the team or the product is in its honest form. A
+   product-change line carries a status — `shipped` / `in-progress` /
+   `planned` / `under-consideration` — a named source, and a date, with no
+   invented status and no status upgraded in the wording ("planned" never
+   reads as "coming soon"). A "we're considering" line carries a named
+   team source; without one it is written as what it is — a research
+   recommendation, attributed to the research. Zero product-change lines
+   is a valid and normal state, and the email never manufactures one.
+   **Blocking**
 3. No participant other than the recipient is identifiable: no names,
    companies, quotes, or narrowing details of anyone else, and counts are
    aggregated ("operators at eight organizations"), never the exact
    small-n counts used internally. **Blocking**
-4. The recipient's recontact is covered by the study's consent terms, the
-   email is addressed individually (no visible participant list), and
-   `research-safety-checker` has cleared it at the `external` bar.
-   **Blocking** — the safety gate owns this item
-5. No commitment beyond what the named source supports: `in-progress` and
-   `planned` items read as intentions, and carry no dates the source
-   doesn't carry. **Blocking**
-6. No internal jargon, internal links, code names, ticket numbers, or
-   confidential product detail beyond what the impact item's source makes
-   shareable. **Blocking**
+4. The recipient's recontact is covered by the study's consent terms
+   (internal participants' terms govern the same way), the email is
+   addressed individually (no visible participant list), and
+   `research-safety-checker` has cleared it at the bar the recipient's
+   `participant_type` sets — never below `internal-org`. **Blocking** — the
+   safety gate owns this item
+5. No commitment beyond what the named source supports, and no decision
+   implied that hasn't been made: consideration never reads as commitment,
+   a research recommendation never reads as a team plan, `in-progress` and
+   `planned` items read as intentions carrying no dates the source doesn't
+   carry, and when no decision exists yet the email says so in plain words
+   rather than borrowing momentum from its own phrasing. **Blocking**
+6. For an external recipient: no internal jargon, internal links, code
+   names, ticket numbers, or confidential product detail beyond what the
+   impact item's source makes shareable. **Blocking.** For an internal
+   recipient, internal detail is permitted where the impact item's source
+   supports it and it identifies no other participant; a two-tier study's
+   drafts are checked separately, and external text appearing in both is
+   the internal draft's loss, not the external draft's gain
 7. Feedback with no action yet is acknowledged in one honest line — or its
    omission was the researcher's explicit call, noted in Reviewer Notes
 8. A named human sender appears, and the product owner has confirmed every
@@ -1175,6 +1199,10 @@ which is the same standard this suite holds research to.
 5. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
 6. research-readability-checker    → FAIL? revise, re-run
 7. Release with Reviewer Notes attached
+8. Then ask, every time: "Want to close the loop with the people who took
+   part?" — internal participants and external customers alike. Yes routes
+   to participant-impact-summary (§4.9); no is a fine answer, recorded and
+   not revisited
 ```
 
 **Producing a plan:**
@@ -1250,16 +1278,20 @@ plan to be finished.
 7. Release with Reviewer Notes attached
 ```
 
-**Producing a customer impact summary:**
+**Producing a participant impact summary:**
 
 ```
 1. Findings must have cleared the findings sequence first
 2. Collect impact items — each with status, named source, and date; no
-   source, no email line
-3. Draft the email (customer-impact-summary) — aggregated, individually
-   addressed, no other participant identifiable
-4. research-safety-checker (external bar, always — the destination is not
-   optional for this artifact)
+   source, no email line. Zero items is the normal case and needs no fixing
+3. Draft the email (participant-impact-summary) — the spine is what the
+   feedback taught the team and what's honestly being weighed; product
+   changes only where sourced. Aggregated, individually addressed, no other
+   participant identifiable; a study with internal and external
+   participants gets two drafts, one per tier
+4. research-safety-checker (at the bar the recipient sets — external for
+   customers and SMEs, internal-org for internal participants; never
+   chosen, never below internal-org)
 5. research-synthesis-checker (impact mode — heard-lines against findings
    records, did-lines against sourced impact items)
 6. research-readability-checker

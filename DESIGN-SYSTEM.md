@@ -21,7 +21,7 @@ Ensure that all artifacts produced by research skills maintain:
 - Any document generated for stakeholder review
 
 **Skip these standards for:**
-- Customer impact summaries — they are plain email, and the reader's mail client owns the styling; structure and rules live in `skills/customer-impact-summary/` and `EVALUATION-LOOP.md` §4.9
+- Participant impact summaries — they are plain email, and the reader's mail client owns the styling; structure and rules live in `skills/participant-impact-summary/` and `EVALUATION-LOOP.md` §4.9
 - Internal notes and scratch work
 - De-identified transcripts (maintain anonymity over styling)
 - Raw data files (CSVs, JSON, etc.)

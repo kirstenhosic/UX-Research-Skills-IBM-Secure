@@ -173,16 +173,22 @@ finding ID. Unzip it to inspect; the source is
 the deck, it turns finished findings into a deliverable — if they aren't
 synthesized yet, run Scenario A first.
 
-**Closing the loop with the customers who gave the feedback?**
-[`customer-impact-summary.skill`](customer-impact-summary.skill) drafts the
-short external email that shows a customer what happened to what they said:
-what we heard (aggregated from findings that already passed the gates) and
-what we did (impact items, each carrying a shipped / in-progress / planned /
-under-consideration label with a named source and date). The destination is
-`external` by definition, so the safety scan runs at its highest bar, no
-other participant is ever identifiable, and a named person on your team
-sends it after the product owner confirms every impact claim. The source is
-[`skills/customer-impact-summary/`](skills/customer-impact-summary/).
+**Closing the loop with the people who gave the feedback?**
+[`participant-impact-summary.skill`](participant-impact-summary.skill)
+drafts the short email that shows a participant — an external customer or
+an internal colleague — what happened to what they said: what we heard
+(aggregated from findings that already passed the gates), how it's
+informing the team, and — only when changes exist and are sourced — what
+changed in the product. It is built for the common case where no product
+decisions have been made yet: it says so plainly, consideration never
+reads as commitment, and a "we're considering" line needs the team behind
+it, not just the research recommending it. Dr. Morgan offers it at the end
+of every findings sequence. The safety destination is set by
+who the recipient is (`external` for customers, `internal-org` for internal
+participants — a study with both gets two drafts), no other participant is
+ever identifiable, and a named person on your team sends it after the
+product owner confirms every impact claim. The source is
+[`skills/participant-impact-summary/`](skills/participant-impact-summary/).
 
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
@@ -290,8 +296,8 @@ flowchart TD
     ENDR -->|"writing the findings report?"| RPT["<b>research-findings-report</b><br/>writes the .docx report + .md appendix<br/>from findings that already passed"]
     RPT -.->|"a report is a new artifact —<br/>it runs the checks again"| PF
 
-    ENDR -->|"closing the loop with customers?"| CIS["<b>customer-impact-summary</b><br/>drafts the external email from findings<br/>that already passed + sourced impact items"]
-    CIS -.->|"external by definition —<br/>it runs the checks again"| PF
+    ENDR -->|"closing the loop<br/>with participants?"| CIS["<b>participant-impact-summary</b><br/>what we heard + how it's informing us,<br/>from findings that already passed — Dr. Morgan<br/>offers it after every findings release"]
+    CIS -.->|"destination set by the recipient —<br/>it runs the checks again"| PF
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 
