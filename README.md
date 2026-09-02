@@ -44,27 +44,23 @@ doesn't change with the product; only the specificity does.
 Sixty seconds of orientation. If you've used Bob before, skip to
 [Quick start](#quick-start).
 
-- **IBM Bob** is IBM's AI assistant. You type to it in plain English, in a
-  chat window or in your editor; it types back. That's the whole interface.
-- **An agent** is a set of instructions Bob loads that turns it into a
-  specialist. Dr. Morgan is one: load it, and instead of a general-purpose
-  assistant you're talking to a research mentor with opinions, standards, and
-  a review process. Loading an agent is a menu action in Bob, not a technical
-  step.
-- **You drive with sentences, not commands.** "I have eight interviews and I
-  don't know where to start" is a perfectly good message. There is no syntax
-  to learn and nothing you can break by asking the wrong question.
-- **Expect to be questioned.** Most AI tools answer immediately and agree
-  with you. Dr. Morgan is built to do the opposite: it will ask what decision
-  your research serves before it helps, and it will push back on weak
-  reasoning. That friction is the product working, not failing.
-- **One rule matters before anything else:** swap participant names, email
-  addresses, and phone numbers for IDs (P1, P2) *before* you paste anything
-  in. More on this in [Quick start](#quick-start), step 3.
-- **Words in this README that come from AI tooling** — *agent*, *skill*,
-  *gate*, *verdict*, *artifact* — are all defined in the
-  [Glossary](#glossary) at the bottom. Nothing in here assumes you already
-  know them.
+Bob is IBM's AI assistant. You type to it in plain English, in a chat window
+or in your editor, and it types back. An **agent** is a set of instructions
+that turns Bob into a specialist for the length of a conversation. Load Dr.
+Morgan — a menu action, nothing technical — and you're talking to a research
+mentor instead of a general-purpose assistant.
+
+There is no syntax to learn. "I have eight interviews and I don't know where
+to start" is a perfectly good message, and you can't break anything by asking
+the wrong question. Do expect pushback, though. Most AI tools agree with
+whatever you say; this one asks what decision your research serves before it
+helps, and argues when your reasoning is thin. It's supposed to.
+
+One rule before anything else: swap participant names, email addresses, and
+phone numbers for IDs (P1, P2) before you paste anything in.
+
+Terms of art — *agent*, *skill*, *gate*, *verdict*, *artifact* — are all
+defined in the [Glossary](#glossary) at the bottom.
 
 ---
 
@@ -118,10 +114,9 @@ Chat. That works — but it is not equivalent, and the difference matters:
 >   the risk isn't a refusal, it's a rubric reconstructed from memory and
 >   delivered with the same confidence. Paste the file a gate needs alongside
 >   the agent, or run that gate in a session with the repo connected. For the
->   checkers, that file is small on purpose: [`rubrics/`](rubrics/) holds a
->   generated excerpt per artifact type — the verdict schema plus that gate's
->   rubric, verbatim — so a pasted checker session carries a few pages instead
->   of all of `EVALUATION-LOOP.md`. Each checker names its own excerpt.
+>   checkers that file is small on purpose: each one names its excerpt in
+>   [`rubrics/`](rubrics/) — the verdict schema plus its own rubric, a few
+>   pages instead of all of `EVALUATION-LOOP.md`.
 > - **Custom instructions beat a first chat message.** Custom instructions
 >   are re-applied every turn. A first message is just an early turn, and it
 >   gets buried as you paste transcripts in — which is exactly when you're
@@ -298,8 +293,7 @@ reading the thing.
   [`research-synthesis-checker`](agents/research-synthesis-checker.agent.md)
   reads the finished synthesis back against the source, claim by claim. That
   catches a great deal — and it is still one language model checking
-  another's work. Spot-check quotes against your transcripts: cheapest thing
-  to verify, most damaging thing to get wrong.
+  another's work. Spot-check quotes against your transcripts anyway.
 - **Put weaker evidence on the record.** Proxy evidence — a colleague
   describing customers rather than a customer describing themselves — gets
   flagged, and competitive claims carry `[verified]`, `[vendor claim]`,
@@ -316,27 +310,14 @@ reading the thing.
 - **Stop where judgment is required.** In Draft mode you review every theme
   before synthesis is built on it. That is where the interpretation gets set,
   and no checker can verify what data means.
-- **Catch the guide defects that can't be fixed later.** A leading question,
-  a stimulus shown before the unprimed baseline, the same thing asked twice
-  in different words —
-  [`research-guide-checker`](agents/research-guide-checker.agent.md) reads
-  every drafted guide for these before a session is scheduled, because a
-  defect in a guide stops being fixable the moment the first participant
-  answers the question. Two caveats it states in its own report and that are
-  worth repeating: **it is not a pilot**, and **it cannot see the
-  moderator**. Whether a question is ambiguous to an actual practitioner is
-  answered by one pilot session, not by review; and most leading happens
-  live, in an unwritten follow-up or a silence someone fills with a
-  hypothesis.
-- **Check the survey before you spend the list.** An agree/disagree item that
-  measures agreeableness, options that overlap or leave someone out, a band
-  set that quietly tells the respondent what normal looks like, demographics
-  on screen one —
-  [`research-survey-checker`](agents/research-survey-checker.agent.md) reads
-  the instrument before it is fielded, because a survey has no second
-  participant. It states its own two limits every run: it is not a cognitive
-  pretest, and it cannot see who answered or who didn't, which is the
-  question that decides whether the numbers mean anything.
+- **Catch instrument defects while they can still be fixed.** Every drafted
+  guide runs [`research-guide-checker`](agents/research-guide-checker.agent.md)
+  before a session is scheduled, and every survey runs
+  [`research-survey-checker`](agents/research-survey-checker.agent.md) before
+  the link is sent — a fielded survey has no second chance. Both state their
+  own limits in every report: a review is not a pilot, and neither can see
+  the moderator in the room or who never answered. So pilot the guide with
+  one person, and mind the sample.
 
 **What they can't do**
 
@@ -383,8 +364,7 @@ region scale with the destination, and stricter consent terms win.
 Reviewer Notes for you to weigh. `REVISE` means Dr. Morgan fixes the blocking
 items and re-runs that gate — twice at most, and if the fix moved a quote, a
 count, or an attribution, the synthesis gate re-checks too, because the pass
-behind it is stale. `ESCALATE` means stop and look
-at it yourself.
+behind it is stale. `ESCALATE` means stop and look at it yourself.
 
 Two calls stay yours: the themes, which you accept, revise, split, or reject
 one at a time before synthesis is built on them, and whether the artifact
@@ -588,40 +568,35 @@ citations live in the individual files.
 ## How this was tested
 
 Everything above claims the checkers catch things. Here is how those claims
-were checked, in plain terms. The full record — run by run, including the
-misses — is in [`MAINTAINING.md`](MAINTAINING.md) and the separate
+were checked. The run-by-run record, including the misses, is in
+[`MAINTAINING.md`](MAINTAINING.md) and the separate
 [testing repo](https://github.com/kirstenhosic/UX-Research-Skills-testing)
 *(private)*.
 
-- **The checkers were graded against work with known, planted defects.** A
-  findings set with 15 deliberate flaws and an answer key. A 28-item survey
-  with 48. Each fixture also carries *controls* — clean items the checker must
-  leave alone — so the test catches false alarms as well as misses. The survey
-  fixture even includes a decoy discussion guide the survey checker has to
-  refuse by name.
-- **The same test was run more than once, independently.** The core held run
-  to run: every planted blocking defect, every control. The edges did not —
-  one borderline item drew a flag, a block, and silence across three runs.
-  That variance is measured and written down, and it is why the docs say a
-  single checker run is not a measurement of the checker.
-- **The rubrics got hostile reads** — sessions deliberately set up to make a
-  rule fail or mislead. Every change those reads forced is recorded with the
-  transcript that forced it, cited by filename, so no rule here rests on a
-  test nobody can open.
-- **The tests found real flaws, which is the point.** One caught an ordering
-  flaw in how the safety scan ran; the fixtures have caught errors in their
-  own answer keys three times. Both outcomes are documented as expected —
-  a test that never embarrasses its author isn't testing.
-- **The mechanical claims are checked mechanically.** The blocks that repeat
-  across files are verified byte-identical, and the built artifacts (the deck
-  skill, the rubric excerpts) rebuild to the exact same bytes from their
-  sources — so what you read is provably what runs.
-- **What none of this proves.** The fixtures were built from the same rubrics
-  they score against, by the person who wrote them. A clean run says the
-  system is internally consistent — not that it is right, and not that your
-  study is. That's what [How much to trust the
-  output](#how-much-to-trust-the-output) is about, and it is why the last gate
-  is still you reading the thing.
+The checkers were graded against work with known, planted defects: a findings
+set carrying 15 deliberate flaws and an answer key, and a 28-item survey
+carrying 48. Both fixtures include *controls* — clean items the checker must
+leave alone — so a false alarm counts against it the same as a miss. The
+survey fixture also hides a decoy discussion guide the survey checker has to
+refuse by name.
+
+The same tests were then run again, in independent sessions. The core held
+every time: every planted blocking defect, every control. The edges wobbled.
+One borderline item drew a flag, a block, and silence across three runs, and
+that variance is written down rather than smoothed over — it's why the docs
+tell maintainers never to trust a single run of a checker as a measurement of
+it.
+
+Testing has caught real flaws, which is the point: an ordering problem in how
+the safety scan ran, and, three times now, errors in the fixtures' own answer
+keys. The rubrics have also been through hostile reads — sessions set up to
+make a rule fail or mislead — and every change a read forced is recorded with
+the transcript that forced it.
+
+What none of this proves: the fixtures were built from the same rubrics they
+score against, by the person who wrote both, so a clean run says the system
+is internally consistent. Not that it is right, and not that your study is.
+The last gate is still you reading the thing.
 
 ---
 
