@@ -256,6 +256,30 @@ interview-guide craft is taught or audited: the agent (Scenario C),
 `always-probe` and visit every hit before you commit — the same sweep as the
 count words below.
 
+## Templates condense the skills — same drift rule as the agent
+
+`templates/` carries fill-in versions of the structures the skills produce:
+the plan's sixteen sections, the findings record, the report and deck
+structures, the impact message. The skills and contracts are canonical; the
+templates follow them. A structural change to `ux_plan_from_scratch.md`,
+`FINDINGS-CONTRACT.md`, or a `skills/*/SKILL.md` structure section is not done
+until the matching template reflects it. The templates deliberately compress
+(brief guidance plus a pointer to the deep doc), so wording can differ;
+section lists, field lists, and their order cannot. The participant tracker
+(`templates/06-participant-tracker.xlsx`) additionally hard-codes the
+`participant_type` taxonomy in its dropdowns; a taxonomy change in
+`FINDINGS-CONTRACT.md` has to be mirrored there.
+
+**Two of the folder's files are generated, same pattern as `rubrics/` and the
+`.skill` files.** The `.docx` copies in `templates/docx/` are rendered from
+the `.md` templates by `templates/build-docx.py` (which drives
+`skills/research-document-template.py`, so styling changes there flow through
+on rebuild), and the tracker `.xlsx` is built by `templates/build-tracker.py`.
+Edit the `.md` files or the build scripts, rerun the script, and commit both;
+never edit a generated file directly. Both builds stamp the shared page
+furniture (the "Secure UX Design" header, page number right in the footer),
+so it lives in the scripts, not in any document.
+
 ## Shared blocks are duplicated on purpose
 
 Each scenario file has to be self-contained so it can be pasted into a chat alone,

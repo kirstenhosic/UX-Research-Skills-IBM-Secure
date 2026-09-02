@@ -556,6 +556,7 @@ apply to you before planning against them.
 | [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) | How Dr. Morgan gets specific about your product: the resolution order, the five-question intake, the file format, and how to add your own. [`product-context/`](product-context/) holds the files themselves. |
 | [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files, and the table of which methods have an instrument gate and which don't. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
+| [`templates/`](templates/README.md) | The manual path: fill-in templates for the whole study lifecycle (intake, plan, screener, guide, participant tracker, findings records, report, deck, impact message), in the same structures Dr. Morgan produces. For researchers and designers who want to do the work themselves; the gates and release sign-off apply either way. |
 
 The five scenario files and the seven evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
