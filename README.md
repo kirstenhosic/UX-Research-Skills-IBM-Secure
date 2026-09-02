@@ -154,6 +154,18 @@ theming (Carbon Design System, IBM Plex). Unzip it to inspect; it needs the
 separate **pptx** skill to render. It turns finished findings into slides —
 if they aren't synthesized yet, run Scenario A first.
 
+**Need a written findings report?**
+[`research-findings-report.skill`](research-findings-report.skill) writes the
+findings-and-recommendations document from findings records: a 3-5 page
+`.docx` body in IBM Secure's design system (rendered through the document
+template), a companion `.md` appendix carrying the full records and method
+detail, and an additional-materials list linking the files a future reader
+will need. It validates every record before featuring it and reports gaps by
+finding ID. Unzip it to inspect; the source is
+[`skills/research-findings-report/`](skills/research-findings-report/). Like
+the deck, it turns finished findings into a deliverable — if they aren't
+synthesized yet, run Scenario A first.
+
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
 a separate tool Dr. Morgan hands off to. It renders a `.docx` in IBM Secure's
@@ -256,6 +268,9 @@ flowchart TD
 
     ENDR -->|"building a readout deck?"| SK["<b>research-readout-deck</b><br/>renders the .pptx from findings that already passed"]
     SK -.->|"a deck is a new artifact —<br/>it runs the checks again"| PF
+
+    ENDR -->|"writing the findings report?"| RPT["<b>research-findings-report</b><br/>writes the .docx report + .md appendix<br/>from findings that already passed"]
+    RPT -.->|"a report is a new artifact —<br/>it runs the checks again"| PF
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 

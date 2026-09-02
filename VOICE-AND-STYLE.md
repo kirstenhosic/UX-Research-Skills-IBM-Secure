@@ -283,6 +283,15 @@ artifact as a whole.
     the tier table and the consent rule; this rubric defers to its verdict
     rather than re-deciding it.
 
+**Appended**
+
+22. No sentence is interrupted by an em dash or en dash. The thought finishes;
+    the qualification arrives as a new sentence or a bracketed aside. Hyphens
+    in compound words and minus signs are fine. Added 2026-09-02 with the
+    findings-report skill and appended rather than inserted, because earlier
+    items are cited by number here and in §4.8 of `EVALUATION-LOOP.md`. See
+    Part 5's punctuation entry for the rule's scope and rationale.
+
 Items 11, 15, and 16 are blocking. Item 21 is owned by the safety gate, which
 runs before any of this. The rest are
 flags — style disagreements are a human's call, and a gate that hard-fails on
@@ -303,10 +312,20 @@ something they know well* — plain, direct, unhurried. Plain is not casual.
 don't read as authentic, they read as careless, and in a document asking a room
 to spend money that's expensive.
 
-**Don't panic about punctuation.** Em-dashes, semicolons, and the serial comma
-are not tells. Uniformity is the tell. A document with varied sentence lengths
-and one em-dash per page is fine; a document with no em-dashes and metronomic
-rhythm still reads generated.
+**Don't panic about punctuation, with one exception.** Semicolons and the
+serial comma are not tells, and uniformity is still the strongest one: a
+document with metronomic rhythm reads generated no matter how it's punctuated.
+The exception, adopted 2026-09-02 as a suite-wide rule for released artifacts:
+**no sentence is interrupted by an em dash or en dash.** Finish the thought,
+then start the next sentence, or put the aside in brackets. "Configuration
+broke down at the auth screen (six of eight participants) before anyone
+reached policies," not "Configuration broke down — six of eight — at the auth
+screen." The interrupting dash has become the most widely recognized
+generated-text signature among stakeholders, and a report read as generated
+loses the room whether or not the signal is fair. Hyphens in compound words
+and minus signs are not dashes and are fine. The rule governs artifacts a
+stakeholder will open; this repo's own documentation predates it and is not
+retrofitted.
 
 **Don't manufacture opinions.** "I think" attached to a claim you can't defend
 is worse than the neutral version. Stance has to be earned by evidence — the

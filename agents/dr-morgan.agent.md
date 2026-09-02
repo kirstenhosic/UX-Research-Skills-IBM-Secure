@@ -223,6 +223,7 @@ Full spec, verdict schema, and Definition-of-Done rubrics: `EVALUATION-LOOP.md`.
 | Synthesis findings | `research-synthesis-checker` → `research-significance-checker` → `research-readability-checker` |
 | Competitive analysis | `research-synthesis-checker` (source-integrity mode) → `research-significance-checker` → `research-readability-checker` |
 | Readout deck | `research-synthesis-checker` (deck mode) → `research-readability-checker` |
+| Findings report (written) | `research-synthesis-checker` (report mode) → `research-readability-checker` |
 
 Gates run in order, and a `FAIL` stops the sequence. There's no point checking whether a finding matters, or how it reads, before knowing it's supported.
 
@@ -822,7 +823,7 @@ Timeline: [weeks]
 Deliverable: [what you need]
 ```
 
-→ **Result:** A complete, professionally styled Word document (Cambria, grayish-blue palette, auto-numbered sections, callouts, page numbers) with strategic framing, scope boundaries, numbered discussion guide, timeline, and deliverables — ready for stakeholder review. Rationales and briefs use the same skill via its custom `sections` layout.
+→ **Result:** A complete, professionally styled Word document (IBM Plex Sans, IBM Carbon palette — Blue 60 headings, Gray 100 body — auto-numbered sections, callouts, page numbers) with strategic framing, scope boundaries, numbered discussion guide, timeline, and deliverables — ready for stakeholder review. Rationales and briefs use the same skill via its custom `sections` layout.
 
 **When to use it directly (skipping coaching):**
 - You've already done your planning thinking and need a polished deliverable
@@ -864,7 +865,7 @@ Mark each core question `[behavioral]`, `[contextual]`, or `[hypothetical]` in t
 
 ## Findings one-pager / readout (Scenarios A / E)
 
-Emit the underlying findings as records conforming to `FINDINGS-CONTRACT.md` — the evaluators verify against that shape, and the readout deck can only render fields a record actually contains, which is what stops evidence being invented during deck building.
+Emit the underlying findings as records conforming to `FINDINGS-CONTRACT.md` — the evaluators verify against that shape, and the readout deck and findings report can only render fields a record actually contains, which is what stops evidence being invented downstream. For the full written report (3-5 page `.docx` body, `.md` appendix, additional-materials list), hand off to the `research-findings-report` skill rather than freehanding it; the one-pager below is the inline, single-page form.
 
 ```
 - The decision this informs + headline takeaway (lead with the answer)
@@ -884,7 +885,7 @@ Give the strong finding more room than the weak one. Equal-sized sections for un
 
 ## Maintenance note
 
-This agent is self-contained but condenses five scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, and `competitive_analysis.md`) plus the `research-readout-deck` skill and the `research-document-template` skill (the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
+This agent is self-contained but condenses five scenarios that also exist as deeper standalone files (`analyze_your_data.md`, `select_best_method.md`, `ux_plan_from_scratch.md`, `challenge_and_refine_plan.md`, and `competitive_analysis.md`) plus the `research-readout-deck` skill, the `research-findings-report` skill, and the `research-document-template` skill (the styling template every generated research document goes through). When you change a standalone file, mirror the change here (or treat the standalones as source of truth and regenerate this agent) — they will drift otherwise.
 
 Seven evaluator agents gate this agent's output: `research-safety-checker` (pre-flight), then `research-synthesis-checker`, `research-significance-checker`, `research-plan-reviewer`, `research-guide-checker`, `research-survey-checker`, and `research-readability-checker`. They are independent of this file and must stay that way — do not absorb their logic into this agent, or the check stops being a check.
 

@@ -14,6 +14,7 @@ Ensure that all artifacts produced by research skills maintain:
 
 **Apply these standards to:**
 - Research plans, rationales, and briefs (via the **Research Document Template** skill, `skills/research-document-template.py`)
+- Findings reports (via the `research-findings-report/` skill, rendered through the Research Document Template)
 - Readout decks (via `research-readout-deck/` generator)
 - Data analysis outputs
 - Competitive analysis matrices
@@ -29,24 +30,34 @@ Ensure that all artifacts produced by research skills maintain:
 
 ## Color Palette
 
-All documents use IBM HashiCorp Secure's professional color scheme:
+All documents use IBM Carbon color tokens, drawn from the IBM Design Language
+(ibm.com/design/language) and the Carbon Design System
+(carbondesignsystem.com/elements/color) — the same token set the readout deck
+already uses:
 
-| Element | Color | RGB | Usage |
+| Element | Carbon token | Hex | Usage |
 |---------|-------|-----|-------|
-| Primary Title | Dark Grayish Blue | #516B7F | Document title, main headings (H1), callout accents |
-| Section Heading | Medium Grayish Blue | #6B8499 | Subtitle, subsection headings (H2) |
-| Callout/Highlight | Soft Blue-Gray | #EDF1F5 | Key findings, decision points, callout boxes (with #516B7F left accent bar) |
-| Body Text | Dark Gray | #333333 | All body text and paragraphs |
-| Metadata/Footer | Medium Gray | #595959 | Cover metadata, page numbers |
-| Table Header | Blue-Gray | #E4EAEF | Table header background (bold #516B7F text) |
+| Primary Title | Blue 60 | #0F62FE | Document title, main headings (H1), callout titles, accent rules |
+| Section Heading | Gray 70 | #525252 | Subtitle, subsection headings (H2) |
+| Callout/Highlight | Gray 10 (layer) | #F4F4F4 | Key findings, decision points, callout boxes (with #0F62FE left accent bar) |
+| Body Text | Gray 100 | #161616 | All body text and paragraphs |
+| Metadata/Footer | Gray 70 | #525252 | Cover metadata, page numbers |
+| Table Header | Gray 10 (layer) | #F4F4F4 | Table header background (bold #161616 text) |
 
-**Rationale:** The muted grayish-blue scheme echoes IBM and HashiCorp branding while remaining professional, sophisticated, and accessible.
+**Rationale:** Blue 60 is IBM's core blue and the single accent; text lives in
+the gray family (Gray 100 body, Gray 70 secondary) per Carbon's text tokens.
+One accent, restrained, AA-contrast pairings throughout — the IBM look. Blue
+60 appears only on white/light surfaces, never as text on a dark fill.
+
+*(Changed 2026-09-02 from the earlier muted grayish-blue scheme — #516B7F /
+#6B8499 / #EDF1F5 / #E4EAEF — so documents and decks share one palette.
+Documents generated before that date carry the old scheme.)*
 
 ---
 
 ## Typography & Spacing
 
-**Document font: Cambria** — set on the Normal style so every element (body, lists, tables, footers) inherits it. Line spacing: 1.15. Margins: 1" all around.
+**Document font: IBM Plex Sans** — set on the Normal style so every element (body, lists, tables, footers) inherits it. Line spacing: 1.15. Margins: 1" all around. IBM Plex is free (github.com/IBM/plex); where a reader's machine lacks it, Word substitutes a system sans automatically — never force a serif fallback.
 
 **Page furniture (every page):**
 - **Header** (via `page_header` config): bold 9pt title line in Primary Blue + gray 9pt context line, separated from the body by a thin accent rule
@@ -57,32 +68,32 @@ All documents use IBM HashiCorp Secure's professional color scheme:
 ### Document Structure
 
 **Title Page:**
-- Main Title: 28pt, Bold, Primary Blue (#516B7F)
-- Subtitle: 16pt, Bold, Secondary Blue (#6B8499)
-- A thin #516B7F horizontal rule under the title block
-- Metadata: 10pt, Regular, Medium Gray (#595959)
+- Main Title: 28pt, Bold, Blue 60 (#0F62FE)
+- Subtitle: 16pt, Bold, Gray 70 (#525252)
+- A thin #0F62FE horizontal rule under the title block
+- Metadata: 10pt, Regular, Gray 70 (#525252)
 - Space Before Title: 152400 EMU (1 inch)
 - Space After Title: 50800 EMU (0.35 inch)
 
 **Headings:**
-- Heading 1: Bold, Primary Blue (#516B7F), auto-numbered ("1.", "2." — numbering is dynamic, so omitted sections never leave gaps)
+- Heading 1: Bold, Blue 60 (#0F62FE), auto-numbered ("1.", "2." — numbering is dynamic, so omitted sections never leave gaps)
 - Space Before: 101600 EMU
 - Space After: 63500 EMU
 - Keep-with-next enabled (no orphaned headings at page bottoms)
 
-- Heading 2: Bold, Secondary Blue (#6B8499)
+- Heading 2: Bold, Gray 70 (#525252)
 - Space Before: 63500 EMU
 - Space After: 38100 EMU
 - Keep-with-next enabled
 
 **Body Text:**
-- Regular: 11pt Cambria, Dark Gray (#333333)
+- Regular: 11pt IBM Plex Sans, Gray 100 (#161616)
 - Space Before Paragraph: 38100 EMU
 - Space After Paragraph: 63500 EMU
 
 **Lists:**
 - Use "List Paragraph" style (not bullet points)
-- 11pt Cambria, Regular
+- 11pt IBM Plex Sans, Regular
 - Indent: 0.25"
 - Space: 31750 EMU after each item
 
@@ -100,10 +111,10 @@ All documents use IBM HashiCorp Secure's professional color scheme:
 ### Callout Boxes
 
 Used for key information, decisions, and questions:
-- Single-cell table with soft blue-gray background (#EDF1F5)
-- Thick left accent bar in Primary Blue (#516B7F)
-- Title in bold, Primary Blue (#516B7F), 12pt
-- Content in italic dark gray (#333333), 11pt
+- Single-cell table with Gray 10 background (#F4F4F4)
+- Thick left accent bar in Blue 60 (#0F62FE)
+- Title in bold, Blue 60 (#0F62FE), 12pt
+- Content in italic Gray 100 (#161616), 11pt
 - Padding: 50800 EMU top and bottom
 - Followed by 50800 EMU spacing
 
@@ -116,12 +127,12 @@ Used for key information, decisions, and questions:
 ### Tables
 
 **Header Row:**
-- Background: Blue-Gray (#E4EAEF)
-- Text: Bold, Primary Blue (#516B7F), 10.5pt Cambria
+- Background: Gray 10 (#F4F4F4)
+- Text: Bold, Gray 100 (#161616), 10.5pt IBM Plex Sans
 - Repeats automatically across page breaks
 
 **Data Rows:**
-- Text: Regular Dark Gray, 10.5pt Cambria
+- Text: Regular Gray 100, 10.5pt IBM Plex Sans
 - Consistent column widths (narrow first column for timeline tables)
 - Clear cell borders
 
@@ -134,8 +145,8 @@ Used for key information, decisions, and questions:
 Every research plan generated follows this structure:
 
 1. **Title & Metadata** (Strategic Framing)
-   - Product name (Main Title, Primary Blue)
-   - Plan type (Subtitle, Secondary Blue)
+   - Product name (Main Title, Blue 60)
+   - Plan type (Subtitle, Gray 70)
    - Context (metadata section)
 
 2. **Purpose & Central Question**
@@ -170,6 +181,42 @@ Every research plan generated follows this structure:
    - What the research will produce
    - Success criteria
    - Confidence notes
+
+---
+
+## Findings Report Format
+
+Every written findings report follows this structure (full recipe, tier
+rules, and worked examples in
+`skills/research-findings-report/references/report-structure.md`):
+
+1. **Title & Metadata** — product, "UX Research Findings & Recommendations,"
+   contributors with roles, date, and the declared destination (title page
+   *and* footer note)
+2. **Executive Summary** (≤ half a page) — headline finding first, as a
+   callout box; the decision it informs; featured findings as one-liners with
+   exact counts and confidence
+3. **Method Note** (≤ a third of a page) — n, persona, method, dates, and the
+   limits that most constrain the findings; full detail in the appendix
+4. **Findings** — 3–6 featured, ordered by importance, visual weight tracking
+   evidence strength; each with a claim-as-heading, exact counts, one
+   verbatim quote, interpretation marked as the researcher's read, and
+   confidence + limits in the body
+5. **Recommendations** — design-system table: # / Action / Owner / Depends on
+   / Horizon / Confidence
+6. **What This Means for You** (optional) — a line or two per audience
+7. **Reviewer Notes** — flags from the gates, or an explicit "no open flags"
+8. **Appendix** — summarized in the `.docx`, full content in a companion
+   `.md` file (full findings records, coverage matrix, method detail,
+   participant profile, recommendation alternatives)
+9. **Additional Materials** — linked list: name, one-line description,
+   location, access note
+
+**Body budget: 3–5 rendered pages** before appendix and materials. The
+`.docx` renders through the Research Document Template's `sections` layout,
+so it inherits the palette, IBM Plex Sans, callouts, and tables above. Naming:
+`[Product]_[ResearchType]_FindingsReport_[Date].docx` plus
+`..._Appendix.md` alongside.
 
 ---
 
@@ -262,15 +309,25 @@ Examples:
 
 ---
 
+### Findings Report Generator
+
+**Location:** `skills/research-findings-report/`
+
+**When to use:** After analysis is complete, to write the findings up as a document rather than slides — the readout someone can absorb without a meeting
+
+**Output:** A 3–5 page `.docx` body (rendered through the Research Document Template, so it follows this design system), a companion `.md` appendix, and an additional-materials list. Gated per `EVALUATION-LOOP.md` §4.8
+
+---
+
 ## Quality Checklist
 
 Before sharing any document, verify:
 
 **Visual Design:**
-- ✅ Document font is Cambria throughout (including tables and footers)
-- ✅ Title is Primary Blue (#516B7F)
-- ✅ Section headings are Secondary Blue (#6B8499)
-- ✅ Callout boxes have Soft Blue-Gray (#EDF1F5) background with a #516B7F accent bar
+- ✅ Document font is IBM Plex Sans throughout (including tables and footers)
+- ✅ Title and H1 headings are Blue 60 (#0F62FE)
+- ✅ Section headings (H2) are Gray 70 (#525252)
+- ✅ Callout boxes have Gray 10 (#F4F4F4) background with a #0F62FE accent bar
 - ✅ Section numbering has no gaps (dynamic numbering handles omitted sections)
 - ✅ Spacing is consistent (no cramped text)
 - ✅ Tables have colored headers
@@ -299,6 +356,7 @@ Before sharing any document, verify:
 - ✅ Confidence and limits stated in the researcher's own voice
 - ✅ The summary concludes rather than restates
 - ✅ Acronyms expanded on first use; research-process jargon confined to the method note
+- ✅ No sentence interrupted by an em dash or en dash — finish the thought, then a new sentence or a bracketed aside (`VOICE-AND-STYLE.md` item 22)
 - ✅ No participant-identifying data — including speaker notes, alt text, and screenshots
 
 This design system governs how a document **looks**. `VOICE-AND-STYLE.md` governs how

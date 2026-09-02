@@ -18,17 +18,19 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
-# Brand Colors (see DESIGN-SYSTEM.md)
-PRIMARY_BLUE = RGBColor(0x51, 0x6B, 0x7F)    # Dark grayish blue — titles, H1
-SECONDARY_BLUE = RGBColor(0x6B, 0x84, 0x99)  # Medium grayish blue — subtitles, H2
-BODY_GRAY = RGBColor(0x33, 0x33, 0x33)       # Softer-than-black body text
-META_GRAY = RGBColor(0x59, 0x59, 0x59)       # Metadata and footer text
-CALLOUT_BG = "EDF1F5"                        # Soft blue-gray — callout boxes
-TABLE_HEADER_BG = "E4EAEF"                   # Slightly deeper — table headers
-ACCENT_HEX = "516B7F"                        # Hex form of PRIMARY_BLUE for XML
+# Brand Colors — IBM Carbon tokens (see DESIGN-SYSTEM.md; source:
+# ibm.com/design/language and carbondesignsystem.com/elements/color)
+PRIMARY_BLUE = RGBColor(0x0F, 0x62, 0xFE)    # Blue 60 — titles, H1, accents
+SECONDARY_TEXT = RGBColor(0x52, 0x52, 0x52)  # Gray 70 — subtitles, H2
+BODY_GRAY = RGBColor(0x16, 0x16, 0x16)       # Gray 100 — body text
+META_GRAY = RGBColor(0x52, 0x52, 0x52)       # Gray 70 — metadata and footer text
+CALLOUT_BG = "F4F4F4"                        # Gray 10 (layer) — callout boxes
+TABLE_HEADER_BG = "F4F4F4"                   # Gray 10 (layer) — table headers
+ACCENT_HEX = "0F62FE"                        # Hex form of PRIMARY_BLUE for XML
 
-# Default Font
-DEFAULT_FONT = "Cambria"
+# Default Font — IBM Plex Sans (install from github.com/IBM/plex; Word
+# substitutes a system sans automatically where it isn't installed)
+DEFAULT_FONT = "IBM Plex Sans"
 
 
 class ResearchDocumentGenerator:
@@ -54,7 +56,7 @@ class ResearchDocumentGenerator:
             section.left_margin = Inches(1)
             section.right_margin = Inches(1)
 
-        # Base style: everything (body, lists, table text) inherits Cambria 11pt
+        # Base style: everything (body, lists, table text) inherits IBM Plex Sans 11pt
         normal = self.doc.styles['Normal']
         normal.font.name = DEFAULT_FONT
         normal.font.size = Pt(11)
@@ -205,7 +207,7 @@ class ResearchDocumentGenerator:
             subtitle_run.font.size = Pt(16)
             subtitle_run.font.bold = True
             subtitle_run.font.name = DEFAULT_FONT
-            subtitle_run.font.color.rgb = SECONDARY_BLUE
+            subtitle_run.font.color.rgb = SECONDARY_TEXT
             subtitle_para.paragraph_format.space_after = Emu(76200)
             rule_target = subtitle_para
 
@@ -253,7 +255,7 @@ class ResearchDocumentGenerator:
         self._keep_with_next(h)
         for run in h.runs:
             run.font.name = DEFAULT_FONT
-            run.font.color.rgb = SECONDARY_BLUE
+            run.font.color.rgb = SECONDARY_TEXT
         return h
 
     def add_paragraph(self, text, bold=False, italic=False, space_before=38100, space_after=63500):
@@ -377,7 +379,7 @@ class ResearchDocumentGenerator:
         for i, header in enumerate(headers):
             self.shade_cell(header_cells[i], TABLE_HEADER_BG)
             header_cells[i].text = header
-            self._style_cell_text(header_cells[i], bold=True, size=10.5, color=PRIMARY_BLUE)
+            self._style_cell_text(header_cells[i], bold=True, size=10.5, color=BODY_GRAY)
 
         # Repeat header row across page breaks
         tr_pr = table.rows[0]._tr.get_or_add_trPr()
@@ -430,7 +432,7 @@ class ResearchDocumentGenerator:
             cell = table.rows[0].cells[i]
             self.shade_cell(cell, TABLE_HEADER_BG)
             cell.text = header
-            self._style_cell_text(cell, bold=True, size=10.5, color=PRIMARY_BLUE)
+            self._style_cell_text(cell, bold=True, size=10.5, color=BODY_GRAY)
 
         tr_pr = table.rows[0]._tr.get_or_add_trPr()
         tr_pr.append(OxmlElement('w:tblHeader'))

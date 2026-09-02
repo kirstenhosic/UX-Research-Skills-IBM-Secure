@@ -15,7 +15,7 @@ Create professional, reusable research documents following IBM HashiCorp Secure'
 ## What This Skill Does
 
 Generates polished Word documents (.docx) for UX research artifacts with:
-- **Consistent Design System**: Cambria typography, grayish-blue palette (#516B7F, #6B8499), soft blue-gray callouts with accent bars
+- **Consistent Design System**: IBM Plex Sans typography, IBM Carbon color tokens (Blue 60 #0F62FE, Gray 100 #161616), Gray 10 callouts with Blue 60 accent bars
 - **Two Layouts**:
   - **Research plan** (default) — purpose → scope → research questions → participants → discussion guide → timeline → deliverables
   - **Custom `sections`** — for rationales, briefs, one-pagers, or any document that doesn't fit the plan structure
@@ -82,12 +82,12 @@ plan the config came from before you share the document.
 ## Design System
 
 All documents use IBM HashiCorp Secure's brand-aligned styling (see `../DESIGN-SYSTEM.md` for the full standard):
-- **Font:** Cambria throughout (body, lists, tables, footers), 1.15 line spacing
-- **Primary Blue** (#516B7F) for the title and H1 headings
-- **Secondary Blue** (#6B8499) for the subtitle and H2 headings
-- **Callouts:** soft blue-gray (#EDF1F5) background with a #516B7F left accent bar
-- **Body text:** dark gray (#333333) for comfortable reading
-- **Tables:** blue-gray (#E4EAEF) headers with bold #516B7F text
+- **Font:** IBM Plex Sans throughout (body, lists, tables, footers), 1.15 line spacing
+- **Blue 60** (#0F62FE) for the title and H1 headings
+- **Gray 70** (#525252) for the subtitle and H2 headings
+- **Callouts:** Gray 10 (#F4F4F4) background with a #0F62FE left accent bar
+- **Body text:** Gray 100 (#161616) for comfortable reading
+- **Tables:** Gray 10 (#F4F4F4) headers with bold Gray 100 text
 
 ## Common Scenarios
 

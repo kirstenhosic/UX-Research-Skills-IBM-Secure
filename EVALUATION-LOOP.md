@@ -210,6 +210,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Synthesis findings** | Scenario A | `synthesis-checker` → `significance-checker` → `readability-checker` |
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
+| **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -278,6 +279,12 @@ becomes "most," a hedge gets dropped for punch. The deck gate re-verifies the
 deck against `FINDINGS-CONTRACT.md`, not against the transcripts: every claim
 on a slide must map to a finding record that already passed. Anything on a
 slide with no matching record is blocking.
+
+The findings report runs the same re-check for the same reason. Prose editing
+is where the same drift happens in a document: a quote smoothed to fit a
+paragraph, a count rounded for rhythm, a limit dropped because the sentence
+read better without it. §4.8 holds its bar, and its appendix and linked
+materials are inside the check, not outside it.
 
 ### Why the document template isn't
 
@@ -863,6 +870,67 @@ the willing, and passes every item above.
 
 ---
 
+### 4.8 Findings report
+
+The bar for the written report the `research-findings-report` skill renders:
+a 3-5 page `.docx` body via `research-document-template`, a companion `.md`
+appendix, and an additional-materials list. Like the deck (§4.4), the report
+is a presentation layer over findings that already passed §4.2, and the gate
+re-verifies against the records, not the transcripts. Unlike the deck, the
+report carries an appendix and outbound links, so the check reaches those
+too.
+
+1. Every claim in the body **and the appendix** maps to a finding record that
+   already passed §4.2 — no new evidence introduced during report writing.
+   **Blocking**
+2. Quotes are verbatim, byte-matched to their records, and attributed to the
+   right participant. Counts match `prevalence` exactly — "5 of 8" never
+   becomes "most." One permitted deviation, and only one: a participant name
+   inside a quote replaced by its bracketed ID, per item 14. **Blocking**
+3. The executive summary leads with the headline finding and concludes rather
+   than restates — it would be wrong if the findings were different
+4. Findings are ordered by importance, and visual weight tracks evidence
+   strength — the strongest finding is not the shortest section
+5. Every featured finding states its strength in the researcher's own voice:
+   confidence with its why, and limits, in the body — not only in an appendix
+   table
+6. Observation, interpretation, and recommendation stay visually distinct,
+   and interpretation is marked as the researcher's read
+7. Recommendations are actions with owners, and each carries its `depends_on`
+   finding IDs, `horizon`, and `confidence` from its record. An empty
+   `depends_on` is **blocking** — the action did not come from the research
+8. The body fits its budget: 3-5 rendered pages. Detail moves down a tier
+   (appendix, then additional materials) before a finding is cut
+9. Non-featured findings are named in the body with a one-line pointer to
+   their full records in the appendix — never silently dropped
+10. Every additional-materials entry carries a name, a one-line description,
+    a location, and an access note where restricted. No invented links, and
+    no linked material exposes what the declared destination doesn't permit.
+    The linked-material half is **blocking**; a missing description is a flag
+11. Reviewer Notes are present: unmapped findings retained, unaddressed
+    research questions, open judgment flags — or an explicit "no open flags"
+12. Cleared by `research-safety-checker` for the declared destination,
+    **including the appendix and every linked material**, and the destination
+    appears on the title page, in the footer, and in the filename
+13. Meets `VOICE-AND-STYLE.md`, including its item 22 — no sentence
+    interrupted by an em dash or en dash
+14. Participants appear **only as IDs (P1, P2, …)** — in the body, the
+    appendix, the materials list, filenames, and document metadata. A name
+    inside a verbatim quote is replaced with its bracketed ID ("I'll just ask
+    [P4]"), which is the one alteration item 2 permits; the name-to-ID
+    mapping is reported to the researcher in conversation and written to no
+    file. Role and company references **stay** — they are what make a finding
+    actionable — subject to the destination bar `research-safety-checker`
+    applies (an `external` destination may require generalizing a company),
+    and stricter consent terms always win. Names, email addresses, and phone
+    numbers are **blocking** at every destination, in linked materials as in
+    the document. Appended 2026-09-02; items 1–13 are cited by number above
+
+Items 1, 2, the `depends_on` half of 7, the linked-material half of 10, 12,
+and the names half of 14 are blocking. The rest are flags.
+
+---
+
 ## 5. Research-question coverage — flag both directions
 
 A coverage check that only runs one way misses half the problem. Run it both
@@ -1113,6 +1181,22 @@ plan to be finished.
 5. research-synthesis-checker (deck mode — verify against findings records)
 6. research-readability-checker
 7. Release
+```
+
+**Producing a findings report:**
+
+```
+1. Findings must have cleared the findings sequence first
+2. research-findings-report validates its input — records exist, each carries
+   the minimum viable fields, destination is declared. Gaps are reported by
+   finding ID, never filled in
+3. Draft report (research-findings-report) — .docx body via
+   research-document-template, plus the .md appendix and materials list
+4. research-safety-checker (report mode — appendix and linked materials
+   included)
+5. research-synthesis-checker (report mode — verify against findings records)
+6. research-readability-checker
+7. Release with Reviewer Notes attached
 ```
 
 Cap: 2 revisions per gate. Then a person looks at it.
