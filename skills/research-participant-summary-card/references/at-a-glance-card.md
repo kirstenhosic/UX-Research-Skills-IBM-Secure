@@ -242,9 +242,10 @@ right: Anonymized — no names, accounts, or individual attribution  |  [Month Y
 
 ## Other formats
 
-**Short email body.** 150 words max. Three bolded conditions inline, one line
+**Short email body.** Drafted by the `participant-impact-summary` skill, not
+this one. 150 words max. Three bolded conditions inline, one line
 on what happens next, card embedded. No attachment: the highest open rate of
-anything in this skill, because corporate laptops make downloads a chore.
+anything here, because corporate laptops make downloads a chore.
 
 **"You said / We heard" one-pager (`.docx`).** Two columns: the requirement
 in their language, then what it means for product thinking. Renders through

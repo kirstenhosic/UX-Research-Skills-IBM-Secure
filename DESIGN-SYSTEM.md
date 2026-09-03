@@ -224,7 +224,7 @@ so it inherits the palette, IBM Plex Sans, callouts, and tables above. Naming:
 ## Participant Summary Format (participant-facing)
 
 The close-the-loop artifact that goes back to the people who were
-interviewed. Governed by `skills/research-participant-summary/SKILL.md`;
+interviewed. Governed by `skills/research-participant-summary-card/SKILL.md`;
 full build reference in that skill's
 `references/at-a-glance-card.md`.
 
@@ -253,9 +253,9 @@ four-person account, "3 of 4" is identifying.
 Naming: `[Product]_ParticipantSummary_AtAGlance_[YYYY-MM].png`, with its
 `.html` source kept alongside so copy can be re-rendered.
 
-Alternative formats offered by the same skill: short email body, a "You said /
-We heard" `.docx` one-pager (via the Research Document Template), and a slide
-summary.
+Alternative formats produced by this skill: a "You said / We heard" `.docx`
+one-pager (via the Research Document Template) and a slide summary. The email
+that carries them is drafted by `skills/participant-impact-summary/`.
 
 ---
 
@@ -360,7 +360,7 @@ Examples:
 
 ### Participant Summary Generator
 
-**Location:** `skills/research-participant-summary/`
+**Location:** `skills/research-participant-summary-card/`
 
 **When to use:** After the internal report is settled, to close the loop with the people you interviewed — a summary card, thank-you email, or customer recap that leaves the company
 

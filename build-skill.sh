@@ -13,7 +13,7 @@
 # drifts from its source without anyone noticing.
 set -e
 cd "$(dirname "$0")"
-SKILLS="research-readout-deck research-findings-report participant-impact-summary research-participant-summary"
+SKILLS="research-readout-deck research-findings-report participant-impact-summary research-participant-summary-card"
 STAMP=202001010000.00   # fixed; the archives are content-addressed, not dated
 
 for NAME in $SKILLS; do

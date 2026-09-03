@@ -1,22 +1,25 @@
 ---
-name: research-participant-summary
+name: research-participant-summary-card
 description: >-
-  Produce the artifact that goes back to the people who gave you their time:
-  a sanitized, high-level summary of what a study heard, written for study
-  participants and participating accounts rather than for internal
-  stakeholders. Default output is a one-page "At a Glance" card (PNG, IBM
-  Carbon design system); also produces a short email body, a "You said / We
-  heard" one-pager .docx, and a slide-ready summary. Use whenever someone
-  wants to close the loop with participants, thank an account, share results
-  back with customers, or send a study recap externally. Trigger on "close
-  the loop," "share back with participants," "participant summary," "customer
-  recap," "thank-you summary," "what we heard card," or "send results to the
-  accounts we interviewed," even when the word "skill" isn't used. This is an
-  externally-destined artifact and is governed by the commitment-safety rules
-  below, which are stricter than any internal report.
+  Design and render the participant-facing DOCUMENT that a close-the-loop
+  message attaches or embeds: a one-page "At a Glance" card (PNG plus
+  editable HTML, IBM Carbon design system) summarizing what a study heard,
+  written for the people who were interviewed rather than for internal
+  stakeholders. Also produces a "You said / We heard" one-pager .docx or a
+  slide-ready summary on request. Use when someone wants a visual, designed,
+  or shareable artifact for participants. Trigger on "at a glance card,"
+  "what we heard card," "participant one-pager," "study summary graphic,"
+  "visual recap for participants," "make it shareable," or "something nicer
+  than an email to send the accounts we interviewed," even when the word
+  "skill" isn't used. NOT the email itself: for the message body, the
+  recipient tiering, and sourced "what changed" items, use
+  `participant-impact-summary`, which this skill is designed to accompany.
+  Most studies run both. Because a designed page under a company logo reads
+  as a roadmap in a way an email does not, the commitment-safety rules below
+  are stricter than any internal report.
 ---
 
-# Research Participant Summary
+# Research Participant Summary Card
 
 The findings report tells your organization what to build. This tells the
 people you interviewed that talking to you mattered. Different reader,
@@ -155,7 +158,7 @@ carries the credibility.
 | Format | Output | Best for | Effort |
 |---|---|---|---|
 | **At a Glance card** (default) | `.png` from HTML | Email embed, Slack, forwarding. Highest reach, lowest friction | Low |
-| **Short email body** | Markdown | No attachment to open on a locked-down corporate laptop. Highest open rate of anything here | Lowest |
+| **Short email body** | Markdown | No attachment to open on a locked-down corporate laptop. Highest open rate of anything here. **Owned by `participant-impact-summary`; use that skill to draft it** | Lowest |
 | **"You said / We heard" one-pager** | `.docx` | The artifact a participant forwards to their own leadership | Medium |
 | **Slide summary** | `.pptx` or PDF | An account walking their own team through it | Medium |
 | **Video walkthrough** | script only | Warmest, but cannot be redacted after sending. Requires comms/legal sign-off; produce a script, never the recording | High |

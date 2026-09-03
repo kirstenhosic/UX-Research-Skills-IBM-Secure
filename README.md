@@ -191,7 +191,7 @@ product owner confirms every impact claim. The source is
 [`skills/participant-impact-summary/`](skills/participant-impact-summary/).
 
 **And the card or one-pager that email attaches?**
-[`skills/research-participant-summary/`](skills/research-participant-summary/)
+[`skills/research-participant-summary-card/`](skills/research-participant-summary-card/)
 renders the designed artifact: a one-page "At a Glance" card (PNG in IBM
 Secure's design system) by default, or a "You said / We heard" `.docx`
 one-pager or slide summary. Same recipient and same destination rule as the
@@ -316,7 +316,7 @@ flowchart TD
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 
-    ENDR -->|"closing the loop with participants?"| PS["<b>research-participant-summary</b><br/>the At a Glance card / email / one-pager<br/>that goes back to the people you interviewed"]
+    ENDR -->|"closing the loop with participants?"| PS["<b>research-participant-summary-card</b><br/>the designed At a Glance card / one-pager<br/>that the impact email attaches"]
     PS -.->|"it leaves the company —<br/>stricter safety bar, plus a<br/>commitment-language scan"| PF
 
     classDef entry  fill:#15803D,stroke:#0B4A24,stroke-width:4px,color:#FFFFFF

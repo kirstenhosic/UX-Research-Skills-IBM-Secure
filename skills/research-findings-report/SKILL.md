@@ -439,9 +439,10 @@ that goes back to the people who gave you their time, and it should never be
 retrofitted into one by deleting a few sections.
 
 When the report is settled, offer the participant-facing summary and hand off
-to the `research-participant-summary` skill. It produces a one-page "At a
-Glance" card by default, plus a short email body, a "You said / We heard"
-one-pager, or a slide summary. It exists separately because a participant
+to the participant skills: `participant-impact-summary` drafts the
+close-the-loop email, and `research-participant-summary-card` produces the
+one-page "At a Glance" card it attaches, or a "You said / We heard" one-pager
+or slide summary. They exist separately because a participant
 summary carries a stricter data bar than this report (no participant IDs, no
 exact counts, no verbatim quotes, no company names) and a risk this report
 doesn't have: a requirement stated flat under your company's logo reads to a

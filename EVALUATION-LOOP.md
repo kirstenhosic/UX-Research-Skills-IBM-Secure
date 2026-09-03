@@ -215,7 +215,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Participant impact summary** | `participant-impact-summary` | `synthesis-checker` (impact mode) → `readability-checker` |
-| **Participant summary card** | `research-participant-summary` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker`. Pre-flight `safety-checker` runs at the recipient's bar and its verdict is blocking — see §4.10 |
+| **Participant summary card** | `research-participant-summary-card` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker`. Pre-flight `safety-checker` runs at the recipient's bar and its verdict is blocking — see §4.10 |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -1013,7 +1013,7 @@ address.
 ### 4.10 Participant summary card
 
 The bar for the participant-facing *document* the
-`research-participant-summary` skill produces: the At a Glance card by
+`research-participant-summary-card` skill produces: the At a Glance card by
 default, or a one-pager or slide summary. §4.9 governs the participant
 **email**; this section governs the artifact that gets attached to it,
 embedded in it, or handed to an account team. A study that sends both runs

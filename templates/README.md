@@ -34,7 +34,7 @@ optional.
 | 08 | [Research report](08-findings-report.md) | Writing the findings and recommendations document | `skills/research-findings-report`, §4.8 |
 | 09 | [Readout deck](09-readout-deck.md) | Building the share-out slides | `skills/research-readout-deck`, §4.4 |
 | 10 | [Participant impact message](10-participant-impact-message.md) | Closing the loop with participants after release | `skills/participant-impact-summary`, §4.9 |
-| 11 | [Participant summary card](11-participant-summary-card.md) | You want a designed one-pager to attach to that message | `skills/research-participant-summary`, §4.10 |
+| 11 | [Participant summary card](11-participant-summary-card.md) | You want a designed one-pager to attach to that message | `skills/research-participant-summary-card`, §4.10 |
 
 ## Shareable copies and page furniture
 

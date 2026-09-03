@@ -12,7 +12,7 @@ studies send both, and a study that does runs both gates.
 apply to this card in full** — same recipient tiering, same aggregation rule,
 same ban on implying decisions that have not been made. Read template 10
 first; this template covers only what a designed document adds.
-`skills/research-participant-summary` carries the full rules and the
+`skills/research-participant-summary-card` carries the full rules and the
 reference HTML.
 
 ## Why a card needs its own bar
@@ -68,7 +68,7 @@ replaced it, and who owns the message. Never drop a finding silently.
 ## Structure
 
 Six zones. Full specification, palette values, and reference HTML:
-`skills/research-participant-summary/references/at-a-glance-card.md`.
+`skills/research-participant-summary-card/references/at-a-glance-card.md`.
 
 ```
 1  EYEBROW          Secure UX Design  |  [Product]
