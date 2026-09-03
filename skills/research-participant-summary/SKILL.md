@@ -241,9 +241,14 @@ is safe. "Shaping the roadmap" is a soft promise. Use the former.
 
 ## Gates and handoff
 
-Runs `research-safety-checker` (pre-flight, mandatory — this artifact leaves
-the company) and `research-readability-checker`. `research-synthesis-checker`
-applies when findings records exist.
+`EVALUATION-LOOP.md` §4.9 is the Definition of Done for this artifact. Runs
+`research-safety-checker` (pre-flight, mandatory, at the `external` bar —
+this artifact leaves the company) and `research-readability-checker`.
+`research-synthesis-checker` applies when findings records exist.
+
+§4.9 makes seven items blocking, and three of them invert rules that hold
+everywhere else in the suite: no participant IDs, no exact counts, no
+verbatim quotes. That is deliberate. The audience changed, not the standard.
 
 Add one check the other gates don't cover: **the commitment scan**. Re-read
 every line as an unfriendly reader at the participant's company. Does any

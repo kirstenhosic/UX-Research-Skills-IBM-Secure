@@ -268,10 +268,21 @@ regenerate the rest. Same goes for the `RELEASE GATE` / `REVISION PROTOCOL` /
 
 **`rubrics/` is generated — never edit it.** Each file there is §2 plus one
 §4.x of `EVALUATION-LOOP.md`, extracted verbatim by `./build-rubrics.sh` so a
-checker session can carry its own rubric without the other six. Edit
+checker session can carry its own rubric without the other eight. Edit
 `EVALUATION-LOOP.md`, run the script, commit both. The check is the same as
 the `.skill` build: run it and confirm `git status` stays clean — a dirty
 rubric after a rebuild means someone edited the excerpt instead of the source.
+Adding a §4.x section is a two-file edit: the section in `EVALUATION-LOOP.md`,
+then its `emit` line in `build-rubrics.sh`. Without the second, the rubric
+silently never generates.
+
+**§4.9 inverts three rules on purpose.** The participant summary gate forbids
+participant IDs, exact prevalence counts, and verbatim quotes — all three of
+which every other gate in the file *requires*. It is the only artifact that
+leaves the company and goes back to the people who were interviewed, and at a
+four-person account "3 of 4" identifies its source. If a future edit
+"corrects" §4.9 to match §4.2 and §4.8, it has broken the gate. The reasoning
+is written into the section; leave it there.
 
 **Widening the verdict schema is a nine-file edit.** The `result` and
 `next_action` enums in §2 of `EVALUATION-LOOP.md` are repeated verbatim in the

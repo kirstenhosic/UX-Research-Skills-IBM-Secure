@@ -1,0 +1,286 @@
+{
+  "title": "IBM PDF Style Reference",
+  "description": "Reference-only mirror of the hardcoded styling constants used by scripts/generate_ibm_pdf.py. The script does NOT load this file at runtime; edit the script to change behavior. This file exists so a human can see colors, fonts, margins, and layout values in one place.",
+
+  "page": {
+    "size": "letter",
+    "width_pt": 612,
+    "height_pt": 792,
+    "margins": {
+      "left": 0.75,
+      "right": 0.75,
+      "top": 0.75,
+      "bottom": 0.85
+    },
+    "content_width_inches": 7.0,
+    "unit": "inches"
+  },
+
+  "fonts": {
+    "primary_family": "IBM Plex Sans",
+    "font_dir_resolution": [
+      "--font-dir CLI flag",
+      "~/Documents/IBM_Plex_Sans/static",
+      "ReportLab built-in fonts (graceful fallback if no IBM Plex install is found)"
+    ],
+    "weights": [
+      { "name": "IBMPlexSans-Light", "file": "IBMPlexSans-Light.ttf", "weight": 300 },
+      { "name": "IBMPlexSans-Regular", "file": "IBMPlexSans-Regular.ttf", "weight": 400 },
+      { "name": "IBMPlexSans-Medium", "file": "IBMPlexSans-Medium.ttf", "weight": 500 },
+      { "name": "IBMPlexSans-SemiBold", "file": "IBMPlexSans-SemiBold.ttf", "weight": 600 },
+      { "name": "IBMPlexSans-Bold", "file": "IBMPlexSans-Bold.ttf", "weight": 700 },
+      { "name": "IBMPlexSans-Italic", "file": "IBMPlexSans-Italic.ttf", "weight": "400i" },
+      { "name": "IBMPlexSans-LightItalic", "file": "IBMPlexSans-LightItalic.ttf", "weight": "300i" },
+      { "name": "IBMPlexSans-MediumItalic", "file": "IBMPlexSans-MediumItalic.ttf", "weight": "500i" },
+      { "name": "IBMPlexSans-SemiBoldItalic", "file": "IBMPlexSans-SemiBoldItalic.ttf", "weight": "600i" },
+      { "name": "IBMPlexSans-BoldItalic", "file": "IBMPlexSans-BoldItalic.ttf", "weight": "700i" }
+    ],
+    "family_mapping": {
+      "normal": "IBMPlexSans-Regular",
+      "bold": "IBMPlexSans-Bold",
+      "italic": "IBMPlexSans-Italic",
+      "boldItalic": "IBMPlexSans-BoldItalic"
+    }
+  },
+
+  "colors": {
+    "blue_10": "#edf5ff",
+    "blue_20": "#d0e2ff",
+    "blue_30": "#a6c8ff",
+    "blue_40": "#78a9ff",
+    "blue_60": "#0f62fe",
+    "blue_80": "#002d9c",
+    "blue_90": "#001d6c",
+    "gray_10": "#f4f4f4",
+    "gray_20": "#e0e0e0",
+    "gray_50": "#8d8d8d",
+    "gray_60": "#6f6f6f",
+    "gray_70": "#525252",
+    "gray_100": "#161616",
+    "white": "#ffffff",
+    "cyan_09": "#e5f6ff",
+    "cyan_11": "#82cfff",
+    "green_60": "#198038",
+    "red_60": "#da1e28"
+  },
+
+  "text_styles": {
+    "h1": {
+      "font": "IBMPlexSans-Light",
+      "size": 32,
+      "leading": 36,
+      "color": "gray_100",
+      "space_before": 0,
+      "space_after": 6
+    },
+    "h2": {
+      "font": "IBMPlexSans-Medium",
+      "size": 16,
+      "leading": 22,
+      "color": "gray_100",
+      "space_before": 16,
+      "space_after": 6
+    },
+    "h3": {
+      "font": "IBMPlexSans-Medium",
+      "size": 12,
+      "leading": 17,
+      "color": "gray_100",
+      "space_before": 12,
+      "space_after": 5
+    },
+    "body": {
+      "font": "IBMPlexSans-Regular",
+      "size": 9.5,
+      "leading": 14.5,
+      "color": "gray_100",
+      "space_before": 0,
+      "space_after": 6,
+      "alignment": "left"
+    },
+    "body_italic": {
+      "font": "IBMPlexSans-Italic",
+      "size": 9.5,
+      "leading": 14.5,
+      "color": "gray_70",
+      "space_before": 0,
+      "space_after": 6
+    },
+    "bullet": {
+      "font": "IBMPlexSans-Regular",
+      "size": 9.5,
+      "leading": 14.5,
+      "color": "gray_100",
+      "space_after": 3,
+      "left_indent": 18,
+      "bullet_indent": 0,
+      "bullet_char": "\u2014"
+    },
+    "sub_bullet": {
+      "font": "IBMPlexSans-Regular",
+      "size": 9.5,
+      "leading": 14.5,
+      "color": "gray_100",
+      "space_after": 3,
+      "left_indent": 36,
+      "bullet_indent": 18,
+      "bullet_char": "\u2022"
+    },
+    "caption": {
+      "font": "IBMPlexSans-Regular",
+      "size": 8,
+      "leading": 11,
+      "color": "gray_60",
+      "space_before": 2,
+      "space_after": 4
+    },
+    "source": {
+      "font": "IBMPlexSans-Regular",
+      "size": 7.5,
+      "leading": 10,
+      "color": "gray_60",
+      "space_before": 2,
+      "space_after": 2
+    },
+    "cover_title": {
+      "font": "IBMPlexSans-Light",
+      "size": 45,
+      "leading": 50,
+      "color": "white",
+      "space_after": 27
+    },
+    "cover_subtitle": {
+      "font": "IBMPlexSans-Light",
+      "size": 24,
+      "leading": 26,
+      "color": "cyan_11",
+      "space_after": 14
+    },
+    "cover_description": {
+      "font": "IBMPlexSans-Light",
+      "size": 14,
+      "leading": 20,
+      "color": "cyan_09"
+    },
+    "cover_meta_label": {
+      "font": "IBMPlexSans-Light",
+      "size": 12,
+      "leading": 13,
+      "color": "cyan_11",
+      "space_after": 2
+    },
+    "cover_meta_value": {
+      "font": "IBMPlexSans-Light",
+      "size": 14,
+      "leading": 15,
+      "color": "white",
+      "space_after": 39
+    },
+    "toc_number": {
+      "font": "IBMPlexSans-Light",
+      "size": 14,
+      "leading": 24,
+      "color": "blue_60"
+    },
+    "toc_text": {
+      "font": "IBMPlexSans-Light",
+      "size": 14,
+      "leading": 24,
+      "color": "gray_100"
+    },
+    "table_header": {
+      "font": "IBMPlexSans-SemiBold",
+      "size": 8.5,
+      "leading": 12,
+      "color": "gray_100"
+    },
+    "table_cell": {
+      "font": "IBMPlexSans-Regular",
+      "size": 8.5,
+      "leading": 12,
+      "color": "gray_100"
+    },
+    "callout_text": {
+      "font": "IBMPlexSans-Italic",
+      "size": 9,
+      "leading": 14,
+      "color": "blue_90",
+      "left_indent": 12,
+      "right_indent": 12
+    },
+    "callout_attribution": {
+      "font": "IBMPlexSans-Regular",
+      "size": 8,
+      "leading": 11,
+      "color": "gray_60",
+      "left_indent": 12,
+      "prefix": "\u2014 "
+    },
+    "footer_text": {
+      "font": "IBMPlexSans-Regular",
+      "size": 6.5,
+      "color": "gray_50"
+    }
+  },
+
+  "table_style": {
+    "header_background": "gray_10",
+    "header_line_below": { "width": 1, "color": "gray_100" },
+    "row_line_below": { "width": 0.4, "color": "gray_20" },
+    "alternating_rows": ["white", "#fafafa"],
+    "cell_padding": { "top": 5, "bottom": 5, "left": 6, "right": 6 },
+    "outer_border": false,
+    "vertical_lines": false,
+    "repeat_header": true
+  },
+
+  "callout_box": {
+    "background": "blue_10",
+    "border_color": "blue_60",
+    "border_width": 3,
+    "corner_radius": 3,
+    "padding": { "top": 10, "bottom": 10, "left": 12, "right": 12 }
+  },
+
+  "section_header": {
+    "blue_bar": { "width": 40, "height": 3, "color": "blue_60" },
+    "underrule": { "color": "gray_20", "thickness": 0.5 },
+    "spacing": { "before_bar": 4, "after_bar": 6, "after_title": 4, "after_rule": 10 }
+  },
+
+  "thin_rule": {
+    "color": "gray_20",
+    "thickness": 0.5,
+    "height": 4
+  },
+
+  "cover_page": {
+    "background": "#071c68",
+    "accent_line": {
+      "color": "cyan_11",
+      "width": 1,
+      "y_offset": 122
+    },
+    "title_push_down": 1.7,
+    "metadata_y_from_bottom": 188,
+    "logo": {
+      "file": "ibm-rebus-totem.svg",
+      "width": 45,
+      "height": 100,
+      "position": "bottom_right",
+      "margin_right": 57,
+      "margin_bottom": 57
+    }
+  },
+
+  "content_footer": {
+    "_note": "The script draws a footer only -- there is no top header rule. Page number is appended to the right-hand text as ' . Page N'.",
+    "rule_y_offset_inches": -0.15,
+    "text_y_offset_inches": -0.35,
+    "rule": { "color": "gray_20", "width": 0.5 },
+    "left_template": "IBM Design Language  |  {title}  |  {date}",
+    "right_template": "IBM Confidential  ·  Page {page}"
+  },
+
+  "link_color": "blue_60"
+}

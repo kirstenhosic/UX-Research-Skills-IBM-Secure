@@ -211,6 +211,7 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
+| **Participant summary** | `research-participant-summary` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker`. Pre-flight `safety-checker` runs at the `external` bar and its verdict is blocking — see §4.9 |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -928,6 +929,76 @@ too.
 
 Items 1, 2, the `depends_on` half of 7, the linked-material half of 10, 12,
 and the names half of 14 are blocking. The rest are flags.
+
+---
+
+### 4.9 Participant summary
+
+The bar for the participant-facing artifact the
+`research-participant-summary` skill produces: the At a Glance card by
+default, or an email body, one-pager, or slide summary. Like the deck (§4.4)
+and the report (§4.8), it is a presentation layer over findings that already
+passed §4.2, and the gate re-verifies against the records.
+
+Two things make this gate different from every other one in this file. The
+artifact **leaves the company**, so the safety bar is stricter than
+`internal-org` or even the usual `external` case. And it states customer
+requirements under the company's own logo, which creates a failure mode no
+internal document has: a requirement written flat reads as a promise the
+customer can hold the company to. Items 1 and 2 below exist for that second
+problem and have no equivalent anywhere else in this loop.
+
+1. **Every substantive statement is attributed to the participant** — "You
+    described…", "You asked for…", "You told us…" — not stated flat as fact
+    or as company intent. A requirement without its attribution is a
+    commitment. **Blocking**
+2. **No retirement, end-of-life, deprecation, licensing, pricing, support-
+    window, or contractual language**, even when a participant raised it and
+    even when correctly attributed. These are owned by PM, commercial, and
+    legal; writing them to a customer signals a plan their procurement team
+    will act on. The underlying need may appear in neutral form (a retirement
+    request becomes "predictability"). **Blocking**
+3. Implementation approaches appear as illustration, never as description of
+    what is being built — "a compatibility layer, for example a proxy or
+    wrapper." Naming the capability is fine; previewing the design is not
+4. **No participant IDs anywhere.** Unlike §4.4, §4.8, and every other
+    artifact in this file, `P1`/`P2` are *not* permitted here. IDs are
+    internal scaffolding that signal per-person attribution exists, which
+    invites a reader at a multi-participant account to work out who said
+    what. **Blocking**
+5. **No exact prevalence counts.** This inverts §4.2 and §4.8 item 2, and the
+    inversion is deliberate: at a four-person account "3 of 4" is a puzzle
+    with a solvable answer. Aggregate, unquantified language is required.
+    **Blocking**
+6. **No verbatim quotes.** A distinctive phrasing identifies its speaker to
+    colleagues who were in the room. Paraphrase into collective voice.
+    **Blocking**
+7. No company or account names, including the reader's own, and no role title
+    specific enough to identify one person. **Blocking**
+8. Findings are framed as conditions for success, not as a list of blockers,
+    and no line mirrors internal doubt back at the customer (no "you are not
+    saying no")
+9. The customer is the actor: "adoption," not "migration," including derived
+    forms
+10. Written in second person throughout, in the participant's language — no
+    finding IDs, RQ numbers, method vocabulary, or unexpanded acronyms
+11. Carries a month and year, and an anonymization disclosure. An undated
+    customer-facing artifact circulates indefinitely and gets read as current
+12. Impact language stays soft: "informing our product thinking," not
+    "shaping the roadmap." **Blocking**
+13. Cleared by `research-safety-checker` at the `external` destination
+14. Meets `VOICE-AND-STYLE.md`, including its item 22 — no sentence
+    interrupted by an em dash or en dash. This bites hardest here, because
+    the format invites appositives
+15. Rendered output has been viewed, not just generated — nothing clipped,
+    overflowing, or reflowed off the card
+
+Items 1, 2, 4, 5, 6, 7, and 12 are blocking. The rest are flags.
+
+A verdict of `PASS` on this gate still does not mean "ready to send." It
+means ready for the researcher's review and for whoever owns customer
+communications. No other artifact in this file carries that caveat, and this
+one always does.
 
 ---
 

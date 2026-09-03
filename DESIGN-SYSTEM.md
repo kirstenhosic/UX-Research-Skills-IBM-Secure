@@ -363,7 +363,7 @@ Examples:
 
 **When to use:** After the internal report is settled, to close the loop with the people you interviewed — a summary card, thank-you email, or customer recap that leaves the company
 
-**Output:** A one-page "At a Glance" PNG card (rendered headless from HTML, following this design system) plus its editable `.html` source; optionally a short email body, a "You said / We heard" `.docx` one-pager, or a slide summary. Stricter anonymization than any internal artifact, and subject to a commitment-language scan before release
+**Output:** A one-page "At a Glance" PNG card (rendered headless from HTML, following this design system) plus its editable `.html` source; optionally a short email body, a "You said / We heard" `.docx` one-pager, or a slide summary. Stricter anonymization than any internal artifact, and subject to a commitment-language scan before release. Gated per `EVALUATION-LOOP.md` §4.9
 
 ---
 
