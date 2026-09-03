@@ -166,6 +166,19 @@ finding ID. Unzip it to inspect; the source is
 the deck, it turns finished findings into a deliverable — if they aren't
 synthesized yet, run Scenario A first.
 
+**Need to share results back with the people you interviewed?**
+[`skills/research-participant-summary/`](skills/research-participant-summary/)
+produces the close-the-loop artifact: a one-page "At a Glance" card (PNG in
+IBM Secure's design system) by default, plus a short email body, a "You said /
+We heard" `.docx` one-pager, or a slide summary. It is deliberately separate
+from the findings report because a participant-facing document has a stricter
+data bar (no participant IDs, no exact counts, no verbatim quotes, no company
+names) and a risk the internal report doesn't carry: a requirement stated flat
+under your company's logo reads to a customer as a roadmap promise. The skill
+enforces participant attribution on every claim and excludes retirement,
+licensing, and pricing language even when a participant raised it. Doing this
+well is also the cheapest way to keep an account saying yes to your next study.
+
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
 a separate tool Dr. Morgan hands off to. It renders a `.docx` in IBM Secure's
@@ -273,6 +286,9 @@ flowchart TD
     RPT -.->|"a report is a new artifact —<br/>it runs the checks again"| PF
 
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
+
+    ENDR -->|"closing the loop with participants?"| PS["<b>research-participant-summary</b><br/>the At a Glance card / email / one-pager<br/>that goes back to the people you interviewed"]
+    PS -.->|"it leaves the company —<br/>stricter safety bar, plus a<br/>commitment-language scan"| PF
 
     classDef entry  fill:#15803D,stroke:#0B4A24,stroke-width:4px,color:#FFFFFF
     classDef coach  fill:#0E7490,stroke:#083F4F,stroke-width:2px,color:#FFFFFF

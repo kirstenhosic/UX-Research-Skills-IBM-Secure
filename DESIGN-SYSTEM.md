@@ -220,6 +220,44 @@ so it inherits the palette, IBM Plex Sans, callouts, and tables above. Naming:
 
 ---
 
+## Participant Summary Format (participant-facing)
+
+The close-the-loop artifact that goes back to the people who were
+interviewed. Governed by `skills/research-participant-summary/SKILL.md`;
+full build reference in that skill's
+`references/at-a-glance-card.md`.
+
+**Default format — the "At a Glance" card.** One page, portrait, 1200 × 1500
+CSS px, exported as PNG at 2× (2400 × 3000). Six zones:
+
+1. **Eyebrow** — `Secure UX Design  |  [Product]`, uppercase, Gray 70
+2. **Title** — `What You Told Us About Adopting [Product]`, Blue 60, 50pt,
+   two lines; subtitle in Gray 70, then a 4px Blue 60 rule
+3. **Three stat tiles** — Gray 10 fill, 6px Blue 60 left bar, 40pt figure.
+   Never a session duration
+4. **Headline callout** — Gray 10 with Blue 60 accent bar, one sentence
+5. **Three numbered conditions** — 1px `#E4EAEF` border, 52px Blue 60
+   numbered square, bold title, supporting line opening with "You told us…"
+6. **Secondary list** — 10px Blue 60 square bullets, three items
+
+Footer: 1px top border, thank-you at left, anonymization disclosure plus
+**month and year** at right.
+
+**This format has a stricter data bar than any internal document:** no
+participant IDs, no exact prevalence counts, no verbatim quotes, no company
+or account names. That inverts the usual rule in "Data Integrity Standards"
+below — because the audience changed, not because the standard relaxed. At a
+four-person account, "3 of 4" is identifying.
+
+Naming: `[Product]_ParticipantSummary_AtAGlance_[YYYY-MM].png`, with its
+`.html` source kept alongside so copy can be re-rendered.
+
+Alternative formats offered by the same skill: short email body, a "You said /
+We heard" `.docx` one-pager (via the Research Document Template), and a slide
+summary.
+
+---
+
 ## Deck (Presentation) Format
 
 Every readout deck follows this structure:
@@ -316,6 +354,16 @@ Examples:
 **When to use:** After analysis is complete, to write the findings up as a document rather than slides — the readout someone can absorb without a meeting
 
 **Output:** A 3–5 page `.docx` body (rendered through the Research Document Template, so it follows this design system), a companion `.md` appendix, and an additional-materials list. Gated per `EVALUATION-LOOP.md` §4.8
+
+---
+
+### Participant Summary Generator
+
+**Location:** `skills/research-participant-summary/`
+
+**When to use:** After the internal report is settled, to close the loop with the people you interviewed — a summary card, thank-you email, or customer recap that leaves the company
+
+**Output:** A one-page "At a Glance" PNG card (rendered headless from HTML, following this design system) plus its editable `.html` source; optionally a short email body, a "You said / We heard" `.docx` one-pager, or a slide summary. Stricter anonymization than any internal artifact, and subject to a commitment-language scan before release
 
 ---
 

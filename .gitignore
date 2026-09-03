@@ -1,0 +1,30 @@
+# Research data — never commit
+# Participant transcripts, session notes, and study outputs belong in the
+# team's research storage, not in this skills repo. Raw transcripts carry
+# real participant names; once committed they persist in git history even
+# after deletion.
+*research materials/
+*Research Materials/
+*.vtt
+*transcripts*/
+*Transcripts*/
+
+# Study working documents
+~$*
+*Rationale.docx
+Public Preview Detailed Plan.docx
+
+# Dependencies
+node_modules/
+package-lock.json
+package.json
+
+# Editor and tooling
+.vscode/
+.bob/
+.idea/
+
+# OS
+.DS_Store
+**/.DS_Store
+Thumbs.db

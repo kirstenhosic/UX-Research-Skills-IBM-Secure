@@ -14,7 +14,7 @@ import json
 import sys
 from docx import Document
 from docx.shared import Pt, RGBColor, Inches, Emu
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_TAB_ALIGNMENT, WD_TAB_LEADER
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -36,9 +36,10 @@ DEFAULT_FONT = "IBM Plex Sans"
 class ResearchDocumentGenerator:
     """Generate professional research documents (plans, rationales, custom)."""
 
-    def __init__(self, config):
+    def __init__(self, config, toc_entries=None):
         """Initialize with document configuration"""
         self.config = config
+        self.toc_entries = toc_entries or []
         self.doc = Document()
         self.section_num = 0  # dynamic H1 numbering — no gaps when sections are omitted
         self.omissions = []   # every section that did not render, and why
@@ -258,6 +259,68 @@ class ResearchDocumentGenerator:
             run.font.color.rgb = SECONDARY_TEXT
         return h
 
+    def add_toc(self, title="Table of Contents", entries=None):
+        """Add a native Word Table of Contents field block populated with cached entries."""
+        toc_items = entries if entries is not None else self.toc_entries
+
+        h = self.doc.add_heading(title, level=2)
+        h.paragraph_format.space_before = Emu(101600)
+        h.paragraph_format.space_after = Emu(44450)
+        self._keep_with_next(h)
+        for run in h.runs:
+            run.font.name = DEFAULT_FONT
+            run.font.color.rgb = SECONDARY_TEXT
+
+        p_begin = self.doc.add_paragraph()
+        p_begin.paragraph_format.space_before = Emu(19050)
+        p_begin.paragraph_format.space_after = Emu(19050)
+        run = p_begin.add_run()
+        r = run._r
+
+        fldChar1 = OxmlElement('w:fldChar')
+        fldChar1.set(qn('w:fldCharType'), 'begin')
+        instrText = OxmlElement('w:instrText')
+        instrText.set(qn('xml:space'), 'preserve')
+        instrText.text = r'TOC \o "1-3" \h \z \u'
+        fldChar2 = OxmlElement('w:fldChar')
+        fldChar2.set(qn('w:fldCharType'), 'separate')
+
+        r.append(fldChar1)
+        r.append(instrText)
+        r.append(fldChar2)
+
+        if toc_items:
+            for entry_title, page_num in toc_items:
+                toc_p = self.doc.add_paragraph()
+                toc_p.paragraph_format.space_before = Pt(2)
+                toc_p.paragraph_format.space_after = Pt(2)
+                toc_p.paragraph_format.tab_stops.add_tab_stop(Inches(6.5), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+                
+                r_title = toc_p.add_run(entry_title)
+                r_title.font.name = DEFAULT_FONT
+                r_title.font.size = Pt(10.5)
+                r_title.font.color.rgb = BODY_GRAY
+                
+                r_page = toc_p.add_run(f"\t{page_num}")
+                r_page.font.name = DEFAULT_FONT
+                r_page.font.size = Pt(10.5)
+                r_page.font.bold = True
+                r_page.font.color.rgb = PRIMARY_BLUE
+
+        p_end = self.doc.add_paragraph()
+        p_end.paragraph_format.space_before = Emu(19050)
+        p_end.paragraph_format.space_after = Emu(152400)
+        run_end = p_end.add_run()
+        fldChar3 = OxmlElement('w:fldChar')
+        fldChar3.set(qn('w:fldCharType'), 'end')
+        run_end._r.append(fldChar3)
+
+        # Force Word to update fields (including TOC) automatically when opened
+        if self.doc.settings.element.find(qn('w:updateFields')) is None:
+            element = OxmlElement('w:updateFields')
+            element.set(qn('w:val'), 'true')
+            self.doc.settings.element.append(element)
+
     def add_paragraph(self, text, bold=False, italic=False, space_before=38100, space_after=63500):
         """Add a paragraph with proper spacing"""
         p = self.doc.add_paragraph(text)
@@ -464,7 +527,7 @@ class ResearchDocumentGenerator:
     def render_custom_sections(self, sections):
         """Render a generic `sections` list. Each section: heading + ordered blocks.
 
-        Block types: paragraph, bullets, callout, table, subheading.
+        Block types: paragraph, bullets, callout, table, subheading, toc.
         """
         for section in sections:
             heading = section.get('heading', '')
@@ -489,6 +552,8 @@ class ResearchDocumentGenerator:
                                                block.get('rows', []))
                 elif btype == 'subheading':
                     self.add_heading_2(block.get('text', ''))
+                elif btype == 'toc':
+                    self.add_toc(block.get('title', 'Table of Contents'), entries=self.toc_entries)
 
     # ------------------------------------------------------------------
     # Research-plan layout (default)
@@ -541,6 +606,9 @@ class ResearchDocumentGenerator:
         metadata = self.config.get('metadata', [])
         if metadata:
             self.add_metadata(metadata)
+
+        if self.config.get('include_toc'):
+            self.add_toc(entries=self.toc_entries)
 
         # Custom document layout (rationales, briefs, one-pagers)
         custom_sections = self.config.get('sections')
@@ -811,6 +879,57 @@ def print_omission_report(omissions, output_file, stream=sys.stderr):
           file=stream)
 
 
+def extract_exact_toc_pages(docx_path, config):
+    """Run a fast pass via LibreOffice / pdftotext (if available) to resolve exact heading page numbers."""
+    import subprocess, os
+    soffice_cmd = "/opt/homebrew/bin/soffice" if os.path.exists("/opt/homebrew/bin/soffice") else "soffice"
+    try:
+        temp_dir = "/tmp"
+        subprocess.run([soffice_cmd, "--headless", "--convert-to", "pdf", docx_path, "--outdir", temp_dir],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        pdf_path = os.path.join(temp_dir, os.path.basename(docx_path).replace(".docx", ".pdf"))
+        proc = subprocess.run(["pdftotext", pdf_path, "-"], capture_output=True, text=True, check=True)
+        pages = proc.stdout.split("\x0c")
+
+        headings = []
+        sec_num = 0
+        for sec in config.get("sections", []):
+            h = sec.get("heading", "")
+            numbered = sec.get("numbered", True)
+            if h:
+                if numbered:
+                    sec_num += 1
+                    full_title = f"{sec_num}. {h}"
+                else:
+                    full_title = h
+                headings.append((h, full_title))
+
+        page_map = []
+        found_map = {}
+        for h_orig, full_title in headings:
+            for p_num, p_text in enumerate(pages, 1):
+                lines = [l.strip() for l in p_text.split("\n") if l.strip()]
+                found = False
+                for line in lines:
+                    if full_title in line or h_orig in line:
+                        if p_num == 1 and "Table of Contents" in p_text:
+                            toc_idx = p_text.find("Table of Contents")
+                            h_idx = p_text.find(full_title) if full_title in p_text else p_text.find(h_orig)
+                            if h_idx > toc_idx and h_idx != -1:
+                                found = True
+                                break
+                        else:
+                            found = True
+                            break
+                if found and h_orig not in found_map:
+                    found_map[h_orig] = p_num
+                    page_map.append((full_title, str(p_num)))
+                    break
+        return page_map
+    except Exception:
+        return None
+
+
 def main():
     """Main entry point"""
     if len(sys.argv) < 2:
@@ -823,9 +942,22 @@ def main():
     with open(config_file, 'r') as f:
         config = json.load(f)
 
+    # Pass 1: generate initial document
     generator = ResearchDocumentGenerator(config)
     generator.generate()
     generator.save(output_file)
+
+    # Pass 2: if TOC is enabled, resolve exact page numbers and re-render TOC entries
+    has_toc = config.get('include_toc') or any(
+        b.get('type') == 'toc' for sec in config.get('sections', []) for b in sec.get('blocks', [])
+    )
+    if has_toc:
+        exact_toc = extract_exact_toc_pages(output_file, config)
+        if exact_toc:
+            generator = ResearchDocumentGenerator(config, toc_entries=exact_toc)
+            generator.generate()
+            generator.save(output_file)
+
     print_omission_report(generator.omission_report(), output_file)
 
 

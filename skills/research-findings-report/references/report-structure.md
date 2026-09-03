@@ -29,6 +29,17 @@ metadata block.
 The destination appears here *and* in the footer note. Forwarding is the real
 leak path, and the title page is the one part of a document everyone sees.
 
+## 1.1 Table of Contents & Heading Styles
+
+All section titles and chapter headings MUST use proper heading styles (`#` / `##` / `###` in Markdown; `Heading 1` / `Heading 2` in Word/python-docx) so that word processors and document readers can build a dynamic Table of Contents automatically. Do NOT insert manual index tables.
+
+## 1.2 Participant Reference Table (Mandatory)
+
+Must appear prominently before or within the Methodology section:
+- Column headers: `Participant ID`, `Role`, `Organization`, `Evidence Group`.
+- Uses strictly purely numeric IDs (`P1`, `P2`, `P3`, etc.) exclusively. Zero first/last names or prefixed IDs (e.g., no `C-BofA-Eng`, `P-IBM-SE1`).
+- Explicitly calibrates evidence weights (e.g., Direct Customers vs. Internal Field Proxies vs. Analogical benchmark participants).
+
 ## 2. Executive summary — ≤ half a page
 
 The most-read and often only-read section. Three moves, in order:

@@ -147,12 +147,11 @@ and the gap becomes visible instead of getting filled. Concretely:
 If a record fails check 2, report the gap to the user by finding ID and ask.
 Never fill it in yourself.
 
-### Participant identity: IDs only, always
+### Participant identity: numerical IDs only, everywhere
 
-The report refers to participants **only by participant ID** (P1, P2, ...),
+The report refers to participants **only by purely numerical participant ID** (`P1`, `P2`, `P3`, ...),
 everywhere: body, appendix, additional-materials descriptions, filenames, and
-document metadata. If a name appears anywhere in the input, replace it before
-writing:
+document metadata. Do NOT use prefixed, alphanumeric, or organizational IDs like `C-BofA-Eng`, `P-IBM-SE1`, or `C-NWM-TL`. Consistency across all documents is mandatory. If a name or alphanumeric ID appears anywhere in the input, replace it before writing:
 
 - **In prose and attributions:** use the ID. If the study has no ID scheme
   yet, assign one (P1, P2, in session order) and use it consistently across
@@ -231,36 +230,38 @@ lengths, worked examples, and the `sections` config skeleton live in
 before writing.
 
 1. **Title page** — product, "UX Research Findings & Recommendations",
-   contributors with roles, date, declared destination.
-2. **Executive summary** (≤ half a page) — the headline finding in the first
+   contributors with roles, date, declared destination. Apply standard heading styles (`#` / `##` / `###` in Markdown; `Heading 1` / `Heading 2` in Word/python-docx) to every section heading to enable automatic Table of Contents generation.
+2. **Participant Reference Table (Mandatory)** — table with explicit header `Participant ID` listing purely numerical IDs (`P1`, `P2`...), roles, orgs, and evidence calibration.
+3. **Executive summary** (≤ half a page) — the headline finding in the first
    sentence, the decision it informs, then the featured findings as
    one-liners, each with its count and confidence. This section concludes; it
    never restates. A reader who stops here should leave with the answer.
-3. **Method note** (≤ a third of a page) — who, how many, what method, when,
+4. **Method note** (≤ a third of a page) — who, how many, what method, when,
    and the one or two limits that most constrain the findings. Full detail
    goes to the appendix. This sits high because a skeptic looks for it before
    granting the findings anything.
-4. **Findings** — the featured 3-6, ordered by importance, never by
+5. **Findings** — the featured 3-6, ordered by importance, never by
    chronology or research question number. Each finding: the claim as a
    heading, evidence with exact counts and one verbatim quote, your
    interpretation marked as yours, then confidence and limits in your own
    voice. The strongest finding gets the most room. Equal-sized sections for
    unequal evidence is a lie told through layout.
-5. **Recommendations** — numbered, each an action with an owner, its
+6. **Recommendations** — numbered, each an action with an owner, its
    `depends_on` finding IDs, its horizon label, and its confidence. Rendered
    as a design-system table so the room can scan it.
-6. **What this means for you** (optional, ≤ a third of a page) — one or two
+7. **Potential Next Steps** — prioritized study roadmap for follow-up research (e.g., developer interviews, EU accounts, surveys).
+8. **What this means for you** (optional, ≤ a third of a page) — one or two
    lines per audience (PM, Eng, Design, customer-facing) for a report
    traveling beyond the immediate team. Skip for a small, close team.
-7. **Reviewer Notes** — the flags that rode along from the gates: unmapped
+9. **Reviewer Notes** — the flags that rode along from the gates: unmapped
    findings retained, research questions left unaddressed, open judgment
    calls. This section is where a study stays honest in public.
-8. **Appendix** (summarized in the `.docx`, full content in the companion
+10. **Appendix** (summarized in the `.docx`, full content in the companion
    `.md`) — full findings records including the non-featured ones, the
    research-question coverage matrix, method detail, participant profile,
    disconfirming evidence detail, alternatives considered for each
    recommendation.
-9. **Additional materials** — the linked list: each entry a name, a one-line
+11. **Additional materials** — the linked list: each entry a name, a one-line
    description of what it is and when to open it, a link or location, and an
    access note where access is restricted.
 
@@ -318,6 +319,7 @@ restyle by hand. Specifics that matter for this report:
 - The **headline finding** renders as a callout box in the executive summary
 - **Recommendations** render as a table: # / Action / Owner / Depends on /
   Horizon / Confidence
+- **Table of Contents:** Include `"include_toc": true` in the report config so `research-document-template.py` inserts a native Word Table of Contents field block right after the metadata block
 - The **destination** goes in the `footer_note` config (for example
   "Confidential — Internal Use Only · internal-team") so every page carries it
 - File naming per `DESIGN-SYSTEM.md`:
@@ -372,7 +374,28 @@ Then confirm the structure:
   research questions. A study that quietly drops a question its stakeholders
   still expect an answer to will get asked about it anyway.
 
-## Step 6 — You are not the last check
+## Step 6 — Automated Gate Checks & Proactive Researcher Guidance
+
+You must not wait for the researcher to ask for quality, safety, or formatting checks. Automate them during execution and prompt the user proactively at key decision points:
+
+1. **Automated Name Scrubbing (Pre-Flight Safeguard):**  
+   Before writing any text to a Markdown report, JSON config, or `.docx` file, automatically scrub every participant name and replace it with `P1`, `P2`, ... IDs. State the name-to-ID mapping to the researcher in chat ONCE and ensure it never lands in any output file.
+
+2. **Automated Evaluation Loop (Quality & Redaction Gate):**  
+   After composing the report draft, automatically run the pre-flight checks:
+   - `research-safety-checker` (verifies zero names or PII leak into files, config, or footer metadata)
+   - `research-synthesis-checker` (verifies exact quote byte-matching and exact prevalence counts)
+   - `research-readability-checker` (verifies body conciseness: 3–5 pages max, layered structure)
+
+3. **Proactive Researcher Prompts:**  
+   Prompt the researcher at natural decision seams:
+   - *"I have created the draft report with all participant names pseudonymized (P1, P2...). Would you like me to run the pre-flight safety & groundedness audit on the file now?"*
+   - *"Report draft complete. Would you like me to compile the styled `.docx` deliverable using `research-document-template`?"*
+   - *"Are there any specific stakeholders or owners to assign to Recommendations R1–R12 before exporting for broader distribution?"*
+   - *"Important: Please thoroughly review and verify this draft report yourself—checking quote nuances, evidence grounding, and stakeholder alignment—before sharing it out with project stakeholders, product managers, or leadership."*
+   - *"Participant Reciprocity (Closing the Loop): Consider preparing a sanitized, high-level participant summary ('What We Learned & Product Direction') to share back with participating customer accounts (e.g., P1–P4). This demonstrates impact, builds long-term trust, and keeps customer accounts engaged for follow-up studies."*
+
+## Step 7 — You are not the last check
 
 Your QA pass is the producer checking their own work, which is worth doing
 and is not independent. Inside the UX Research Skills suite, the report goes
@@ -401,6 +424,25 @@ Don't round a "somewhat" into a "strongly," don't promote one comment to
 the data is thin or mixed, say so on the page. An honest "early signal, worth
 validating" is more useful to a product team than false confidence, and it is
 the sentence that keeps them coming back for the next study.
+
+## After the report: closing the loop with participants
+
+The report you just wrote is for your organization. It is not the artifact
+that goes back to the people who gave you their time, and it should never be
+retrofitted into one by deleting a few sections.
+
+When the report is settled, offer the participant-facing summary and hand off
+to the `research-participant-summary` skill. It produces a one-page "At a
+Glance" card by default, plus a short email body, a "You said / We heard"
+one-pager, or a slide summary. It exists separately because a participant
+summary carries a stricter data bar than this report (no participant IDs, no
+exact counts, no verbatim quotes, no company names) and a risk this report
+doesn't have: a requirement stated flat under your company's logo reads to a
+customer as a roadmap promise.
+
+The recruiting argument for doing it at all: a participant who sees their own
+requirement in print says yes to the next study. One who hears nothing assumes
+the session went into a drawer.
 
 ---
 
