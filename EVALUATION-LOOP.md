@@ -9,7 +9,10 @@ loop — with an explicit bar, a revision step, a cap on iterations, and a
 defined moment where the machine stops and a person decides.
 
 **The human is always the final gate.** Everything below is a filter that
-removes work you shouldn't have to do by hand. It is not an approval.
+removes work you shouldn't have to do by hand. It is not an approval. §11
+turns that stance into a recorded step: no final output releases without the
+researcher's sign-off that they read the whole thing and made their own
+edits.
 
 ---
 
@@ -211,7 +214,8 @@ Every row below is preceded by `research-safety-checker` (pre-flight, always).
 | **Competitive analysis** | Scenario E | `synthesis-checker` (source-integrity mode) → `significance-checker` → `readability-checker` |
 | **Readout deck** | `research-readout-deck` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
 | **Findings report** | `research-findings-report` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker` |
-| **Participant summary** | `research-participant-summary` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker`. Pre-flight `safety-checker` runs at the `external` bar and its verdict is blocking — see §4.9 |
+| **Participant impact summary** | `participant-impact-summary` | `synthesis-checker` (impact mode) → `readability-checker` |
+| **Participant summary card** | `research-participant-summary` | `synthesis-checker` (re-verify against the findings contract) → `readability-checker`. Pre-flight `safety-checker` runs at the recipient's bar and its verdict is blocking — see §4.10 |
 
 Run gates **in order**. Groundedness before significance before readability —
 there's no point assessing whether a finding matters, or polishing how it
@@ -932,73 +936,152 @@ and the names half of 14 are blocking. The rest are flags.
 
 ---
 
-### 4.9 Participant summary
+### 4.9 Participant impact summary
 
-The bar for the participant-facing artifact the
+The bar for the participant-facing email the `participant-impact-summary`
+skill drafts: a short "what we heard, what we did" note to someone who gave
+research feedback — an external customer or an internal participant. The
+destination is **set by the recipient, never chosen**: `external` for
+`customer-direct` and `sme-external` recipients, `internal-org` for
+`internal-direct` and `internal-proxy` ones, and a study with both kinds
+gets two drafts, each cleared at its own bar. The email mixes three claim
+types with different sources: "what we heard" renders from findings
+records that passed §4.2; "how it's informing us" renders either from the
+findings themselves (a research recommendation, attributed as such) or
+from a named team source (a "we're considering" line needs the team behind
+it); and "what changed in the product" renders from **impact items**
+(status + named source + date, defined in the skill), because product
+status lives in no findings record. The spine of the email is the
+informing tier: **zero product changes is the normal state shortly after a
+study**, an email with none is complete, and the failure this rubric
+exists to catch is the reader hearing commitment in a list of maybes.
+`synthesis-checker` in impact mode verifies each line against its own
+source type.
+
+1. Every "what we heard" line maps to finding records that passed §4.2,
+   aggregated for an external reader — no line without a record behind it.
+   **Blocking**
+2. Every claim about the team or the product is in its honest form. A
+   product-change line carries a status — `shipped` / `in-progress` /
+   `planned` / `under-consideration` — a named source, and a date, with no
+   invented status and no status upgraded in the wording ("planned" never
+   reads as "coming soon"). A "we're considering" line carries a named
+   team source; without one it is written as what it is — a research
+   recommendation, attributed to the research. Zero product-change lines
+   is a valid and normal state, and the email never manufactures one.
+   **Blocking**
+3. No participant other than the recipient is identifiable: no names,
+   companies, quotes, or narrowing details of anyone else, and counts are
+   aggregated ("operators at eight organizations"), never the exact
+   small-n counts used internally. **Blocking**
+4. The recipient's recontact is covered by the study's consent terms
+   (internal participants' terms govern the same way), the email is
+   addressed individually (no visible participant list), and
+   `research-safety-checker` has cleared it at the bar the recipient's
+   `participant_type` sets — never below `internal-org`. **Blocking** — the
+   safety gate owns this item
+5. No commitment beyond what the named source supports, and no decision
+   implied that hasn't been made: consideration never reads as commitment,
+   a research recommendation never reads as a team plan, `in-progress` and
+   `planned` items read as intentions carrying no dates the source doesn't
+   carry, and when no decision exists yet the email says so in plain words
+   rather than borrowing momentum from its own phrasing. **Blocking**
+6. For an external recipient: no internal jargon, internal links, code
+   names, ticket numbers, or confidential product detail beyond what the
+   impact item's source makes shareable. **Blocking.** For an internal
+   recipient, internal detail is permitted where the impact item's source
+   supports it and it identifies no other participant; a two-tier study's
+   drafts are checked separately, and external text appearing in both is
+   the internal draft's loss, not the external draft's gain
+7. Feedback with no action yet is acknowledged in one honest line — or its
+   omission was the researcher's explicit call, noted in Reviewer Notes
+8. A named human sender appears, and the product owner has confirmed every
+   impact item's status and wording. Flagged while unconfirmed; blocking
+   at send
+9. Roughly 200–350 words, opening with thanks anchored to the specific
+   study. Over-length is a flag; cut impact items before honesty
+10. Meets `VOICE-AND-STYLE.md`, including its item 22 — no sentence
+    interrupted by an em dash or en dash
+
+Items 1–6 are blocking, item 8 blocks at send, and the rest are flags. The
+skill drafts only: sending, scheduling, or addressing mail is out of scope
+for every agent and skill in this suite, and a person sends from their own
+address.
+
+---
+
+### 4.10 Participant summary card
+
+The bar for the participant-facing *document* the
 `research-participant-summary` skill produces: the At a Glance card by
-default, or an email body, one-pager, or slide summary. Like the deck (§4.4)
-and the report (§4.8), it is a presentation layer over findings that already
-passed §4.2, and the gate re-verifies against the records.
+default, or a one-pager or slide summary. §4.9 governs the participant
+**email**; this section governs the artifact that gets attached to it,
+embedded in it, or handed to an account team. A study that sends both runs
+both gates, and the email's two-tier destination rule in §4.9 governs the
+card too: the recipient sets the bar, it is never chosen.
 
-Two things make this gate different from every other one in this file. The
-artifact **leaves the company**, so the safety bar is stricter than
-`internal-org` or even the usual `external` case. And it states customer
-requirements under the company's own logo, which creates a failure mode no
-internal document has: a requirement written flat reads as a promise the
-customer can hold the company to. Items 1 and 2 below exist for that second
-problem and have no equivalent anywhere else in this loop.
+Everything in §4.9 items 1-6 applies here unchanged, including its
+aggregation rule and its ban on implying decisions that have not been made.
+What follows are the additional items a rendered document needs and an email
+does not.
 
-1. **Every substantive statement is attributed to the participant** — "You
-    described…", "You asked for…", "You told us…" — not stated flat as fact
-    or as company intent. A requirement without its attribution is a
-    commitment. **Blocking**
+Like the deck (§4.4) and the report (§4.8), the card is a presentation layer
+over findings that already passed §4.2, and the gate re-verifies against the
+records. The failure this section exists to catch is different from §4.9's:
+an email reads as one person writing to another, but a designed card carries
+the company's logo and visual authority, and a requirement laid out in a
+numbered list under that logo reads as a roadmap rather than as something a
+customer said.
+
+1. **Every substantive statement is attributed to the participant** - "You
+    described...", "You asked for...", "You told us..." - not stated flat as
+    fact or as company intent. This is stricter than §4.9 item 5, which bans
+    implying decisions: here even a correctly-hedged requirement is a defect
+    if it is not visibly the customer's. **Blocking**
 2. **No retirement, end-of-life, deprecation, licensing, pricing, support-
     window, or contractual language**, even when a participant raised it and
     even when correctly attributed. These are owned by PM, commercial, and
-    legal; writing them to a customer signals a plan their procurement team
-    will act on. The underlying need may appear in neutral form (a retirement
-    request becomes "predictability"). **Blocking**
-3. Implementation approaches appear as illustration, never as description of
-    what is being built — "a compatibility layer, for example a proxy or
-    wrapper." Naming the capability is fine; previewing the design is not
-4. **No participant IDs anywhere.** Unlike §4.4, §4.8, and every other
-    artifact in this file, `P1`/`P2` are *not* permitted here. IDs are
-    internal scaffolding that signal per-person attribution exists, which
-    invites a reader at a multi-participant account to work out who said
-    what. **Blocking**
-5. **No exact prevalence counts.** This inverts §4.2 and §4.8 item 2, and the
-    inversion is deliberate: at a four-person account "3 of 4" is a puzzle
-    with a solvable answer. Aggregate, unquantified language is required.
+    legal; writing them into a designed artifact signals a plan the
+    customer's procurement team will act on. The underlying need may appear
+    in neutral form (a retirement request becomes "predictability").
     **Blocking**
+3. Implementation approaches appear as illustration, never as description of
+    what is being built - "a compatibility layer, for example a proxy or
+    wrapper." Naming the capability is fine; previewing the design is not
+4. **No participant IDs anywhere.** Unlike §4.4 and §4.8, `P1`/`P2` are not
+    permitted. IDs are internal scaffolding that signal per-person
+    attribution exists, which invites a reader at a multi-participant account
+    to work out who said what. **Blocking**
+5. **No exact prevalence counts**, per §4.9 item 3. Restated here because a
+    stat tile invites a number: at a four-person account "3 of 4" is a puzzle
+    with a solvable answer. **Blocking**
 6. **No verbatim quotes.** A distinctive phrasing identifies its speaker to
     colleagues who were in the room. Paraphrase into collective voice.
     **Blocking**
-7. No company or account names, including the reader's own, and no role title
-    specific enough to identify one person. **Blocking**
-8. Findings are framed as conditions for success, not as a list of blockers,
+7. Findings are framed as conditions for success, not as a list of blockers,
     and no line mirrors internal doubt back at the customer (no "you are not
     saying no")
-9. The customer is the actor: "adoption," not "migration," including derived
-    forms
-10. Written in second person throughout, in the participant's language — no
+8. The customer is the actor: "adoption," not "migration," including derived
+    forms. A product team with its own neutral vocabulary follows that
+    instead; the principle is what governs
+9. Written in second person throughout, in the participant's language - no
     finding IDs, RQ numbers, method vocabulary, or unexpanded acronyms
-11. Carries a month and year, and an anonymization disclosure. An undated
+10. Carries a month and year, and an anonymization disclosure. An undated
     customer-facing artifact circulates indefinitely and gets read as current
-12. Impact language stays soft: "informing our product thinking," not
+11. Impact language stays soft: "informing our product thinking," not
     "shaping the roadmap." **Blocking**
-13. Cleared by `research-safety-checker` at the `external` destination
-14. Meets `VOICE-AND-STYLE.md`, including its item 22 — no sentence
+12. Meets `VOICE-AND-STYLE.md`, including its item 22 - no sentence
     interrupted by an em dash or en dash. This bites hardest here, because
     the format invites appositives
-15. Rendered output has been viewed, not just generated — nothing clipped,
+13. Rendered output has been viewed, not just generated - nothing clipped,
     overflowing, or reflowed off the card
 
-Items 1, 2, 4, 5, 6, 7, and 12 are blocking. The rest are flags.
+Items 1, 2, 4, 5, 6, and 11 are blocking, on top of everything §4.9 items 1-6
+already block. The rest are flags.
 
-A verdict of `PASS` on this gate still does not mean "ready to send." It
-means ready for the researcher's review and for whoever owns customer
-communications. No other artifact in this file carries that caveat, and this
-one always does.
+A verdict of `PASS` still does not mean "ready to send." It means ready for
+the researcher's review and for whoever owns customer communications. §4.9
+item 8 applies: the product owner confirms wording before it goes out.
 
 ---
 
@@ -1194,7 +1277,13 @@ which is the same standard this suite holds research to.
 4. research-synthesis-checker      → FAIL? revise blocking claims, re-run
 5. research-significance-checker   → FAIL? revise, re-run. Flags → Reviewer Notes
 6. research-readability-checker    → FAIL? revise, re-run
-7. Release with Reviewer Notes attached
+7. RELEASE SIGN-OFF (§11)          → the researcher reads the whole artifact
+                                     and makes their own edits; recorded
+8. Release with Reviewer Notes attached
+9. Then ask, every time: "Want to close the loop with the people who took
+   part?" — internal participants and external customers alike. Yes routes
+   to participant-impact-summary (§4.9); no is a fine answer, recorded and
+   not revisited
 ```
 
 **Producing a plan:**
@@ -1212,7 +1301,9 @@ which is the same standard this suite holds research to.
    research-survey-checker         → only if a survey instrument is attached.
                                       FAIL? revise, re-run
 5. research-readability-checker    → FAIL? revise, re-run
-6. Release
+6. RELEASE SIGN-OFF (§11)          → the researcher reads it all and makes
+                                     their own edits; recorded
+7. Release
 ```
 
 **Producing a discussion guide or interview script on its own:**
@@ -1222,7 +1313,9 @@ which is the same standard this suite holds research to.
 2. research-safety-checker         → PRE-FLIGHT, always runs first
 3. research-guide-checker          → FAIL? revise blocking items, re-run
 4. research-readability-checker    → FAIL? revise, re-run
-5. Release
+5. RELEASE SIGN-OFF (§11)          → the researcher reads it all and makes
+                                     their own edits; recorded
+6. Release
 ```
 
 A guide drafted inside a plan runs the same gate; it does not wait for the whole
@@ -1237,7 +1330,9 @@ plan to be finished.
 4. research-readability-checker    → FAIL? revise, re-run
 5. Pilot it with ten people before the link goes out. The gate is not a pilot,
    and the population can only be fielded once
-6. Release
+6. RELEASE SIGN-OFF (§11)          → the researcher reads every item and makes
+                                     their own edits; recorded
+7. Release
 ```
 
 **Producing a deck:**
@@ -1251,7 +1346,9 @@ plan to be finished.
 4. research-safety-checker (deck mode — speaker notes and screenshots included)
 5. research-synthesis-checker (deck mode — verify against findings records)
 6. research-readability-checker
-7. Release
+7. RELEASE SIGN-OFF (§11) — every slide and every speaker note, then their
+   own edits; recorded
+8. Release
 ```
 
 **Producing a findings report:**
@@ -1267,7 +1364,32 @@ plan to be finished.
    included)
 5. research-synthesis-checker (report mode — verify against findings records)
 6. research-readability-checker
-7. Release with Reviewer Notes attached
+7. RELEASE SIGN-OFF (§11) — body, appendix, and materials list, then their
+   own edits; recorded
+8. Release with Reviewer Notes attached
+```
+
+**Producing a participant impact summary:**
+
+```
+1. Findings must have cleared the findings sequence first
+2. Collect impact items — each with status, named source, and date; no
+   source, no email line. Zero items is the normal case and needs no fixing
+3. Draft the email (participant-impact-summary) — the spine is what the
+   feedback taught the team and what's honestly being weighed; product
+   changes only where sourced. Aggregated, individually addressed, no other
+   participant identifiable; a study with internal and external
+   participants gets two drafts, one per tier
+4. research-safety-checker (at the bar the recipient sets — external for
+   customers and SMEs, internal-org for internal participants; never
+   chosen, never below internal-org)
+5. research-synthesis-checker (impact mode — heard-lines against findings
+   records, did-lines against sourced impact items)
+6. research-readability-checker
+7. RELEASE SIGN-OFF (§11) — the sender reads every word as themselves and
+   makes their own edits; recorded
+8. Product owner confirms every impact item; a named person sends it from
+   their own address
 ```
 
 Cap: 2 revisions per gate. Then a person looks at it.
@@ -1572,6 +1694,63 @@ and move on.
   this conversation
 - It is not a stakeholder alignment exercise. Four questions, one owner, a
   disposition. If it turns into a workshop, it has stopped being a checkpoint
+
+---
+
+## 11. The release sign-off — the researcher reads the thing
+
+Every gate in this file checks the artifact. None of them checks that the
+person whose name goes on it has read it, and the gap is not theoretical: a
+clean run of verdicts invites exactly the skim it should prevent. Six green
+gates read as "someone checked this," and the someone was a set of language
+models, each blind by design to most of what can be wrong. The last gate has
+been "still you reading the thing" in this repo's own words since the
+beginning; this section makes it a recorded step instead of a closing
+sentiment.
+
+**When.** After the last gate returns `RELEASE`, before the artifact is
+shared with anyone — every final output: findings, readout deck, findings
+report, participant impact summary, plan, guide, survey instrument.
+
+**What the researcher agrees to, and what the record shows they did.** Read
+the whole artifact — every section, the appendix, every slide, every speaker
+note, every linked material description — and make their own edits. The ask
+is made in so many words, every time: producers must not soften it to "look
+this over." The sign-off is the researcher's statement that the reading
+happened and the output is now their work.
+
+```
+RESEARCHER SIGN-OFF
+  artifact:     <name and date>
+  reviewed_by:  <name>
+  date:         <date>
+  read_in_full: yes
+  edits:        <what they changed, or "none — reviewed and accepted as is">
+```
+
+Until the block exists, the artifact is a **draft**, whatever the verdict
+said. "None — reviewed and accepted as is" is a legitimate `edits` entry;
+the requirement is the reading and the ownership, not churn for its own
+sake.
+
+**The staleness rule follows the researcher too.** An edit that moves a
+quote, a count, or an attribution re-runs `research-synthesis-checker`
+before release, exactly as a gate-driven revision does (§1), and without
+consuming an iteration. A researcher's hand in the file is not a safe hand
+by virtue of being human — it is the same three fragile things moving. A
+purely stylistic edit re-runs nothing: a readability regression the
+researcher introduces in their own voice is theirs to own, and is visible
+to any reader in a way a shifted count is not.
+
+**Why this is a checkpoint and not a gate.** No agent can verify that
+reading happened; an evaluator scoring "was this reviewed?" would be
+scoring the presence of a block, which any producer can emit. Like the
+theme checkpoint (§9), the value is the person's judgment, not the
+paperwork; the paperwork exists so the moment can't be skipped silently.
+Unlike the decision checkpoint (§10), it is not advisory: the artifact
+stays a draft without it. And if the researcher declines to review, that
+is recorded in place of the block — nobody can stop a person sharing a
+draft, but the record should say that is what it was.
 
 ---
 

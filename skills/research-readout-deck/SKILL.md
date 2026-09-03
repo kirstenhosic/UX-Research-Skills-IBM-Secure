@@ -410,6 +410,12 @@ Screenshots and embedded file metadata can't be machine-checked. List them for
 the user by slide number and say plainly that the deck isn't cleared until a
 person has looked at them.
 
+Whatever the gates say, the deck is a draft until the researcher signs off:
+they read every slide and every speaker note, make their own edits, and the
+sign-off is recorded (§11 of `EVALUATION-LOOP.md` has the block). The deck is
+presented under their name, not a gate's. An edit of theirs that moves a
+quote, a count, or an attribution re-runs the synthesis gate first.
+
 Outside the suite, the same principle holds in a lighter form: before this deck
 gets presented, someone who didn't build it should read it against the source.
 

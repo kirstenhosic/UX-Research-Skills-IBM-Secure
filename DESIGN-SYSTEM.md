@@ -21,6 +21,7 @@ Ensure that all artifacts produced by research skills maintain:
 - Any document generated for stakeholder review
 
 **Skip these standards for:**
+- Participant impact summaries — they are plain email, and the reader's mail client owns the styling; structure and rules live in `skills/participant-impact-summary/` and `EVALUATION-LOOP.md` §4.9
 - Internal notes and scratch work
 - De-identified transcripts (maintain anonymity over styling)
 - Raw data files (CSVs, JSON, etc.)
@@ -363,7 +364,7 @@ Examples:
 
 **When to use:** After the internal report is settled, to close the loop with the people you interviewed — a summary card, thank-you email, or customer recap that leaves the company
 
-**Output:** A one-page "At a Glance" PNG card (rendered headless from HTML, following this design system) plus its editable `.html` source; optionally a short email body, a "You said / We heard" `.docx` one-pager, or a slide summary. Stricter anonymization than any internal artifact, and subject to a commitment-language scan before release. Gated per `EVALUATION-LOOP.md` §4.9
+**Output:** A one-page "At a Glance" PNG card (rendered headless from HTML, following this design system) plus its editable `.html` source; optionally a "You said / We heard" `.docx` one-pager or a slide summary. This is what the `participant-impact-summary` email attaches or embeds; the two are a pair. Stricter anonymization than any internal artifact, and subject to a commitment-language scan before release. Gated per `EVALUATION-LOOP.md` §4.10, with §4.9 items 1-6 applying in full
 
 ---
 

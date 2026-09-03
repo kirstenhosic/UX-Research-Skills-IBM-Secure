@@ -28,3 +28,6 @@ package.json
 .DS_Store
 **/.DS_Store
 Thumbs.db
+
+# Python
+__pycache__/

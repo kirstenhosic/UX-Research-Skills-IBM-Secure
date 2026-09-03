@@ -256,6 +256,30 @@ interview-guide craft is taught or audited: the agent (Scenario C),
 `always-probe` and visit every hit before you commit — the same sweep as the
 count words below.
 
+## Templates condense the skills — same drift rule as the agent
+
+`templates/` carries fill-in versions of the structures the skills produce:
+the plan's sixteen sections, the findings record, the report and deck
+structures, the impact message. The skills and contracts are canonical; the
+templates follow them. A structural change to `ux_plan_from_scratch.md`,
+`FINDINGS-CONTRACT.md`, or a `skills/*/SKILL.md` structure section is not done
+until the matching template reflects it. The templates deliberately compress
+(brief guidance plus a pointer to the deep doc), so wording can differ;
+section lists, field lists, and their order cannot. The participant tracker
+(`templates/06-participant-tracker.xlsx`) additionally hard-codes the
+`participant_type` taxonomy in its dropdowns; a taxonomy change in
+`FINDINGS-CONTRACT.md` has to be mirrored there.
+
+**Two of the folder's files are generated, same pattern as `rubrics/` and the
+`.skill` files.** The `.docx` copies in `templates/docx/` are rendered from
+the `.md` templates by `templates/build-docx.py` (which drives
+`skills/research-document-template.py`, so styling changes there flow through
+on rebuild), and the tracker `.xlsx` is built by `templates/build-tracker.py`.
+Edit the `.md` files or the build scripts, rerun the script, and commit both;
+never edit a generated file directly. Both builds stamp the shared page
+furniture (the "Secure UX Design" header, page number right in the footer),
+so it lives in the scripts, not in any document.
+
 ## Shared blocks are duplicated on purpose
 
 Each scenario file has to be self-contained so it can be pasted into a chat alone,
@@ -276,13 +300,23 @@ Adding a §4.x section is a two-file edit: the section in `EVALUATION-LOOP.md`,
 then its `emit` line in `build-rubrics.sh`. Without the second, the rubric
 silently never generates.
 
-**§4.9 inverts three rules on purpose.** The participant summary gate forbids
-participant IDs, exact prevalence counts, and verbatim quotes — all three of
-which every other gate in the file *requires*. It is the only artifact that
-leaves the company and goes back to the people who were interviewed, and at a
-four-person account "3 of 4" identifies its source. If a future edit
-"corrects" §4.9 to match §4.2 and §4.8, it has broken the gate. The reasoning
-is written into the section; leave it there.
+**§4.10 inverts three rules on purpose.** The participant summary card gate
+forbids participant IDs, exact prevalence counts, and verbatim quotes — all
+three of which every other gate in the file *requires*. It is the only
+artifact that leaves the company and goes back to the people who were
+interviewed, and at a four-person account "3 of 4" identifies its source. If a
+future edit "corrects" §4.10 to match §4.2 and §4.8, it has broken the gate.
+The reasoning is written into the section; leave it there.
+
+**§4.9 and §4.10 are a pair, and the split is deliberate.** §4.9 gates the
+participant *email*; §4.10 gates the *designed document* that email attaches.
+They arrived independently — the email from the public repo, the card from the
+IBM one — and were reconciled rather than merged, because the failure modes
+differ. An email reads as one person writing to another; a card carries the
+company's logo, and a requirement in a numbered list under that logo reads as
+a roadmap. §4.10 therefore applies §4.9 items 1-6 by reference and adds only
+what a rendered document needs. Don't collapse them into one section without
+resolving that.
 
 **Widening the verdict schema is a nine-file edit.** The `result` and
 `next_action` enums in §2 of `EVALUATION-LOOP.md` are repeated verbatim in the

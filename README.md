@@ -71,6 +71,13 @@ so you can reach the files directly — if you're not sure how, ask Bob itself:
 **Dr. Morgan** agent ([`agents/dr-morgan.agent.md`](agents/dr-morgan.agent.md))
 by name and start talking to it.
 
+**You'll know it's loaded.** Dr. Morgan opens its first reply with an
+identification line — `Dr. Morgan · Scenario — · Coach mode` — and repeats
+it whenever the scenario or mode changes. If you don't see that line, you're
+talking to plain Bob, not Dr. Morgan: reselect the agent before sharing
+anything you want held to this suite's rules. You can also just ask "am I
+talking to Dr. Morgan?" at any point.
+
 **2. Say what you're working on.** A plain sentence is fine. Three real
 openers, and what happens next:
 
@@ -166,18 +173,37 @@ finding ID. Unzip it to inspect; the source is
 the deck, it turns finished findings into a deliverable — if they aren't
 synthesized yet, run Scenario A first.
 
-**Need to share results back with the people you interviewed?**
+**Closing the loop with the people who gave the feedback?**
+[`participant-impact-summary.skill`](participant-impact-summary.skill)
+drafts the short email that shows a participant — an external customer or
+an internal colleague — what happened to what they said: what we heard
+(aggregated from findings that already passed the gates), how it's
+informing the team, and — only when changes exist and are sourced — what
+changed in the product. It is built for the common case where no product
+decisions have been made yet: it says so plainly, consideration never
+reads as commitment, and a "we're considering" line needs the team behind
+it, not just the research recommending it. Dr. Morgan offers it at the end
+of every findings sequence. The safety destination is set by
+who the recipient is (`external` for customers, `internal-org` for internal
+participants — a study with both gets two drafts), no other participant is
+ever identifiable, and a named person on your team sends it after the
+product owner confirms every impact claim. The source is
+[`skills/participant-impact-summary/`](skills/participant-impact-summary/).
+
+**And the card or one-pager that email attaches?**
 [`skills/research-participant-summary/`](skills/research-participant-summary/)
-produces the close-the-loop artifact: a one-page "At a Glance" card (PNG in
-IBM Secure's design system) by default, plus a short email body, a "You said /
-We heard" `.docx` one-pager, or a slide summary. It is deliberately separate
-from the findings report because a participant-facing document has a stricter
-data bar (no participant IDs, no exact counts, no verbatim quotes, no company
-names) and a risk the internal report doesn't carry: a requirement stated flat
-under your company's logo reads to a customer as a roadmap promise. The skill
-enforces participant attribution on every claim and excludes retirement,
-licensing, and pricing language even when a participant raised it. Doing this
-well is also the cheapest way to keep an account saying yes to your next study.
+renders the designed artifact: a one-page "At a Glance" card (PNG in IBM
+Secure's design system) by default, or a "You said / We heard" `.docx`
+one-pager or slide summary. Same recipient and same destination rule as the
+email above, and one addition that only a designed document needs. An email
+reads as one person writing to another, but a card carries the company's logo,
+and a requirement laid out in a numbered list under that logo reads as a
+roadmap rather than as something a customer said. So the skill attributes
+every claim to the participant ("You asked for...", never "We will ship..."),
+and excludes retirement, licensing, and pricing language even when a
+participant raised it, because writing those into a designed artifact signals
+a plan the customer's procurement team will act on. Gated at
+`EVALUATION-LOOP.md` §4.10.
 
 **Need a formatted Word document?** That's the **Research Document Template**
 ([`skills/research-document-template.py`](skills/research-document-template.py)),
@@ -285,6 +311,9 @@ flowchart TD
     ENDR -->|"writing the findings report?"| RPT["<b>research-findings-report</b><br/>writes the .docx report + .md appendix<br/>from findings that already passed"]
     RPT -.->|"a report is a new artifact —<br/>it runs the checks again"| PF
 
+    ENDR -->|"closing the loop<br/>with participants?"| CIS["<b>participant-impact-summary</b><br/>what we heard + how it's informing us,<br/>from findings that already passed — Dr. Morgan<br/>offers it after every findings release"]
+    CIS -.->|"destination set by the recipient —<br/>it runs the checks again"| PF
+
     ENDR -->|"need a formatted .docx?"| DOC["<b>research-document-template</b><br/>renders the .docx from a plan that already passed"]
 
     ENDR -->|"closing the loop with participants?"| PS["<b>research-participant-summary</b><br/>the At a Glance card / email / one-pager<br/>that goes back to the people you interviewed"]
@@ -390,16 +419,27 @@ permitted detail, not less.
 Names, emails, and phone numbers block at every tier. Role, account name, and
 region scale with the destination, and stricter consent terms win.
 
-**Then act on the verdict.** `RELEASE` ships it, with any flags attached as
-Reviewer Notes for you to weigh. `REVISE` means Dr. Morgan fixes the blocking
+**Then act on the verdict.** `RELEASE` means the gates are done — not that
+the artifact is. `REVISE` means Dr. Morgan fixes the blocking
 items and re-runs that gate — twice at most, and if the fix moved a quote, a
 count, or an attribution, the synthesis gate re-checks too, because the pass
 behind it is stale. `ESCALATE` means stop and look at it yourself.
 
-Two calls stay yours: the themes, which you accept, revise, split, or reject
-one at a time before synthesis is built on them, and whether the artifact
-actually ships. Passing the gates isn't approval. A readout deck is a new
-artifact and runs the checks again.
+**Then you read the thing — all of it — and sign off.** Before any final
+output goes anywhere, Dr. Morgan asks for your sign-off: you read the whole
+artifact (every section, every slide, every speaker note), make your own
+edits, and it records that you did. This isn't a formality it can skip and
+isn't one you should: six green verdicts read as "someone checked this,"
+and the someone was a set of language models, each blind by design to most
+of what can be wrong. The output ships under your name. "Reviewed and
+accepted as is" is a fine outcome; unread is not. If your edits move a
+quote, a count, or an attribution, the synthesis gate re-checks, same as
+any revision.
+
+Three calls stay yours: the themes, which you accept, revise, split, or
+reject one at a time before synthesis is built on them; the sign-off; and
+whether the artifact actually ships. Passing the gates isn't approval. A
+readout deck is a new artifact and runs the checks again.
 
 The gate matrix, verdict schema, and known limits are in
 [`EVALUATION-LOOP.md`](EVALUATION-LOOP.md).
@@ -429,8 +469,12 @@ first:
 Spot-check a quote against your transcript when a session has run long. It is
 the cheapest thing to verify and the most damaging thing to get wrong.
 
-**Move before it happens.** Ask Dr. Morgan for a **carry-over packet** and
-paste it as the first message of a fresh conversation. It carries scenario
+**Move before it happens — and expect Dr. Morgan to raise it first.** It
+offers the **carry-over packet** unprompted at every clean seam, produces it
+immediately (unasked) the moment it notices one of the symptoms above, and
+treats the single word **"handoff"** as an instruction to produce it right
+now, no questions first. Paste the packet as the first message of a fresh
+conversation. It carries scenario
 and mode, product and method context, the decision and research questions,
 participant IDs and the declared destination, where you are in the flow,
 theme dispositions, gate verdicts with iteration numbers, and open flags.
@@ -530,6 +574,7 @@ apply to you before planning against them.
 | [`PRODUCT-CONTEXT.md`](PRODUCT-CONTEXT.md) | How Dr. Morgan gets specific about your product: the resolution order, the five-question intake, the file format, and how to add your own. [`product-context/`](product-context/) holds the files themselves. |
 | [`METHODS.md`](METHODS.md) | How Dr. Morgan gets operationally specific about a method: session shape, counts, instrument craft, and what each method cannot tell you. [`methods/`](methods/) holds the files, and the table of which methods have an instrument gate and which don't. Read before adding a method. |
 | [`MAINTAINING.md`](MAINTAINING.md) | Repo upkeep — test fixtures, keeping the agent in sync with the standalone files, and the drift check for shared blocks. Only needed if you're editing the suite, not using it. |
+| [`templates/`](templates/README.md) | The manual path: fill-in templates for the whole study lifecycle (intake, plan, screener, guide, participant tracker, findings records, report, deck, impact message), in the same structures Dr. Morgan produces. For researchers and designers who want to do the work themselves; the gates and release sign-off apply either way. |
 
 The five scenario files and the seven evaluator agents are listed in
 [What you can ask for](#what-you-can-ask-for) and
@@ -585,7 +630,7 @@ citations live in the individual files.
 | gate | A checker that reads a finished artifact and reports whether it passes. Six of the seven run as quality gates; the safety checker runs ahead of them as pre-flight. Each looks for something different. |
 | verdict | The block a gate ends with: **PASS**, **PASS WITH FLAGS**, or **FAIL**, plus what to do next. Written in a fixed shape so a person or a script can act on it without reading prose — in that machine-readable block they appear as `PASS`, `PASS_WITH_FLAGS`, `FAIL` — plus `NOT_APPLICABLE`, which a gate returns when it was handed an artifact it does not own, and which asserts nothing about the artifact. |
 | pre-flight | The safety scan that runs before the gates, on everything, every time. |
-| checkpoint | A stop where a *person* decides, not an agent. Three exist: the **decision checkpoint** before the study, where the decision's owner says whether the decision is real (advisory — Dr. Morgan must ask, the answer never blocks); the **theme checkpoint** after clustering (the default one, and it blocks by destination); and a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass. |
+| checkpoint | A stop where a *person* decides, not an agent. Four exist: the **decision checkpoint** before the study, where the decision's owner says whether the decision is real (advisory — Dr. Morgan must ask, the answer never blocks); the **theme checkpoint** after clustering (the default one, and it blocks by destination); a conditional **codebook checkpoint** at the end of coding, run only when the corpus is too large to code in one attentive pass; and the **release sign-off** after the last gate, where the researcher records that they read the whole final output and made their own edits — without it the artifact stays a draft. |
 | blocking vs. flagged | Blocking means something is wrong and gets fixed. Flagged means it's accurate but a human should look. |
 | altitude | How zoomed-in a claim is. "Operators misunderstand the secret lifecycle" and "the close button is 4px too small" are different altitudes. |
 | proxy evidence | Something a colleague told you about customers, as distinct from something a customer told you. |
